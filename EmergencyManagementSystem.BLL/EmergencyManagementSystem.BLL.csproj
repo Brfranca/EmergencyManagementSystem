@@ -6,6 +6,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EmergencyManagementSystem.Common\EmergencyManagementSystem.Common.csproj" />
+    <ProjectReference Include="..\EmergencyManagementSystem.DAL\EmergencyManagementSystem.DAL.csproj" />
+    <ProjectReference Include="..\EmergencyManagementSystem.Entities\EmergencyManagementSystem.Entities.csproj" />
   </ItemGroup>
 
 </Project>

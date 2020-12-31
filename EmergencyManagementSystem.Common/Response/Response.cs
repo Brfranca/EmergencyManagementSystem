@@ -36,4 +36,35 @@ namespace EmergencyManagementSystem.Common.Response
             };
         }
     }
+
+    public class Response<T> : Response
+    {
+        public T Data { get; set; }
+
+        public static Response<T> CreateSuccess(T data, string message = "")
+        {
+            return new Response<T>
+            {
+                Success = true,
+                Message = message,
+                Data = data
+            };
+        }
+
+        public static new Response<T> CreateFailureException(string message, Exception error)
+        {
+            return new Response<T>
+            {
+                Success = false,
+                Message = message,
+                ExceptionError = error.Message,
+                StackTrace = error.StackTrace
+            };
+        }
+
+        public static new Response<T> CreateFailure(string message)
+        {
+            return new Response<T> { Success = false, Message = message };
+        }
+    }
 }

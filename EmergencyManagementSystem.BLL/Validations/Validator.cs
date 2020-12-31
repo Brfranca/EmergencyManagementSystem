@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EmergencyManagementSystem.BLL.Validations
+namespace EmergencyManagementSystem.BLL
 {
     public class Validator
     {
