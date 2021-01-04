@@ -4,14 +4,13 @@ using System.Text;
 
 namespace EmergencyManagementSystem.Entities.Enums
 {
-    public enum Occupation
+    public enum Occupation : short
     {
         TARM,
-        DOCTOR,
+        Doctor,
         RO,
-        DRIVER,
-        NURSE,
-        NURSINGTECHNICIAN,
-
+        Driver,
+        Nurse,
+        NursingTechnician,
     }
 }

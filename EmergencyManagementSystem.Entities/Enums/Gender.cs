@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EmergencyManagementSystem.Entities.Enums
 {
-    public enum Gender
+    public enum Gender : short
     {
         Female,
         Male,

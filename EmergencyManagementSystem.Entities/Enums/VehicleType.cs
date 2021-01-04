@@ -4,10 +4,11 @@ using System.Text;
 
 namespace EmergencyManagementSystem.Entities.Enums
 {
-    public enum EmergencyStatus : short
+    public enum VehicleType : short
     {
-        Canceled,
-        Opened,
-        Closed
+        USB,
+        USA,
+        HEL,
+        AVI
     }
 }

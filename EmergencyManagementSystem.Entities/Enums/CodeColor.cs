@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EmergencyManagementSystem.Entities.Enums
 {
-    public enum CodeColor
+    public enum CodeColor : short
     {
         Red,
         Yellow,

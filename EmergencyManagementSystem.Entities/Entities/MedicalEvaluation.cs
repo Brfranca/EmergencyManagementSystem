@@ -5,9 +5,8 @@ using System.Text;
 
 namespace EmergencyManagementSystem.Entities.Entities
 {
-    public class MedicalEvaluation : Entity<long>
+    public class MedicalEvaluation : EntityRecord<long>
     {
-        public DateTime Date { get; set; }
         public int DoctorId { get; set; }
         public int EmergencyId { get; set; }
         public string Evaluation { get; set; }
