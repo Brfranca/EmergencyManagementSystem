@@ -6,8 +6,9 @@ namespace EmergencyManagementSystem.Entities.Enums
 {
     public enum VehicleSituation : short
     {
-        Available,
-        InRepair,
-        WithoutDriver
+        Broken,
+        Cleared,
+        InService,
+        WithdrawnFromCirculation
     }
 }
