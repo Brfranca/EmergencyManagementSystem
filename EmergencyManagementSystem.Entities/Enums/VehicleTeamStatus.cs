@@ -8,6 +8,6 @@ namespace EmergencyManagementSystem.Entities.Enums
     {
         Canceled,
         InProgress,
-        EndOfShift
+        Finalized
     }
 }

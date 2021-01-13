@@ -9,6 +9,6 @@ namespace EmergencyManagementSystem.Entities.Enums
         Broken,
         Cleared,
         InService,
-        WithdrawnFromCirculation
+        NotCirculating
     }
 }
