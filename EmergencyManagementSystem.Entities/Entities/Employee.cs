@@ -17,5 +17,12 @@ namespace EmergencyManagementSystem.Entities.Entities
         public int AddressId { get; set; }
         public Occupation Occupation { get; set; }
         public string CRM { get; set; }
+        public ICollection<TeamMember> TeamMembers { get; set; }
+
+
+        public Employee()
+        {
+            this.TeamMembers = new List<TeamMember>();
+        }
     }
 }
