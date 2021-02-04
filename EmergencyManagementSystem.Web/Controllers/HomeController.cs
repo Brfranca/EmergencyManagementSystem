@@ -1,4 +1,4 @@
-﻿using EmergencyManagementSystem.Web.Models;
+﻿using EmergencyManagementSystem.Web;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;

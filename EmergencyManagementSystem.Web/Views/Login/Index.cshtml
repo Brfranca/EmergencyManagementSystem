@@ -1,0 +1,79 @@
+﻿@model LoginViewModel
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Login</title>
+
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
+
+    <link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/et-line-font/et-line-font.css">
+    <link rel="stylesheet" href="~/css/themify-icons/themify-icons.css">
+
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/js/niche.js"></script>
+
+</head>
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-box-body">
+            <h3 class="login-box-msg">Login</h3>
+            <form action="@Url.Action("Login","Login")" method="post">
+                <div class="form-group has-feedback">
+                    <input type="text" name="Login" class="form-control sty1" placeholder="Usuário" value="@Model.Login" required
+                            oninvalid="this.setCustomValidity('Minha mensagem teste')"
+                            oninput="this.setCustomValidity('')">
+                </div>
+                <div class="form-group has-feedback">
+                    <input type="password" name="Password" class="form-control sty1" placeholder="Senha" value="@Model.Password" required
+                            oninvalid="this.setCustomValidity('Minha mensagem teste')"
+                            oninput="this.setCustomValidity('')">
+                </div>
+                <div>
+                    <div class="col-xs-8">
+                        <div class="checkbox icheck">
+                            <label>
+                                <input type="checkbox" onclick="">
+                                Mostrar
+                            </label>
+                            <a href="pages-recover-password.html" class="pull-right"><i class="fa fa-lock"></i> Esqueceu sua senha?</a>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-xs-4 m-t-1">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+
+            <!-- <div class="social-auth-links text-center"> -->
+            <!-- <p>- OR -</p> -->
+            <!-- <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using -->
+            <!-- Facebook</a> <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using -->
+            <!-- Google+</a> </div> -->
+            <!-- /.social-auth-links -->
+
+            @*<div class="m-t-2">Deseja criar sua conta? <a href="pages-register.html" class="text-center">Registrar-se</a></div>*@
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+<script>
+
+    function mostrarSenha() {
+
+    }
+
+</script>

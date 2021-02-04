@@ -1,6 +1,6 @@
 using System;
 
-namespace EmergencyManagementSystem.Web.Models
+namespace Microsoft.AspNetCore.Mvc
 {
     public class ErrorViewModel
     {
