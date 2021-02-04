@@ -60,10 +60,10 @@ body {
 	margin: 0 auto;
 	min-height: 100%;
 	box-shadow: 0 0 8px rgba(0,0,0,0.5);
-	position: relative
+	position: relative 
 }
 .layout-boxed {
-	background: url('../img/boxed-bg.jpg') repeat fixed;
+	background: url('~/img/boxed-bg.jpg') repeat fixed;
 }
 .content-wrapper, .main-footer {
 	-webkit-transition: -webkit-transform .3s ease-in-out, margin .3s ease-in-out;
@@ -4040,6 +4040,7 @@ table.text-center, table.text-center td, table.text-center th {
 .login-logo a, .register-logo a {
 	color: #444
 }
+/*Aqui altera a imagem defs Fundo bdo Login*/
 .login-page, .register-page {
 	background:url(../img/body-bg.jpg) no-repeat center top;
 	background-size:cover;

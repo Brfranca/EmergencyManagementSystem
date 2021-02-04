@@ -11,12 +11,13 @@ namespace EmergencyManagementSystem.Web.Controllers
     {
         public IActionResult Index()
         {
-            return View(new LoginViewModel());
+            return View(new UserModel());
         }
 
         [HttpPost]
-        public IActionResult Login(UserLoginModel userLogin)
+        public IActionResult Login(UserModel userLogin)
         {
+
             return View();
         }
     }
