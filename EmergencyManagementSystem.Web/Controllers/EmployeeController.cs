@@ -13,7 +13,13 @@ namespace EmergencyManagementSystem.Web.Controllers
         {
             return View(new UserModel());
         }
+
         public IActionResult Create()
+        {
+            return View(new EmployeeModel());
+        }
+
+        public IActionResult Register()
         {
             return View(new EmployeeModel());
         }

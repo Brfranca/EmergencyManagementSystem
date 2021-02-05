@@ -27,15 +27,15 @@
     <![endif]-->
 
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="skin-blue sidebar-mini">
     <div class="wrapper boxed-wrapper">
         <header class="main-header">
             <!-- Logo -->
             <a href="index.html" class="logo blue-bg">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><img src="dist/img/logo-n.png" alt=""></span>
+                <span class="logo-mini"><img src="~/img/logo-n.png" alt=""></span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><img src="dist/img/logo.png" alt=""></span>
+                <span class="logo-lg"><img src="~/img/logo.png" alt=""></span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar blue-bg navbar-static-top">
@@ -347,29 +347,28 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
-            <!-- <div class="content-header sty-one"> -->
-            <!-- <h1 class="text-black">Blank Page</h1> -->
-            <!-- <ol class="breadcrumb"> -->
-            <!-- <li><a href="#">Home</a></li> -->
-            <!-- <li class="sub-bread"><i class="fa fa-angle-right"></i> Pages</li> -->
-            <!-- <li><i class="fa fa-angle-right"></i> Blank Page</li> -->
-            <!-- </ol> -->
-            <!-- </div> -->
-            <!-- <!-- Main content --> @*-->*@
-            <!-- <div class="content"> -->
-            <!-- <div class="row"> -->
-            <!-- <div class="col-12"> -->
-            <!-- <div class="card"> -->
-            <!-- <div class="card-body"> -->
-            <!-- This is some text within a card block. -->
-            <!-- </div> -->
-            <!-- </div> -->
-            <!-- </div> -->
-            <!-- </div> -->
-            <!-- </div> -->
-            <!-- /.content -->
+            @*<div class="content-header sty-one">
+                <h1 class="text-white">Blank Page</h1>
+                <ol class="breadcrumb">
+                    <li><a href="#">Home</a></li>
+                    <li class="sub-bread"><i class="fa fa-angle-right"></i> Pages</li>
+                    <li><i class="fa fa-angle-right"></i> Blank Page</li>
+                </ol>
+            </div>*@
             @RenderBody()
-
+            <!-- Main content -->
+            @*<div class="content">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                This is some text within a card block.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+            <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
