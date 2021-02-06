@@ -1,3 +1,20 @@
 ﻿.bg-darkTest {
     background-color: #242A33 !important;
 }
+
+.bg-purpleTest {
+    background-color: #4959D1 !important;
+    color: white;
+}
+
+.bg-blueTest {
+    background-color: #2262C9 !important;
+    color: white;
+}
+
+.bg-blueTest2 {
+    background-color: #00AD7C !important;
+    color: black;
+}
+
+
