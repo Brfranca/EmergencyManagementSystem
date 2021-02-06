@@ -17,67 +17,189 @@
                 <div class="card tab-style1">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs profile-tab" role="tablist">
-                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab" aria-expanded="true">Activity</a> </li>
+                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab" aria-expanded="true">Ocorrência</a> </li>
                         <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab" aria-expanded="false">Profile</a> </li>
                         <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#settings" role="tab">Settings</a> </li>
                     </ul>
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div class="tab-pane active" id="home" role="tabpanel" aria-expanded="true">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-lg-2">
-                                        <div class="user-img pull-left"> <img src="dist/img/img3.jpg" class="img-circle img-responsive" alt="User Image"> </div>
-                                    </div>
-                                    <div class="col-lg-10">
-                                        <div class="mail-contnet">
-                                            <h5>Florence Douglas</h5>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum raesent mauris nec.</p>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum raesent mauris nec.</p>
-                                            <div class="row">
-                                                <div class="col-lg-3 col-xs-4 m-bot-2"><img src="dist/img/img7.jpg" alt="user" class="img-responsive img-rounded"></div>
-                                                <div class="col-lg-3 col-xs-4 m-bot-2"><img src="dist/img/img8.jpg" alt="user" class="img-responsive img-rounded"></div>
-                                                <div class="col-lg-3 col-xs-4 m-bot-2"><img src="dist/img/img9.jpg" alt="user" class="img-responsive img-rounded"></div>
-                                                <div class="col-lg-3 col-xs-4 m-bot-2"><img src="dist/img/img10.jpg" alt="user" class="img-responsive img-rounded"></div>
+                            @*<div class="card-body">
+                                    <form class="form-horizontal form-material">
+                                        <div class="form-group">
+                                            <label class="col-md-12">Full Name</label>
+                                            <div class="col-md-12">
+                                                <input placeholder="Florence Douglas" class="form-control form-control-line" type="text">
                                             </div>
-                                            <div class="like-comm m-t-1"> <a href="#">150 comment</a> <a href="#"><i class="fa fa-heart text-danger"></i> 25 Love</a> </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="row m-t-3">
-                                    <div class="col-lg-2">
-                                        <div class="user-img pull-left"> <img src="dist/img/img5.jpg" class="img-circle img-responsive" alt="User Image"> </div>
-                                    </div>
-                                    <div class="col-lg-10">
-                                        <div class="mail-contnet">
-                                            <h5>Florence Douglas</h5>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum raesent mauris nec.</p>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum raesent mauris nec.</p>
-                                            <div class="like-comm m-t-1"> <a href="#">150 comment</a> <a href="#"><i class="fa fa-heart text-danger"></i> 25 Love</a> </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row m-t-3">
-                                    <div class="col-lg-2">
-                                        <div class="user-img pull-left"> <img src="dist/img/img3.jpg" class="img-circle img-responsive" alt="User Image"> </div>
-                                    </div>
-                                    <div class="col-lg-10">
-                                        <div class="mail-contnet">
-                                            <h5>Florence Douglas</h5>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum raesent mauris nec.</p>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum raesent mauris nec.</p>
-                                            <div class="row">
-                                                <div class="col-lg-3 col-xs-4 m-bot-2"><img src="dist/img/img7.jpg" alt="user" class="img-responsive img-rounded"></div>
-                                                <div class="col-lg-3 col-xs-4 m-bot-2"><img src="dist/img/img8.jpg" alt="user" class="img-responsive img-rounded"></div>
-                                                <div class="col-lg-3 col-xs-4 m-bot-2"><img src="dist/img/img9.jpg" alt="user" class="img-responsive img-rounded"></div>
-                                                <div class="col-lg-3 col-xs-4 m-bot-2"><img src="dist/img/img10.jpg" alt="user" class="img-responsive img-rounded"></div>
+                                        <div class="form-group">
+                                            <label for="example-email" class="col-md-12">Email</label>
+                                            <div class="col-md-12">
+                                                <input placeholder="florencedouglas@admin.com" class="form-control form-control-line" name="example-email" id="example-email" type="email">
                                             </div>
-                                            <div class="like-comm m-t-1"> <a href="#">150 comment</a> <a href="#"><i class="fa fa-heart text-danger"></i> 25 Love</a> </div>
                                         </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12">Password</label>
+                                            <div class="col-md-12">
+                                                <input value="password" class="form-control form-control-line" type="password">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12">Phone No</label>
+                                            <div class="col-md-12">
+                                                <input placeholder="123 456 7890" class="form-control form-control-line" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12">Message</label>
+                                            <div class="col-md-12">
+                                                <textarea rows="5" class="form-control form-control-line"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-12">Select Country</label>
+                                            <div class="col-sm-12">
+                                                <select class="form-control form-control-line">
+                                                    <option>London</option>
+                                                    <option>India</option>
+                                                    <option>Usa</option>
+                                                    <option>Canada</option>
+                                                    <option>Thailand</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-12">
+                                                <button class="btn btn-success">Update Profile</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>*@
+
+
+                            <div class="row m-t-3">
+                                <div class="col-lg-12">
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="control-label">Telefone</label>
+                                                        <input class="form-control" placeholder="Telefone" type="text">
+                                                        <span class="fa fa-phone form-control-feedback" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="control-label">Solicitante</label>
+                                                        <input class="form-control" placeholder="Nome" type="text">
+                                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleinputemail1">Nome da Ocorrência</label>
+                                                <input type="text" class="form-control" id="exampleinputemail1" placeholder="Motivo / Queixa">
+                                            </div>
+                                            <hr />
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="control-label">Paciente</label>
+                                                        <input class="form-control" placeholder="Nome" type="text">
+                                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-12">Sexo</label>
+                                                    <div class="col-sm-12">
+                                                        <select class="form-control form-control-line">
+                                                            <option>Indeterminado</option>
+                                                            <option>Feminino</option>
+                                                            <option>Masculino</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="control-label">Idade</label>
+                                                        <input class="form-control" placeholder="00" type="number">
+                                                        <span class="fa fa-envelope-o form-control-feedback" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <button type="button" class="btn btn-sm bg-purpleTest"><i class="fa fa-plus-circle"></i> Paciente</button>
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="control-label">CEP</label>
+                                                        <input class="form-control" placeholder="00.000-000" type="text" @*value="@Model.AddressModel.CEP" name="CEP"*@>
+                                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="control-label">Cidade</label>
+                                                        <input class="form-control" placeholder="Cidade" type="text" @*value="@Model.AddressModel.CEP" name="CEP"*@>
+                                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="control-label">Bairro</label>
+                                                        <input class="form-control" placeholder="Bairro" type="text" @*value="@Model.AddressModel.CEP" name="CEP"*@>
+                                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="control-label">Rua</label>
+                                                        <input class="form-control" placeholder="Rua" type="text" @*value="@Model.AddressModel.CEP" name="CEP"*@>
+                                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="control-label">Número</label>
+                                                        <input class="form-control" placeholder="Número" type="text" @*value="@Model.AddressModel.CEP" name="CEP"*@>
+                                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="control-label">Complemento</label>
+                                                        <input class="form-control" placeholder="Complemento" type="text" @*value="@Model.AddressModel.CEP" name="CEP"*@>
+                                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleinputemail1">Ponto de Referência</label>
+                                                <input type="text" class="form-control" id="exampleinputemail1" placeholder="Próximo...">
+                                            </div>
+
+                                            <div class="row">
+                                                @*<div class="col-md-12">
+                                                        <div class="form-group has-feedback">
+                                                            <label class="control-label">Bio</label>
+                                                            <textarea class="form-control" id="placeTextarea" rows="3" placeholder="Bio"></textarea>
+                                                        </div>
+                                                    </div>*@
+                                                <div class="col-md-12">
+                                                    <button type="submit" class="btn btn-lg bg-purpleTest">Cadastrar</button>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+
                         <!--second tab-->
                         <div class="tab-pane" id="profile" role="tabpanel" aria-expanded="false">
                             <div class="card-body">
@@ -173,7 +295,7 @@
                                 </form>
                             </div>
                         </div>
-                    </div>
+                    </div> @*Final TabContent*@
                 </div>
             </div>
         </div>
