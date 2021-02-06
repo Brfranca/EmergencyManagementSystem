@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EmergencyManagementSystem.Service.Services
 {
-    public class AddressRest : RestBase<Result, AddressModel>
+    public class AddressRest : RestBase<AddressModel>
     {
         public AddressRest(IConfiguration configuration, string key)
             : base(configuration, "CommonApi", "Address")

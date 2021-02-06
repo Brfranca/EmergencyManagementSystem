@@ -1,4 +1,5 @@
 ﻿using EmergencyManagementSystem.Service.Interfaces;
+using EmergencyManagementSystem.Service.Models;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using RestSharp;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace EmergencyManagementSystem.Service.Services
 {
-    public class RestBase<TResult, TModel>
+    public class RestBase<TModel> : IRestBase<TModel> where TModel : class
     {
         private readonly IConfiguration _configuration;
         private readonly RestClient _restClient;
@@ -43,24 +44,24 @@ namespace EmergencyManagementSystem.Service.Services
             return JsonConvert.DeserializeObject<R>(result.Content);
         }
 
-        public TResult Register(TModel model)
+        public Result Register(TModel model)
         {
-            return Post<TResult, TModel>(model, $"{_controller}/Register");
+            return Post<Result, TModel>(model, $"{_controller}/Register");
         }
 
-        public TResult Delete(TModel model)
+        public Result Delete(TModel model)
         {
-            return Post<TResult, TModel>(model, $"{_controller}/Delete");
+            return Post<Result, TModel>(model, $"{_controller}/Delete");
         }
 
-        public TResult Find(IFilter model)
+        public Result<TModel> Find(IFilter model)
         {
-            return Post<TResult, IFilter>(model, $"{_controller}/Find");
+            return Post<Result<TModel>, IFilter>(model, $"{_controller}/Find");
         }
 
-        public TResult Update(TModel model)
+        public Result Update(TModel model)
         {
-            return Post<TResult, TModel>(model, $"{_controller}/Update");
+            return Post<Result, TModel>(model, $"{_controller}/Update");
         }
     }
 }
