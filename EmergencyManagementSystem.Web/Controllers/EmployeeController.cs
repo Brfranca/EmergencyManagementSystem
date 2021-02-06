@@ -1,4 +1,5 @@
 ﻿using EmergencyManagementSystem.Service.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace EmergencyManagementSystem.Web.Controllers
 {
+    [Authorize]
     public class EmployeeController : Controller
     {
         public IActionResult Index()

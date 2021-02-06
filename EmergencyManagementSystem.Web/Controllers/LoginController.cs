@@ -24,6 +24,9 @@ namespace EmergencyManagementSystem.Web.Controllers
 
         public IActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+                return RedirectToAction("Register", "Employee");
+
             return View(new UserModel());
         }
 
@@ -39,19 +42,19 @@ namespace EmergencyManagementSystem.Web.Controllers
                 SingIn(user.Model);
 
                 if (User.Identity.IsAuthenticated)
-                    return RedirectToAction("index", "Ocurrence");
+                    return RedirectToAction("Register", "Employee");
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "User");
             }
-            catch (Exception erro)
+            catch
             {
-                return View("Index");
+                return RedirectToAction("Index", "User");
             }
         }
 
-        [HttpGet("Logoff")]
+        [HttpGet("Logout")]
         [Authorize]
-        public IActionResult Logoff()
+        public IActionResult Logout()
         {
             var authenticationManager = Request.HttpContext;
             authenticationManager.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme).Wait();
@@ -75,7 +78,6 @@ namespace EmergencyManagementSystem.Web.Controllers
                 ExpiresUtc = DateTime.Now.ToLocalTime().AddHours(2),
                 IsPersistent = true
             };
-
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimPrincipal, propriedadesDeAutenticacao);
         }
     }
