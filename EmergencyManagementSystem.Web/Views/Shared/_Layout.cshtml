@@ -37,13 +37,13 @@
                 <!-- logo for regular state and mobile devices -->
                 <span class="logo-lg"><img src="~/img/logo.png" alt=""></span>
             </a>
-            <!-- Header Navbar: style can be found in header.less -->
-            <nav class="navbar blue-bg navbar-static-top">
+            <!-- Header Navbar: style can be found in header.less --> @*TESTE COR*@
+            <nav class="navbar bg-darkTest navbar-static-top">
                 <!-- Sidebar toggle button-->
-                <ul class="nav navbar-nav pull-left">
-                    <li><a class="sidebar-toggle" data-toggle="push-menu" href=""></a> </li>
-                </ul>
-                <div class="pull-left search-box">
+                @*<ul class="nav navbar-nav pull-left">
+                        <li><a class="sidebar-toggle" data-toggle="push-menu" href=""></a> </li>
+                    </ul>*@
+                <!--<div class="pull-left search-box">
                     <form action="#" method="get" class="search-form">
                         <div class="input-group">
                             <input name="search" class="form-control" placeholder="Search..." type="text">
@@ -51,9 +51,9 @@
                                 <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i> </button>
                             </span>
                         </div>
-                    </form>
-                    <!-- search form -->
-                </div>
+                    </form>-->
+                <!-- search form -->
+                <!--</div>-->
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <!-- Messages: style can be found in dropdown.less-->
@@ -152,7 +152,7 @@
                         </li>
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu p-ph-res">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="dist/img/img1.jpg" class="user-image" alt="User Image"> <span class="hidden-xs">Alexander Pierce</span> </a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> @*<img src="dist/img/img1.jpg" class="user-image" alt="User Image">*@ <span class="hidden-xs">Alexander Pierce</span> </a>
                             <ul class="dropdown-menu">
                                 <li class="user-header">
                                     <div class="pull-left user-img"><img src="dist/img/img1.jpg" class="img-responsive" alt="User"></div>
@@ -347,27 +347,7 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
-            @*<div class="content-header sty-one">
-                <h1 class="text-white">Blank Page</h1>
-                <ol class="breadcrumb">
-                    <li><a href="#">Home</a></li>
-                    <li class="sub-bread"><i class="fa fa-angle-right"></i> Pages</li>
-                    <li><i class="fa fa-angle-right"></i> Blank Page</li>
-                </ol>
-            </div>*@
             @RenderBody()
-            <!-- Main content -->
-            @*<div class="content">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                This is some text within a card block.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>*@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
@@ -387,3 +367,9 @@
     <script src="dist/js/niche.js"></script>
 </body>
 </html>
+
+<css>
+    .bg-dark {
+    background-color: #343a40 !important;
+    }
+</css>
