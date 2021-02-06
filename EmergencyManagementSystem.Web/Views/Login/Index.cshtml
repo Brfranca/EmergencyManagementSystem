@@ -12,11 +12,12 @@
     <link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css">
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
-    
+
     <link rel="stylesheet" href="~/css/style.css">
     <link rel="stylesheet" href="~/css/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/css/et-line-font/et-line-font.css">
     <link rel="stylesheet" href="~/css/themify-icons/themify-icons.css">
+    <link href="~/css/Custom.css" rel="stylesheet" />
 
     <script src="~/js/jquery.min.js"></script>
     <script src="~/bootstrap/js/bootstrap.min.js"></script>
@@ -27,16 +28,25 @@
     <div class="login-box">
         <div class="login-box-body">
             <h3 class="login-box-msg">Login</h3>
-            <form action="@Url.Action("Login","Login")" method="post">
+            <form action="@Url.Action("Login", "Login")" method="post">
+
+
+                @if (!string.IsNullOrWhiteSpace(Model.Login))
+                {
+                    <p class="alert alert-danger">
+                        @Html.ValidationMessageFor(d => d.Login)
+                    </p>
+                }
+
                 <div class="form-group has-feedback">
                     <input type="text" name="Login" class="form-control sty1" placeholder="Usuário" value="@Model.Login" required
-                            oninvalid="this.setCustomValidity('Favor digite o login.')"
-                            oninput="this.setCustomValidity('')">
+                           oninvalid="this.setCustomValidity('Favor digite o login.')"
+                           oninput="this.setCustomValidity('')">
                 </div>
                 <div class="form-group has-feedback">
                     <input type="password" name="Password" class="form-control sty1" placeholder="Senha" value="@Model.Password" required
-                            oninvalid="this.setCustomValidity('Favor digite a senha.')"
-                            oninput="this.setCustomValidity('')">
+                           oninvalid="this.setCustomValidity('Favor digite a senha.')"
+                           oninput="this.setCustomValidity('')">
                 </div>
                 <div>
                     <div class="col-xs-8">
@@ -58,11 +68,10 @@
 
             <!-- <div class="social-auth-links text-center"> -->
             <!-- <p>- OR -</p> -->
-            <!-- <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using -->
-            <!-- Facebook</a> <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using -->
+            <!-- <a href = "#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using -->
+            <!-- Facebook</a> <a href = "#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using -->
             <!-- Google+</a> </div> -->
             <!-- /.social-auth-links -->
-
             @*<div class="m-t-2">Deseja criar sua conta? <a href="pages-register.html" class="text-center">Registrar-se</a></div>*@
         </div>
     </div>

@@ -27,9 +27,8 @@ namespace EmergencyManagementSystem.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Insert(EmployeeModel employeeModel)
+        public IActionResult Register(EmployeeModel employeeModel)
         {
-
             return View();
         }
     }

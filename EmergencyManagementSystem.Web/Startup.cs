@@ -19,14 +19,12 @@ namespace EmergencyManagementSystem.Web
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
@@ -43,10 +41,8 @@ namespace EmergencyManagementSystem.Web
                .AddCookie(options => options.LoginPath = "/Login/Index");
 
             services.AddMvc();
-            //services.AddMvc().SetCompatibilityVersion();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -56,7 +52,6 @@ namespace EmergencyManagementSystem.Web
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseAuthentication();
@@ -77,7 +72,6 @@ namespace EmergencyManagementSystem.Web
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-
         }
     }
 }

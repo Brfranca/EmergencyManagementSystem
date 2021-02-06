@@ -37,18 +37,18 @@ namespace EmergencyManagementSystem.Web.Controllers
             {
                 var user = _userRest.Find(new UserFilter { Login = userLogin.Login, Password = userLogin.Password });
                 if (!user.Success)
-                    return View("Index");
+                {
+                    ModelState.AddModelError("Login", "Login ou senha incorrétos");
+                    return View("Index", userLogin);
+                }
 
                 SingIn(user.Model);
 
-                if (User.Identity.IsAuthenticated)
-                    return RedirectToAction("Register", "Employee");
-
-                return RedirectToAction("Index", "User");
+                return RedirectToAction("Index");
             }
             catch
             {
-                return RedirectToAction("Index", "User");
+                return RedirectToAction("Index");
             }
         }
 
