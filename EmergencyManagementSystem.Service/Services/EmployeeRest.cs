@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace EmergencyManagementSystem.Service.Services
 {
-    public class AddressRest : RestBase<Result, AddressModel>
+    public class EmployeeRest : RestBase<Result, EmployeeModel>
     {
-        public AddressRest(IConfiguration configuration, string key)
-            : base(configuration, "CommonApi", "Address")
+        public EmployeeRest(IConfiguration configuration) 
+            : base(configuration, "CommonApi", "Employee")
         {
         }
     }
