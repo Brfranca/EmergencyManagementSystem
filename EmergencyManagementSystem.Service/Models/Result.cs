@@ -9,7 +9,7 @@ namespace EmergencyManagementSystem.Service.Models
 {
     public class Result<T> : Result where T : class
     {
-        public T Model { get; private set; }
+        public T Model { get; set; }
 
         public Result()
         {
@@ -53,8 +53,8 @@ namespace EmergencyManagementSystem.Service.Models
 
     public class Result
     {
-        public bool Success { get; protected set; }
-        public List<string> Messages { get; protected set; }
+        public bool Success { get; set; }
+        public List<string> Messages { get; set; }
 
         public static Result BuildError(string message)
             => new Result

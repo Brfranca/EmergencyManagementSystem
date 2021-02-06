@@ -10,5 +10,6 @@ namespace EmergencyManagementSystem.Service.Filters
     public class UserFilter : IFilter
     {
         public string Login { get; set; }
+        public string Password { get; set; }
     }
 }
