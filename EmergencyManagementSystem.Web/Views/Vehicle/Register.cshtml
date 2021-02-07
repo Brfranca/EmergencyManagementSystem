@@ -36,14 +36,14 @@
                                     <label for="exampleInputPassword1">Placa</label>
                                     @Html.EditorFor(model => model.VehiclePlate, new { htmlAttributes = new { @class = "form-control" } })
                                     @*<input type="text" class="form-control" id="exampleInputPassword1" placeholder="" value="@Model.VehiclePlate" name="VehiclePlate">*@
-                                    @Html.ValidationMessageFor(d => d.VehiclePlate)
+                                    @Html.ValidationMessageFor(d => d.VehiclePlate, "", new { @class = "text-danger" })
 
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Ano</label>
                                     @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })
                                     @*                                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="" value="@Model.Year" name="Year">*@
-                                    @Html.ValidationMessageFor(d => d.Year)
+                                    @Html.ValidationMessageFor(d => d.Year, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="form-group">
                                     <label for="location1">Tipo do Veículo</label>
