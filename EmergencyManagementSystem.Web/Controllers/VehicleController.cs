@@ -17,7 +17,13 @@ namespace EmergencyManagementSystem.Web.Controllers
 
         public IActionResult Register()
         {
-            return View(new VehicleModel());
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Register(VehicleModel vehicleModel)
+        {
+            return View();
         }
     }
 }
