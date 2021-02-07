@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmergencyManagementSystem.Service.Interfaces
+namespace EmergencyManagementSystem.Service.Filters
 {
-    public interface IFilter
+    public class EmployeeFilter : FilterBase
     {
-        int CurrentPage { get; set; }
     }
 }

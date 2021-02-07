@@ -29,7 +29,7 @@ namespace EmergencyManagementSystem.Web
         {
             services.AddControllersWithViews();
             services.AddScoped<IUserRest, UserRest>();
-
+            services.AddScoped<IEmployeeRest, EmployeeRest>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {

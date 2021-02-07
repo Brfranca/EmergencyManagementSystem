@@ -6,7 +6,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <div class="content-header sty-one">
     <h1 class="text-white">Contact</h1>
 </div>
@@ -50,35 +49,13 @@
                             </tbody>
                         </table>
 
-                        @*@Html.PagedListPager(Model, pagina => Url.Action("Index", new { pagina }),
-                            new PagedListRenderOptionsBase
-                            {
-                                PreviousElementClass = "paginate_button previous disabled",
-                                ActiveLiElementClass = "paginate_button",
-                                PageClasses = new[] { "paginate_button" },
-                                NextElementClass = "paginate_button next",
-                                LinkToNextPageFormat = "Próxima",
-                                LinkToPreviousPageFormat = "Voltar",
-                                LiElementClasses = new[] { "paginate_button" },
-                                ClassToApplyToFirstListItemInPager = "paginate_button",
-                                ClassToApplyToLastListItemInPager = "paginate_button",
-                                ContainerDivClasses = new[] { "pagination" },
-                                EllipsesElementClass = "paginate_button" 
-                            })*@
-
-                        <ul class="pagination">
-                                <li class="paginate_button previous disabled">
-                                    <a href="#">Voltar</a>
-                                </li>
-                                <li class="paginate_button active">
-                                    <a href="#">1</a>
-                                </li>
-                                
-                                <li class="paginate_button next">
-                                    <a href="#">Próximo</a>
-                                </li>
-                            </ul>
-
+                        @Html.PagedListPager(Model, page =>
+                                Url.Action("Index", new { page = page }),
+                                new PagedListRenderOptionsBase
+                                {
+                                    LiElementClasses = new string[] { "page-item" },
+                                    PageClasses = new string[] { "page-link" }
+                                })
                     </div>
                 </div>
             </div>

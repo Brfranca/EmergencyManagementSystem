@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace EmergencyManagementSystem.Service.Services
 {
@@ -62,6 +63,11 @@ namespace EmergencyManagementSystem.Service.Services
         public Result Update(TModel model)
         {
             return Post<Result, TModel>(model, $"{_controller}/Update");
+        }
+
+        public PagedList<TModel> FindPaginated(IFilter filter)
+        {
+            return Post<PagedList<TModel>, IFilter>(filter, $"{_controller}/FindPaginated");
         }
     }
 }

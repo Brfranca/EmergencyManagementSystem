@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace EmergencyManagementSystem.Service.Filters
 {
-    public class UserFilter : FilterBase
+    public class FilterBase : IFilter
     {
-        public string Login { get; set; }
-        public string Password { get; set; }
+        public int CurrentPage { get; set; }
     }
 }

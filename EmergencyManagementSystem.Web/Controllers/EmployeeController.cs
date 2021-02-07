@@ -1,4 +1,7 @@
-﻿using EmergencyManagementSystem.Service.Models;
+﻿using EmergencyManagementSystem.Service.Filters;
+using EmergencyManagementSystem.Service.Interfaces;
+using EmergencyManagementSystem.Service.Models;
+using EmergencyManagementSystem.Service.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,13 +15,18 @@ namespace EmergencyManagementSystem.Web.Controllers
     [Authorize]
     public class EmployeeController : Controller
     {
-        public IActionResult Index(int? pagina)
+        private readonly IEmployeeRest _employeeRest;
+        public EmployeeController(IEmployeeRest employeeRest)
         {
-            return View(new PagedList<EmployeeModel>(new List<EmployeeModel>()
+            _employeeRest = employeeRest;
+        }
+        public IActionResult Index(int? page)
+        {
+            var employees = _employeeRest.FindPaginated(new EmployeeFilter
             {
-                new EmployeeModel(){ Name = "João Pereira", Company = Service.Enums.Company.Bombeiro, Email = "teste@hotmail.com", Telephone = "047 98483-0063"},
-                new EmployeeModel{ Name = "Augusto Santos", Company = Service.Enums.Company.SAMU, Email = "teste@hotmail.com", Telephone = "047 98483-0063"}
-            }, pagina ?? 1, 1));
+                CurrentPage = page ?? 1
+            });
+            return View(employees);
         }
 
         public IActionResult Register()
