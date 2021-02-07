@@ -5,20 +5,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace EmergencyManagementSystem.Web.Controllers
 {
     [Authorize]
     public class EmployeeController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index(int? pagina)
         {
-            return View(new UserModel());
-        }
-
-        public IActionResult Create()
-        {
-            return View(new EmployeeModel());
+            return View(new PagedList<EmployeeModel>(new List<EmployeeModel>()
+            {
+                new EmployeeModel(){ Name = "João Pereira", Company = Service.Enums.Company.Bombeiro, Email = "teste@hotmail.com", Telephone = "047 98483-0063"},
+                new EmployeeModel{ Name = "Augusto Santos", Company = Service.Enums.Company.SAMU, Email = "teste@hotmail.com", Telephone = "047 98483-0063"}
+            }, pagina ?? 1, 1));
         }
 
         public IActionResult Register()
