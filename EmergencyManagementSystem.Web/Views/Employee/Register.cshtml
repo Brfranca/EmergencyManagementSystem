@@ -6,7 +6,7 @@
 }
 
 <div class="content-header sty-one">
-    <h1 class="text-white">Cadastrar Funcionário</h1>
+    <h1 class="text-white">Cadastro de Funcionário</h1>
 </div>
 
 <div class="content">
@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card card-outline">
-                    <div class="card-header blue-bg"    >
+                    <div class="card-header blue-bg">
                         <h5 class="text-white m-b-0">Dados do profissional</h5>
                     </div>
                     <div class="card-body">
@@ -76,12 +76,14 @@
                                     <span class="fa fa-briefcase form-control-feedback" aria-hidden="true"></span>
                                 </div>
                             </div>
-                            @*CompanyName é um enum e deve aparecer apenas opções validas da tela*@
                             <div class="col-md-6">
-                                <div class="form-group has-feedback">
-                                    <label class="control-label">Empresa/Corporação</label>
-                                    <input class="form-control" placeholder="" type="text">
-                                    <span class="fa fa-globe form-control-feedback" aria-hidden="true"></span>
+                                <div class="form-group">
+                                    <label for="location1">Coorporação</label>
+                                    <select class="custom-select form-control" id="location1" name="location">
+                                        <option value="">Selecione</option>
+                                        <option value="">SAMU</option>
+                                        <option value="">Bombeiro</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -102,13 +104,6 @@
                                 <div class="form-group has-feedback">
                                     <label class="control-label">CEP</label>
                                     <input class="form-control" placeholder="00.000-000" type="text" @*value="@Model.AddressModel.CEP" name="CEP"*@>
-                                    <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group has-feedback">
-                                    <label class="control-label">Estado - UF</label>
-                                    <input class="form-control" placeholder="UF" type="text" @*value="@Model.AddressModel.CEP" name="CEP"*@>
                                     <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                 </div>
                             </div>
@@ -147,18 +142,10 @@
                                     <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group has-feedback">
-                                    <label class="control-label">Ponto de Referencia</label>
-                                    <input class="form-control" placeholder="Ponto de Referencia" type="text" @*value="@Model.AddressModel.CEP" name="CEP"*@>
-                                    <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
-                                </div>
-                            </div>
-
 
                             @*<div class="col-md-12">
-                                <button type="submit" class="btn btn-success">Submit</button>
-                            </div>*@
+            <button type="submit" class="btn btn-success">Submit</button>
+        </div>*@
                         </div>
 
                     </div>
