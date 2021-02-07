@@ -1,6 +1,6 @@
 ﻿namespace EmergencyManagementSystem.Service.Enums
 {
-    public enum Company
+    public enum Company : short
     {
         Invalid,
         SAMU,
