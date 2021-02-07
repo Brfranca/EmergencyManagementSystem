@@ -24,5 +24,7 @@ namespace EmergencyManagementSystem.Service.Models
         public VehicleType VehicleType { get; set; }
         public VehicleSituation VehicleSituation { get; set; }
         //public ICollection<VehicleTeam> VehicleTeams { get; set; }
+
+        
     }
 }

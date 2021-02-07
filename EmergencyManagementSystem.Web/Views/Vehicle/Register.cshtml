@@ -17,56 +17,51 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
-                            <div class="card-body">
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="card-body">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                                <div class="row">
-                                    <div class="col-md-4 col-xs-12">
-                                        <h4 class="card-title">Dados do Veículo</h4>
-                                        <div id="treeview1" class=""></div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Nome/Modelo</label>
-                                    @*<input type="text" class="form-control" id="exampleInputEmail1" placeholder="" value="@Model.VehicleName" name="VehicleName">*@
-                                    @Html.EditorFor(model => model.VehicleName, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(d => d.VehicleName, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Placa</label>
-                                    @Html.EditorFor(model => model.VehiclePlate, new { htmlAttributes = new { @class = "form-control" } })
-                                    @*<input type="text" class="form-control" id="exampleInputPassword1" placeholder="" value="@Model.VehiclePlate" name="VehiclePlate">*@
-                                    @Html.ValidationMessageFor(d => d.VehiclePlate, "", new { @class = "text-danger" })
-
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Ano</label>
-                                    @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })
-                                    @*                                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="" value="@Model.Year" name="Year">*@
-                                    @Html.ValidationMessageFor(d => d.Year, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="form-group">
-                                    <label for="location1">Tipo do Veículo</label>
-                                    @{ string[] vehicleType = Enum.GetNames(typeof(EmergencyManagementSystem.Service.Enums.VehicleType)); }
-                                    <select class="form-control" name="VehicleType" id="VehicleType">
-                                        @for (int i = 0; i < vehicleType.Length; i++)
-                                        {
-                                            <option value="@i">@vehicleType[i]</option>
-                                        }
-                                    </select>
-                                    @*<select class="custom-select form-control" id="location1" value="@Model.VehicleType" name="VehicleType">
-                                            <option value="0">Selecione</option>
-                                            <option value="1">USB</option>
-                                            <option value="2">USA</option>
-                                            <option value="3">HEL</option>
-                                            <option value="4">AVI</option>
-                                        </select>*@
-                                    @Html.ValidationMessageFor(d => d.VehicleType, "", new { @class = "text-danger" })
+                            <div class="row">
+                                <div class="col-md-4 col-xs-12">
+                                    <h4 class="card-title">Dados do Veículo</h4>
+                                    <div id="treeview1" class=""></div>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <button type="submit" class="btn btn-lg bg-purpleTest">Cadastrar</button>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Nome/Modelo</label>
+                                @*<input type="text" class="form-control" id="exampleInputEmail1" placeholder="" value="@Model.VehicleName" name="VehicleName">*@
+                                @Html.EditorFor(model => model.VehicleName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(d => d.VehicleName, "", new { @class = "text-danger" })
                             </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Placa</label>
+                                @Html.EditorFor(model => model.VehiclePlate, new { htmlAttributes = new { @class = "form-control" } })
+                                @*<input type="text" class="form-control" id="exampleInputPassword1" placeholder="" value="@Model.VehiclePlate" name="VehiclePlate">*@
+                                @Html.ValidationMessageFor(d => d.VehiclePlate, "", new { @class = "text-danger" })
+
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Ano</label>
+                                @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })
+                                @*                                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="" value="@Model.Year" name="Year">*@
+                                @Html.ValidationMessageFor(d => d.Year, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label for="location1">Tipo do Veículo</label>
+
+                                @{ string[] vehicleType = Enum.GetNames(typeof(EmergencyManagementSystem.Service.Enums.VehicleType)); }
+
+                                <select class="form-control" name="VehicleType" id="VehicleType">
+                                    @for (int i = 0; i < vehicleType.Length; i++)
+                                    {
+                                        <option value="@i" @(i == (int)(Model?.VehicleType ?? 0) ? "Selected" : "")>@vehicleType[i]</option>
+                                    }
+                                </select>
+                                @Html.ValidationMessageFor(d => d.VehicleType, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <button type="submit" class="btn btn-lg bg-purpleTest">Cadastrar</button>
+                        </div>
                     </div>
                 </div>
             </div>
