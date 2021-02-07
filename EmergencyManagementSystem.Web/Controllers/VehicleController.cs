@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EmergencyManagementSystem.Service.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,12 @@ namespace EmergencyManagementSystem.Web.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+
+        public IActionResult Register()
+        {
+            return View(new VehicleModel());
         }
     }
 }

@@ -1,0 +1,57 @@
+﻿@model EmergencyManagementSystem.Service.Models.VehicleModel
+
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-header sty-one">
+    <h1 class="text-white">Cadastro de Veículo</h1>
+</div>
+
+<div class="content">
+    <div class="info-box">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <form>
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 col-xs-12">
+                                    <h4 class="card-title">Dados do Veículo</h4>
+                                    <div id="treeview1" class=""></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Nome/Modelo</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="" value="@Model.VehicleName" name="VehicleName">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Placa</label>
+                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="" value="@Model.VehiclePlate" name="VehiclePlate">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Ano</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="" value="@Model.Year" name="Year">
+                            </div>
+                            <div class="form-group">
+                                <label for="location1">Tipo do Veículo</label>
+                                <select class="custom-select form-control" id="location1" value="@Model.VehicleType" name="VehicleType">
+                                    <option value="0">Selecione</option>
+                                    <option value="1">USB</option>
+                                    <option value="2">USA</option>
+                                    <option value="3">HEL</option>
+                                    <option value="4">AVI</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <button type="submit" class="btn btn-lg bg-purpleTest">Cadastrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
