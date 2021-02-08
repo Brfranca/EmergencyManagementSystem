@@ -18,11 +18,13 @@ namespace EmergencyManagementSystem.Service.Models
         [StringLength(40, MinimumLength = 3, ErrorMessage = "O nome/modelo deve ter no mínimo 3 e no máximo 40 caracteres.")]
         public string VehicleName { get; set; }
         [Required(ErrorMessage = "Favor informar o ano do veículo.")]
-        [StringLength(7, MinimumLength = 7, ErrorMessage = "o ano deve ter 4 números.")]
-        public int Year { get; set; }
+        [Range(1000, 9999, ErrorMessage = "O ano deve conter 4 números.")]
+        public int? Year { get; set; }
         [Range(1, 4, ErrorMessage = "Favor informar o tipo do veículo.")]
         public VehicleType VehicleType { get; set; }
         public VehicleSituation VehicleSituation { get; set; }
         //public ICollection<VehicleTeam> VehicleTeams { get; set; }
+
+        
     }
 }

@@ -21,13 +21,11 @@ namespace EmergencyManagementSystem.Web.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Register(VehicleModel vehicleModel)
         {
             if (!ModelState.IsValid)
-            {
                 return View(vehicleModel);
-            }
+
             return RedirectToAction();
         }
     }
