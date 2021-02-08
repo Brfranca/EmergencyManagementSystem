@@ -20,12 +20,12 @@ namespace EmergencyManagementSystem.Web.Controllers
         {
             _employeeRest = employeeRest;
         }
-        public IActionResult Index(int? page)
+
+        public IActionResult Index(EmployeeFilter employeeFilter)
         {
-            var employees = _employeeRest.FindPaginated(new EmployeeFilter
-            {
-                CurrentPage = page ?? 1
-            });
+            ViewBag.Name = employeeFilter.Name;
+            ViewBag.CPF = employeeFilter.CPF;
+            var employees = _employeeRest.FindPaginated(employeeFilter);
             return View(employees);
         }
 

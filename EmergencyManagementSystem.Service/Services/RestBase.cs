@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using X.PagedList;
@@ -18,7 +19,6 @@ namespace EmergencyManagementSystem.Service.Services
         private readonly IConfiguration _configuration;
         private readonly RestClient _restClient;
         private readonly string _controller;
-
         public RestBase(IConfiguration configuration, string key, string controller)
         {
             _configuration = configuration;
@@ -67,7 +67,8 @@ namespace EmergencyManagementSystem.Service.Services
 
         public PagedList<TModel> FindPaginated(IFilter filter)
         {
-            return Post<PagedList<TModel>, IFilter>(filter, $"{_controller}/FindPaginated");
+            var result = Post<PaginationModel<TModel>, IFilter>(filter, $"{_controller}/FindPaginated");
+            return new PagedList<TModel>(result.DataPagination, result.Models);
         }
     }
 }

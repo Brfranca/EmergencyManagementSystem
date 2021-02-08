@@ -5,60 +5,88 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<form>
+    <div class="content-header sty-one">
+        <h1 class="text-white">Funcionários</h1>
+    </div>
 
-<div class="content-header sty-one">
-    <h1 class="text-white">Contact</h1>
-</div>
-<div class="content">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="info-box">
-                <div class="box-body">
-                    <div class="right-page-header">
-                        <div class="d-flex">
-                            <div class="align-self-center">
-                                <h4 class="text-white m-b-1">Funcionários</h4>
-                            </div>
-                            <div class="ml-auto">
-                                <input id="demo-input-search2" placeholder="pesquisar" class="form-control" type="text">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+
+                <div class="col-md-3">
+                    <div class="form-group-sm">
+                        <input id="demo-input-search2" name="employeeFilter.Name" placeholder="Nome" class="form-control" type="text" value="@ViewBag.Name">
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group-sm">
+                        <input id="demo-input-search2" name="employeeFilter.CPF" placeholder="CPF" class="form-control" type="text" value="@ViewBag.CPF">
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group-sm">
+                        <input type="submit" class="btn btn-secondary" value="Pesquisar" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="info-box">
+                    <div class="box-body">
+                        <div class="right-page-header">
+                            <div class="d-flex">
+                                <div class="align-self-center">
+                                    <h4 class="text-white m-b-1">Funcionários</h4>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="table-responsive">
-                        <table id="example2" class="table table-bordered table-hover no-wrap">
-                            <thead>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>Telefone</th>
-                                    <th>Email</th>
-                                    <th>Compania</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model)
-                                {
+                        <div class="table-responsive">
+                            <table id="example2" class="table table-bordered table-hover no-wrap">
+                                <thead>
                                     <tr>
-                                        <td>Tiago</td>
-                                        <td>47 98483-0063</td>
-                                        <td>alexander@gmail.com</td>
-                                        <td>@item.Company</td>
-                                        <td><button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Delete"> <i class="ti-close" aria-hidden="true"></i> </button></td>
+                                        <th>Nome</th>
+                                        <th>Telefone</th>
+                                        <th>Email</th>
+                                        <th>Compania</th>
+                                        <th>Action</th>
                                     </tr>
-                                }
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.Name</td>
+                                            <td>@item.Telephone</td>
+                                            <td>@item.Email</td>
+                                            <td>@item.Company.GetEnumDescription()</td>
+                                            <td>
+                                                <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Deletar" href="@Url.Action("")">
+                                                    <i class="ti-close" aria-hidden="true"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
 
-                        @Html.PagedListPager(Model, page =>
-                                Url.Action("Index", new { page = page }),
-                                new PagedListRenderOptionsBase
-                                {
-                                    LiElementClasses = new string[] { "page-item" },
-                                    PageClasses = new string[] { "page-link" }
-                                })
+                            @Html.PagedListPager(Model, page =>
+                                    Url.Action("Index", new { CurrentPage = page, Name = ViewBag.Name, CPF = ViewBag.CPF }),
+                                    new PagedListRenderOptionsBase
+                                    {
+                                        LiElementClasses = new string[] { "page-item" },
+                                        PageClasses = new string[] { "page-link" }
+                                    })
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</form>

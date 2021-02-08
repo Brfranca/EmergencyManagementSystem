@@ -10,5 +10,11 @@ namespace EmergencyManagementSystem.Service.Filters
     public class FilterBase : IFilter
     {
         public int CurrentPage { get; set; }
+
+        public FilterBase()
+        {
+            if (CurrentPage == 0)
+                CurrentPage = 1;
+        }
     }
 }
