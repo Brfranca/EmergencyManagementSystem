@@ -1,23 +1,23 @@
 ﻿@model EmergencyManagementSystem.Service.Models.VehicleModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Update";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-<div class="content-header sty-one">
-    <h1 class="text-white">Cadastro de Funcionário</h1>
-</div>
+    <div class="content-header sty-one">
+        <h1 class="text-white">Cadastro de Funcionário</h1>
+    </div>
 
     <div class="content">
         <div class="info-box">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
-                        <form action="@Url.Action("Register", "Vehicle")" method="post">
+                        <form action="@Url.Action("Update", "Vehicle")" method="post">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-4 col-xs-12">
-                                        <h4 class="card-title">Dados do Profissional</h4>
+                                        <h4 class="card-title">Dados do Veículo</h4>
                                         <div id="treeview1" class=""></div>
                                     </div>
                                 </div>
@@ -61,10 +61,26 @@
                                             <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group has-feedback">
+                                            <label for="location1">Situação do veículo</label>
+
+                                            @{ string[] vehicleSituation = Enum.GetNames(typeof(EmergencyManagementSystem.Service.Enums.VehicleSituation)); }
+
+                                            <select class="form-control" name="VehicleSituation" id="VehicleSituation">
+                                                @for (int i = 0; i < vehicleSituation.Length; i++)
+                                                {
+                                                    <option value="@i" @(i == (int)(Model?.VehicleSituation ?? 0) ? "Selected" : "")>@vehicleSituation[i]</option>
+                                                }
+                                            </select>
+                                            @Html.ValidationMessageFor(d => d.VehicleSituation, "", new { @class = "text-danger" })
+                                            <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <button type="submit" class="btn btn-lg bg-purpleTest">Cadastrar</button>
+                                <button type="submit" class="btn btn-lg bg-purpleTest">Salvar alterações</button>
                             </div>
                         </form>
                     </div>

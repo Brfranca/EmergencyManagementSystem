@@ -8,6 +8,7 @@ namespace EmergencyManagementSystem.Service.Filters
 {
     public class VehicleFilter : FilterBase
     {
+        public int Id { get; set; }
         public string VehicleName { get; set; }
         public int Year { get; set; }
     }

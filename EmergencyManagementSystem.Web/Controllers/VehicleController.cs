@@ -1,6 +1,7 @@
 ﻿using EmergencyManagementSystem.Service.Filters;
 using EmergencyManagementSystem.Service.Interfaces;
 using EmergencyManagementSystem.Service.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace EmergencyManagementSystem.Web.Controllers
 {
+    [Authorize]
     public class VehicleController : Controller
     {
         private readonly IVehicleRest _vehicleRest;
@@ -29,16 +31,36 @@ namespace EmergencyManagementSystem.Web.Controllers
 
         public IActionResult Register()
         {
-            return View();
+            return View(new VehicleModel());
         }
 
         [HttpPost]
         public IActionResult Register(VehicleModel vehicleModel)
         {
-            if (!ModelState.IsValid)
+            vehicleModel.VehicleSituation = Service.Enums.VehicleSituation.Cleared;
+            var result = _vehicleRest.Register(vehicleModel);
+            if (!result.Success)
                 return View(vehicleModel);
 
-            return RedirectToAction();
+            return RedirectToAction("Index", "Vehicle");
+        }
+
+        public IActionResult Update(int id)
+        {
+            var result = _vehicleRest.Find(new VehicleFilter { Id = id });
+            if (!result.Success)
+                return RedirectToAction("Index");
+            return View(result.Model);
+        }
+
+        [HttpPost]
+        public IActionResult Update(VehicleModel vehicleModel)
+        {
+            var result = _vehicleRest.Update(vehicleModel);
+            if (!result.Success)
+                return View(vehicleModel);
+
+            return RedirectToAction("Index", "Vehicle");
         }
     }
 }

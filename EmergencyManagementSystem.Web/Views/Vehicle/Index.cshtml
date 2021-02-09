@@ -72,11 +72,8 @@
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <button class="btn btn-outline-danger btn-sm" type="button" title="Deletar"><i class="fa fa-trash-o"></i></button>
-                                                        @*<button type="button" class="btn btn-sm btn-outline-danger" data-toggle="tooltip" data-placement="top" href="@Url.Action("")">
-                            <i class="ti-trash" aria-hidden="true"></i>
-                        </button>*@
-                                                        <button class="btn btn-outline-warning btn-sm" type="button" title="Editar"><i class="fa fa-pencil"></i></button>
-                                                        <button class="btn btn-outline-primary btn-sm" type="button" title="Detalhes"><i class="fa fa-list"></i></button>
+                                                        <a class="btn btn-outline-warning btn-sm" title="Editar" href="@Url.Action("Update", "Vehicle", new { id = item.Id })"><i class="fa fa-pencil"></i></a>
+                                                        <a class="btn btn-outline-primary btn-sm" title="Detalhes" href="@Url.Action("Detail","Vehicle")"><i class="fa fa-list"></i></a>
                                                     </div>
                                                 </div>
                                             </span>
