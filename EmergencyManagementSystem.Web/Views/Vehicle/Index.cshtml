@@ -27,13 +27,13 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group-sm">
-                                    <input id="demo-input-search2" name="vehicleFilter.VehicleName" placeholder="Nome/Modelo" class="form-control" type="text" value="@ViewBag.Name">
+                                    <input id="demo-input-search2" name="vehicleFilter.VehicleName" placeholder="Nome/Modelo" class="form-control" type="text" value="@ViewBag.VehicleName">
                                 </div>
                             </div>
 
                             <div class="col-md-2">
                                 <div class="form-group-sm">
-                                    <input id="demo-input-search2" name="employeeFilter.CPF" placeholder="CPF" class="form-control" type="text" value="@ViewBag.CPF">
+                                    <input id="demo-input-search2" name="vehicleFilter.VehiclePlate" placeholder="Placa" class="form-control" type="text" value="@ViewBag.VehiclePlate">
                                 </div>
                             </div>
 
@@ -50,11 +50,11 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Nome</th>
-                                        <th>Telefone</th>
-                                        <th>Email</th>
-                                        <th>Coorporação</th>
-                                        <th>Action</th>
+                                        <th>Nome/Modelo</th>
+                                        <th>Placa</th>
+                                        <th>Ano</th>
+                                        <th>Situação</th>
+                                        <th>Tipo de veículo</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -87,7 +87,7 @@
                             </table>
 
                             @Html.PagedListPager(Model, page =>
-                                    Url.Action("Index", new { CurrentPage = page, Name = ViewBag.Name, CPF = ViewBag.CPF }),
+                                    Url.Action("Index", new { CurrentPage = page, VehicleName = ViewBag.VehicleName, VehiclePlate = ViewBag.VehiclePlate }),
                                     new PagedListRenderOptionsBase
                                     {
                                         LiElementClasses = new string[] { "page-item" },
