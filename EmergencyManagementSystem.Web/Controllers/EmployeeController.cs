@@ -39,5 +39,20 @@ namespace EmergencyManagementSystem.Web.Controllers
         {
             return View();
         }
+
+        public IActionResult Update(int id)
+        {
+            var result = _employeeRest.Find(new EmployeeFilter { Id = id });
+            if (!result.Success)
+                return RedirectToAction("Index");
+            return View(result.Model);
+        }
+
+        public IActionResult Detail(EmployeeModel employeeModel)
+        {
+            return View();
+        }
+
+
     }
 }

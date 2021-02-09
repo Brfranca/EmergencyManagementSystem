@@ -42,11 +42,13 @@
                                     <input type="submit" class="btn btn-secondary btn-nor" value="Pesquisar" />
                                 </div>
                             </div>
+
                         </div>
 
 
+
                         <div class="table-responsive">
-                            <table id="example2" class="table table-bordered table-hover no-wrap">
+                            <table id="example2" class="table table-bordered table-hover no-wrap" data-name="cool-table">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -74,8 +76,8 @@
                                                             @*<button type="button" class="btn btn-sm btn-outline-danger" data-toggle="tooltip" data-placement="top" href="@Url.Action("")">
                                                                     <i class="ti-trash" aria-hidden="true"></i>
                                                                 </button>*@
-                                                            <button class="btn btn-outline-warning btn-sm" type="button" title="Editar"><i class="fa fa-pencil"></i></button>
-                                                            <button class="btn btn-outline-primary btn-sm" type="button" title="Detalhes"><i class="fa fa-list"></i></button>
+                                                            <a class="btn btn-outline-warning btn-sm" title="Editar" href="@Url.Action("Update", "Employee", new { id = item.Id })"><i class="fa fa-pencil"></i></a>
+                                                            <a class="btn btn-outline-primary btn-sm" title="Detalhes" href="@Url.Action("Detail","Employee")"><i class="fa fa-list"></i></a>
                                                         </div>
                                                     </div>
                                                 </span>
@@ -89,10 +91,16 @@
                                     Url.Action("Index", new { CurrentPage = page, Name = ViewBag.Name, CPF = ViewBag.CPF }),
                                     new PagedListRenderOptionsBase
                                     {
-                                        LiElementClasses = new string[] { "page-item" },
+                                        LiElementClasses = new string[] { "paginate_button" },
                                         PageClasses = new string[] { "page-link" }
+                                        //LiElementClasses = new string[] { "page-item" },
+                                        //PageClasses = new string[] { "page-link" }
                                     })
                         </div>
+                        <a type="button" class="btn btn-nor bg-purpleTest"  @*data-toggle="tooltip" data-placement="top"*@ href="@Url.Action("Register","Employee")">
+                            Novo Funcionário
+                            <i class="ti-pencil-alt" aria-hidden="true"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -100,15 +108,18 @@
     </div>
 </form>
 
+<script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
 <script>
     $(function () {
         $('#example1').DataTable()
         $('#example2').DataTable({
-            'paging': true,
+            'paging': false,
             'lengthChange': false,
             'searching': false,
             'ordering': true,
-            'info': true,
+            'info': false,
             'autoWidth': false
         })
     })

@@ -8,6 +8,7 @@ namespace EmergencyManagementSystem.Service.Filters
 {
     public class EmployeeFilter : FilterBase
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string CPF { get; set; }
     }
