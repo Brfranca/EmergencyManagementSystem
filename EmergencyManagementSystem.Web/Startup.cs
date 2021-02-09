@@ -30,6 +30,8 @@ namespace EmergencyManagementSystem.Web
             services.AddControllersWithViews();
             services.AddScoped<IUserRest, UserRest>();
             services.AddScoped<IEmployeeRest, EmployeeRest>();
+            services.AddScoped<IVehicleRest, VehicleRest>();
+
 
             services.Configure<CookiePolicyOptions>(options =>
             {

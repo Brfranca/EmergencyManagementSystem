@@ -1,4 +1,6 @@
-﻿using EmergencyManagementSystem.Service.Models;
+﻿using EmergencyManagementSystem.Service.Filters;
+using EmergencyManagementSystem.Service.Interfaces;
+using EmergencyManagementSystem.Service.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,9 +11,19 @@ namespace EmergencyManagementSystem.Web.Controllers
 {
     public class VehicleController : Controller
     {
-        public IActionResult Index()
+        private readonly IVehicleRest _vehicleRest;
+
+        public VehicleController(IVehicleRest vehicleRest)
         {
-            return View();
+            _vehicleRest = vehicleRest;
+        }
+
+        public IActionResult Index(VehicleFilter filter)
+        {
+            ViewBag.VehicleName = filter.VehicleName;
+            ViewBag.Year = filter.Year;
+            var employees = _vehicleRest.FindPaginated(filter);
+            return View(employees);
         }
 
 
