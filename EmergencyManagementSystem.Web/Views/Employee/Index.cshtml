@@ -5,36 +5,13 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
+<div class="content-header sty-one">
+    <h1 class="text-white">Funcionários</h1>
+</div>
 <form>
-    <div class="content-header sty-one">
-        <h1 class="text-white">Funcionários</h1>
-    </div>
 
-    <div class="card">
-        <div class="card-body">
-            <div class="row">
-
-                <div class="col-md-3">
-                    <div class="form-group-sm">
-                        <input id="demo-input-search2" name="employeeFilter.Name" placeholder="Nome" class="form-control" type="text" value="@ViewBag.Name">
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group-sm">
-                        <input id="demo-input-search2" name="employeeFilter.CPF" placeholder="CPF" class="form-control" type="text" value="@ViewBag.CPF">
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group-sm">
-                        <input type="submit" class="btn btn-secondary" value="Pesquisar" />
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
     <div class="content">
         <div class="row">
             <div class="col-lg-12">
@@ -43,18 +20,40 @@
                         <div class="right-page-header">
                             <div class="d-flex">
                                 <div class="align-self-center">
-                                    <h4 class="text-white m-b-1">Funcionários</h4>
+                                    <h4 class="text-white m-b-1">Funcionários Cadastrados</h4>
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group-sm">
+                                    <input id="demo-input-search2" name="employeeFilter.Name" placeholder="Nome" class="form-control" type="text" value="@ViewBag.Name">
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group-sm">
+                                    <input id="demo-input-search2" name="employeeFilter.CPF" placeholder="CPF" class="form-control" type="text" value="@ViewBag.CPF">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <div class="form-group-sm">
+                                    <input type="submit" class="btn btn-secondary btn-nor" value="Pesquisar" />
+                                </div>
+                            </div>
+                        </div>
+
+
                         <div class="table-responsive">
                             <table id="example2" class="table table-bordered table-hover no-wrap">
                                 <thead>
                                     <tr>
+                                        <th>ID</th>
                                         <th>Nome</th>
                                         <th>Telefone</th>
                                         <th>Email</th>
-                                        <th>Compania</th>
+                                        <th>Coorporação</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -62,14 +61,24 @@
                                     @foreach (var item in Model)
                                     {
                                         <tr>
+                                            <td>@item.Id</td>
                                             <td>@item.Name</td>
                                             <td>@item.Telephone</td>
                                             <td>@item.Email</td>
                                             <td>@item.Company.GetEnumDescription()</td>
-                                            <td>
-                                                <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Deletar" href="@Url.Action("")">
-                                                    <i class="ti-close" aria-hidden="true"></i>
-                                                </button>
+                                            <td class="jsgrid-cell jsgrid-control-field jsgrid-align-center" style="width: 50px;">
+                                                <span class="pull-right">
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            <button class="btn btn-outline-danger btn-sm" type="button" title="Deletar"><i class="fa fa-trash-o"></i></button>
+                                                            @*<button type="button" class="btn btn-sm btn-outline-danger" data-toggle="tooltip" data-placement="top" href="@Url.Action("")">
+                                                                    <i class="ti-trash" aria-hidden="true"></i>
+                                                                </button>*@
+                                                            <button class="btn btn-outline-warning btn-sm" type="button" title="Editar"><i class="fa fa-pencil"></i></button>
+                                                            <button class="btn btn-outline-primary btn-sm" type="button" title="Detalhes"><i class="fa fa-list"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </span>
                                             </td>
                                         </tr>
                                     }
@@ -90,3 +99,17 @@
         </div>
     </div>
 </form>
+
+<script>
+    $(function () {
+        $('#example1').DataTable()
+        $('#example2').DataTable({
+            'paging': true,
+            'lengthChange': false,
+            'searching': false,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false
+        })
+    })
+</script>
