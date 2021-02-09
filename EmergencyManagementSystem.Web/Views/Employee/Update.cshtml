@@ -6,7 +6,7 @@
 }
 
 <div class="content-header sty-one">
-    <h1 class="text-white">Cadastro de Funcionário</h1>
+    <h1 class="text-white">Atualização de Cadastro</h1>
 </div>
 
 <div class="content">
@@ -33,22 +33,19 @@
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
                                         <label class="control-label">Data de Nascimento</label>
-                                        <input class="form-control" placeholder="dd/mm/yyyy" type="date" value="@Model.BirthDate" name="BirthDate">
-                                        <span class="fa fa-envelope-o form-control-feedback" aria-hidden="true"></span>
+                                        <input class="form-control" id="readonlyInput" readonly value="@Model.BirthDate" type="text">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
                                         <label class="control-label">CPF</label>
-                                        <p class="form-control-static m-bot-1" id="staticInput">@Model.CPF</p>
-                                       @* <input class="form-control" type="text" value="@Model.CPF" name="CPF">*@
+                                        <input class="form-control" id="readonlyInput" readonly value="@Model.CPF" type="text">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
                                         <label class="control-label">RG</label>
-                                        <input class="form-control" placeholder="RG" type="text" value="@Model.RG" name="RG">
-                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
+                                        <input class="form-control" id="readonlyInput" readonly value="@Model.RG" type="text">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -76,7 +73,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
                                         <label class="control-label">Registro Profissional</label>
-                                        <input class="form-control" placeholder="Número do registro" type="text" value="@Model.ProfessionalRegistration" name="ProfessionalRegistration" *@>
+                                        <input class="form-control" placeholder="Número do registro" type="text" value="@Model.ProfessionalRegistration" name="ProfessionalRegistration">
                                         <span class="fa fa-briefcase form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
@@ -147,7 +144,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <button type="submit" class="btn btn-lg bg-purpleTest">Cadastrar</button>
+                            <button type="submit" class="btn btn-lg bg-purpleTest">Salvar Alterações</button>
                         </div>
                     </form>
                 </div>
