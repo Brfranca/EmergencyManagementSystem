@@ -1,4 +1,5 @@
-﻿@model EmergencyManagementSystem.Service.Models.EmployeeModel
+﻿@using EmergencyManagementSystem.Service.Models
+@model EmployeeModel
 
 @{
     ViewData["Title"] = "Create";
@@ -14,7 +15,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-                    <form action="@Url.Action("Register", "Employee")" method="post">
+                    <form method="post">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-4 col-xs-12">
@@ -113,42 +114,42 @@
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
                                         <label class="control-label">CEP</label>
-                                        <input class="form-control" placeholder="00.000-000" type="text" value="@Model.AddressModel.CEP" name="CEP">
+                                        <input class="form-control" placeholder="00.000-000" type="text" value="@Model.AddressModel.CEP" name="AddressModel.CEP">
                                         <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
                                         <label class="control-label">Cidade</label>
-                                        <input class="form-control" placeholder="Cidade" type="text" value="@Model.AddressModel.City" name="City">
+                                        <input class="form-control" placeholder="Cidade" type="text" value="@Model.AddressModel.City" name="AddressModel.City">
                                         <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
                                         <label class="control-label">Bairro</label>
-                                        <input class="form-control" placeholder="Bairro" type="text" value="@Model.AddressModel.District" name="District">
+                                        <input class="form-control" placeholder="Bairro" type="text" value="@Model.AddressModel.District" name="AddressModel.District">
                                         <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
                                         <label class="control-label">Rua</label>
-                                        <input class="form-control" placeholder="Rua" type="text" value="@Model.AddressModel.Street" name="Street">
+                                        <input class="form-control" placeholder="Rua" type="text" value="@Model.AddressModel.Street" name="AddressModel.Street">
                                         <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
                                         <label class="control-label">Número</label>
-                                        <input class="form-control" placeholder="Número" type="text" value="@Model.AddressModel.Number" name="Number">
+                                        <input class="form-control" placeholder="Número" type="text" value="@Model.AddressModel.Number" name="AddressModel.Number">
                                         <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
                                         <label class="control-label">Complemento</label>
-                                        <input class="form-control" placeholder="Complemento" type="text" value="@Model.AddressModel.Complement" name="Complement">
+                                        <input class="form-control" placeholder="Complemento" type="text" value="@Model.AddressModel.Complement" name="AddressModel.Complement">
                                         <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
@@ -163,4 +164,5 @@
         </div>
     </div>
 </div>
+
 
