@@ -46,7 +46,7 @@
                                 @{ string[] vehicleType = Enum.GetNames(typeof(EmergencyManagementSystem.Service.Enums.VehicleType)); }
 
                                 <select class="form-control" name="VehicleType" id="VehicleType">
-                                    @for (int i = 0; i < vehicleType.Length; i++)
+                                    @for (int i = 1; i < vehicleType.Length; i++)
                                     {
                                         <option value="@i" @(i == (int)(Model?.VehicleType ?? 0) ? "Selected" : "")>@vehicleType[i]</option>
                                     }

@@ -50,7 +50,12 @@ namespace EmergencyManagementSystem.Web.Controllers
 
         public IActionResult Update(int id)
         {
+
             var result = _vehicleRest.Find(new VehicleFilter { Id = id });
+
+            if (!ModelState.IsValid)
+                return RedirectToAction("Index");
+
             if (!result.Success)
                 return RedirectToAction("Index");
             return View(result.Model);
@@ -59,11 +64,26 @@ namespace EmergencyManagementSystem.Web.Controllers
         [HttpPost]
         public IActionResult Update(VehicleModel vehicleModel)
         {
+            if (!ModelState.IsValid)
+                return View(vehicleModel);
+
             var result = _vehicleRest.Update(vehicleModel);
             if (!result.Success)
                 return View(vehicleModel);
 
             return RedirectToAction("Index", "Vehicle");
+        }
+
+        public IActionResult Details(int id)
+        {
+            var result = _vehicleRest.Find(new VehicleFilter { Id = id });
+
+            if (!ModelState.IsValid)
+                return RedirectToAction("Index");
+
+            if (!result.Success)
+                return RedirectToAction("Index");
+            return View(result.Model);
         }
     }
 }

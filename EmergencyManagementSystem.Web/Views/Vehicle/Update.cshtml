@@ -1,91 +1,78 @@
 ﻿@model EmergencyManagementSystem.Service.Models.VehicleModel
-
 @{
     ViewData["Title"] = "Update";
     Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
-    <div class="content-header sty-one">
-        <h1 class="text-white">Cadastro de Funcionário</h1>
-    </div>
-
+@Html.AntiForgeryToken()
+<div class="content-header sty-one">
+    <h1 class="text-white">Atualização de Veículo</h1>
+</div>
+@using (Html.BeginForm())
+{
     <div class="content">
         <div class="info-box">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
-                        <form action="@Url.Action("Update", "Vehicle")" method="post">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-4 col-xs-12">
-                                        <h4 class="card-title">Dados do Veículo</h4>
-                                        <div id="treeview1" class=""></div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group has-feedback">
-                                            <label class="control-label">Nome</label>
-                                            <input class="form-control" placeholder="Nome/Modelo" type="text" value="@Model.VehicleName" name="VehicleName">
-                                            @Html.ValidationMessageFor(d => d.VehicleName, "", new { @class = "text-danger" })
-                                            <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group has-feedback">
-                                            <label class="control-label">Ano</label>
-                                            <input class="form-control" placeholder="yyyy" type="text" value="@Model.Year" name="Year">
-                                            @Html.ValidationMessageFor(d => d.Year, "", new { @class = "text-danger" })
-                                            <span class="fa fa-envelope-o form-control-feedback" aria-hidden="true"></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group has-feedback">
-                                            <label class="control-label">Placa</label>
-                                            <input class="form-control" placeholder="xxx1111" type="text" value="@Model.VehiclePlate" name="VehiclePlate">
-                                            <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group has-feedback">
-                                            <label for="location1">Tipo do Veículo</label>
-
-                                            @{ string[] vehicleType = Enum.GetNames(typeof(EmergencyManagementSystem.Service.Enums.VehicleType)); }
-
-                                            <select class="form-control" name="VehicleType" id="VehicleType">
-                                                @for (int i = 0; i < vehicleType.Length; i++)
-                                                {
-                                                    <option value="@i" @(i == (int)(Model?.VehicleType ?? 0) ? "Selected" : "")>@vehicleType[i]</option>
-                                                }
-                                            </select>
-                                            @Html.ValidationMessageFor(d => d.VehicleType, "", new { @class = "text-danger" })
-                                            <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group has-feedback">
-                                            <label for="location1">Situação do veículo</label>
-
-                                            @{ string[] vehicleSituation = Enum.GetNames(typeof(EmergencyManagementSystem.Service.Enums.VehicleSituation)); }
-
-                                            <select class="form-control" name="VehicleSituation" id="VehicleSituation">
-                                                @for (int i = 0; i < vehicleSituation.Length; i++)
-                                                {
-                                                    <option value="@i" @(i == (int)(Model?.VehicleSituation ?? 0) ? "Selected" : "")>@vehicleSituation[i]</option>
-                                                }
-                                            </select>
-                                            @Html.ValidationMessageFor(d => d.VehicleSituation, "", new { @class = "text-danger" })
-                                            <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
-                                        </div>
-                                    </div>
+                        <div class="card-body">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="row">
+                                <div class="col-md-4 col-xs-12">
+                                    <h4 class="card-title">Dados do Veículo</h4>
+                                    <div id="treeview1" class=""></div>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <button type="submit" class="btn btn-lg bg-purpleTest">Salvar alterações</button>
-                            </div>
-                        </form>
+                                <input type="hidden" asp-for="Vehicle.Id" />
+                                <div class="form-group">
+                                    <label asp-for="exampleInputEmail1">Nome/Modelo</label>
+                                    @Html.EditorFor(model => model.VehicleName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(d => d.VehicleName, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Placa</label>
+                                    @Html.EditorFor(model => model.VehiclePlate, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(d => d.VehiclePlate, "", new { @class = "text-danger" })
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Ano</label>
+                                    @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(d => d.Year, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label for="location1">Tipo do Veículo</label>
+                                    @{ string[] vehicleType = Enum.GetNames(typeof(EmergencyManagementSystem.Service.Enums.VehicleType)); }
+
+                                    <select class="form-control" name="VehicleType" id="VehicleType">
+                                        @for (int i = 1; i < vehicleType.Length; i++)
+                                        {
+                                            <option value="@i" @(i == (int)(Model?.VehicleType ?? 0) ? "Selected" : "")>@vehicleType[i]</option>
+                                        }
+                                    </select>
+                                    @Html.ValidationMessageFor(d => d.VehicleType, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label for="location1">Tipo do Veículo</label>
+                                    @{ string[] vehicleSituation = Enum.GetNames(typeof(EmergencyManagementSystem.Service.Enums.VehicleSituation)); }
+
+                                    <select class="form-control" name="VehicleSituation" id="VehicleSituation">
+                                        @for (int i = 1; i < vehicleSituation.Length; i++)
+                                        {
+                                            <option value="@i" @(i == (int)(Model?.VehicleSituation ?? 0) ? "Selected" : "")>@vehicleSituation[i]</option>
+                                        }
+                                    </select>
+                                    @Html.ValidationMessageFor(d => d.VehicleSituation, "", new { @class = "text-danger" })
+                                </div>
+                        </div>
+                        
+                    </div>
+                    <div class="card-body">
+                        <button type="submit" class="btn btn-lg bg-purpleTest">Salvar alterações</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 }
+                                
