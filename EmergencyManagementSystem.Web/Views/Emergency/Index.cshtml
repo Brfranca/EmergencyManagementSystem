@@ -1,4 +1,7 @@
-﻿@{
+﻿@using EmergencyManagementSystem.Service.Models
+@model EmergencyModel
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="content">
@@ -29,17 +32,12 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div class="tab-pane active" id="home" role="tabpanel" aria-expanded="true">
-
-                            <div class="col-lg-12">
-                                <h4 class="text-white"><span class="pull-right">#5669626</span></h4>
-                            </div>
-
-                            @*Adicionar DAta/hhora e número da ocorrência gerada automáticamente*@
-                            <div class="row m-t-3">
-
+                            <div class="row m-t-3-1">
                                 <div class="col-lg-12">
                                     <div class="card-body">
                                         <form>
+                                            <h4><label class="control-label">Oc: @(Model?.Id)</label></h4>
+
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group has-feedback">
@@ -151,12 +149,6 @@
                                             </div>
 
                                             <div class="row">
-                                                @*<div class="col-md-12">
-                                                        <div class="form-group has-feedback">
-                                                            <label class="control-label">Bio</label>
-                                                            <textarea class="form-control" id="placeTextarea" rows="3" placeholder="Bio"></textarea>
-                                                        </div>
-                                                    </div>*@
                                                 <div class="col-md-12">
                                                     <button type="submit" id="btnRegister" class="btn btn-lg bg-purpleTest">Registrar</button>
                                                     <button type="button" id="btnCancel" onclick="appendCancel()" class="btn btn-lg bg-light">Cancelar</button>
@@ -182,9 +174,7 @@
 
                                                 </div>
                                             </div>
-
                                         </form>
-
                                     </div>
                                 </div>
                             </div>
@@ -195,17 +185,26 @@
                         <div class="tab-pane" id="profile" role="tabpanel" aria-expanded="false">
                             @*Começar com numero ocorrencia/ telefone / funcionário que gerou ocorrencia*@
                             @*Segunda linha Solicitante / data hora gerada a ocorrencia. Terceira Nome da ocorrência*@
-                            <label class="control-label">Dados iniciais ocorrencia </label>
 
-
-
-
-
-
-                            <div class="row m-t-3">
+                            <div class="row m-t-3-1">
                                 <div class="col-lg-12">
                                     <div class="card-body">
                                         <form>
+                                            <div class="row">
+
+                                                <div class="col-lg-4">
+                                                    <fieldset class="form-group">
+                                                        <p class="form-control-static m-bot-1" id="staticInput">Nome Solicitante</p>
+                                                    </fieldset>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <fieldset class="form-group">
+                                                        <p class="form-control-static m-bot-1" id="staticInput">(47)99999-9999</p>
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+
+
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group has-feedback">
@@ -261,42 +260,42 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group has-feedback">
                                                         <label class="control-label">CEP</label>
-                                                        <input class="form-control" placeholder="00.000-000" type="text" @*value="@Model.AddressModel.CEP" name="CEP"*@>
+                                                        <input class="form-control" placeholder="00.000-000" type="text" @*value="@Model.AddressModel.CEP" name="CEP" *@>
                                                         <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group has-feedback">
                                                         <label class="control-label">Cidade</label>
-                                                        <input class="form-control" placeholder="Cidade" type="text" @*value="@Model.AddressModel.CEP" name="CEP"*@>
+                                                        <input class="form-control" placeholder="Cidade" type="text" @*value="@Model.AddressModel.CEP" name="CEP" *@>
                                                         <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group has-feedback">
                                                         <label class="control-label">Bairro</label>
-                                                        <input class="form-control" placeholder="Bairro" type="text" @*value="@Model.AddressModel.CEP" name="CEP"*@>
+                                                        <input class="form-control" placeholder="Bairro" type="text" @*value="@Model.AddressModel.CEP" name="CEP" *@>
                                                         <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group has-feedback">
                                                         <label class="control-label">Rua</label>
-                                                        <input class="form-control" placeholder="Rua" type="text" @*value="@Model.AddressModel.CEP" name="CEP"*@>
+                                                        <input class="form-control" placeholder="Rua" type="text" @*value="@Model.AddressModel.CEP" name="CEP" *@>
                                                         <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group has-feedback">
                                                         <label class="control-label">Número</label>
-                                                        <input class="form-control" placeholder="Número" type="text" @*value="@Model.AddressModel.CEP" name="CEP"*@>
+                                                        <input class="form-control" placeholder="Número" type="text" @*value="@Model.AddressModel.CEP" name="CEP" *@>
                                                         <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group has-feedback">
                                                         <label class="control-label">Complemento</label>
-                                                        <input class="form-control" placeholder="Complemento" type="text" @*value="@Model.AddressModel.CEP" name="CEP"*@>
+                                                        <input class="form-control" placeholder="Complemento" type="text" @*value="@Model.AddressModel.CEP" name="CEP" *@>
                                                         <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                                     </div>
                                                 </div>
@@ -332,16 +331,16 @@
                         <!--third tab-->
                         <div class="tab-pane" id="settings" role="tabpanel">
                             <div class="card-body">
-                                <form class="form-horizontal form-material">
+                                <form>
                                     <div class="form-group">
-                                        <label class="col-md-12">Full Name</label>
-                                        <div class="col-md-12">
+                                        <label class="col-lg-12">Full Name</label>
+                                        <div class="col-lg-12">
                                             <input placeholder="Florence Douglas" class="form-control form-control-line" type="text">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="example-email" class="col-md-12">Email</label>
-                                        <div class="col-md-12">
+                                        <div class="col-lg-12">
                                             <input placeholder="florencedouglas@admin.com" class="form-control form-control-line" name="example-email" id="example-email" type="email">
                                         </div>
                                     </div>

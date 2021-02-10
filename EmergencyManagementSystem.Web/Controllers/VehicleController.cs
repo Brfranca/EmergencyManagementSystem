@@ -37,6 +37,9 @@ namespace EmergencyManagementSystem.Web.Controllers
         [HttpPost]
         public IActionResult Register(VehicleModel vehicleModel)
         {
+            if (!ModelState.IsValid)
+                return View(vehicleModel);
+
             vehicleModel.VehicleSituation = Service.Enums.VehicleSituation.Cleared;
             var result = _vehicleRest.Register(vehicleModel);
             if (!result.Success)

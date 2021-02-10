@@ -13,18 +13,16 @@ namespace EmergencyManagementSystem.Web.Controllers
     [Authorize]
     public class EmergencyController : Controller
     {
-        private readonly IEmergencyRest _emergencyRest;
-        public EmergencyController(IEmergencyRest emergencyRest)
+        public EmergencyController()
         {
-            _emergencyRest = emergencyRest;
         }
 
-        public IActionResult Index(EmergencyFilter emergencyFilter)
+        public IActionResult Index( )
         {
-            ViewBag.Name = emergencyFilter.Id;
-            ViewBag.CPF = emergencyFilter.Date;
-            var emergencies = _emergencyRest.FindPaginated(emergencyFilter);
-            return View(emergencies);
+            //ViewBag.Name = emergencyFilter.Id;
+            //ViewBag.CPF = emergencyFilter.Date;
+            //var emergencies = _emergencyRest.FindPaginated(emergencyFilter);
+            return View();
         }
 
         public IActionResult Register()

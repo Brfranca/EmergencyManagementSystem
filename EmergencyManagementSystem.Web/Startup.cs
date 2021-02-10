@@ -31,6 +31,8 @@ namespace EmergencyManagementSystem.Web
             services.AddScoped<IUserRest, UserRest>();
             services.AddScoped<IEmployeeRest, EmployeeRest>();
             services.AddScoped<IVehicleRest, VehicleRest>();
+            //services.AddScoped<IEmergencyRest, EmergencyRest>();
+
 
 
             services.Configure<CookiePolicyOptions>(options =>
