@@ -92,10 +92,14 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="location1">Coorporação</label>
-                                        <select class="custom-select form-control" id="location1" name="location">
-                                            <option value="">Selecione</option>
-                                            <option value="">SAMU</option>
-                                            <option value="">Bombeiro</option>
+
+                                        @{ string[] company = Enum.GetNames(typeof(EmergencyManagementSystem.Service.Enums.Company)); }
+
+                                        <select class="form-control" name="VehicleType" id="VehicleType">
+                                            @for (int i = 0; i < company.Length; i++)
+                                            {
+                                                <option value="@i" @(i == (int)(Model?.Company ?? 0) ? "Selected" : "")>@company[i]</option>
+                                            }
                                         </select>
                                     </div>
                                 </div>
