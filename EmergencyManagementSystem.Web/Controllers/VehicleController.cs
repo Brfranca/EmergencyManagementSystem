@@ -45,7 +45,7 @@ namespace EmergencyManagementSystem.Web.Controllers
             if (!result.Success)
                 return View(vehicleModel);
 
-            return RedirectToAction("Index", "Vehicle");
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Update(int id)
@@ -54,10 +54,10 @@ namespace EmergencyManagementSystem.Web.Controllers
             var result = _vehicleRest.Find(new VehicleFilter { Id = id });
 
             if (!ModelState.IsValid)
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
 
             if (!result.Success)
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             return View(result.Model);
         }
 
@@ -71,7 +71,7 @@ namespace EmergencyManagementSystem.Web.Controllers
             if (!result.Success)
                 return View(vehicleModel);
 
-            return RedirectToAction("Index", "Vehicle");
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Details(int id)
@@ -79,10 +79,10 @@ namespace EmergencyManagementSystem.Web.Controllers
             var result = _vehicleRest.Find(new VehicleFilter { Id = id });
 
             if (!ModelState.IsValid)
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
 
             if (!result.Success)
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             return View(result.Model);
         }
     }

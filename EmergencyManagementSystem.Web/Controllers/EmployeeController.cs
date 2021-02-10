@@ -37,7 +37,14 @@ namespace EmergencyManagementSystem.Web.Controllers
         [HttpPost]
         public IActionResult Register(EmployeeModel employeeModel)
         {
-            return View();
+            if (!ModelState.IsValid)
+                return View(employeeModel);
+
+            var result = _employeeRest.Register(employeeModel);
+            if (!result.Success)
+                return View(employeeModel);
+
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Update(int id)
