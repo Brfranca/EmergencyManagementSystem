@@ -1,4 +1,5 @@
 ﻿@model EmergencyManagementSystem.Service.Models.VehicleModel
+@using EmergencyManagementSystem.Service.Models
 
 @{
     ViewData["Title"] = "Register";
@@ -51,13 +52,15 @@
                                     <div class="form-group has-feedback">
                                         <label for="location1">Tipo do Veículo</label>
 
-                                        @{ string[] vehicleType = Enum.GetNames(typeof(EmergencyManagementSystem.Service.Enums.VehicleType)) ; }
+                                        @{ string[] vehicleType = Enum.GetNames(typeof(EmergencyManagementSystem.Service.Enums.VehicleType)); }
 
                                         <select class="form-control" name="VehicleType" id="VehicleType">
-                                            @for (int i = 0; i < vehicleType.Length; i++)
+                                            @foreach (EmergencyManagementSystem.Service.Enums.VehicleType suit in (EmergencyManagementSystem.Service.Enums.VehicleType[])Enum.GetValues(typeof(EmergencyManagementSystem.Service.Enums.VehicleType)))
                                             {
-                                                <option value="@i" @(i == (int)(Model?.VehicleType ?? 0) ? "Selected" : "")>@vehicleType[i]</option>
+                                                suit.GetEnumDescription();
+                                                <option value="@suit" @(suit == (Model?.VehicleType ?? 0) ? "Selected" : "")>@suit.GetEnumDescription()</option>
                                             }
+
                                         </select>
                                         @Html.ValidationMessageFor(d => d.VehicleType, "", new { @class = "text-danger" })
                                     </div>

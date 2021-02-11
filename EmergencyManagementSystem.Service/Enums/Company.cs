@@ -4,9 +4,11 @@ namespace EmergencyManagementSystem.Service.Enums
 {
     public enum Company : short
     {
-        [Description("Inválido")]
+        [Description("Selecionar")]
         Invalid,
+        [Description("Serviço de Atendimento Móvel de Urgência (SAMU)")]
         SAMU,
-        Bombeiro
+        [Description("Corpo de bombeiros")]
+        FireFighter
     }
 }
