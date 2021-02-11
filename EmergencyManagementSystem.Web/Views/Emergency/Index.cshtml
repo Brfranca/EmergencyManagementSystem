@@ -29,28 +29,26 @@
 
                     </ul>
 
-                    <!-- Tab panes -->
+                    <!-- First tab -->
                     <div class="tab-content">
                         <div class="tab-pane active" id="home" role="tabpanel" aria-expanded="true">
                             <div class="row m-t-3-1">
                                 <div class="col-lg-12">
                                     <div class="card-body">
                                         <form>
-                                            <h4><label class="control-label">Oc: @(Model?.Id)</label></h4>
+                                            <h4 class="text-white">OC: 532154@(Model?.Id)<span class="pull-right"><b>10/02/2021  15:12</b></span> </h4>
 
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group has-feedback">
                                                         <label class="control-label">Telefone</label>
                                                         <input class="form-control" placeholder="Telefone" id="telefone" type="text">
-                                                        <span class="fa fa-phone form-control-feedback" aria-hidden="true"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group has-feedback">
                                                         <label class="control-label">Solicitante</label>
                                                         <input class="form-control" placeholder="Nome" type="text">
-                                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -85,7 +83,6 @@
                                                             <div class="form-group has-feedback">
                                                                 <label class="control-label">Idade</label>
                                                                 <input class="form-control" placeholder="00" type="number">
-                                                                <span class="fa fa-envelope-o form-control-feedback" aria-hidden="true"></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -104,42 +101,36 @@
                                                     <div class="form-group has-feedback">
                                                         <label class="control-label">CEP</label>
                                                         <input class="form-control" placeholder="00.000-000" type="text" @*value="@Model.AddressModel.CEP" name="CEP"*@>
-                                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group has-feedback">
                                                         <label class="control-label">Cidade</label>
                                                         <input class="form-control" placeholder="Cidade" type="text" @*value="@Model.AddressModel.CEP" name="CEP"*@>
-                                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group has-feedback">
                                                         <label class="control-label">Bairro</label>
                                                         <input class="form-control" placeholder="Bairro" type="text" @*value="@Model.AddressModel.CEP" name="CEP"*@>
-                                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group has-feedback">
                                                         <label class="control-label">Rua</label>
                                                         <input class="form-control" placeholder="Rua" type="text" @*value="@Model.AddressModel.CEP" name="CEP"*@>
-                                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group has-feedback">
                                                         <label class="control-label">Número</label>
                                                         <input class="form-control" placeholder="Número" type="text" @*value="@Model.AddressModel.CEP" name="CEP"*@>
-                                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group has-feedback">
                                                         <label class="control-label">Complemento</label>
                                                         <input class="form-control" placeholder="Complemento" type="text" @*value="@Model.AddressModel.CEP" name="CEP"*@>
-                                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -189,140 +180,211 @@
                             <div class="row m-t-3-1">
                                 <div class="col-lg-12">
                                     <div class="card-body">
-                                        <form>
-                                            <div class="row">
+                                        <h4 class="text-white">OC: 532154@(Model?.Id)<span class="pull-right"><b>10/02/2021  15:12</b></span> </h4>
+                                        @*<h4 class="text-white"> ACIDENTE DE CARRO <span class="pull-right"><b> 10/02/2021 15:32 - </b>OC: 5669626@(Model?.Id)</span> </h4>*@
 
-                                                <div class="col-lg-4">
-                                                    <fieldset class="form-group">
-                                                        <p class="form-control-static m-bot-1" id="staticInput">Nome Solicitante</p>
-                                                    </fieldset>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <fieldset class="form-group">
-                                                        <p class="form-control-static m-bot-1" id="staticInput">(47)99999-9999</p>
-                                                    </fieldset>
-                                                </div>
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <fieldset class="form-group">
+                                                    <p class="form-control-static m-bot-1" id="staticInput">Solicitante: Tiago</p>
+                                                </fieldset>
                                             </div>
+                                            <div class="col-lg-4">
+                                                <fieldset class="form-group">
+                                                    <p class="form-control-static m-bot-1" id="staticInput">(47)99999-9999</p>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <fieldset class="form-group">
+                                                    <p class="form-control-static m-bot-1" id="staticInput">TARM: Nome Funcionário</p>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                        @*Colocar o Google aqui, talvez*@
+
+                                        <hr />
+                                        <strong><i class="fa fa-map-marker margin-r-5"></i> Address</strong>
+                                        <div class="embed-container maps">
+                                            <iframe class="full-wid" src="https://maps.google.co.in/maps?sll=34.0204989,-118.4117325&amp;sspn=0.8745562,1.4073488&amp;cid=16298491244936825076&amp;q=Los+Angeles,+CA,+USA&amp;ie=UTF8&amp;hq=&amp;hnear=Los+Angeles,+Los+Angeles+County,+California,+United+States&amp;t=m&amp;ll=34.052234,-118.243685&amp;spn=0.697085,0.848982&amp;output=embed" style="pointer-events: none;"></iframe>
+                                        </div>
 
 
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group has-feedback">
-                                                        <label class="control-label">Telefone</label>
-                                                        <input class="form-control" placeholder="Telefone" type="text">
-                                                        <span class="fa fa-phone form-control-feedback" aria-hidden="true"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group has-feedback">
-                                                        <label class="control-label">Solicitante</label>
-                                                        <input class="form-control" placeholder="Nome" type="text">
-                                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="exampleinputemail1">Nome da Ocorrência</label>
-                                                <input type="text" class="form-control" id="exampleinputemail1" placeholder="Motivo / Queixa">
-                                            </div>
-                                            <hr />
-                                            <div class="form-group">
-                                                <label for="exampleinputemail1">Paciente</label>
-                                                <input type="text" class="form-control" id="exampleinputemail1" placeholder="Nome">
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="location1">Sexo</label>
-                                                        <select class="custom-select form-control" id="location1" name="location">
-                                                            <option value="">Selecione</option>
-                                                            <option value="">Indeterminado</option>
-                                                            <option value="">Feminino</option>
-                                                            <option value="">Masculino</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group has-feedback">
-                                                        <label class="control-label">Idade</label>
-                                                        <input class="form-control" placeholder="00" type="number">
-                                                        <span class="fa fa-envelope-o form-control-feedback" aria-hidden="true"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-5">
-                                                    <button type="button" class="btn btn-sm bg-purpleTest"><i class="fa fa-plus-circle"></i> Paciente</button>
-                                                </div>
-                                            </div>
-                                            <hr />
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group has-feedback">
-                                                        <label class="control-label">CEP</label>
-                                                        <input class="form-control" placeholder="00.000-000" type="text" @*value="@Model.AddressModel.CEP" name="CEP" *@>
-                                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group has-feedback">
-                                                        <label class="control-label">Cidade</label>
-                                                        <input class="form-control" placeholder="Cidade" type="text" @*value="@Model.AddressModel.CEP" name="CEP" *@>
-                                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group has-feedback">
-                                                        <label class="control-label">Bairro</label>
-                                                        <input class="form-control" placeholder="Bairro" type="text" @*value="@Model.AddressModel.CEP" name="CEP" *@>
-                                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group has-feedback">
-                                                        <label class="control-label">Rua</label>
-                                                        <input class="form-control" placeholder="Rua" type="text" @*value="@Model.AddressModel.CEP" name="CEP" *@>
-                                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group has-feedback">
-                                                        <label class="control-label">Número</label>
-                                                        <input class="form-control" placeholder="Número" type="text" @*value="@Model.AddressModel.CEP" name="CEP" *@>
-                                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group has-feedback">
-                                                        <label class="control-label">Complemento</label>
-                                                        <input class="form-control" placeholder="Complemento" type="text" @*value="@Model.AddressModel.CEP" name="CEP" *@>
-                                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="exampleinputemail1">Ponto de Referência</label>
-                                                <input type="text" class="form-control" id="exampleinputemail1" placeholder="Próximo...">
-                                            </div>
+                                        @*TESTE*@
+                                        <div class="card tab-style1">
+                                            <!-- Nav tabs -->
+                                            <ul class="nav nav-tabs profile-tab" role="tablist">
+                                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#patient-1" role="tab" aria-expanded="true">Paciente1</a> </li>
+                                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#patient-2" role="tab" aria-expanded="false">Paciente2</a> </li>
+                                            </ul>
 
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <button type="submit" class="btn btn-lg bg-purpleTest">Registrar</button>
-                                                    <button type="button" class="btn btn-lg bg-light">Cancelar</button>
+                                            <!-- First tab -->
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="patient-1" role="tabpanel" aria-expanded="true">
+                                                    <div class="row m-t-3-1">
+                                                        <div class="col-lg-12">
+                                                            <div class="card-body">
+                                                                <form>
 
-                                                </div>
-                                            </div>
-                                            <hr />
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group has-feedback">
-                                                        <label class="control-label">Comentário</label>
-                                                        <textarea class="form-control" id="placeTextarea" rows="1" placeholder="Observação"></textarea>
+                                                                    <div id="patientList">
+                                                                        <div id="patient">
+                                                                            <div class="form-group">
+                                                                                <label for="exampleinputemail1">Paciente</label>
+                                                                                <input type="text" class="form-control" id="exampleinputemail1" placeholder="Nome">
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-6">
+                                                                                    <div class="form-group">
+                                                                                        <label for="location1">Sexo</label>
+                                                                                        <select class="custom-select form-control" id="location1" name="location">
+                                                                                            <option value="">Selecione</option>
+                                                                                            <option value="">Indeterminado</option>
+                                                                                            <option value="">Feminino</option>
+                                                                                            <option value="">Masculino</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <div class="form-group has-feedback">
+                                                                                        <label class="control-label">Idade</label>
+                                                                                        <input class="form-control" placeholder="00" type="number">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row">
+                                                                        <div class="col-md-5">
+                                                                            <button type="button" class="btn btn-sm bg-purpleTest" onclick="AdicionarPaciente()"><i class="fa fa-plus-circle"></i> Paciente</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
+
+
+                                                <!--second tab-->
+                                                <div class="tab-pane" id="patient-2" role="tabpanel" aria-expanded="false">
+
+                                                    <div class="row m-t-3-1">
+                                                        <div class="col-lg-12">
+                                                            <div class="card-body">
+                                                                <form>
+                                                                    <div id="patientList">
+
+                                                                        <div id="patient">
+                                                                            <div class="form-group">
+                                                                                <label for="exampleinputemail1">Paciente</label>
+                                                                                <input type="text" class="form-control" id="exampleinputemail1" placeholder="Nome">
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-6">
+                                                                                    <div class="form-group">
+                                                                                        <label for="location1">Sexo</label>
+                                                                                        <select class="custom-select form-control" id="location1" name="location">
+                                                                                            <option value="">Selecione</option>
+                                                                                            <option value="">Indeterminado</option>
+                                                                                            <option value="">Feminino</option>
+                                                                                            <option value="">Masculino</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <div class="form-group has-feedback">
+                                                                                        <label class="control-label">Idade</label>
+                                                                                        <input class="form-control" placeholder="00" type="number">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row">
+                                                                        <div class="col-md-5">
+                                                                            <button type="button" class="btn btn-sm bg-purpleTest" onclick="AdicionarPaciente()"><i class="fa fa-plus-circle"></i> Paciente</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div> @*Final TabContent*@
+                                        </div>
+                                        @*TESTE FINAl*@
+                                        <div class="row">
+                                            <div class="mx-auto">
+                                                <div class="col-1">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="control-label text-right">PA</label>
+                                                        <input class="form-control" type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="col-1">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="control-label">FC</label>
+                                                        <input class="form-control" type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="col-1">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="control-label text-right">FR</label>
+                                                        <input class="form-control" type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="col-1">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="control-label">Temp</label>
+                                                        <input class="form-control" type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="col-1">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="control-label">SatO2</label>
+                                                        <input class="form-control" type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="col-1">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="control-label">HGT</label>
+                                                        <input class="form-control" type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="col-1">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="control-label">Glasgow</label>
+                                                        <input class="form-control" type="text">
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <button type="submit" class="btn btn-nor bg-purpleTest"><i class="fa fa-plus-circle"></i></button>
+                                                </div>
                                             </div>
-                                        </form>
+                                        </div>
+
                                     </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn btn-lg bg-purpleTest">Registrar</button>
+                                            <button type="button" class="btn btn-lg bg-light">Cancelar</button>
+
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group has-feedback">
+                                                <label class="control-label">Comentário</label>
+                                                <textarea class="form-control" id="placeTextarea" rows="1" placeholder="Observação"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -390,31 +452,4 @@
     <!-- Main row -->
 </div>
 
-<script>
-    function AdicionarPaciente() {
-        var html = $('#patient').html();
-        $('#patientList').append(html);
-    }
 
-    function appendCancel() {
-        $('#btnCancel').attr('disabled', true);
-        $('#btnRegister').attr('disabled', true);
-
-        $("#cancel").removeClass();
-    }
-
-    $(document).ready(function () {
-        if ($('#telefone').val != "") {
-            $("#telefone").inputmask({
-                mask: ["(99) 9999-9999"],
-                keepStatic: true
-            });
-        }
-    });
-
-    function validatePhone() {
-
-    }
-
-
-</script>
