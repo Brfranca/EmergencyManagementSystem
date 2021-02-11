@@ -17,7 +17,77 @@
     color: black;
 }
 
+
+.wt-block-itens {
+    width: auto;
+    align-items: center;
+}
+
 .wt-block {
-    width: 100px;
-    align-content: center;
+    width: 100px !important;
+    align-content: center !important;
+}
+
+.wt02 {
+    width: 2% !important;
+}
+
+.wt05 {
+    width: 5%;
+}
+
+.wt10 {
+    width: 10%;
+}
+
+.wt15 {
+    width: 15%;
+}
+
+.wt20 {
+    width: 20%;
+}
+
+.wt30 {
+    width: 30%;
+}
+
+.wt35 {
+    width: 35%;
+}
+
+.wt40 {
+    width: 40%;
+}
+
+.wt50 {
+    width: 50%;
+}
+
+.wt55 {
+    width: 55%;
+}
+
+.wt59 {
+    width: 59.9%;
+}
+
+wt60 {
+    width: 60%;
+}
+
+wt70 {
+    width: 70%;
+}
+
+.wt80 {
+    width: 80%;
+}
+
+.wt19 {
+    width: 19%;
+}
+
+.wt100 {
+    width: 100%;
 }
