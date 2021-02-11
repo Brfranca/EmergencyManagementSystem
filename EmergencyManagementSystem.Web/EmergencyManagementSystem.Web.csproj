@@ -35,6 +35,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\css\loading2.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="jQuery.InputMask" Version="5.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />

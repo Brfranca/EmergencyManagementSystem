@@ -1,8 +1,10 @@
-﻿namespace EmergencyManagementSystem.Service.Enums
+﻿using System.ComponentModel;
+
+namespace EmergencyManagementSystem.Service.Enums
 {
     public enum VehicleSituation : short
     {
-        Invalido,
+        [Description("Inválido")]
         Broken,
         Cleared,
         InService,

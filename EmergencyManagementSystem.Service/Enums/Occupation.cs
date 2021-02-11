@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace EmergencyManagementSystem.Service.Enums
 {
-    public enum CodeColor : short
+    public enum Occupation : short
     {
-        [Description("Inválido")]
         Invalido,
-        Red,
-        Yellow,
-        Green,
-        Blue
+        TARM,
+        RO,
+        Physician,
+        Driver,
+        Nurse,
+        NursingTechnician,
+        Pilot
     }
 }

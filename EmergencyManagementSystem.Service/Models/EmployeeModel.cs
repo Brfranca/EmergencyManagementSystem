@@ -20,13 +20,11 @@ namespace EmergencyManagementSystem.Service.Models
         public string ProfessionalRegistration { get; set; }
         public AddressModel AddressModel { get; set; }
         public long AddressId { get; set; }
-        public OccupationModel OccupationModel { get; set; }
-        public short OccupationId { get; set; }
+        public Occupation Occupation { get; set; }
         
         public EmployeeModel()
         {
             AddressModel = new AddressModel();
-            OccupationModel = new OccupationModel();
         }
     }
 

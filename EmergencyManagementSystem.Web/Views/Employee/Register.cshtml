@@ -1,8 +1,8 @@
-﻿@using EmergencyManagementSystem.Service.Models
-@model EmployeeModel
+﻿@model EmergencyManagementSystem.Service.Models.EmployeeModel;
+
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Register";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -26,67 +26,75 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
-                                        <label class="control-label">Nome</label>
-                                        <input class="form-control" placeholder="Nome Completo" type="text" value="@Model.Name" name="Name">
+                                        <label for="exampleInputEmail1">Nome completo</label>
+                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(d => d.Name, "", new { @class = "text-danger" })
                                         <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
-                                        <label class="control-label">Data de Nascimento</label>
-                                        <input class="form-control" placeholder="dd/mm/yyyy" type="date" value="@Model.BirthDate" name="BirthDate">
-                                        <span class="fa fa-envelope-o form-control-feedback" aria-hidden="true"></span>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group has-feedback">
-                                        <label class="control-label">CPF</label>
-                                        <input class="form-control" placeholder="000.000.000-00" type="text" value="@Model.CPF" name="CPF">
+                                        <label for="exampleInputEmail1">Data de nascimento</label>
+                                        @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(d => d.BirthDate, "", new { @class = "text-danger" })
                                         <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
-                                        <label class="control-label">RG</label>
-                                        <input class="form-control" placeholder="RG" type="text" value="@Model.RG" name="RG">
+                                        <label for="exampleInputEmail1">CPF</label>
+                                        @Html.EditorFor(model => model.CPF, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(d => d.CPF, "", new { @class = "text-danger" })
                                         <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
-                                        <label class="control-label">E-mail</label>
-                                        <input class="form-control" placeholder="exemplo@email.com" type="text" value="@Model.Email" name="Email">
-                                        <span class="fa fa-envelope-o form-control-feedback" aria-hidden="true"></span>
+                                        <label for="exampleInputEmail1">RG</label>
+                                        @Html.EditorFor(model => model.RG, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(d => d.RG, "", new { @class = "text-danger" })
+                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
-                                        <label class="control-label">Telefone</label>
-                                        <input class="form-control" placeholder="Telefone" type="text" value="@Model.Telephone" name="Telephone">
-                                        <span class="fa fa-phone form-control-feedback" aria-hidden="true"></span>
+                                        <label for="exampleInputEmail1">E-mail</label>
+                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(d => d.Email, "", new { @class = "text-danger" })
+                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
-                                @*A profissão vai ter que ser preenchida por uma busca no banco de dados e mostrar como um combobox*@
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
-                                        <label class="control-label">Profissão</label>
-                                        @*@{ string[] Occupations = Enum.GetNames(typeof(EmergencyManagementSystem.Service.Enums.VehicleType)); }
+                                        <label for="exampleInputEmail1">Telefone</label>
+                                        @Html.EditorFor(model => model.Telephone, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(d => d.Telephone, "", new { @class = "text-danger" })
+                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group has-feedback">
+                                        <label for="location1">Profissão</label>
 
-                                            <select class="form-control" name="VehicleType" id="VehicleType">
-                                                @for (int i = 0; i < vehicleType.Length; i++)
-                                                {
-                                                    <option value="@i" @(i == (int)(Model?.VehicleType ?? 0) ? "Selected" : "")>@vehicleType[i]</option>
-                                                }
-                                            </select>*@
-                                        <input class="form-control" placeholder="Profissão" type="text" @*value="@Model.OccupationModel.Profession" name="Profession"*@>
-                                        <span class="fa fa-briefcase form-control-feedback" aria-hidden="true"></span>
+                                        @{ string[] occupation = Enum.GetNames(typeof(EmergencyManagementSystem.Service.Enums.Occupation)); }
+
+                                        <select class="form-control" name="Occupation" id="Occupation">
+                                            @for (int i = 0; i < occupation.Length; i++)
+                                            {
+                                                <option value="@i" @(i == (int)(Model?.Occupation ?? 0) ? "Selected" : "")>@occupation[i]</option>
+                                            }
+                                        </select>
+                                        @Html.ValidationMessageFor(d => d.Occupation, "", new { @class = "text-danger" })
+                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
+                            </div>
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
-                                        <label class="control-label">Registro Profissional</label>
-                                        <input class="form-control" placeholder="Número do registro" type="text" value="@Model.ProfessionalRegistration" name="ProfessionalRegistration" *@>
-                                        <span class="fa fa-briefcase form-control-feedback" aria-hidden="true"></span>
+                                        <label for="exampleInputEmail1">Registro Profissional</label>
+                                        @Html.EditorFor(model => model.ProfessionalRegistration, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(d => d.ProfessionalRegistration, "", new { @class = "text-danger" })
+                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -95,7 +103,7 @@
 
                                         @{ string[] company = Enum.GetNames(typeof(EmergencyManagementSystem.Service.Enums.Company)); }
 
-                                        <select class="form-control" name="VehicleType" id="VehicleType">
+                                        <select class="form-control" name="Company" id="Company">
                                             @for (int i = 0; i < company.Length; i++)
                                             {
                                                 <option value="@i" @(i == (int)(Model?.Company ?? 0) ? "Selected" : "")>@company[i]</option>
@@ -117,43 +125,49 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
-                                        <label class="control-label">CEP</label>
-                                        <input class="form-control" placeholder="00.000-000" type="text" value="@Model.AddressModel.CEP" name="AddressModel.CEP">
+                                        <label for="exampleInputEmail1">CEP</label>
+                                        @Html.EditorFor(model => model.AddressModel.CEP, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(d => d.AddressModel.CEP, "", new { @class = "text-danger" })
                                         <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
-                                        <label class="control-label">Cidade</label>
-                                        <input class="form-control" placeholder="Cidade" type="text" value="@Model.AddressModel.City" name="AddressModel.City">
+                                        <label for="exampleInputEmail1">Cidade</label>
+                                        @Html.EditorFor(model => model.AddressModel.City, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(d => d.AddressModel.City, "", new { @class = "text-danger" })
                                         <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
-                                        <label class="control-label">Bairro</label>
-                                        <input class="form-control" placeholder="Bairro" type="text" value="@Model.AddressModel.District" name="AddressModel.District">
+                                        <label for="exampleInputEmail1">Bairro</label>
+                                        @Html.EditorFor(model => model.AddressModel.District, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(d => d.AddressModel.District, "", new { @class = "text-danger" })
                                         <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
-                                        <label class="control-label">Rua</label>
-                                        <input class="form-control" placeholder="Rua" type="text" value="@Model.AddressModel.Street" name="AddressModel.Street">
+                                        <label for="exampleInputEmail1">Rua</label>
+                                        @Html.EditorFor(model => model.AddressModel.Street, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(d => d.AddressModel.Street, "", new { @class = "text-danger" })
                                         <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
-                                        <label class="control-label">Número</label>
-                                        <input class="form-control" placeholder="Número" type="text" value="@Model.AddressModel.Number" name="AddressModel.Number">
+                                        <label for="exampleInputEmail1">Número</label>
+                                        @Html.EditorFor(model => model.AddressModel.Number, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(d => d.AddressModel.Number, "", new { @class = "text-danger" })
                                         <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
-                                        <label class="control-label">Complemento</label>
-                                        <input class="form-control" placeholder="Complemento" type="text" value="@Model.AddressModel.Complement" name="AddressModel.Complement">
+                                        <label for="exampleInputEmail1">Complemento</label>
+                                        @Html.EditorFor(model => model.AddressModel.Complement, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(d => d.AddressModel.Complement, "", new { @class = "text-danger" })
                                         <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>

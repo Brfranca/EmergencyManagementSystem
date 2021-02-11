@@ -71,9 +71,12 @@
                                                 <span class="pull-right">
                                                     <div class="row">
                                                         <div class="col-md-3">
-                                                            <button class="btn btn-outline-danger btn-sm" type="button" title="Deletar"><i class="fa fa-trash-o"></i></button>
+                                                            <a class="btn btn-outline-danger btn-sm" type="button" title="Deletar" href="@Url.Action("Update", "Employee", new { id = item.Id })"><i class="fa fa-trash-o"></i></a>
+                                                            @*<button type="button" class="btn btn-sm btn-outline-danger" data-toggle="tooltip" data-placement="top" href="@Url.Action("")">
+                                                                    <i class="ti-trash" aria-hidden="true"></i>
+                                                                </button>*@
                                                             <a class="btn btn-outline-warning btn-sm" title="Editar" href="@Url.Action("Update", "Employee", new { id = item.Id })"><i class="fa fa-pencil"></i></a>
-                                                            <a class="btn btn-outline-primary btn-sm" title="Detalhes" href="@Url.Action("Detail","Employee")"><i class="fa fa-list"></i></a>
+                                                            <a class="btn btn-outline-primary btn-sm" title="Detalhes" href="@Url.Action("Detail","Employee", new { id = item.Id })"><i class="fa fa-list"></i></a>
                                                         </div>
                                                     </div>
                                                 </span>
@@ -84,14 +87,18 @@
                             </table>
 
                             @Html.PagedListPager(Model, page =>
-                                    Url.Action("Index", new { CurrentPage = page, Name = ViewBag.Name, CPF = ViewBag.CPF }),
-                                    new PagedListRenderOptionsBase
-                                    {
-                                        LiElementClasses = new string[] { "paginate_button" },
-                                        PageClasses = new string[] { "page-link" }
-                                    })
+                            Url.Action("Index", new { CurrentPage = page, Name = ViewBag.Name, CPF = ViewBag.CPF }),
+                            new PagedListRenderOptionsBase
+                            {
+                                ContainerDivClasses = new[] { "dataTables_paginate paging_simple_numbers" },
+                                ActiveLiElementClass = "paginate_button active",
+                                PageClasses = new[] { "page-link" },
+                                UlElementClasses = new[] { "pagination" },
+                                LinkToPreviousPageFormat = "Voltar",
+                                LinkToNextPageFormat = "Próximo",
+                            })
                         </div>
-                        <a type="button" class="btn btn-nor bg-purpleTest"  @*data-toggle="tooltip" data-placement="top"*@ href="@Url.Action("Register","Employee")">
+                        <a type="button" class="btn btn-nor bg-purpleTest" @*data-toggle="tooltip" data-placement="top"*@ href="@Url.Action("Register","Employee")">
                             Novo Funcionário
                             <i class="ti-pencil-alt" aria-hidden="true"></i>
                         </a>
