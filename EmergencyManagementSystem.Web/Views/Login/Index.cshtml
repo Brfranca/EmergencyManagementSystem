@@ -20,7 +20,7 @@
     <link href="~/css/Custom.css" rel="stylesheet" />
 
     <script src="~/js/jquery.min.js"></script>
-    <script src="~/bootstrap/js/bootstrap.min.js"></script>
+    @*<script src="~/bootstrap/js/bootstrap.min.js"></script>*@
     <script src="~/js/niche.js"></script>
 
 </head>
@@ -38,7 +38,7 @@
                     </p>
                 }
 
-                
+
 
                 <div class="form-group has-feedback">
                     <input type="text" name="Login" class="form-control sty1" placeholder="Usuário" value="@Model.Login" required
@@ -47,7 +47,7 @@
 
                 </div>
                 <div class="form-group has-feedback">
-                    <input type="password" name="Password" class="form-control sty1" placeholder="Senha" value="@Model.Password" required
+                    <input type="password" name="Password" class="form-control sty1" placeholder="Senha" id="senha" value="@Model.Password" required
                            oninvalid="this.setCustomValidity('Favor digite a senha.')"
                            oninput="this.setCustomValidity('')">
                 </div>
@@ -55,8 +55,8 @@
                     <div class="col-xs-8">
                         <div class="checkbox icheck">
                             <label>
-                                <input type="checkbox" onclick="">
-                                Mostrar
+                                <input type="checkbox" id="mostraSenha" onclick="MostrarSenha()">
+                                Mostrar Senha
                             </label>
                             <a href="pages-recover-password.html" class="pull-right"><i class="fa fa-lock"></i> Esqueceu sua senha?</a>
                         </div>
@@ -83,10 +83,39 @@
 </html>
 
 
+<div id="loader"></div>
+
 <script>
-
-    function mostrarSenha() {
-
+    function MostrarSenha() {
+        var checkBox = document.getElementById('mostraSenha').checked;
+        if (checkBox == true)
+            document.getElementById('senha').type = 'text';
+        else
+            document.getElementById('senha').type = 'password';
     }
 
+    var spinner = $('#loader');
+    $('form').submit(function () {
+        spinner.show();
+    });
 </script>
+
+<style type="text/css">
+
+    #sidebar-wrapper {
+        overflow: auto;
+    }
+
+    #loader {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        background: rgba(0,0,0,0.75) url('../../wwwroot/Imagens/loading2.gif') no-repeat center center;
+        z-index: 10000;
+    }
+</style>
+

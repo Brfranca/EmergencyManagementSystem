@@ -55,11 +55,21 @@ namespace EmergencyManagementSystem.Web.Controllers
             return View(result.Model);
         }
 
-        public IActionResult Detail(EmployeeModel employeeModel)
+        public IActionResult Detail(int id)
         {
-            return View();
+            var result = _employeeRest.Find(new EmployeeFilter { Id = id });
+            if (!result.Success)
+                return RedirectToAction("Index");
+            return View(result.Model);
         }
 
+        public IActionResult Delete(int id)
+        {
+            var result = _employeeRest.Delete(new EmployeeModel { Id = id });
+            if (!result.Success)
+                ModelState.AddModelError("Id", "Erro ao remover funcionário");
 
+            return RedirectToAction("Index");
+        }
     }
 }
