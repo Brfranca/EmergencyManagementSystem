@@ -50,16 +50,37 @@ namespace EmergencyManagementSystem.Web.Controllers
         public IActionResult Update(int id)
         {
             var result = _employeeRest.Find(new EmployeeFilter { Id = id });
+
+            if (!ModelState.IsValid)
+                return RedirectToAction(nameof(Index));
+
             if (!result.Success)
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             return View(result.Model);
         }
 
-        public IActionResult Detail(int id)
+        [HttpPost]
+        public IActionResult Update(EmployeeModel employeeModel)
+        {
+            if (!ModelState.IsValid)
+                return View(employeeModel);
+
+            var result = _employeeRest.Update(employeeModel);
+            if (!result.Success)
+                return View(employeeModel);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Details(int id)
         {
             var result = _employeeRest.Find(new EmployeeFilter { Id = id });
+
+            if (!ModelState.IsValid)
+                return RedirectToAction(nameof(Index));
+
             if (!result.Success)
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             return View(result.Model);
         }
 
