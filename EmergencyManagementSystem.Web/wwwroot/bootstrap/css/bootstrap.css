@@ -3319,6 +3319,12 @@ fieldset[disabled] a.btn {
     border-radius: 0.2rem;
 }
 
+.btn-xx, .btn-group-sm > .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.45rem;
+    border-radius: 0.2rem;
+}
+
 .btn-block {
     display: block;
     width: 100%;

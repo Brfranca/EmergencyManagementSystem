@@ -17,12 +17,12 @@ namespace EmergencyManagementSystem.Web.Controllers
         {
         }
 
-        public IActionResult Index( )
+        public IActionResult Index()
         {
             //ViewBag.Name = emergencyFilter.Id;
             //ViewBag.CPF = emergencyFilter.Date;
             //var emergencies = _emergencyRest.FindPaginated(emergencyFilter);
-            return View();
+            return View(new EmergencyModel());
         }
 
         public IActionResult Register()

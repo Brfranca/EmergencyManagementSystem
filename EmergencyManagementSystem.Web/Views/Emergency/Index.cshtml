@@ -147,7 +147,6 @@
                                                 </div>
                                             </div>
 
-                                            @*Adicionar o Google Mpas Aqui*@
 
                                             <div id="cancel" class="hide">
                                                 <hr />
@@ -174,39 +173,37 @@
 
                         <!--second tab-->
                         <div class="tab-pane" id="profile" role="tabpanel" aria-expanded="false">
-                            @*Começar com numero ocorrencia/ telefone / funcionário que gerou ocorrencia*@
-                            @*Segunda linha Solicitante / data hora gerada a ocorrencia. Terceira Nome da ocorrência*@
 
                             <div class="row m-t-3-1">
                                 <div class="col-lg-12">
                                     <div class="card-body">
-                                        <h4 class="text-white">OC: 532154@(Model?.Id)<span class="pull-right"><b>10/02/2021  15:12</b></span> </h4>
-                                        @*<h4 class="text-white"> ACIDENTE DE CARRO <span class="pull-right"><b> 10/02/2021 15:32 - </b>OC: 5669626@(Model?.Id)</span> </h4>*@
-
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <fieldset class="form-group">
-                                                    <p class="form-control-static m-bot-1" id="staticInput">Solicitante: Tiago</p>
-                                                </fieldset>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <fieldset class="form-group">
-                                                    <p class="form-control-static m-bot-1" id="staticInput">(47)99999-9999</p>
-                                                </fieldset>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <fieldset class="form-group">
-                                                    <p class="form-control-static m-bot-1" id="staticInput">TARM: Nome Funcionário</p>
-                                                </fieldset>
-                                            </div>
-                                        </div>
-                                        @*Colocar o Google aqui, talvez*@
-
+                                        <h4 class="text-white">OC: 532154@(Model?.Id) - Acidente de Carro<span class="pull-right"><b>10/02/2021  15:12</b></span> </h4>
+                                        <h5 class="text-white"><b>Solicitante:</b> Tiago<span class="pull-right"><b>Funcionário:</b> Marilei</span> </h5>
+                                        <h5 class="text-white"><b>Telefone:</b> 47 99968-34567<span class="pull-right"></span> </h5>
                                         <hr />
-                                        <strong><i class="fa fa-map-marker margin-r-5"></i> Address</strong>
-                                        <div class="embed-container maps">
-                                            <iframe class="full-wid" src="https://maps.google.co.in/maps?sll=34.0204989,-118.4117325&amp;sspn=0.8745562,1.4073488&amp;cid=16298491244936825076&amp;q=Los+Angeles,+CA,+USA&amp;ie=UTF8&amp;hq=&amp;hnear=Los+Angeles,+Los+Angeles+County,+California,+United+States&amp;t=m&amp;ll=34.052234,-118.243685&amp;spn=0.697085,0.848982&amp;output=embed" style="pointer-events: none;"></iframe>
-                                        </div>
+
+                                        @*Google Maps - arrumar pois não está responsivo*@
+
+                                        <ul class="sidebar-menu" data-widget="tree">
+                                            <li class="treeview">
+                                                <a href="#"> <i class="fa fa-map-marker"></i> <span>Localização</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+                                                <ul class="treeview-menu">
+                                                    <!-- Endereço -->
+                                                    <label>Blumenau/Fortaleza Alta - Rua Monte Meru, 353</label>
+                                                    @*<div class="info-box">
+                                                            <h4 class="text-white m-b-2">Map Markers</h4>
+                                                            <div id="mapmarker"></div>
+                                                        </div>*@
+                                                    <div class="embed-container maps">
+                                                        <iframe class="full-wid" src="https://maps.google.co.in/maps?sll=34.0204989,-118.4117325&amp;sspn=0.8745562,1.4073488&amp;cid=16298491244936825076&amp;q=Los+Angeles,+CA,+USA&amp;ie=UTF8&amp;hq=&amp;hnear=Los+Angeles,+Los+Angeles+County,+California,+United+States&amp;t=m&amp;ll=34.052234,-118.243685&amp;spn=0.697085,0.848982&amp;output=embed" style="pointer-events: none;"></iframe>
+                                                    </div>
+
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                        <hr />
+
+
 
 
                                         @*TESTE*@
@@ -253,13 +250,76 @@
                                                                         </div>
                                                                     </div>
 
-                                                                    <div class="row">
-                                                                        <div class="col-md-5">
-                                                                            <button type="button" class="btn btn-sm bg-purpleTest" onclick="AdicionarPaciente()"><i class="fa fa-plus-circle"></i> Paciente</button>
+
+                                                                    <div class="card-group align-items-center">
+                                                                        <div class="col-1-5">
+                                                                            <div class="form-group has-feedback">
+                                                                                <label class="control-label">PA</label>
+                                                                                <input class="form-control" type="text">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-1-5">
+                                                                            <div class="form-group has-feedback">
+                                                                                <label class="control-label">FC</label>
+                                                                                <input class="form-control" type="text">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-1-5">
+                                                                            <div class="form-group has-feedback">
+                                                                                <label class="control-label">FR</label>
+                                                                                <input class="form-control" type="text">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-1-5">
+                                                                            <div class="form-group has-feedback">
+                                                                                <label class="control-label">Temp</label>
+                                                                                <input class="form-control" type="text">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-1-5">
+                                                                            <div class="form-group has-feedback">
+                                                                                <label class="control-label">SatO2</label>
+                                                                                <input class="form-control" type="text">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-1-5">
+                                                                            <div class="form-group has-feedback">
+                                                                                <label class="control-label">HGT</label>
+                                                                                <input class="form-control" type="text">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-1-5">
+                                                                            <div class="form-group">
+                                                                                <label class="control-label">Glasgow</label>
+                                                                                <input class="form-control" type="text">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-1-5">
+                                                                            <button type="submit" class="btn btn-nor bg-purpleTest"><i class="fa fa-plus-circle"></i></button>
                                                                         </div>
                                                                     </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+
+                                                                            <div class="form-group has-feedback">
+                                                                                <label class="control-label">Avaliação Médica</label>
+                                                                                <textarea class="form-control" id="placeTextarea" rows="3"></textarea>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+
+                                                                        <!-- arrumar -->
+                                                                        <div class="col-md-5">
+                                                                            <button type="button" class="btn btn-sm bg-purpleTest" onclick="AdicionarPaciente()"><i class="fa fa-save"></i> Gravar</button>
+                                                                        </div>
+                                                                    </div>
+
+
+
                                                                 </form>
                                                             </div>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -302,6 +362,8 @@
                                                                         </div>
                                                                     </div>
 
+
+
                                                                     <div class="row">
                                                                         <div class="col-md-5">
                                                                             <button type="button" class="btn btn-sm bg-purpleTest" onclick="AdicionarPaciente()"><i class="fa fa-plus-circle"></i> Paciente</button>
@@ -315,94 +377,176 @@
 
                                             </div> @*Final TabContent*@
                                         </div>
+                                        <br>
                                         @*TESTE FINAl*@
+                                        <div class="row pull-right">
+                                            <div class="col-md-5">
+                                                <button type="button" class="btn btn-sm bg-purpleTest" onclick="AdicionarPaciente()"><i class="fa fa-plus-circle"></i> Paciente</button>
+                                            </div>
+                                        </div>
+                                        <br />
+
+                                        <h5 class="text-white">Histórico de Avaliação Médica</h5>
+
+                                        <div class="table-responsive">
+                                            <table id="example2" class="table table-bordered table-hover no-wrap" data-name="cool-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Data</th>
+                                                        <th>Profissional</th>
+                                                        <th>Avaliação</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @*@foreach (var item in Model)
+                                                        {
+                                                            <tr>
+                                                                <td>@item.Data/Hora</td>
+                                                                <td>@item.Profissional</td>
+                                                                <td>@item.Avaliação</td>
+                                                            </tr>
+                                                        }*@
+                                                </tbody>
+                                            </table>
+
+                                            @*@Html.PagedListPager(Model, page =>
+                                                Url.Action("Index", new { CurrentPage = page, Name = ViewBag.Name, CPF = ViewBag.CPF }),
+                                                new PagedListRenderOptionsBase
+                                                {
+                                                    ContainerDivClasses = new[] { "dataTables_paginate paging_simple_numbers" },
+                                                    ActiveLiElementClass = "paginate_button active",
+                                                    PageClasses = new[] { "page-link" },
+                                                    UlElementClasses = new[] { "pagination" },
+                                                    LinkToPreviousPageFormat = "Voltar",
+                                                    LinkToNextPageFormat = "Próximo",
+                                                })*@
+                                        </div>
+                                        <hr />
 
 
+                                        <h5 class="text-white">Painel de decisões médicas</h5>
 
-                                        <div class="tab-pane" id="settings" role="tabpanel">
-                                            <div class="card-body">
-                                                <form>
-                                                    <div>
-                                                        <div class="card-group align-items-center">
-                                                            <div class="col-1-5">
-                                                                <div class="form-group has-feedback">
-                                                                    <label class="control-label">PA</label>
-                                                                    <input class="form-control" type="text">
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <button type="submit" id="btnRegister" class="btn btn-nor bg-light">Orientação Médica Sem Envio de Veículo</button>
+                                                <button type="button" id="btnCancel" class="btn btn-nor bg-light">Solicitar Apoio Bombeiro</button>
+                                                <button type="submit" id="btnRegister" class="btn btn-nor bg-light">Solicitar Apoio SAMU</button>
+                                                <button type="button" id="btnCancel" class="btn btn-nor bg-light">Repasse Bombeiro</button>
+                                                <button type="button" id="btnCancel" class="btn btn-nor bg-light">Repasse SAMU</button>
+                                            </div>
+                                        </div>
+                                        <hr />
+
+                                        <ul class="sidebar-menu" data-widget="tree">
+                                            <li class="treeview">
+                                                <a href="#"> <i class="fa fa-ambulance"></i> <span>Envio de Veículos</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+                                                <ul class="treeview-menu">
+                                                    <!-- Veículos  -->
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-xs-6">
+                                                            <div class="info-box">
+                                                                <span class="info-box-icon bg-aqua"><i class="icon-briefcase"></i></span>
+                                                                <div class="info-box-content"> <span class="info-box-number">USB</span> <span class="info-box-text"></span> </div>
+                                                                <div class="btn-group" style="width: 100%; margin-bottom: 0px;">
+                                                                    <!--<button type="button" id="color-chooser-btn" class="btn btn-info btn-block dropdown-toggle" data-toggle="dropdown">Color <span class="caret"></span></button>-->
+                                                                    <ul class="fc-color-picker" id="color-chooser">
+                                                                        <li><a class="text-light-blue" href="#"><i class="fa fa-square"></i></a></li>
+                                                                        <li><a class="text-yellow" href="#"><i class="fa fa-square"></i></a></li>
+                                                                        <li><a class="text-green" href="#"><i class="fa fa-square"></i></a></li>
+                                                                        <li><a class="text-red" href="#"><i class="fa fa-square"></i></a></li>
+                                                                    </ul>
                                                                 </div>
+
+                                                                <!-- /.info-box-content -->
                                                             </div>
-                                                            <div class="col-1-5">
-                                                                <div class="form-group has-feedback">
-                                                                    <label class="control-label">FC</label>
-                                                                    <input class="form-control" type="text">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-1-5">
-                                                                <div class="form-group has-feedback">
-                                                                    <label class="control-label">FR</label>
-                                                                    <input class="form-control" type="text">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-1-5">
-                                                                <div class="form-group has-feedback">
-                                                                    <label class="control-label">Temp</label>
-                                                                    <input class="form-control" type="text">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-1-5">
-                                                                <div class="form-group has-feedback">
-                                                                    <label class="control-label">SatO2</label>
-                                                                    <input class="form-control" type="text">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-1-5">
-                                                                <div class="form-group has-feedback">
-                                                                    <label class="control-label">HGT</label>
-                                                                    <input class="form-control" type="text">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-1-5">
-                                                                <div class="form-group">
-                                                                    <label class="control-label">Glasgow</label>
-                                                                    <input class="form-control" type="text">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-1-5">
-                                                                <button type="submit" class="btn btn-nor bg-purpleTest"><i class="fa fa-plus-circle"></i></button>
-                                                            </div>
+                                                            <!-- /.info-box -->
                                                         </div>
+                                                        <div class="col-lg-4 col-xs-6">
+                                                            <div class="info-box">
+                                                                <span class="info-box-icon bg-aqua"><i class="icon-briefcase"></i></span>
+                                                                <div class="info-box-content"> <span class="info-box-number">USA</span> <span class="info-box-text"></span> </div>
+                                                                <div class="btn-group" style="width: 100%; margin-bottom: 0px;">
+                                                                    <!--<button type="button" id="color-chooser-btn" class="btn btn-info btn-block dropdown-toggle" data-toggle="dropdown">Color <span class="caret"></span></button>-->
+                                                                    <ul class="fc-color-picker" id="color-chooser">
+                                                                        <li><a class="text-light-blue" href="#"><i class="fa fa-square"></i></a></li>
+                                                                        <li><a class="text-yellow" href="#"><i class="fa fa-square"></i></a></li>
+                                                                        <li><a class="text-green" href="#"><i class="fa fa-square"></i></a></li>
+                                                                        <li><a class="text-red" href="#"><i class="fa fa-square"></i></a></li>
+                                                                    </ul>
+                                                                </div>
+
+                                                                <!-- /.info-box-content -->
+                                                            </div>
+                                                            <!-- /.info-box -->
+                                                        </div>
+                                                        <div class="col-lg-4 col-xs-6">
+                                                            <div class="info-box">
+                                                                <span class="info-box-icon bg-aqua"><i class="icon-briefcase"></i></span>
+                                                                <div class="info-box-content"> <span class="info-box-number">HEL</span> <span class="info-box-text"></span> </div>
+                                                                <div class="btn-group" style="width: 100%; margin-bottom: 0px;">
+                                                                    <!--<button type="button" id="color-chooser-btn" class="btn btn-info btn-block dropdown-toggle" data-toggle="dropdown">Color <span class="caret"></span></button>-->
+                                                                    <ul class="fc-color-picker" id="color-chooser">
+                                                                        <li><a class="text-light-blue" href="#"><i class="fa fa-square"></i></a></li>
+                                                                        <li><a class="text-yellow" href="#"><i class="fa fa-square"></i></a></li>
+                                                                        <li><a class="text-green" href="#"><i class="fa fa-square"></i></a></li>
+                                                                        <li><a class="text-red" href="#"><i class="fa fa-square"></i></a></li>
+                                                                    </ul>
+                                                                </div>
+
+                                                                <!-- /.info-box-content -->
+                                                            </div>
+                                                            <!-- /.info-box -->
+                                                        </div>
+                                                        <div class="col-lg-4 col-xs-6">
+                                                            <div class="info-box">
+                                                                <span class="info-box-icon bg-aqua"><i class="icon-briefcase"></i></span>
+                                                                <div class="info-box-content"> <span class="info-box-number">AVI</span> <span class="info-box-text"></span> </div>
+                                                                <div class="btn-group" style="width: 100%; margin-bottom: 0px;">
+                                                                    <!--<button type="button" id="color-chooser-btn" class="btn btn-info btn-block dropdown-toggle" data-toggle="dropdown">Color <span class="caret"></span></button>-->
+                                                                    <ul class="fc-color-picker" id="color-chooser">
+                                                                        <li><a class="text-light-blue" href="#"><i class="fa fa-square"></i></a></li>
+                                                                        <li><a class="text-yellow" href="#"><i class="fa fa-square"></i></a></li>
+                                                                        <li><a class="text-green" href="#"><i class="fa fa-square"></i></a></li>
+                                                                        <li><a class="text-red" href="#"><i class="fa fa-square"></i></a></li>
+                                                                    </ul>
+                                                                </div>
+
+                                                                <!-- /.info-box-content -->
+                                                            </div>
+                                                            <!-- /.info-box -->
+                                                        </div>
+
                                                     </div>
-                                                </form>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                        <hr />
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+
+                                                <div class="form-group has-feedback">
+                                                    <label class="control-label">Histórico de Veiculos Enviados//Talvez criar na terceira aba</label>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group has-feedback">
-                                                <label class="control-label">Avaliação Médica</label>
-                                                <textarea class="form-control" id="placeTextarea" rows="3" ></textarea>
+                                        <div class="row">
+                                            <div class="col-md-12">
+
+                                                <div class="form-group has-feedback">
+                                                    <label class="control-label">Histórico de Decisões Médicas??// Talvez criar na terceira aba</label>
+                                                    <label class="control-label">Revisar o enum sobre o fechamento de ocorrência caso o médico encerre a ocorrencia</label>
+
+                                                </div>
                                             </div>
                                         </div>
 
+                                    </div><!--ACaba card body da pagina-->
 
-
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <button type="submit" class="btn btn-lg bg-purpleTest">Registrar</button>
-                                            <button type="button" class="btn btn-lg bg-light">Cancelar</button>
-
-                                        </div>
-                                    </div>
-                                    <hr />
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group has-feedback">
-                                                <label class="control-label">Comentário</label>
-                                                <textarea class="form-control" id="placeTextarea" rows="1" placeholder="Observação"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                 </div>
+
                             </div>
                         </div>
 
@@ -469,4 +613,6 @@
     <!-- Main row -->
 </div>
 
-
+<script src="https://maps.google.com/maps/api/js?key=AIzaSyCUBL-6KdclGJ2a_UpmB2LXvq7VOcPT7K4&sensor=true"></script>
+<script src="dist/plugins/gmaps/gmaps.int.js"></script>
+<script src="dist/plugins/gmaps/gmaps.js"></script>
