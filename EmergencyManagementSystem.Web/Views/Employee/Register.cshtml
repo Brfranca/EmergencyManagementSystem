@@ -1,4 +1,5 @@
-﻿@model EmergencyManagementSystem.Service.Models.EmployeeModel;
+﻿@model EmergencyManagementSystem.Service.Models.EmployeeModel
+@using EmergencyManagementSystem.Service.Models
 
 
 @{
@@ -6,17 +7,22 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@Html.AntiForgeryToken()
+
 <div class="content-header sty-one">
     <h1 class="text-white">Cadastro de Funcionário</h1>
 </div>
 
-<div class="content">
-    <div class="info-box">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <form method="post">
+@using (Html.BeginForm())
+{
+    <div class="content">
+        <div class="info-box">
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="card">
                         <div class="card-body">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             <div class="row">
                                 <div class="col-md-4 col-xs-12">
                                     <h4 class="card-title">Dados do Profissional</h4>
@@ -29,6 +35,7 @@
                                         <label for="exampleInputEmail1">Nome completo</label>
                                         @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(d => d.Name, "", new { @class = "text-danger" })
+                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -36,6 +43,7 @@
                                         <label for="exampleInputEmail1">Data de nascimento</label>
                                         @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(d => d.BirthDate, "", new { @class = "text-danger" })
+                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -43,6 +51,7 @@
                                         <label for="exampleInputEmail1">CPF</label>
                                         @Html.EditorFor(model => model.CPF, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(d => d.CPF, "", new { @class = "text-danger" })
+                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -50,6 +59,7 @@
                                         <label for="exampleInputEmail1">RG</label>
                                         @Html.EditorFor(model => model.RG, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(d => d.RG, "", new { @class = "text-danger" })
+                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -57,6 +67,7 @@
                                         <label for="exampleInputEmail1">E-mail</label>
                                         @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(d => d.Email, "", new { @class = "text-danger" })
+                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -64,46 +75,50 @@
                                         <label for="exampleInputEmail1">Telefone</label>
                                         @Html.EditorFor(model => model.Telephone, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(d => d.Telephone, "", new { @class = "text-danger" })
+                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
                                         <label for="location1">Profissão</label>
+                                    <select class="form-control" name="Occupation" id="Occupation">
 
-                                        @{ string[] occupation = Enum.GetNames(typeof(EmergencyManagementSystem.Service.Enums.Occupation)); }
-
-                                        <select class="form-control" name="Occupation" id="Occupation">
-                                            @for (int i = 0; i < occupation.Length; i++)
-                                            {
-                                                <option value="@i" @(i == (int)(Model?.Occupation ?? 0) ? "Selected" : "")>@occupation[i]</option>
-                                            }
-                                        </select>
+                                        @foreach (EmergencyManagementSystem.Service.Enums.Occupation suit in (EmergencyManagementSystem.Service.Enums.Occupation[])Enum.GetValues(typeof(EmergencyManagementSystem.Service.Enums.Occupation)))
+                                        {
+                                            suit.GetEnumDescription();
+                                            <option value="@suit" @(suit == (Model?.Occupation ?? 0) ? "Selected" : "")>@suit.GetEnumDescription()</option>
+                                        }
+                                    </select>
                                         @Html.ValidationMessageFor(d => d.Occupation, "", new { @class = "text-danger" })
+                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
-                            </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
                                         <label for="exampleInputEmail1">Registro Profissional</label>
                                         @Html.EditorFor(model => model.ProfessionalRegistration, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(d => d.ProfessionalRegistration, "", new { @class = "text-danger" })
+                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="location1">Coorporação</label>
-
-                                        @{ string[] company = Enum.GetNames(typeof(EmergencyManagementSystem.Service.Enums.Company)); }
-
-                                        <select class="form-control" name="Company" id="Company">
-                                            @for (int i = 0; i < company.Length; i++)
-                                            {
-                                                <option value="@i" @(i == (int)(Model?.Company ?? 0) ? "Selected" : "")>@company[i]</option>
-                                            }
-                                        </select>
+                                    <select class="form-control" name="Company" id="Company">
+                                        
+                                        @foreach (EmergencyManagementSystem.Service.Enums.Company suit in (EmergencyManagementSystem.Service.Enums.Company[])Enum.GetValues(typeof(EmergencyManagementSystem.Service.Enums.Company)))
+                                        {
+                                            suit.GetEnumDescription();
+                                            <option value="@suit" @(suit == (Model?.Company ?? 0) ? "Selected" : "")>@suit.GetEnumDescription()</option>
+                                        }
+                                    </select>
+                                        @Html.ValidationMessageFor(d => d.Company, "", new { @class = "text-danger" })
+                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
 
                         <div class="card-body">
@@ -120,7 +135,6 @@
                                         <label for="exampleInputEmail1">CEP</label>
                                         @Html.EditorFor(model => model.AddressModel.CEP, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(d => d.AddressModel.CEP, "", new { @class = "text-danger" })
-                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -128,7 +142,6 @@
                                         <label for="exampleInputEmail1">Cidade</label>
                                         @Html.EditorFor(model => model.AddressModel.City, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(d => d.AddressModel.City, "", new { @class = "text-danger" })
-                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -136,7 +149,6 @@
                                         <label for="exampleInputEmail1">Bairro</label>
                                         @Html.EditorFor(model => model.AddressModel.District, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(d => d.AddressModel.District, "", new { @class = "text-danger" })
-                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -144,7 +156,6 @@
                                         <label for="exampleInputEmail1">Rua</label>
                                         @Html.EditorFor(model => model.AddressModel.Street, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(d => d.AddressModel.Street, "", new { @class = "text-danger" })
-                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -152,7 +163,6 @@
                                         <label for="exampleInputEmail1">Número</label>
                                         @Html.EditorFor(model => model.AddressModel.Number, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(d => d.AddressModel.Number, "", new { @class = "text-danger" })
-                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -160,19 +170,27 @@
                                         <label for="exampleInputEmail1">Complemento</label>
                                         @Html.EditorFor(model => model.AddressModel.Complement, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(d => d.AddressModel.Complement, "", new { @class = "text-danger" })
-                                        <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group has-feedback">
+                                        <label for="exampleInputEmail1">Referência</label>
+                                        @Html.EditorFor(model => model.AddressModel.Reference, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(d => d.AddressModel.Reference, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                         <div class="card-body">
                             <button type="submit" class="btn btn-lg bg-purpleTest">Cadastrar</button>
                         </div>
-                    </form>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
-</div>
 
+}
 

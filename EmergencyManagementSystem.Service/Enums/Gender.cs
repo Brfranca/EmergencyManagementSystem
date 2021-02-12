@@ -9,9 +9,13 @@ namespace EmergencyManagementSystem.Service.Enums
 {
     public enum  Gender : short
     {
-        [Description("Inválido")]
+        [Description("Selecionar")]
+        Invalid,
+        [Description("Feminino")]
         Female,
+        [Description("Masculino")]
         Male,
+        [Description("Desconhecido")]
         Unknown
     }
 }
