@@ -22,8 +22,7 @@ namespace EmergencyManagementSystem.Service.Models
         public int? Year { get; set; }
         [Range(1, 4, ErrorMessage = "Favor informar o tipo do veículo.")]
         public VehicleType VehicleType { get; set; }
-        public VehicleSituation VehicleSituation { get; set; }
-        //public ICollection<VehicleTeam> VehicleTeams { get; set; }
+        public VehicleStatus VehicleStatus { get; set; }
 
         
     }

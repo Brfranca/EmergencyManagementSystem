@@ -55,14 +55,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="location1">Tipo do Veículo</label>
-                                <select class="form-control" name="VehicleSituation" id="VehicleSituation">
-                                    @foreach (EmergencyManagementSystem.Service.Enums.VehicleSituation suit in (EmergencyManagementSystem.Service.Enums.VehicleSituation[])Enum.GetValues(typeof(EmergencyManagementSystem.Service.Enums.VehicleSituation)))
+                                <select class="form-control" name="VehicleStatus" id="VehicleStatus">
+                                    @foreach (EmergencyManagementSystem.Service.Enums.VehicleStatus suit in (EmergencyManagementSystem.Service.Enums.VehicleStatus[])Enum.GetValues(typeof(EmergencyManagementSystem.Service.Enums.VehicleStatus)))
                                     {
                                         suit.GetEnumDescription();
-                                        <option value="@suit" @(suit == (Model?.VehicleSituation ?? 0) ? "Selected" : "")>@suit.GetEnumDescription()</option>
+                                        <option value="@suit" @(suit == (Model?.VehicleStatus ?? 0) ? "Selected" : "")>@suit.GetEnumDescription()</option>
                                     }
                                 </select>
-                                @Html.ValidationMessageFor(d => d.VehicleSituation, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(d => d.VehicleStatus, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
