@@ -22,10 +22,10 @@ namespace EmergencyManagementSystem.Service.Models
         public long AddressId { get; set; }
         public Occupation Occupation { get; set; }
 
-        //public EmployeeModel()
-        //{
-        //    AddressModel = new AddressModel();
-        //}
+        public EmployeeModel()
+        {
+            AddressModel = new AddressModel();
+        }
     }
 
     public static class Utils
