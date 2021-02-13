@@ -40,7 +40,7 @@ namespace EmergencyManagementSystem.Web.Controllers
             if (!ModelState.IsValid)
                 return View(vehicleModel);
 
-            vehicleModel.VehicleSituation = Service.Enums.VehicleSituation.Cleared;
+            vehicleModel.VehicleStatus = Service.Enums.VehicleStatus.Cleared;
             var result = _vehicleRest.Register(vehicleModel);
             if (!result.Success)
                 return View(vehicleModel);
@@ -84,6 +84,11 @@ namespace EmergencyManagementSystem.Web.Controllers
             if (!result.Success)
                 return RedirectToAction(nameof(Index));
             return View(result.Model);
+        }
+
+        public IActionResult ()
+        {
+            return View(new VehicleModel());
         }
     }
 }

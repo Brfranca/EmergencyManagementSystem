@@ -2,7 +2,7 @@
 
 namespace EmergencyManagementSystem.Service.Enums
 {
-    public enum VehicleSituation : short
+    public enum VehicleStatus : short
     {
         [Description("Selecionar")]
         Invalid,
