@@ -16,9 +16,11 @@ namespace EmergencyManagementSystem.Web.Controllers
     public class EmployeeController : Controller
     {
         private readonly IEmployeeRest _employeeRest;
-        public EmployeeController(IEmployeeRest employeeRest)
+        private readonly IAddressRest _addressRest;
+        public EmployeeController(IEmployeeRest employeeRest, IAddressRest addressRest)
         {
             _employeeRest = employeeRest;
+            _addressRest = addressRest;
         }
 
         public IActionResult Index(EmployeeFilter employeeFilter)
@@ -47,15 +49,25 @@ namespace EmergencyManagementSystem.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Update(int id)
+        public IActionResult Update(long id, long addressId)
         {
-            var result = _employeeRest.Find(new EmployeeFilter { Id = id });
-
             if (!ModelState.IsValid)
                 return RedirectToAction(nameof(Index));
 
+            var resultAddress = _addressRest.Find(new AddressFilter { Id = addressId });
+
+            if (!resultAddress.Success)
+                return RedirectToAction(nameof(Index));
+
+
+            var result = _employeeRest.Find(new EmployeeFilter { Id = id });
+
+            result.Model.AddressModel = resultAddress.Model;
+
             if (!result.Success)
                 return RedirectToAction(nameof(Index));
+
+
             return View(result.Model);
         }
 

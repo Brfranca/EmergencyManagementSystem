@@ -31,6 +31,7 @@ namespace EmergencyManagementSystem.Web
             services.AddScoped<IUserRest, UserRest>();
             services.AddScoped<IEmployeeRest, EmployeeRest>();
             services.AddScoped<IVehicleRest, VehicleRest>();
+            services.AddScoped<IAddressRest, AddressRest>();
             //services.AddScoped<IEmergencyRest, EmergencyRest>();
 
 
@@ -75,6 +76,7 @@ namespace EmergencyManagementSystem.Web
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
             });
         }
     }

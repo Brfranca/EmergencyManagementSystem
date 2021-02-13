@@ -1,4 +1,5 @@
-﻿using EmergencyManagementSystem.Service.Models;
+﻿using EmergencyManagementSystem.Service.Interfaces;
+using EmergencyManagementSystem.Service.Models;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace EmergencyManagementSystem.Service.Services
 {
-    public class AddressRest : RestBase<AddressModel>
+    public class AddressRest : RestBase<AddressModel>, IAddressRest
     {
-        public AddressRest(IConfiguration configuration, string key)
+        public AddressRest(IConfiguration configuration)
             : base(configuration, "CommonApi", "Address")
         {
         }

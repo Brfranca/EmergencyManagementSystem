@@ -18,14 +18,14 @@ namespace EmergencyManagementSystem.Service.Models
         public DateTime BirthDate { get; set; }
         public Company Company { get; set; }
         public string ProfessionalRegistration { get; set; }
-        public AddressModel AddressModel { get; set; }
+        public  AddressModel AddressModel { get; set; }
         public long AddressId { get; set; }
         public Occupation Occupation { get; set; }
-        
-        public EmployeeModel()
-        {
-            AddressModel = new AddressModel();
-        }
+
+        //public EmployeeModel()
+        //{
+        //    AddressModel = new AddressModel();
+        //}
     }
 
     public static class Utils
