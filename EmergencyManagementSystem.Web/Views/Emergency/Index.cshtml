@@ -92,9 +92,10 @@
 
                                             <div class="row">
                                                 <div class="col-md-5">
-                                                    <button type="button" class="btn btn-sm bg-purpleTest" onclick="AdicionarPaciente()"><i class="fa fa-plus-circle"></i> Paciente</button>
+                                                    <button type="button" class="btn btn-sm bg-purpleTest" onclick="AdicionarPaciente('patient', 'patientList')"><i class="fa fa-plus-circle"></i> Paciente</button>
                                                 </div>
                                             </div>
+
                                             <hr />
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -225,8 +226,8 @@
                                                             <div class="card-body">
                                                                 <form>
 
-                                                                    <div id="patientList">
-                                                                        <div id="patient">
+                                                                    <div id="patientList2">
+                                                                        <div id="patient2">
                                                                             <div class="form-group">
                                                                                 <label for="exampleinputemail1">Paciente</label>
                                                                                 <input type="text" class="form-control" id="exampleinputemail1" placeholder="Nome">
@@ -314,7 +315,7 @@
 
                                                                         <!-- arrumar -->
                                                                         <div class="col-md-5">
-                                                                            <button type="button" class="btn btn-sm bg-purpleTest" onclick="AdicionarPaciente()"><i class="fa fa-save"></i> Gravar</button>
+                                                                            <button type="button" class="btn btn-sm bg-purpleTest" onclick="AdicionarPaciente2('patient2', 'patientList2')"><i class="fa fa-save"></i> Gravar</button>
                                                                         </div>
                                                                     </div>
 
@@ -335,9 +336,9 @@
                                                         <div class="col-lg-12">
                                                             <div class="card-body">
                                                                 <form>
-                                                                    <div id="patientList">
+                                                                    <div id="patientList3">
 
-                                                                        <div id="patient">
+                                                                        <div id="patient3">
                                                                             <div class="form-group">
                                                                                 <label for="exampleinputemail1">Paciente</label>
                                                                                 <input type="text" class="form-control" id="exampleinputemail1" placeholder="Nome">
@@ -369,7 +370,7 @@
 
                                                                     <div class="row">
                                                                         <div class="col-md-5">
-                                                                            <button type="button" class="btn btn-sm bg-purpleTest" onclick="AdicionarPaciente()"><i class="fa fa-plus-circle"></i> Paciente</button>
+                                                                            <button type="button" class="btn btn-sm bg-purpleTest" onclick="AdicionarPaciente3"><i class="fa fa-plus-circle"></i> Paciente</button>
                                                                         </div>
                                                                     </div>
                                                                 </form>
@@ -384,7 +385,7 @@
                                         @*TESTE FINAl*@
                                         <div class="row pull-right">
                                             <div class="col-md-5">
-                                                <button type="button" class="btn btn-sm bg-purpleTest" onclick="AdicionarPaciente()"><i class="fa fa-plus-circle"></i> Paciente</button>
+                                                <button type="button" class="btn btn-sm bg-purpleTest" onclick="AdicionarPaciente3()"><i class="fa fa-plus-circle"></i> Paciente</button>
                                             </div>
                                         </div>
                                         <br />
@@ -622,6 +623,13 @@
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
 <script>
+
+    function AdicionarPaciente(idPatient, idpatientList) {
+
+        var patient = $('#' + idPatient).html();
+        $('#' + idpatientList).append(patient);
+
+    }
 
     function Pesquisar() {
         window.setTimeout(PesquisarTeste, 2000);
