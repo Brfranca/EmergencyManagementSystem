@@ -86,9 +86,9 @@ namespace EmergencyManagementSystem.Web.Controllers
             return View(result.Model);
         }
 
-        public IActionResult ()
-        {
-            return View(new VehicleModel());
-        }
+        //public IActionResult ()
+        //{
+        //    return View(new VehicleModel());
+        //}
     }
 }
