@@ -184,10 +184,10 @@
 
                                         @*Google Maps - arrumar pois não está responsivo*@
 
-                                        <ul class="sidebar-menu" data-widget="tree">
-                                            <li class="treeview">
+                                        <div class="sidebar-menu" data-widget="tree">
+                                            <div class="treeview">
                                                 <a href="#"> <i class="fa fa-map-marker"></i> <span>Localização</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
-                                                <ul class="treeview-menu">
+                                                <div class="treeview-menu">
                                                     <!-- Endereço -->
                                                     <label>Blumenau/Fortaleza Alta - Rua Monte Meru, 353</label>
                                                     @*<div class="info-box">
@@ -196,11 +196,13 @@
                                                         </div>*@
                                                     <div class="embed-container maps">
                                                         <iframe class="full-wid" src="https://maps.google.co.in/maps?sll=34.0204989,-118.4117325&amp;sspn=0.8745562,1.4073488&amp;cid=16298491244936825076&amp;q=Los+Angeles,+CA,+USA&amp;ie=UTF8&amp;hq=&amp;hnear=Los+Angeles,+Los+Angeles+County,+California,+United+States&amp;t=m&amp;ll=34.052234,-118.243685&amp;spn=0.697085,0.848982&amp;output=embed" style="pointer-events: none;"></iframe>
+
+
                                                     </div>
 
-                                                </ul>
-                                            </li>
-                                        </ul>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <hr />
 
 
@@ -613,6 +615,12 @@
     <!-- Main row -->
 </div>
 
-<script src="https://maps.google.com/maps/api/js?key=AIzaSyCUBL-6KdclGJ2a_UpmB2LXvq7VOcPT7K4&sensor=true"></script>
-<script src="dist/plugins/gmaps/gmaps.int.js"></script>
-<script src="dist/plugins/gmaps/gmaps.js"></script>
+
+<link href="~/css/maps.css" rel="stylesheet" />
+<script src="~/js/maps.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClYGY0602EMNEOdHTFm0UWoisuKoF73u4&callback=initAutocomplete&libraries=places&v=weekly" async></script>
+
+
+@*<script src="https://maps.google.com/maps/api/js?key=AIzaSyCUBL-6KdclGJ2a_UpmB2LXvq7VOcPT7K4&sensor=true"></script>*@
+@*<script src="dist/plugins/gmaps/gmaps.int.js"></script>
+    <script src="dist/plugins/gmaps/gmaps.js"></script>*@
