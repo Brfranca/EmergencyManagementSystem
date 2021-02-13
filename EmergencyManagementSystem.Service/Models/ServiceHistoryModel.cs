@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace EmergencyManagementSystem.Service.Models
 {
-    public class ServiceHistory
+    public class ServiceHistoryModel
     {
         public long Id { get; set; }
         public DateTime Date { get; set; }
