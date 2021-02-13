@@ -49,18 +49,20 @@ namespace EmergencyManagementSystem.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Update(long id, long addressId)
+        public IActionResult Update(long id)
         {
             if (!ModelState.IsValid)
                 return RedirectToAction(nameof(Index));
 
-            var resultAddress = _addressRest.Find(new AddressFilter { Id = addressId });
+            var result = _employeeRest.Find(new EmployeeFilter { Id = id });
+
+            var resultAddress = _addressRest.Find(new AddressFilter { Id = result.Model.AddressId });
 
             if (!resultAddress.Success)
                 return RedirectToAction(nameof(Index));
 
 
-            var result = _employeeRest.Find(new EmployeeFilter { Id = id });
+            //var result = _employeeRest.Find(new EmployeeFilter { Id = id });
 
             result.Model.AddressModel = resultAddress.Model;
 
