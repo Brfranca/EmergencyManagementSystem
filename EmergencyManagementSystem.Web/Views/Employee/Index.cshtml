@@ -44,9 +44,6 @@
                             </div>
 
                         </div>
-
-
-
                         <div class="table-responsive">
                             <table id="example2" class="table table-bordered table-hover no-wrap" data-name="cool-table">
                                 <thead>
@@ -73,9 +70,6 @@
                                                     <div class="row">
                                                         <div class="col-md-3">
                                                             <a class="btn btn-outline-danger btn-sm" type="button" title="Deletar" href="@Url.Action("Update", "Employee", new { id = item.Id })"><i class="fa fa-trash-o"></i></a>
-                                                            @*<button type="button" class="btn btn-sm btn-outline-danger" data-toggle="tooltip" data-placement="top" href="@Url.Action("")">
-                                                                    <i class="ti-trash" aria-hidden="true"></i>
-                                                                </button>*@
                                                             <a class="btn btn-outline-warning btn-sm" title="Editar" href="@Url.Action("Update", "Employee", new { item.Id, item.AddressId })"><i class="fa fa-pencil"></i></a>
                                                             <a class="btn btn-outline-primary btn-sm" title="Detalhes" href="@Url.Action("Details","Employee", new { id = item.Id })"><i class="fa fa-list"></i></a>
                                                         </div>
@@ -99,7 +93,7 @@
                                 LinkToNextPageFormat = "Próximo",
                             })
                         </div>
-                        <a type="button" class="btn btn-nor bg-purpleTest" @*data-toggle="tooltip" data-placement="top"*@ href="@Url.Action("Register","Employee")">
+                        <a type="button" class="btn btn-nor bg-purpleTest"  href="@Url.Action("Register","Employee")">
                             Novo Funcionário
                             <i class="ti-pencil-alt" aria-hidden="true"></i>
                         </a>
