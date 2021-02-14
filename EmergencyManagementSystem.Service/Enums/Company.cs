@@ -6,9 +6,9 @@ namespace EmergencyManagementSystem.Service.Enums
     {
         [Description("Selecionar")]
         Invalid,
-        [Description("Serviço de Atendimento Móvel de Urgência (SAMU)")]
+        [Description("SAMU")]
         SAMU,
-        [Description("Corpo de bombeiros")]
+        [Description("Bombeiros")]
         FireFighter
     }
 }

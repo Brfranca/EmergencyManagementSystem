@@ -20,12 +20,12 @@ namespace EmergencyManagementSystem.Web.Controllers
             _vehicleRest = vehicleRest;
         }
 
-        public IActionResult Index(VehicleFilter filter)
+        public IActionResult Index(VehicleFilter vehiclefilter)
         {
-            ViewBag.VehicleName = filter.VehicleName;
-            ViewBag.Year = filter.Year;
-            var employees = _vehicleRest.FindPaginated(filter);
-            return View(employees);
+            ViewBag.VehicleName = vehiclefilter.VehicleName;
+            ViewBag.Plate = vehiclefilter.VehiclePlate;
+            var vehicles = _vehicleRest.FindPaginated(vehiclefilter);
+            return View(vehicles);
         }
 
 
@@ -86,9 +86,12 @@ namespace EmergencyManagementSystem.Web.Controllers
             return View(result.Model);
         }
 
-        public IActionResult UpdateStatus()
+        public IActionResult Status(VehicleFilter vehiclefilter)
         {
-            return View(new VehicleModel());
+            ViewBag.Codename = vehiclefilter.Codename;
+            ViewBag.OperationCity = vehiclefilter.OperationCity;
+            var vehicles = _vehicleRest.FindPaginated(vehiclefilter);
+            return View(vehicles);
         }
     }
 }
