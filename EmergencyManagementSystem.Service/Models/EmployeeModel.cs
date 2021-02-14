@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 using EmergencyManagementSystem.Service.Enums;
@@ -15,6 +16,8 @@ namespace EmergencyManagementSystem.Service.Models
         public string Email { get; set; }
         public string CPF { get; set; }
         public string RG { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime BirthDate { get; set; }
         public Company Company { get; set; }
         public string ProfessionalRegistration { get; set; }

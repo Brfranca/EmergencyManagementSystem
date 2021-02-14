@@ -24,45 +24,61 @@
                                     <div id="treeview1" class=""></div>
                                 </div>
                             </div>
-                            <input type="hidden" asp-for="Vehicle.Id" />
-                            <div class="form-group">
-                                <label asp-for="exampleInputEmail1">Nome/Modelo</label>
-                                @Html.EditorFor(model => model.VehicleName, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(d => d.VehicleName, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Placa</label>
-                                @Html.EditorFor(model => model.VehiclePlate, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(d => d.VehiclePlate, "", new { @class = "text-danger" })
+                            <input type="hidden" asp-for="Id" name="Id" value="@Model.Id" />
+                            <input type="hidden" asp-for="VehicleStatus" name="VehicleStatus" value="@Model.VehicleStatus" />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group has-feedback">
+                                        <label for="exampleInputEmail1">Nome/Modelo</label>
+                                        @Html.EditorFor(model => model.VehicleName, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(d => d.VehicleName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group has-feedback">
+                                        <label for="exampleInputPassword1">Placa</label>
+                                        @Html.EditorFor(model => model.VehiclePlate, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(d => d.VehiclePlate, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group has-feedback">
+                                        <label for="exampleInputEmail1">Ano</label>
+                                        @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(d => d.Year, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group has-feedback">
+                                        <label for="location1">Tipo do Veículo</label>
 
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Ano</label>
-                                @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(d => d.Year, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-group">
-                                <label for="location1">Tipo do Veículo</label>
+                                        @{ string[] vehicleType = Enum.GetNames(typeof(EmergencyManagementSystem.Service.Enums.VehicleType)); }
 
-                                <select class="form-control" name="VehicleType" id="VehicleType">
-                                    @foreach (EmergencyManagementSystem.Service.Enums.VehicleType suit in (EmergencyManagementSystem.Service.Enums.VehicleType[])Enum.GetValues(typeof(EmergencyManagementSystem.Service.Enums.VehicleType)))
-                                    {
-                                        suit.GetEnumDescription();
-                                        <option value="@suit" @(suit == (Model?.VehicleType ?? 0) ? "Selected" : "")>@suit.GetEnumDescription()</option>
-                                    }
-                                </select>
-                                @Html.ValidationMessageFor(d => d.VehicleType, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-group">
-                                <label for="location1">Tipo do Veículo</label>
-                                <select class="form-control" name="VehicleStatus" id="VehicleStatus">
-                                    @foreach (EmergencyManagementSystem.Service.Enums.VehicleStatus suit in (EmergencyManagementSystem.Service.Enums.VehicleStatus[])Enum.GetValues(typeof(EmergencyManagementSystem.Service.Enums.VehicleStatus)))
-                                    {
-                                        suit.GetEnumDescription();
-                                        <option value="@suit" @(suit == (Model?.VehicleStatus ?? 0) ? "Selected" : "")>@suit.GetEnumDescription()</option>
-                                    }
-                                </select>
-                                @Html.ValidationMessageFor(d => d.VehicleStatus, "", new { @class = "text-danger" })
+                                        <select class="form-control" name="VehicleType" id="VehicleType">
+                                            @foreach (EmergencyManagementSystem.Service.Enums.VehicleType suit in (EmergencyManagementSystem.Service.Enums.VehicleType[])Enum.GetValues(typeof(EmergencyManagementSystem.Service.Enums.VehicleType)))
+                                            {
+                                                suit.GetEnumDescription();
+                                                <option value="@suit" @(suit == (Model?.VehicleType ?? 0) ? "Selected" : "")>@suit.GetEnumDescription()</option>
+                                            }
+
+                                        </select>
+                                        @Html.ValidationMessageFor(d => d.VehicleType, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group has-feedback">
+                                        <label for="exampleInputPassword1">Cidade</label>
+                                        @Html.EditorFor(model => model.OperationCity, new { htmlAttributes = new { @class = "form-control", @placeholder = "Onde o veículo vai atuar" } })
+                                        @Html.ValidationMessageFor(d => d.OperationCity, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group has-feedback">
+                                        <label for="exampleInputEmail1">Codinome</label>
+                                        @Html.EditorFor(model => model.Codename, new { htmlAttributes = new { @class = "form-control", @placeholder = "USB01, USA01..." } })
+                                        @Html.ValidationMessageFor(d => d.Codename, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
