@@ -89,7 +89,7 @@ namespace EmergencyManagementSystem.Web.Controllers
             if (!result.Success)
                 ModelState.AddModelError("Id", "Erro ao remover funcionário");
 
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
     }
 }

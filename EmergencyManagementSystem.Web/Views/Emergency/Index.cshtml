@@ -92,7 +92,7 @@
 
                                             <div class="row">
                                                 <div class="col-md-5">
-                                                    <button type="button" class="btn btn-sm bg-purpleTest" onclick="AdicionarPaciente('patient', 'patientList')"><i class="fa fa-plus-circle"></i> Paciente</button>
+                                                    <button type="button" class="btn btn-sm bg-purpleTest" onclick="AddPatients('patient', 'patientList')"><i class="fa fa-plus-circle"></i> Paciente</button>
                                                 </div>
                                             </div>
 
@@ -211,47 +211,157 @@
                                         @*TESTE*@
                                         <div class="card tab-style1">
                                             <!-- Nav tabs -->
-                                            <ul class="nav nav-tabs profile-tab" role="tablist">
-                                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#patient-1" role="tab" aria-expanded="true">Paciente1</a> </li>
-                                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#patient-2" role="tab" aria-expanded="false">Paciente2</a> </li>
+                                            <ul class="nav nav-tabs profile-tab" role="tablist" id="navsPatient">
+                                                <li class="nav-item" id="navPatient-1"> <a class="nav-link active" data-toggle="tab" href="#patient-1" role="tab" aria-expanded="true">Paciente</a> </li>
+
+                                                @*<li class="nav-item" id="navPatient"> <a class="nav-link" data-toggle="tab" href="#patient-2" role="tab" aria-expanded="false">Paciente</a> </li>*@
+
+                                                <li class="nav-item" id="navAddPatients"><a onclick="AddPatientsTab()" class="nav-link" data-toggle="tab" role="tab" aria-expanded="true" href="#patient-1"><i class="fa fa-plus-circle"></i></a></li>
+
                                             </ul>
 
+
                                             <!-- First tab -->
-                                            <div class="tab-content">
-                                                <div class="tab-pane active" id="patient-1" role="tabpanel" aria-expanded="true">
+                                            <div class="tab-content" id="tabsPatient">
+
+                                                @*<div id="patient">*@
+
+                                                <div class="tab-pane active" role="tabpanel" aria-expanded="true" id="patient-1">
                                                     <div class="row m-t-3-1">
                                                         <div class="col-lg-12">
                                                             <div class="card-body">
                                                                 <form>
 
-                                                                    <div id="patientList2">
-                                                                        <div id="patient2">
+                                                                    <div class="form-group">
+                                                                        <label for="exampleinputemail1">Paciente</label>
+                                                                        <input type="text" class="form-control" id="exampleinputemail1" placeholder="Nome">
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
                                                                             <div class="form-group">
-                                                                                <label for="exampleinputemail1">Paciente</label>
-                                                                                <input type="text" class="form-control" id="exampleinputemail1" placeholder="Nome">
+                                                                                <label for="location1">Sexo</label>
+                                                                                <select class="custom-select form-control" id="location1" name="location">
+                                                                                    <option value="">Selecione</option>
+                                                                                    <option value="">Indeterminado</option>
+                                                                                    <option value="">Feminino</option>
+                                                                                    <option value="">Masculino</option>
+                                                                                </select>
                                                                             </div>
-                                                                            <div class="row">
-                                                                                <div class="col-md-6">
-                                                                                    <div class="form-group">
-                                                                                        <label for="location1">Sexo</label>
-                                                                                        <select class="custom-select form-control" id="location1" name="location">
-                                                                                            <option value="">Selecione</option>
-                                                                                            <option value="">Indeterminado</option>
-                                                                                            <option value="">Feminino</option>
-                                                                                            <option value="">Masculino</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-md-6">
-                                                                                    <div class="form-group has-feedback">
-                                                                                        <label class="control-label">Idade</label>
-                                                                                        <input class="form-control" placeholder="00" type="number">
-                                                                                    </div>
-                                                                                </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group has-feedback">
+                                                                                <label class="control-label">Idade</label>
+                                                                                <input class="form-control" placeholder="00" type="number">
                                                                             </div>
                                                                         </div>
                                                                     </div>
 
+                                                                    <div class="card-group align-items-center">
+                                                                        <div class="col-1-5">
+                                                                            <div class="form-group has-feedback">
+                                                                                <label class="control-label">PA</label>
+                                                                                <input class="form-control" type="text" id="PA-1">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-1-5">
+                                                                            <div class="form-group has-feedback">
+                                                                                <label class="control-label">FC</label>
+                                                                                <input class="form-control" type="text" id="FC-1">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-1-5">
+                                                                            <div class="form-group has-feedback">
+                                                                                <label class="control-label">FR</label>
+                                                                                <input class="form-control" type="text" id="FR-1">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-1-5">
+                                                                            <div class="form-group has-feedback">
+                                                                                <label class="control-label">Temp</label>
+                                                                                <input class="form-control" type="text" id="Temp-1">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-1-5">
+                                                                            <div class="form-group has-feedback">
+                                                                                <label class="control-label">SatO2</label>
+                                                                                <input class="form-control" type="text" id="Sat02-1">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-1-5">
+                                                                            <div class="form-group has-feedback">
+                                                                                <label class="control-label">HGT</label>
+                                                                                <input class="form-control" type="text" id="HGT-1">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-1-5">
+                                                                            <div class="form-group">
+                                                                                <label class="control-label">Glasgow</label>
+                                                                                <input class="form-control" type="text" id="Glasgow-1"> 
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-1-5">
+                                                                            <a class="btn btn-nor bg-purpleTest" onclick="ConcatFields(1)"><i class="fa fa-plus-circle"></i></a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+
+                                                                            <div class="form-group has-feedback">
+                                                                                <label class="control-label">Avaliação Médica</label>
+                                                                                <textarea class="form-control" id="placeTextarea" rows="3"></textarea>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+
+                                                                        <!-- arrumar -->
+                                                                        <div class="col-md-5">
+                                                                            <button type="button" class="btn btn-sm bg-purpleTest" onclick=""><i class="fa fa-save"></i> Gravar</button>
+                                                                        </div>
+                                                                    </div>
+
+
+
+                                                                </form>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @*</div>*@
+
+
+                                                @* tab limpa para replicar*@
+                                                <div hidden class="tab-pane" id="tabExample" role="tabpanel" aria-expanded="false">
+
+                                                    <div class="row m-t-3-1">
+                                                        <div class="col-lg-12">
+                                                            <div class="card-body">
+                                                                <form>
+
+                                                                    <div class="form-group">
+                                                                        <label for="exampleinputemail1">Paciente</label>
+                                                                        <input type="text" class="form-control" id="exampleinputemail1" placeholder="Nome">
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label for="location1">Sexo</label>
+                                                                                <select class="custom-select form-control" id="location1" name="location">
+                                                                                    <option value="">Selecione</option>
+                                                                                    <option value="">Indeterminado</option>
+                                                                                    <option value="">Feminino</option>
+                                                                                    <option value="">Masculino</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group has-feedback">
+                                                                                <label class="control-label">Idade</label>
+                                                                                <input class="form-control" placeholder="00" type="number">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
 
                                                                     <div class="card-group align-items-center">
                                                                         <div class="col-1-5">
@@ -311,14 +421,10 @@
                                                                     </div>
                                                                     <div class="row">
 
-                                                                        <!-- arrumar -->
                                                                         <div class="col-md-5">
-                                                                            <button type="button" class="btn btn-sm bg-purpleTest" onclick="AdicionarPaciente2('patient2', 'patientList2')"><i class="fa fa-save"></i> Gravar</button>
+                                                                            <button type="button" class="btn btn-sm bg-purpleTest" onclick=""><i class="fa fa-save"></i> Gravar</button>
                                                                         </div>
                                                                     </div>
-
-
-
                                                                 </form>
                                                             </div>
 
@@ -327,60 +433,13 @@
                                                 </div>
 
 
-                                                <!--second tab-->
-                                                <div class="tab-pane" id="patient-2" role="tabpanel" aria-expanded="false">
+                                            </div> @*Final TabContent
 
-                                                    <div class="row m-t-3-1">
-                                                        <div class="col-lg-12">
-                                                            <div class="card-body">
-                                                                <form>
-                                                                    <div id="patientList3">
-
-                                                                        <div id="patient3">
-                                                                            <div class="form-group">
-                                                                                <label for="exampleinputemail1">Paciente</label>
-                                                                                <input type="text" class="form-control" id="exampleinputemail1" placeholder="Nome">
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="col-md-6">
-                                                                                    <div class="form-group">
-                                                                                        <label for="location1">Sexo</label>
-                                                                                        <select class="custom-select form-control" id="location1" name="location">
-                                                                                            <option value="">Selecione</option>
-                                                                                            <option value="">Indeterminado</option>
-                                                                                            <option value="">Feminino</option>
-                                                                                            <option value="">Masculino</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-md-6">
-                                                                                    <div class="form-group has-feedback">
-                                                                                        <label class="control-label">Idade</label>
-                                                                                        <input class="form-control" placeholder="00" type="number">
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-
-                                                                        </div>
-                                                                    </div>
-
-
-
-                                                                    <div class="row">
-                                                                        <div class="col-md-5">
-                                                                            <button type="button" class="btn btn-sm bg-purpleTest" onclick="AdicionarPaciente3"><i class="fa fa-plus-circle"></i> Paciente</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                 </div>
+                                                <br>
+                                                @*TESTE FINAl*@
 
-                                            </div> @*Final TabContent*@
                                         </div>
-                                        <br>
-                                        @*TESTE FINAl*@
                                         <div class="row pull-right">
                                             <div class="col-md-5">
                                                 <button type="button" class="btn btn-sm bg-purpleTest" onclick="AdicionarPaciente3()"><i class="fa fa-plus-circle"></i> Paciente</button>
@@ -620,17 +679,47 @@
 <script src="~/js/maps.js"></script>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
-<script>
+<script> //Cuidado ao mexer
 
-    function AdicionarPaciente(idPatient, idpatientList) {
+    function AddPatients(idPatient, idpatientList) {
 
         var patient = $('#' + idPatient).html();
         $('#' + idpatientList).append(patient);
 
     }
+    var numberPacient = 1; //Variável deve receber a quantidade de paciente do back-end
+
+    function AddPatientsTab() {
+
+        numberPacient += 1;
+
+        var navAddPatients = '<li class="nav-item" id="navAddPatients"><a onclick="AddPatientsTab()" class="nav-link" data-toggle="tab" role="tab" aria-expanded="true" href="#patient-1"><i class="fa fa-plus-circle"></i></a></li>';
+
+        var navPatient = '<li class="nav-item"> <a id="navPatient" class="nav-link" data-toggle="tab" href="#patient" role="tab" aria-expanded="false">Paciente</a> </li>';
+
+        navPatient = navPatient.replace('#patient', '#patient-' + numberPacient)
+            .replace('navPatient', 'navPatient-' + numberPacient);
+
+        $('#navAddPatients').remove();
+        $('#navsPatient').append(navPatient);
+        $('#navsPatient').append(navAddPatients);
+
+        var tab = $('#tabExample').html();
+
+        tab = '<div class="tab-pane" id="patient-2" role="tabpanel" aria-expanded="false">' + tab + '</div>';
+        tab = tab.replace('patient-2', 'patient-' + numberPacient);
+
+        $('#tabsPatient').append(tab);
+        window.setTimeout(SelectTab, 100);
+    }
+
+    function SelectTab(){
+        $('#navPatient-' + numberPacient).click();
+
+    }
 
     function Pesquisar() {
-        window.setTimeout(PesquisarTeste, 2000);
+        window.setTimeout(PesquisarTeste, 1000);
     }
 
     function PesquisarTeste() {
@@ -641,3 +730,5 @@
         google.maps.event.trigger(this, 'focus', {});
     }
 </script>
+
+

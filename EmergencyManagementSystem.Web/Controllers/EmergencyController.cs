@@ -35,10 +35,5 @@ namespace EmergencyManagementSystem.Web.Controllers
         {
             return View();
         }
-
-        public IActionResult Maps()
-        {
-            return View();
-        }
     }
 }
