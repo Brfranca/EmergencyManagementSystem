@@ -65,6 +65,20 @@
                                         @Html.ValidationMessageFor(d => d.VehicleType, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group has-feedback">
+                                        <label for="exampleInputPassword1">Cidade</label>
+                                        @Html.EditorFor(model => model.OperationCity, new { htmlAttributes = new { @class = "form-control", @placeholder = "Onde o veículo vai atuar" } })
+                                        @Html.ValidationMessageFor(d => d.OperationCity, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group has-feedback">
+                                        <label for="exampleInputEmail1">Codinome</label>
+                                        @Html.EditorFor(model => model.Codename, new { htmlAttributes = new { @class = "form-control", @placeholder = "USB01, USA01..." } })
+                                        @Html.ValidationMessageFor(d => d.Codename, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="card-body">
