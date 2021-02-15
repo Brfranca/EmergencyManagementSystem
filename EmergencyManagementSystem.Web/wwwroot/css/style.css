@@ -4339,7 +4339,7 @@ table.text-center, table.text-center td, table.text-center th {
     -o-transform: translate(0, 0);
     transform: translate(0, 0);
     padding: 10px;
-    height: 505px;
+    height: 130px;
     overflow: auto
 }
 
@@ -4953,8 +4953,13 @@ table.text-center, table.text-center td, table.text-center th {
     }
 
 .login-page, .register-page {
-    background: url(../img/body-bg.jpg) no-repeat center top;
+    background: url(/css/Filtered_Medical_Background.png) no-repeat center top;
     background-size: cover;
+}
+
+.minhaCor {
+    background-color: #242A33;
+
 }
 
     .login-page.sty1, .register-page.sty1 {
@@ -4982,7 +4987,7 @@ table.text-center, table.text-center td, table.text-center th {
 }
 
 .login-box-body, .register-box-body {
-    background: #fff;
+    background: #242A33;
     padding: 20px;
     border-top: 0;
     color: #666;
@@ -4993,10 +4998,10 @@ table.text-center, table.text-center td, table.text-center th {
         border-radius: 0px;
         height: 100%;
         padding-top: 15%;
-    }
+        }
 
     .login-box-body .form-control-feedback, .register-box-body .form-control-feedback {
-        color: #777
+        color: #777;
     }
 
 .login-box-msg, .register-box-msg {

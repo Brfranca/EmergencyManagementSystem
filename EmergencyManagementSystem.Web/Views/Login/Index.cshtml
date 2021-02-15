@@ -32,13 +32,13 @@
                 }
 
                 <div class="form-group has-feedback">
-                    <input type="text" name="Login" class="form-control sty1" placeholder="Usuário" value="@Model.Login" required
+                    <input type="text" name="Login" class="form-control sty1 minhaCor" placeholder="Usuário" value="@Model.Login" required
                            oninvalid="this.setCustomValidity('Favor digite o login.')"
                            oninput="this.setCustomValidity('')">
 
                 </div>
                 <div class="form-group has-feedback">
-                    <input type="password" name="Password" class="form-control sty1" placeholder="Senha" id="senha" value="@Model.Password" required
+                    <input type="password" name="Password" class="form-control sty1 minhaCor" placeholder="Senha" id="senha" value="@Model.Password" required
                            oninvalid="this.setCustomValidity('Favor digite a senha.')"
                            oninput="this.setCustomValidity('')">
                 </div>
@@ -59,17 +59,8 @@
                     <!-- /.col -->
                 </div>
             </form>
-
-            <!-- <div class="social-auth-links text-center"> -->
-            <!-- <p>- OR -</p> -->
-            <!-- <a href = "#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using -->
-            <!-- Facebook</a> <a href = "#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using -->
-            <!-- Google+</a> </div> -->
-            <!-- /.social-auth-links -->
-            @*<div class="m-t-2">Deseja criar sua conta? <a href="pages-register.html" class="text-center">Registrar-se</a></div>*@
         </div>
     </div>
-
 </body>
 </html>
 

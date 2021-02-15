@@ -433,49 +433,78 @@
                                                 </div>
                                             </div>
 
-                                            @*endTab*@
-
                                         </div>
 
-                                        <br />
 
-                                        <h5 class="text-white">Histórico de Avaliação Médica</h5>
 
-                                        <div class="table-responsive">
-                                            <table id="example2" class="table table-bordered table-hover no-wrap" data-name="cool-table">
+
+                                        @*<table id="" class="table table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th>Data</th>
-                                                        <th>Profissional</th>
-                                                        <th>Avaliação</th>
+                                                        <th class="wt20">Data</th>
+                                                        <th class="wt20">Profissional</th>
+                                                        <th class="wt19">Paciente</th>
+                                                        <th class="wt41">Avaliação</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
-                                                    @*@foreach (var item in Model)
-                                                        {
-                                                            <tr>
-                                                                <td>@item.Data/Hora</td>
-                                                                <td>@item.Profissional</td>
-                                                                <td>@item.Avaliação</td>
-                                                            </tr>
-                                                        }*@
+                                            </table>*@
+                                        <div class="box-header with-border">
+                                            <h5 class="box-title text-white">
+                                                Histórico de Avaliação Médica
+                                            </h5>
+                                        </div>
+                                        <div class="direct-chat-messages">
+                                            <table id="" class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="wt20">Data</th>
+                                                        <th class="wt20">Profissional</th>
+                                                        <th class="wt20">Paciente</th>
+                                                        <th class="wt40">Avaliação</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="">
+                                                    <tr>
+                                                        <td class="wt20">Hora</td>
+                                                        <td class="wt20">Profissional</td>
+                                                        <td class="wt20">Paciente</td>
+                                                        <td class="wt40">Avaliação</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="wt20">Hora</td>
+                                                        <td class="wt20">Profissional</td>
+                                                        <td class="wt20">Paciente</td>
+                                                        <td class="wt40">Avaliação</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="wt20">Hora</td>
+                                                        <td class="wt20">Profissional</td>
+                                                        <td class="wt20">Paciente</td>
+                                                        <td class="wt40">Avaliação</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="wt20">Hora</td>
+                                                        <td class="wt20">Profissional</td>
+                                                        <td class="wt20">Paciente</td>
+                                                        <td class="wt40">Avaliação</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="wt20">Hora</td>
+                                                        <td class="wt20">Profissional</td>
+                                                        <td class="wt20">Paciente</td>
+                                                        <td class="wt40">Avaliação</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="wt20">Hora</td>
+                                                        <td class="wt20">Profissional</td>
+                                                        <td class="wt20">Paciente</td>
+                                                        <td class="wt40">Avaliação</td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
-
-                                            @*@Html.PagedListPager(Model, page =>
-                                                Url.Action("Index", new { CurrentPage = page, Name = ViewBag.Name, CPF = ViewBag.CPF }),
-                                                new PagedListRenderOptionsBase
-                                                {
-                                                    ContainerDivClasses = new[] { "dataTables_paginate paging_simple_numbers" },
-                                                    ActiveLiElementClass = "paginate_button active",
-                                                    PageClasses = new[] { "page-link" },
-                                                    UlElementClasses = new[] { "pagination" },
-                                                    LinkToPreviousPageFormat = "Voltar",
-                                                    LinkToNextPageFormat = "Próximo",
-                                                })*@
                                         </div>
-                                        <hr />
 
+                                        <hr />
 
                                         <h5 class="text-white">Painel de decisões médicas</h5>
 
@@ -486,6 +515,46 @@
                                             <a id="btnRegister" class="btn btn-block btn-default">Solicitar Apoio SAMU</a>
                                             <a id="btnCancel" class="btn btn-block btn-default">Repasse Bombeiro</a>
                                             <a id="btnCancel" class="btn btn-block btn-default">Repasse SAMU</a>
+                                        </div>
+
+
+                                        <div class="box-header with-border">
+                                            <h5 class="box-title text-white">
+                                                Histórico de Decisóes Médica
+                                            </h5>
+                                        </div>
+
+
+                                        <table id="" class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th class="wt20">Data</th>
+                                                    <th class="wt20">Profissional</th>
+                                                    <th class="wt19">Paciente</th>
+                                                    <th class="wt41">Avaliação</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                        <div class="direct-chat-messages">
+
+                                            <table id="" class="table table-bordered">
+                                                <thead hidden>
+                                                    <tr>
+                                                        <th class="wt20">Data</th>
+                                                        <th class="wt20">Profissional</th>
+                                                        <th class="wt20">Paciente</th>
+                                                        <th class="wt40">Avaliação</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="">
+                                                    <tr>
+                                                        <td class="wt20">Hora</td>
+                                                        <td class="wt20">Profissional</td>
+                                                        <td class="wt20">Paciente</td>
+                                                        <td class="wt40">Avaliação</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
 
                                         <hr />
@@ -566,23 +635,43 @@
                                         </div>
                                         <hr />
 
-                                        <div class="row">
-                                            <div class="col-md-12">
-
-                                                <div class="form-group has-feedback">
-                                                    <label class="control-label">Histórico de Veiculos Enviados//Talvez criar na terceira aba</label>
-                                                </div>
-                                            </div>
+                                        <div class="box-header with-border">
+                                            <h5 class="box-title text-white">
+                                                Histórico de Veiculos Enviados
+                                            </h5>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
 
-                                                <div class="form-group has-feedback">
-                                                    <label class="control-label">Histórico de Decisões Médicas??// Talvez criar na terceira aba</label>
-                                                    <label class="control-label">Revisar o enum sobre o fechamento de ocorrência caso o médico encerre a ocorrencia</label>
 
-                                                </div>
-                                            </div>
+                                        <table id="" class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th class="wt20">Data</th>
+                                                    <th class="wt20">Profissional</th>
+                                                    <th class="wt19">Paciente</th>
+                                                    <th class="wt41">Avaliação</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                        <div class="direct-chat-messages">
+
+                                            <table id="" class="table table-bordered">
+                                                <thead hidden>
+                                                    <tr>
+                                                        <th class="wt20">Data</th>
+                                                        <th class="wt20">Profissional</th>
+                                                        <th class="wt20">Paciente</th>
+                                                        <th class="wt40">Avaliação</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="">
+                                                    <tr>
+                                                        <td class="wt20">Hora</td>
+                                                        <td class="wt20">Profissional</td>
+                                                        <td class="wt20">Paciente</td>
+                                                        <td class="wt40">Avaliação</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
 
                                     </div><!--ACaba card body da pagina-->
@@ -656,14 +745,32 @@
     <!-- Main row -->
 </div>
 
+<style>
+</style>
+
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClYGY0602EMNEOdHTFm0UWoisuKoF73u4&region=BR&language=pt&callback=initAutocomplete&libraries=places&v=weekly"></script>
 <link href="~/css/maps.css" rel="stylesheet" />
 <script src="~/js/maps.js"></script>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
-<script>    
+<script>
     //Cuidado ao mexer
+
+    $(function () {
+        $('#example1').DataTable()
+        $('#example2').DataTable({
+            'paging': false,
+            'lengthChange': false,
+            'searching': false,
+            'ordering': false,
+            'info': false,
+            'autoWidth': false,
+            'scrollY': "200px",
+            'scrollCollapse': true,
+            'responsive': true
+        })
+    })
 
     function ConcatFields(idPatient) {
 
@@ -761,7 +868,7 @@
         $('#btnRegister').attr('disabled', true);
         $("#cancel").removeClass();
     }
-S
+    S
 
     function Pesquisar() {
         window.setTimeout(PesquisarTeste, 1000);
