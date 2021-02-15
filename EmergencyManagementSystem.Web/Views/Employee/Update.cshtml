@@ -1,7 +1,5 @@
 ﻿@model EmergencyManagementSystem.Service.Models.EmployeeModel
 @using EmergencyManagementSystem.Service.Models
-
-
 @{
     ViewData["Title"] = "Update";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -10,9 +8,8 @@
 @Html.AntiForgeryToken()
 
 <div class="content-header sty-one">
-    <h1 class="text-white">Cadastro de Funcionário</h1>
+    <h1 class="text-white">Atualização de Funcionário</h1>
 </div>
-
 @using (Html.BeginForm())
 {
     <div class="content">
@@ -42,21 +39,21 @@
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
                                         <label for="exampleInputEmail1">Data de nascimento</label>
-                                        @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly"} })
                                         @Html.ValidationMessageFor(d => d.BirthDate, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
                                         <label for="exampleInputEmail1">CPF</label>
-                                        @Html.EditorFor(model => model.CPF, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.EditorFor(model => model.CPF, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                                         @Html.ValidationMessageFor(d => d.CPF, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
                                         <label for="exampleInputEmail1">RG</label>
-                                        @Html.EditorFor(model => model.RG, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.EditorFor(model => model.RG, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                                         @Html.ValidationMessageFor(d => d.RG, "", new { @class = "text-danger" })
                                     </div>
                                 </div>

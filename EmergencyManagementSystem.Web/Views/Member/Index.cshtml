@@ -1,14 +1,14 @@
-﻿@using EmergencyManagementSystem.Service.Models
+﻿@*@using EmergencyManagementSystem.Service.Models
 @using X.PagedList.Mvc.Core
 @using X.PagedList.Web.Common
-@model X.PagedList.IPagedList<EmployeeModel>
+@model X.PagedList.IPagedList<MemberModel>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
 <div class="content-header sty-one">
-    <h1 class="text-white">Funcionários</h1>
+    <h1 class="text-white">Membros</h1>
 </div>
 <form>
 
@@ -20,20 +20,20 @@
                         <div class="right-page-header">
                             <div class="d-flex">
                                 <div class="align-self-center">
-                                    <h4 class="text-white m-b-1">Funcionários Cadastrados</h4>
+                                    <h4 class="text-white m-b-1">Veículos Cadastrados</h4>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group-sm">
-                                    <input id="demo-input-search2" name="employeeFilter.Name" placeholder="Nome" class="form-control" type="text" value="@ViewBag.Name">
+                                    <input id="demo-input-search2" name="vehicleFilter.VehicleName" placeholder="Nome/Modelo" class="form-control" type="text" value="@ViewBag.VehicleName">
                                 </div>
                             </div>
 
                             <div class="col-md-2">
                                 <div class="form-group-sm">
-                                    <input id="demo-input-search2" name="employeeFilter.CPF" placeholder="CPF" class="form-control" type="text" value="@ViewBag.CPF">
+                                    <input id="demo-input-search2" name="vehicleFilter.VehiclePlate" placeholder="Placa" class="form-control" type="text" value="@ViewBag.VehiclePlate">
                                 </div>
                             </div>
 
@@ -42,17 +42,19 @@
                                     <input type="submit" class="btn btn-secondary btn-nor" value="Pesquisar" />
                                 </div>
                             </div>
-
                         </div>
+
+
                         <div class="table-responsive">
                             <table id="example2" class="table table-bordered table-hover no-wrap" data-name="cool-table">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Nome</th>
-                                        <th>Telefone</th>
-                                        <th>Email</th>
-                                        <th>Coorporação</th>
+                                        <th>Nome/Modelo</th>
+                                        <th>Placa</th>
+                                        <th>Ano</th>
+                                        <th>Situação</th>
+                                        <th>Tipo de veículo</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -61,17 +63,18 @@
                                     {
                                         <tr>
                                             <td>@item.Id</td>
-                                            <td>@item.Name</td>
-                                            <td>@item.Telephone</td>
-                                            <td>@item.Email</td>
-                                            <td>@item.Company.GetEnumDescription()</td>
+                                            <td>@item.VehicleName</td>
+                                            <td>@item.VehiclePlate</td>
+                                            <td>@item.Year</td>
+                                            <td>@item.VehicleStatus.GetEnumDescription()</td>
+                                            <td>@item.VehicleType.GetEnumDescription()</td>
                                             <td class="jsgrid-cell jsgrid-control-field jsgrid-align-center" style="width: 50px;">
                                                 <span class="pull-right">
                                                     <div class="row">
                                                         <div class="col-md-3">
-                                                            <a class="btn btn-outline-danger btn-sm" type="button" title="Deletar" href="@Url.Action("Update", "Employee", new { id = item.Id })"><i class="fa fa-trash-o"></i></a>
-                                                            <a class="btn btn-outline-warning btn-sm" title="Editar" href="@Url.Action("Update", "Employee", new { item.Id, item.AddressId })"><i class="fa fa-pencil"></i></a>
-                                                            <a class="btn btn-outline-primary btn-sm" title="Detalhes" href="@Url.Action("Details","Employee", new { id = item.Id })"><i class="fa fa-list"></i></a>
+                                                            <button class="btn btn-outline-danger btn-sm" type="button" title="Deletar"><i class="fa fa-trash-o"></i></button>
+                                                            <a class="btn btn-outline-warning btn-sm" title="Editar" href="@Url.Action("Update", "Vehicle", new { id = item.Id })"><i class="fa fa-pencil"></i></a>
+                                                            <a class="btn btn-outline-primary btn-sm" title="Detalhes" href="@Url.Action("Details","Vehicle", new { id = item.Id })"><i class="fa fa-list"></i></a>
                                                         </div>
                                                     </div>
                                                 </span>
@@ -82,19 +85,15 @@
                             </table>
 
                             @Html.PagedListPager(Model, page =>
-                            Url.Action("Index", new { CurrentPage = page, Name = ViewBag.Name, CPF = ViewBag.CPF }),
-                            new PagedListRenderOptionsBase
-                            {
-                                ContainerDivClasses = new[] { "dataTables_paginate paging_simple_numbers" },
-                                ActiveLiElementClass = "paginate_button active",
-                                PageClasses = new[] { "page-link" },
-                                UlElementClasses = new[] { "pagination" },
-                                LinkToPreviousPageFormat = "Voltar",
-                                LinkToNextPageFormat = "Próximo",
-                            })
+                                    Url.Action("Index", new { CurrentPage = page, VehicleName = ViewBag.VehicleName, VehiclePlate = ViewBag.VehiclePlate }),
+                                    new PagedListRenderOptionsBase
+                                    {
+                                        LiElementClasses = new string[] { "page-item" },
+                                        PageClasses = new string[] { "page-link" }
+                                    })
                         </div>
-                        <a type="button" class="btn btn-nor bg-purpleTest"  href="@Url.Action("Register","Employee")">
-                            Novo Funcionário
+                        <a type="button" class="btn btn-nor bg-purpleTest" href="@Url.Action("Register","Vehicle")">
+                            Novo Veículo
                             <i class="ti-pencil-alt" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -102,7 +101,6 @@
             </div>
         </div>
     </div>
-
 </form>
 
 <script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
@@ -120,4 +118,4 @@
             'autoWidth': false
         })
     })
-</script>
+</script>*@

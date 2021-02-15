@@ -3,10 +3,6 @@ using EmergencyManagementSystem.Service.Interfaces;
 using EmergencyManagementSystem.Service.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace EmergencyManagementSystem.Web.Controllers
 {
@@ -64,6 +60,7 @@ namespace EmergencyManagementSystem.Web.Controllers
         [HttpPost]
         public IActionResult Update(VehicleModel vehicleModel)
         {
+
             if (!ModelState.IsValid)
                 return View(vehicleModel);
 
