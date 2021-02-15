@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 using EmergencyManagementSystem.Service.Enums;
+using Newtonsoft.Json;
 
 namespace EmergencyManagementSystem.Service.Models
 {
@@ -40,6 +41,8 @@ namespace EmergencyManagementSystem.Service.Models
         {
             AddressModel = new AddressModel();
         }
+
+      
     }
 
     public static class Utils

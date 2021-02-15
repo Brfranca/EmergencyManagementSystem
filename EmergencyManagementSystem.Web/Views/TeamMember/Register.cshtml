@@ -1,4 +1,10 @@
-﻿@{
+﻿@model EmergencyManagementSystem.Service.Models.TeamMemberModel
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+@using EmergencyManagementSystem.Service.Models
+
+
+@{
     ViewData["Title"] = "Register";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -22,15 +28,7 @@
         <!-- Google Font -->
         @*<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">*@
 
-        <!-- Theme style -->
-        @*<link rel="stylesheet" href="~/css/style.css">*@    @*deixa a escrita na tabela na cor branca *@
-        <link rel="stylesheet" href="~/css/font-awesome/css/font-awesome.min.css">
-        <link rel="stylesheet" href="~/css/et-line-font/et-line-font.css">
-        <link rel="stylesheet" href="~/css/themify-icons/themify-icons.css">
 
-        <!-- jsgrid Tables -->
-        <link type="text/css" rel="stylesheet" href="~/plugins/jsgrid/jsgrid.css" />
-        <link type="text/css" rel="stylesheet" href="~/plugins/jsgrid/theme.css" />
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -42,11 +40,11 @@
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         @*<div class="wrapper boxed-wrapper">*@
-        <header class="main-header">
+        <!--<header class="main-header">
             <!-- Logo -->
-            <!-- Header Navbar: style can be found in header.less -->
-            @*<nav class="navbar blue-bg navbar-static-top">*@
-            <!-- Sidebar toggle button-->
+            <!-- Header Navbar: style can be found in header.less -->-->
+            <!--@*<nav class="navbar blue-bg navbar-static-top">*@-->
+            <!--<!-- Sidebar toggle button-->
             <!--<div class="pull-right search-box">
             <form action="#" method="get" class="search-form">
                 <div class="input-group">
@@ -56,9 +54,9 @@
                 </div>
             </form>-->
             <!-- search form -->
-            <!--</div>-->
-            @*</nav>*@
-        </header>
+            <!--</div>-->-->
+            <!--@*</nav>*@
+        </header>-->
         <!-- Left side column. contains the logo and sidebar -->
         <!-- Content Wrapper. Contains page content -->
         @*<div class="content-wrapper">*@
@@ -76,30 +74,130 @@
         <div class="content">
             <div class="info-box">
                 <h4 class="text-black">Editable with Datatable</h4>
-                <div id="basicscenario"></div>
+                <div id="basicscenario" class="jsgrid">
+                    <div class="jsgrid-grid-header jsgrid-header-scrollbar">
+                        <table class="jsgrid-table table table-striped table-hover">
+                            <tr class="jsgrid-header-row">
+                                <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable">ID</th>
+                                <th class="jsgrid-header-cell jsgrid-header-sortable">Nome</th>
+                                <th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable">Ocupação</th>
+                                <th class="jsgrid-header-cell jsgrid-align-center">Is Married</th>
+                                <th class="jsgrid-header-cell jsgrid-control-field jsgrid-align-center"></th>
+                            </tr>
+                            <tr class="jsgrid-filter-row">
+                                <td class="jsgrid-cell">
+                                    <input type="number" class="form-control input-sm">
+                                </td>
+                                <td class="jsgrid-cell jsgrid-align-right">
+                                    <input type="text" class="form-control input-sm">
+                                </td>
+                                <td class="jsgrid-cell jsgrid-align-center">
+                                    <select class="form-control input-sm">
+                                        @foreach (EmergencyManagementSystem.Service.Enums.Occupation suit in (EmergencyManagementSystem.Service.Enums.Occupation[])Enum.GetValues(typeof(EmergencyManagementSystem.Service.Enums.Occupation)))
+                                        {
+                                            suit.GetEnumDescription();
+                                            <option value="@suit" @*@(suit == (Model?.MemberModel. ?? 0) ? "Selected" : "")*@>@suit.GetEnumDescription()</option>
+                                        }
+                                    </select>
+                                </td>
+                                <td class="jsgrid-cell jsgrid-align-center">
+                                    <input type="checkbox" readonly="">
+                                </td>
+                                <td class="jsgrid-cell jsgrid-control-field jsgrid-align-center">
+                                    <button class="jsgrid-button jsgrid-search-button" type="button" title="Search" onclick="loadData()">
+                                    </button><button class="jsgrid-button jsgrid-clear-filter-button" type="button" title="Clear filter">
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="jsgrid-insert-row" style="display: none;">
+                                <td class="jsgrid-cell" >
+                                    <input type="text" class="form-control input-sm">
+                                </td>
+                                <td class="jsgrid-cell jsgrid-align-right">
+                                    <input type="number" class="form-control input-sm">
+                                </td>
+                                <td class="jsgrid-cell" >
+                                    <input type="text" class="form-control input-sm">
+                                </td>
+                                <td class="jsgrid-cell jsgrid-align-center">
+                                    <select class="form-control input-sm">
+                                        @foreach (EmergencyManagementSystem.Service.Enums.Occupation suit in (EmergencyManagementSystem.Service.Enums.Occupation[])Enum.GetValues(typeof(EmergencyManagementSystem.Service.Enums.Occupation)))
+                                        {
+                                            if (suit != 0)
+                                            {
+                                                suit.GetEnumDescription();
+                                                <option value="@suit" @*@(suit == (Model?.MemberModel. ?? 0) ? "Selected" : "")*@>@suit.GetEnumDescription()</option>
+                                            }
+
+                                        }
+                                    </select>
+                                </td>
+                                <td class="jsgrid-cell jsgrid-align-center">
+                                    <input type="checkbox">
+                                </td>
+                                <td class="jsgrid-cell jsgrid-control-field jsgrid-align-center">
+                                    <button class="jsgrid-button jsgrid-insert-button" type="button" title="Insert">
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="jsgrid-grid-body" >
+                    <table class="jsgrid-table table table-striped table-hover">
+                    <tbody>
+                        <tr class="jsgrid-row">
+                            @*teste*@
+
+                            <td class="jsgrid-cell jsgrid-align-center">50</td>
+                            <td class="jsgrid-cell jsgrid-align-center">Vanessa</td>
+                            <td class="jsgrid-cell jsgrid-align-center">Médica</td>
+                            <td class="jsgrid-cell jsgrid-align-center">
+                                <input type="checkbox" disabled="">
+                            </td>
+                            <td class="jsgrid-cell jsgrid-control-field jsgrid-align-center">
+                                <button class="jsgrid-button jsgrid-edit-button" type="button" title="Editar">
+                                </button>
+                                <button type="button" class="btn btn-sm bg-black">
+                                    <i class="fa fa-plus-circle" title="Adicionar"></i>
+                                </button>
+                            </td>
+
+                        </tr>
+                        @*fim do teste*@
+                    </tbody>
+                    </table>
+
+
+                </div>
+                    
+
+                </div>
             </div>
-
         </div>
-        <!-- /.content -->
-        @*</div>*@
-
-        @*</div>*@
 
 
 
-
+        <!-- Theme style -->
+        @*<link rel="stylesheet" href="~/css/style.css">*@    @*deixa a escrita na tabela na cor branca *@
+        <link rel="stylesheet" href="~/css/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="~/css/et-line-font/et-line-font.css">
+        <link rel="stylesheet" href="~/css/themify-icons/themify-icons.css">
 
         <!-- jsgrid Tables -->
-        <script src="~/plugins/jsgrid/db.js"></script>
+        <link type="text/css" rel="stylesheet" href="~/plugins/jsgrid/jsgrid.css" />
+        <link type="text/css" rel="stylesheet" href="~/plugins/jsgrid/theme.css" />
+
+        <!-- jsgrid Tables -->
+        @*<script src="~/plugins/jsgrid/db.js"></script>*@
         <script src="~/plugins/jsgrid/jsgrid.css"></script>
 
         <script src="~/plugins/jsgrid/jsgrid.min.js"></script>
-        <script src="~/plugins/jsgrid/jsgrid.int.js"></script>
+        @*<script src="~/plugins/jsgrid/jsgrid.int.js"></script>*@ 
         <script src="~/plugins/jsgrid/theme.css"></script>
-        @*<script src="~/plugins/datatables/dataTables.bootstrap.min.js"></script>*@
         <script src="~/lib/bootstrap/dist/css/bootstrap.min.css"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="~/js/jquery.min.js"></script>
-        @*<script src="~/plugins/datatables/jquery.min.js"></script>*@
     </body>
 }
+
+
