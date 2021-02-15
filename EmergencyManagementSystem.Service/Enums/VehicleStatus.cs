@@ -12,7 +12,7 @@ namespace EmergencyManagementSystem.Service.Enums
         Cleared,
         [Description("Em serviço")]
         InService,
-        [Description("Sem motorista")]
+        [Description("Sem equipe")]
         NotCirculating
     }
 }

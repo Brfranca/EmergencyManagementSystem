@@ -90,5 +90,14 @@ namespace EmergencyManagementSystem.Web.Controllers
             var vehicles = _vehicleRest.FindPaginated(vehiclefilter);
             return View(vehicles);
         }
+
+        [HttpPost]
+        public IActionResult Status(VehicleModel vehicleModel)
+        {
+            //var result = _vehicleRest.Find(new VehicleFilter {Id = vehicleModel.Id});
+
+
+            return View();
+        }
     }
 }

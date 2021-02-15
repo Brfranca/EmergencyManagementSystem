@@ -68,7 +68,10 @@
                                                 <span class="pull-right">
                                                     <div class="row">
                                                         <div class="col-md-3">
-                                                            <a class="btn btn-outline-warning btn-sm" title="Editar" href="@Url.Action("Update", "Vehicle", new { id = item.Id })"><i class="fa fa-pencil"></i></a>
+                                                            <a class="btn btn-outline-danger btn-sm" title="Quebrado" href="@Url.Action("Update", "Vehicle", new { id = item.Id, VehicleStatus = 1 })"><i class="fa fa-wrench"></i></a>
+                                                            <a class="btn btn-outline-warning btn-sm" title="Sem Equipe" href="@Url.Action("Update", "Vehicle", new { id = item.Id, VehicleStatus = 4 })"><i class="fa fa-users"></i></a>
+                                                            <a class="btn btn-outline-success btn-sm" title="Liberado" href="@Url.Action("Update", "Vehicle", new { id = item.Id, VehicleStatus = 2 })"><i class="fa fa-ambulance"></i></a>
+
                                                         </div>
                                                     </div>
                                                 </span>
