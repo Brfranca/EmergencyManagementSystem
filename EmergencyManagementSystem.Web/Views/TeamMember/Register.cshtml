@@ -1,7 +1,7 @@
-﻿@model EmergencyManagementSystem.Service.Models.TeamMemberModel
-@using X.PagedList.Mvc.Core
+﻿@using X.PagedList.Mvc.Core
 @using X.PagedList.Web.Common
 @using EmergencyManagementSystem.Service.Models
+@model X.PagedList.IPagedList<EmployeeModel>
 
 
 @{
@@ -15,82 +15,34 @@
 </div>
 @using (Html.BeginForm())
 {
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Niche Admin - Powerful Bootstrap 4 Dashboard and Admin Template</title>
-        <!-- Tell the browser to be responsive to screen width -->
-        <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
-
-        <!-- v4.0.0-alpha.6 -->
-        <link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css">
-
-        <!-- Google Font -->
-        @*<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">*@
-
-
-
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-    </head>
     <body class="hold-transition skin-blue sidebar-mini">
-        @*<div class="wrapper boxed-wrapper">*@
-        <!--<header class="main-header">
-            <!-- Logo -->
-            <!-- Header Navbar: style can be found in header.less -->-->
-            <!--@*<nav class="navbar blue-bg navbar-static-top">*@-->
-            <!--<!-- Sidebar toggle button-->
-            <!--<div class="pull-right search-box">
-            <form action="#" method="get" class="search-form">
-                <div class="input-group">
-                    <span class="input-group-btn">
-                        <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i> </button>
-                    </span><input name="search" class="form-control" placeholder="Search..." type="text">
-                </div>
-            </form>-->
-            <!-- search form -->
-            <!--</div>-->-->
-            <!--@*</nav>*@
-        </header>-->
-        <!-- Left side column. contains the logo and sidebar -->
-        <!-- Content Wrapper. Contains page content -->
-        @*<div class="content-wrapper">*@
-        <!-- Content Header (Page header) -->
-        @*<div class="content-header sty-one">
-                <h1 class="text-black">Js Grid Table</h1>
-                <ol class="breadcrumb">
-                    <li><a href="#">Home</a></li>
-                    <li class="sub-bread"><i class="fa fa-angle-right"></i> Tables</li>
-                    <li><i class="fa fa-angle-right"></i> Js Grid Table</li>
-                </ol>
-            </div>*@
+
 
         <!-- Main content -->
         <div class="content">
             <div class="info-box">
-                <h4 class="text-black">Editable with Datatable</h4>
-                <div id="basicscenario" class="jsgrid">
+                <h4 class="text-white m-b-1">Equipes</h4>
+                <div id="basicscenario" class="jsgrid" style="position: relative; height: 500px; width: 100%;">
                     <div class="jsgrid-grid-header jsgrid-header-scrollbar">
                         <table class="jsgrid-table table table-striped table-hover">
                             <tr class="jsgrid-header-row">
-                                <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable">ID</th>
                                 <th class="jsgrid-header-cell jsgrid-header-sortable">Nome</th>
+                                <th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable">ID</th>
                                 <th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable">Ocupação</th>
-                                <th class="jsgrid-header-cell jsgrid-align-center">Is Married</th>
-                                <th class="jsgrid-header-cell jsgrid-control-field jsgrid-align-center"></th>
+                                <th class="jsgrid-header-cell jsgrid-align-center">Plantão ativo</th>
+                                <th class="jsgrid-header-cell jsgrid-control-field jsgrid-align-center">
+                                    <button class="jsgrid-button jsgrid-mode-button jsgrid-search-mode-button jsgrid-mode-on-button" type="button" title="">
+                                    </button>
+                                </th>
                             </tr>
                             <tr class="jsgrid-filter-row">
                                 <td class="jsgrid-cell">
-                                    <input type="number" class="form-control input-sm">
-                                </td>
-                                <td class="jsgrid-cell jsgrid-align-right">
                                     <input type="text" class="form-control input-sm">
                                 </td>
+                                <td class="jsgrid-cell jsgrid-align-right">
+                                    <input type="number" class="form-control input-sm">
+                                </td>
+
                                 <td class="jsgrid-cell jsgrid-align-center">
                                     <select class="form-control input-sm">
                                         @foreach (EmergencyManagementSystem.Service.Enums.Occupation suit in (EmergencyManagementSystem.Service.Enums.Occupation[])Enum.GetValues(typeof(EmergencyManagementSystem.Service.Enums.Occupation)))
@@ -101,23 +53,19 @@
                                     </select>
                                 </td>
                                 <td class="jsgrid-cell jsgrid-align-center">
-                                    <input type="checkbox" readonly="">
+                                    <input type="checkbox">
                                 </td>
                                 <td class="jsgrid-cell jsgrid-control-field jsgrid-align-center">
-                                    <button class="jsgrid-button jsgrid-search-button" type="button" title="Search" onclick="loadData()">
-                                    </button><button class="jsgrid-button jsgrid-clear-filter-button" type="button" title="Clear filter">
+                                    <button class="jsgrid-button jsgrid-search-button" type="button" title="Pesquisar">
+                                    </button>
+                                    <button class="jsgrid-button jsgrid-clear-filter-button" type="button" title="Limpar filtro">
                                     </button>
                                 </td>
                             </tr>
                             <tr class="jsgrid-insert-row" style="display: none;">
-                                <td class="jsgrid-cell" >
-                                    <input type="text" class="form-control input-sm">
-                                </td>
+                                <td class="jsgrid-cell"><input type="text" class="form-control input-sm"></td>
                                 <td class="jsgrid-cell jsgrid-align-right">
                                     <input type="number" class="form-control input-sm">
-                                </td>
-                                <td class="jsgrid-cell" >
-                                    <input type="text" class="form-control input-sm">
                                 </td>
                                 <td class="jsgrid-cell jsgrid-align-center">
                                     <select class="form-control input-sm">
@@ -142,40 +90,113 @@
                             </tr>
                         </table>
                     </div>
-                    <div class="jsgrid-grid-body" >
-                    <table class="jsgrid-table table table-striped table-hover">
-                    <tbody>
-                        <tr class="jsgrid-row">
-                            @*teste*@
-
-                            <td class="jsgrid-cell jsgrid-align-center">50</td>
-                            <td class="jsgrid-cell jsgrid-align-center">Vanessa</td>
-                            <td class="jsgrid-cell jsgrid-align-center">Médica</td>
-                            <td class="jsgrid-cell jsgrid-align-center">
-                                <input type="checkbox" disabled="">
-                            </td>
-                            <td class="jsgrid-cell jsgrid-control-field jsgrid-align-center">
-                                <button class="jsgrid-button jsgrid-edit-button" type="button" title="Editar">
-                                </button>
-                                <button type="button" class="btn btn-sm bg-black">
-                                    <i class="fa fa-plus-circle" title="Adicionar"></i>
-                                </button>
-                            </td>
-
-                        </tr>
-                        @*fim do teste*@
-                    </tbody>
-                    </table>
-
-
-                </div>
-                    
-
+                    <div class="jsgrid-grid-body">
+                        <table class="jsgrid-table table table-striped table-hover">
+                            <tbody>
+                                <tr class="jsgrid-row">
+                                    <td class="jsgrid-cell">Ramona Benton</td>
+                                    <td class="jsgrid-cell jsgrid-align-center">43</td>
+                                    <td class="jsgrid-cell jsgrid-align-center">Brazil</td>
+                                    <td class="jsgrid-cell jsgrid-align-center">
+                                        <input type="checkbox" disabled="">
+                                    </td>
+                                    <td class="jsgrid-cell jsgrid-control-field jsgrid-align-center">
+                                        <button class="jsgrid-button jsgrid-edit-button" type="button" title="Edit"></button>
+                                        <button class="jsgrid-button jsgrid-delete-button" type="button" title="Delete"></button>
+                                    </td>
+                                </tr>
+                                <tr class="jsgrid-alt-row">
+                                    <td class="jsgrid-cell">Ezra Tillman</td>
+                                    <td class="jsgrid-cell jsgrid-align-center">51</td>
+                                    <td class="jsgrid-cell jsgrid-align-center">United States</td>
+                                    <td class="jsgrid-cell jsgrid-align-center">
+                                        <input type="checkbox" disabled="">
+                                    </td>
+                                    <td class="jsgrid-cell jsgrid-control-field jsgrid-align-center">
+                                        <button class="jsgrid-button jsgrid-edit-button" type="button" title="Edit"></button>
+                                        <button class="jsgrid-button jsgrid-delete-button" type="button" title="Delete">
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="jsgrid-row">
+                                    <td class="jsgrid-cell">Christopher Mcclure</td>
+                                    <td class="jsgrid-cell jsgrid-align-center">58</td>
+                                    <td class="jsgrid-cell jsgrid-align-center">United States</td>
+                                    <td class="jsgrid-cell jsgrid-align-center">
+                                        <input type="checkbox" disabled="">
+                                    </td>
+                                    <td class="jsgrid-cell jsgrid-control-field jsgrid-align-center">
+                                        <button class="jsgrid-button jsgrid-edit-button" type="button" title="Edit"></button>
+                                        <button class="jsgrid-button jsgrid-delete-button" type="button" title="Delete"></button>
+                                    </td>
+                                </tr>
+                                <tr class="jsgrid-alt-row">
+                                    <td class="jsgrid-cell jsgrid-align-center">Herman Rosa</td>
+                                    <td class="jsgrid-cell jsgrid-align-center">49</td>
+                                    <td class="jsgrid-cell jsgrid-align-center">Russia</td>
+                                    <td class="jsgrid-cell jsgrid-align-center">
+                                        <input type="checkbox" disabled="">
+                                    </td>
+                                    <td class="jsgrid-cell jsgrid-control-field jsgrid-align-center">
+                                        <button class="jsgrid-button jsgrid-edit-button" type="button" title="Edit">
+                                        </button><button class="jsgrid-button jsgrid-delete-button" type="button" title="Delete"></button>
+                                    </td>
+                                </tr>
+                                <tr class="jsgrid-row">
+                                    <td class="jsgrid-cell jsgrid-align-center">Xena Wilkerson</td>
+                                    <td class="jsgrid-cell jsgrid-align-center">63</td>
+                                    <td class="jsgrid-cell jsgrid-align-center">United States</td>
+                                    <td class="jsgrid-cell jsgrid-align-center">
+                                        <input type="checkbox" disabled="">
+                                    </td>
+                                    <td class="jsgrid-cell jsgrid-control-field jsgrid-align-center">
+                                        <button class="jsgrid-button jsgrid-edit-button" type="button" title="Edit"></button>
+                                        <button class="jsgrid-button jsgrid-delete-button" type="button" title="Delete"></button>
+                                    </td>
+                                </tr>
+                                <tr class="jsgrid-alt-row">
+                                    <td class="jsgrid-cell jsgrid-align-center">Lilah Atkins</td>
+                                    <td class="jsgrid-cell jsgrid-align-center">33</td>
+                                    <td class="jsgrid-cell jsgrid-align-center">Brazil</td>
+                                    <td class="jsgrid-cell jsgrid-align-center">
+                                        <input type="checkbox" disabled="">
+                                    </td>
+                                    <td class="jsgrid-cell jsgrid-control-field jsgrid-align-center" style="width: 50px;">
+                                        <button class="jsgrid-button jsgrid-edit-button" type="button" title="Edit"></button>
+                                        <button class="jsgrid-button jsgrid-delete-button" type="button" title="Delete"></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><div class="jsgrid-pager-container" style="">
+                        <div class="jsgrid-pager">
+                            Pages: <span class="jsgrid-pager-nav-button jsgrid-pager-nav-inactive-button">
+                                <a href="javascript:void(0);">First</a>
+                            </span>
+                            <span class="jsgrid-pager-nav-button jsgrid-pager-nav-inactive-button">
+                                <a href="javascript:void(0);">Prev</a>
+                            </span>
+                            <span class="jsgrid-pager-page jsgrid-pager-current-page">1</span>
+                            <span class="jsgrid-pager-page">
+                                <a href="javascript:void(0);">2</a>
+                            </span><span class="jsgrid-pager-page">
+                                <a href="javascript:void(0);">3</a>
+                            </span><span class="jsgrid-pager-page">
+                                <a href="javascript:void(0);">4</a>
+                            </span>
+                            <span class="jsgrid-pager-nav-button"><a href="javascript:void(0);">Next</a></span>
+                            <span class="jsgrid-pager-nav-button"><a href="javascript:void(0);">Last</a></span> &nbsp;&nbsp; 1 of 4
+                        </div>
+                    </div>
+                    <div class="jsgrid-load-shader" style="display: none; position: absolute; inset: 0px; z-index: 1000;"></div>
+                    <div class="jsgrid-load-panel" style="display: none; position: absolute; top: 50%; left: 50%; z-index: 1000;">Please, wait...</div>
                 </div>
             </div>
         </div>
 
 
+        <!-- v4.0.0-alpha.6 -->
+        <link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css">
 
         <!-- Theme style -->
         @*<link rel="stylesheet" href="~/css/style.css">*@    @*deixa a escrita na tabela na cor branca *@
@@ -188,7 +209,7 @@
         <link type="text/css" rel="stylesheet" href="~/plugins/jsgrid/theme.css" />
 
         <!-- jsgrid Tables -->
-        @*<script src="~/plugins/jsgrid/db.js"></script>*@
+        <script src="~/plugins/jsgrid/db.js"></script> @*aonde tem os filtros para a tabela*@
         <script src="~/plugins/jsgrid/jsgrid.css"></script>
 
         <script src="~/plugins/jsgrid/jsgrid.min.js"></script>
