@@ -4957,11 +4957,12 @@ table.text-center, table.text-center td, table.text-center th {
     background-size: cover;
 }
 
-.minhaCor {
+.txt-dark {
     background-color: #242A33;
-
+    color: white;
+    -webkit-box-shadow: 0 0 0 30px #242A33 inset !important;
+    -webkit-text-fill-color: white;
 }
-
     .login-page.sty1, .register-page.sty1 {
         background: url(../img/body-bg1.jpg) no-repeat center top;
         background-size: cover;
