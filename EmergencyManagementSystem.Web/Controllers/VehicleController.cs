@@ -1,4 +1,5 @@
-﻿using EmergencyManagementSystem.Service.Filters;
+﻿using EmergencyManagementSystem.Service.Enums;
+using EmergencyManagementSystem.Service.Filters;
 using EmergencyManagementSystem.Service.Interfaces;
 using EmergencyManagementSystem.Service.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -91,13 +92,18 @@ namespace EmergencyManagementSystem.Web.Controllers
             return View(vehicles);
         }
 
-        [HttpPost]
-        public IActionResult Status(VehicleModel vehicleModel)
+        public IActionResult AlterStatus(int id, int vehicleStatus)
         {
-            //var result = _vehicleRest.Find(new VehicleFilter {Id = vehicleModel.Id});
+            var result = _vehicleRest.Find(new VehicleFilter { Id = id });
+            if (!result.Success)
+                return RedirectToAction(nameof(Status));
+            result.Model.VehicleStatus = (VehicleStatus)vehicleStatus;
 
+            var resultUpdate = _vehicleRest.Update(result.Model);
+            if (!result.Success)
+                return RedirectToAction(nameof(Status));
 
-            return View();
+            return RedirectToAction(nameof(Status));
         }
     }
 }
