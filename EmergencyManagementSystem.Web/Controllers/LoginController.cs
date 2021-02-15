@@ -38,7 +38,7 @@ namespace EmergencyManagementSystem.Web.Controllers
                 var user = _userRest.Find(new UserFilter { Login = userLogin.Login, Password = userLogin.Password });
                 if (!user.Success)
                 {
-                    ModelState.AddModelError("Login", "Login ou senha incorrétos");
+                    ModelState.AddModelError("Login", "Login ou senha incorretos");
                     return View("Index", userLogin);
                 }
 

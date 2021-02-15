@@ -5,6 +5,7 @@
 @{
     ViewData["Title"] = "Register";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    List<string> Messages = ViewBag?.Error;
 }
 
 @Html.AntiForgeryToken()
@@ -16,6 +17,20 @@
 @using (Html.BeginForm())
 {
     <div class="content">
+
+        @if (Messages != null)
+        {
+            <div class="m-b-3" id="error-notification">
+                <div class="callout callout-info" style="margin-bottom: 0!important;">
+                    <h4><i class="fa fa-warning"></i> Nota:</h4>
+                    @foreach (string error in Messages)
+                    {
+                        @error<br />
+                    }
+                </div>
+            </div>
+        }
+
         <div class="info-box">
             <div class="row">
 
@@ -81,14 +96,14 @@
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
                                         <label for="location1">Profissão</label>
-                                    <select class="form-control" name="Occupation" id="Occupation">
+                                        <select class="form-control" name="Occupation" id="Occupation">
 
-                                        @foreach (EmergencyManagementSystem.Service.Enums.Occupation suit in (EmergencyManagementSystem.Service.Enums.Occupation[])Enum.GetValues(typeof(EmergencyManagementSystem.Service.Enums.Occupation)))
-                                        {
-                                            suit.GetEnumDescription();
-                                            <option value="@suit" @(suit == (Model?.Occupation ?? 0) ? "Selected" : "")>@suit.GetEnumDescription()</option>
-                                        }
-                                    </select>
+                                            @foreach (EmergencyManagementSystem.Service.Enums.Occupation suit in (EmergencyManagementSystem.Service.Enums.Occupation[])Enum.GetValues(typeof(EmergencyManagementSystem.Service.Enums.Occupation)))
+                                            {
+                                                suit.GetEnumDescription();
+                                                <option value="@suit" @(suit == (Model?.Occupation ?? 0) ? "Selected" : "")>@suit.GetEnumDescription()</option>
+                                            }
+                                        </select>
                                         @Html.ValidationMessageFor(d => d.Occupation, "", new { @class = "text-danger" })
                                         <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>
@@ -105,14 +120,14 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="location1">Coorporação</label>
-                                    <select class="form-control" name="Company" id="Company">
-                                        
-                                        @foreach (EmergencyManagementSystem.Service.Enums.Company suit in (EmergencyManagementSystem.Service.Enums.Company[])Enum.GetValues(typeof(EmergencyManagementSystem.Service.Enums.Company)))
-                                        {
-                                            suit.GetEnumDescription();
-                                            <option value="@suit" @(suit == (Model?.Company ?? 0) ? "Selected" : "")>@suit.GetEnumDescription()</option>
-                                        }
-                                    </select>
+                                        <select class="form-control" name="Company" id="Company">
+
+                                            @foreach (EmergencyManagementSystem.Service.Enums.Company suit in (EmergencyManagementSystem.Service.Enums.Company[])Enum.GetValues(typeof(EmergencyManagementSystem.Service.Enums.Company)))
+                                            {
+                                                suit.GetEnumDescription();
+                                                <option value="@suit" @(suit == (Model?.Company ?? 0) ? "Selected" : "")>@suit.GetEnumDescription()</option>
+                                            }
+                                        </select>
                                         @Html.ValidationMessageFor(d => d.Company, "", new { @class = "text-danger" })
                                         <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                                     </div>

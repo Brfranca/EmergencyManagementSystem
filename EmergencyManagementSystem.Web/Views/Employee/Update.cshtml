@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Update";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    List<string> Messages = ViewBag?.Error;
 }
 
 @Html.AntiForgeryToken()
@@ -13,6 +14,20 @@
 @using (Html.BeginForm())
 {
     <div class="content">
+
+        @if (Messages != null)
+        {
+            <div class="m-b-3" id="error-notification">
+                <div class="callout callout-info" style="margin-bottom: 0!important;">
+                    <h4><i class="fa fa-warning"></i> Nota:</h4>
+                    @foreach (string error in Messages)
+                    {
+                        @error<br />
+                    }
+                </div>
+            </div>
+        }
+
         <div class="info-box">
             <div class="row">
 
@@ -39,7 +54,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
                                         <label for="exampleInputEmail1">Data de nascimento</label>
-                                        @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly"} })
+                                        @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                                         @Html.ValidationMessageFor(d => d.BirthDate, "", new { @class = "text-danger" })
                                     </div>
                                 </div>

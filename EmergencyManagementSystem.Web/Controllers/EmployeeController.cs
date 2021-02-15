@@ -44,8 +44,10 @@ namespace EmergencyManagementSystem.Web.Controllers
 
             var result = _employeeRest.Register(employeeModel);
             if (!result.Success)
+            {
+                ViewBag.Error = result.Messages;
                 return View(employeeModel);
-
+            }
             return RedirectToAction(nameof(Index));
         }
 
@@ -66,8 +68,10 @@ namespace EmergencyManagementSystem.Web.Controllers
 
             var result = _employeeRest.Update(employeeModel);
             if (!result.Success)
+            {
+                ViewBag.Error = result.Messages;
                 return View(employeeModel);
-
+            }
             return RedirectToAction(nameof(Index));
         }
 

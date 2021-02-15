@@ -14,14 +14,8 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
 
     <link rel="stylesheet" href="~/css/style.css">
-    @*<link rel="stylesheet" href="~/css/font-awesome/css/font-awesome.min.css">*@
-    @*<link rel="stylesheet" href="~/css/et-line-font/et-line-font.css">*@
-    @*<link rel="stylesheet" href="~/css/themify-icons/themify-icons.css">*@
-    @*<link href="~/css/Custom.css" rel="stylesheet" />*@
-
     <script src="~/js/jquery.min.js"></script>
-    @*<script src="~/bootstrap/js/bootstrap.min.js"></script>*@
-    @*<script src="~/js/niche.js"></script>*@
+
 
 </head>
 <body class="hold-transition login-page">
@@ -30,15 +24,12 @@
             <h3 class="login-box-msg">Login</h3>
             <form action="@Url.Action("Login", "Login")" method="post">
 
-
                 @if (!string.IsNullOrWhiteSpace(Model.Login))
                 {
                     <p class="alert alert-danger">
                         @Html.ValidationMessageFor(d => d.Login)
                     </p>
                 }
-
-
 
                 <div class="form-group has-feedback">
                     <input type="text" name="Login" class="form-control sty1" placeholder="Usuário" value="@Model.Login" required

@@ -4,6 +4,7 @@ using EmergencyManagementSystem.Service.Interfaces;
 using EmergencyManagementSystem.Service.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace EmergencyManagementSystem.Web.Controllers
 {
@@ -37,15 +38,18 @@ namespace EmergencyManagementSystem.Web.Controllers
             if (!ModelState.IsValid)
                 return View(vehicleModel);
 
-            vehicleModel.VehicleStatus = Service.Enums.VehicleStatus.Cleared;
+            vehicleModel.VehicleStatus = VehicleStatus.Cleared;
             var result = _vehicleRest.Register(vehicleModel);
             if (!result.Success)
+            {
+                ViewBag.Error = result.Messages;
                 return View(vehicleModel);
+            }
 
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Update(int id)
+        public IActionResult Update(long id)
         {
 
             var result = _vehicleRest.Find(new VehicleFilter { Id = id });
@@ -67,12 +71,15 @@ namespace EmergencyManagementSystem.Web.Controllers
 
             var result = _vehicleRest.Update(vehicleModel);
             if (!result.Success)
+            {
+                ViewBag.Error = result.Messages;
                 return View(vehicleModel);
+            }
 
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Details(int id)
+        public IActionResult Details(long id)
         {
             var result = _vehicleRest.Find(new VehicleFilter { Id = id });
 
@@ -84,25 +91,38 @@ namespace EmergencyManagementSystem.Web.Controllers
             return View(result.Model);
         }
 
-        public IActionResult Status(VehicleFilter vehiclefilter)
+        public IActionResult Status(VehicleFilter vehicleFilter)
         {
-            ViewBag.Codename = vehiclefilter.Codename;
-            ViewBag.OperationCity = vehiclefilter.OperationCity;
-            var vehicles = _vehicleRest.FindPaginated(vehiclefilter);
+            ViewBag.Codename = vehicleFilter.Codename;
+            ViewBag.OperationCity = vehicleFilter.OperationCity;
+            var vehicles = _vehicleRest.FindPaginated(vehicleFilter);
             return View(vehicles);
         }
 
-        public IActionResult AlterStatus(int id, int vehicleStatus)
+        public IActionResult AlterStatus(long id, VehicleStatus currentStatus, int status)
         {
+            if (currentStatus == VehicleStatus.InService)
+            {
+                ViewBag.Error = new List<string> { "Não é possível altear o status de um veículo que está realizando um atendimento." };
+                var vehicles = _vehicleRest.FindPaginated(new VehicleFilter());
+                return View("Status",vehicles);
+            }
+
             var result = _vehicleRest.Find(new VehicleFilter { Id = id });
             if (!result.Success)
-                return RedirectToAction(nameof(Status));
-            result.Model.VehicleStatus = (VehicleStatus)vehicleStatus;
+            {
+                ViewBag.Error = result.Messages;
+                var vehicles = _vehicleRest.FindPaginated(new VehicleFilter());
+                return View("Status", vehicles);
+            }
 
+            result.Model.VehicleStatus = (VehicleStatus)status;
             var resultUpdate = _vehicleRest.Update(result.Model);
-            if (!result.Success)
-                return RedirectToAction(nameof(Status));
-
+            if (!resultUpdate.Success)
+            {
+                var vehicles = _vehicleRest.FindPaginated(new VehicleFilter());
+                return View("Status", vehicles);
+            }
             return RedirectToAction(nameof(Status));
         }
     }
