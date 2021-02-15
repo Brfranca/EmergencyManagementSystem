@@ -9,5 +9,6 @@ namespace EmergencyManagementSystem.Service.Models
         public long MemberId { get; set; }
         public MemberModel MemberModel { get; set; }
 
+
     }
 }

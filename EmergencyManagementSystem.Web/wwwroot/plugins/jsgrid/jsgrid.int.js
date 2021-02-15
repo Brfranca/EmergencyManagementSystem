@@ -82,74 +82,74 @@
                 }]
             })
         }(),
-        function() {
-            $("#staticdata").jsGrid({
-                height: "500px",
-                width: "100%",
-                sorting: !0,
-                paging: !0,
-                data: db.clients,
-                fields: [{
-                    name: "Name",
-                    type: "text",
-                    width: 150
-                }, {
-                    name: "Age",
-                    type: "number",
-                    width: 70
-                }, {
-                    name: "Address",
-                    type: "text",
-                    width: 200
-                }, {
-                    name: "Country",
-                    type: "select",
-                    items: db.countries,
-                    valueField: "Id",
-                    textField: "Name"
-                }, {
-                    name: "Married",
-                    type: "checkbox",
-                    title: "Is Married"
-                }]
-            })
-        }(),
+        //function() {
+        //    $("#staticdata").jsGrid({
+        //        height: "500px",
+        //        width: "100%",
+        //        sorting: !0,
+        //        paging: !0,
+        //        data: db.clients,
+        //        fields: [{
+        //            name: "Name",
+        //            type: "text",
+        //            width: 150
+        //        }, {
+        //            name: "Age",
+        //            type: "number",
+        //            width: 70
+        //        }, {
+        //            name: "Address",
+        //            type: "text",
+        //            width: 200
+        //        }, {
+        //            name: "Country",
+        //            type: "select",
+        //            items: db.countries,
+        //            valueField: "Id",
+        //            textField: "Name"
+        //        }, {
+        //            name: "Married",
+        //            type: "checkbox",
+        //            title: "Is Married"
+        //        }]
+        //    })
+        //}(),
         
-        function() {
-            $("#soarting").jsGrid({
-                height: "500px",
-                width: "100%",
-                autoload: !0,
-                selecting: !1,
-                controller: db,
-                fields: [{
-                    name: "Name",
-                    type: "text",
-                    width: 150
-                }, {
-                    name: "Age",
-                    type: "number",
-                    width: 50
-                }, {
-                    name: "Address",
-                    type: "text",
-                    width: 200
-                }, {
-                    name: "Country",
-                    type: "select",
-                    items: db.countries,
-                    valueField: "Id",
-                    textField: "Name"
-                }, {
-                    name: "Married",
-                    type: "checkbox",
-                    title: "Is Married"
-                }]
-            }), $("#sortingField").on("change", function() {
-                var field = $(this).val();
-                $("#exampleSorting").jsGrid("sort", field)
-            })
-        }(),
+        //function() {
+        //    $("#soarting").jsGrid({
+        //        height: "500px",
+        //        width: "100%",
+        //        autoload: !0,
+        //        selecting: !1,
+        //        controller: db,
+        //        fields: [{
+        //            name: "Name",
+        //            type: "text",
+        //            width: 150
+        //        }, {
+        //            name: "Age",
+        //            type: "number",
+        //            width: 50
+        //        }, {
+        //            name: "Address",
+        //            type: "text",
+        //            width: 200
+        //        }, {
+        //            name: "Country",
+        //            type: "select",
+        //            items: db.countries,
+        //            valueField: "Id",
+        //            textField: "Name"
+        //        }, {
+        //            name: "Married",
+        //            type: "checkbox",
+        //            title: "Is Married"
+        //        }]
+        //    }), $("#sortingField").on("change", function() {
+        //        var field = $(this).val();
+        //        $("#exampleSorting").jsGrid("sort", field)
+        //    })
+        //}(),
         
         function() {
             var MyDateField = function(config) {
