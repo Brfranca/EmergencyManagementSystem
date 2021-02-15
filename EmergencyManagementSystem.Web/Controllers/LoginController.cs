@@ -25,7 +25,7 @@ namespace EmergencyManagementSystem.Web.Controllers
         public IActionResult Index()
         {
             if (User.Identity.IsAuthenticated)
-                return RedirectToAction("Register", "Employee");
+                return RedirectToAction("", "Emergency");
 
             return View(new UserModel());
         }
