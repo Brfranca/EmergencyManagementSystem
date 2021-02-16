@@ -4,6 +4,7 @@
 @model X.PagedList.IPagedList<VehicleModel>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    List<string> Messages = ViewBag?.Error;
 }
 
 
@@ -13,6 +14,18 @@
 <form>
 
     <div class="content">
+        @if (Messages != null)
+        {
+            <div class="m-b-3" id="error-notification">
+                <div class="callout callout-info" style="margin-bottom: 0!important;">
+                    <h4><i class="fa fa-warning"></i> Nota:</h4>
+                    @foreach (string error in Messages)
+                    {
+                        @error<br />
+                    }
+                </div>
+            </div>
+        }
         <div class="row">
             <div class="col-lg-12">
                 <div class="info-box">
@@ -55,6 +68,7 @@
                                         <th>Ano</th>
                                         <th>Situação</th>
                                         <th>Tipo de veículo</th>
+                                        <th>Status</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -68,11 +82,12 @@
                                             <td>@item.Year</td>
                                             <td>@item.VehicleStatus.GetEnumDescription()</td>
                                             <td>@item.VehicleType.GetEnumDescription()</td>
+                                            <td>@item.Active.GetEnumDescription()</td>
                                             <td class="jsgrid-cell jsgrid-control-field jsgrid-align-center" style="width: 50px;">
                                                 <span class="pull-right">
                                                     <div class="row">
                                                         <div class="col-md-3">
-                                                            <button class="btn btn-outline-danger btn-sm" type="button" title="Deletar"><i class="fa fa-trash-o"></i></button>
+                                                            <a class="btn btn-outline-danger btn-sm" type="button" title="@item.GetActive()" href="@Url.Action("Disable", "Vehicle", new { id = item.Id })"><i class="fa fa-ban"></i></a>
                                                             <a class="btn btn-outline-warning btn-sm" title="Editar" href="@Url.Action("Update", "Vehicle", new { id = item.Id })"><i class="fa fa-pencil"></i></a>
                                                             <a class="btn btn-outline-primary btn-sm" title="Detalhes" href="@Url.Action("Details","Vehicle", new { id = item.Id })"><i class="fa fa-list"></i></a>
                                                         </div>

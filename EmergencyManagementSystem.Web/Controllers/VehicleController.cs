@@ -83,11 +83,12 @@ namespace EmergencyManagementSystem.Web.Controllers
         {
             var result = _vehicleRest.Find(new VehicleFilter { Id = id });
 
-            if (!ModelState.IsValid)
-                return RedirectToAction(nameof(Index));
-
             if (!result.Success)
-                return RedirectToAction(nameof(Index));
+            {
+                ViewBag.Error = new List<string> { "Erro ao mostrar os detalhes do veículo." };
+                var vehicles = _vehicleRest.FindPaginated(new VehicleFilter());
+                return View("Index", vehicles);
+            }
             return View(result.Model);
         }
 
@@ -103,7 +104,7 @@ namespace EmergencyManagementSystem.Web.Controllers
         {
             if (currentStatus == VehicleStatus.InService)
             {
-                ViewBag.Error = new List<string> { "Não é possível altear o status de um veículo que está realizando um atendimento." };
+                ViewBag.Error = new List<string> { "Não é possível alterar o status de um veículo que está realizando um atendimento." };
                 var vehicles = _vehicleRest.FindPaginated(new VehicleFilter());
                 return View("Status",vehicles);
             }
@@ -124,6 +125,27 @@ namespace EmergencyManagementSystem.Web.Controllers
                 return View("Status", vehicles);
             }
             return RedirectToAction(nameof(Status));
+        }
+
+        public IActionResult Disable(int id)
+        {
+            var result = _vehicleRest.Find(new VehicleFilter { Id = id });
+            if (!result.Success)
+            {
+                ViewBag.Error = result.Messages;
+                var vehicles = _vehicleRest.FindPaginated(new VehicleFilter());
+                return View("Index", vehicles);
+            }
+
+            result.Model.Active = (result.Model.Active == Active.Active) ? Active.Disabled : Active.Active;
+            var resultDisable = _vehicleRest.Update(result.Model);
+            if (!resultDisable.Success)
+            {
+                ViewBag.Error = new List<string> { $"Erro ao alterar o status do veículo." };
+                var employees = _vehicleRest.FindPaginated(new VehicleFilter());
+                return View("Index", employees);
+            }
+            return RedirectToAction(nameof(Index));
         }
     }
 }

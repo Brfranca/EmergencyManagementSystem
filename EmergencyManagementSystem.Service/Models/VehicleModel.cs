@@ -25,7 +25,19 @@ namespace EmergencyManagementSystem.Service.Models
         [Range(1, 4, ErrorMessage = "Favor informar o tipo do veículo.")]
         public VehicleType VehicleType { get; set; }
         public VehicleStatus VehicleStatus { get; set; }
+        public Active Active { get; set; }
 
-        
+        public string GetEnumDescription(Enum value)
+        {
+            return Utils.GetEnumDescription(value);
+        }
+
+        public string GetActive()
+        {
+            if (Active == Active.Active)
+                return "Desativar";
+            else
+                return "Ativar";
+        }
     }
 }

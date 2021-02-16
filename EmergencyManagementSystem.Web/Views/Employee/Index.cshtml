@@ -5,7 +5,6 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     List<string> Messages = ViewBag?.Error;
-
 }
 
 
@@ -75,32 +74,32 @@
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
-                                    <tr>
-                                        <td>@item.Id</td>
-                                        <td>@item.Name</td>
-                                        <td>@item.Telephone</td>
-                                        <td>@item.Email</td>
-                                        <td>@item.Company.GetEnumDescription()</td>
-                                        <td>@item.Active.GetEnumDescription()</td>
-                                        <td>
-                                            <center>
-                                                <div class="col-md-3">
-                                                    <a class="btn btn-outline-success btn-sm" title="Add usuário" href="@Url.Action("AddUser", "Employee", new { id = item.Id })"><i class="fa fa-user-md"></i></a>
-                                                </div>
-                                            </center>
-                                        </td>
-                                        <td class="jsgrid-cell jsgrid-control-field jsgrid-align-center" style="width: 50px;">
-                                            <span class="pull-right">
-                                                <div class="row">
+                                        <tr>
+                                            <td>@item.Id</td>
+                                            <td>@item.Name</td>
+                                            <td>@item.Telephone</td>
+                                            <td>@item.Email</td>
+                                            <td>@item.Company.GetEnumDescription()</td>
+                                            <td>@item.Active.GetEnumDescription()</td>
+                                            <td>
+                                                <center>
                                                     <div class="col-md-3">
-                                                        <a class="btn btn-outline-danger btn-sm" type="button" title="@item.GetActive()" href="@Url.Action("Delete", "Employee", new { id = item.Id })"><i class="fa fa-ban"></i></a>
-                                                        <a class="btn btn-outline-warning btn-sm" title="Editar" href="@Url.Action("Update", "Employee", new { item.Id, item.AddressId })"><i class="fa fa-pencil"></i></a>
-                                                        <a class="btn btn-outline-primary btn-sm" title="Detalhes" href="@Url.Action("Details","Employee", new { id = item.Id })"><i class="fa fa-list"></i></a>
+                                                        <a class="btn btn-outline-success btn-sm" title="Add usuário" href="@Url.Action("AddUser", "Employee", new { id = item.Id })"><i class="fa fa-user-md"></i></a>
                                                     </div>
-                                                </div>
-                                            </span>
-                                        </td>
-                                    </tr>
+                                                </center>
+                                            </td>
+                                            <td class="jsgrid-cell jsgrid-control-field jsgrid-align-center" style="width: 50px;">
+                                                <span class="pull-right">
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            <a class="btn btn-outline-danger btn-sm" type="button" title="@item.GetActive()" href="@Url.Action("Disable", "Employee", new { id = item.Id })"><i class="fa fa-ban"></i></a>
+                                                            <a class="btn btn-outline-warning btn-sm" title="Editar" href="@Url.Action("Update", "Employee", new { item.Id, item.AddressId })"><i class="fa fa-pencil"></i></a>
+                                                            <a class="btn btn-outline-primary btn-sm" title="Detalhes" href="@Url.Action("Details","Employee", new { id = item.Id })"><i class="fa fa-list"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </span>
+                                            </td>
+                                        </tr>
                                     }
                                 </tbody>
                             </table>
