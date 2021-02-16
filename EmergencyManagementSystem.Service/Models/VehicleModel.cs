@@ -7,8 +7,6 @@ namespace EmergencyManagementSystem.Service.Models
     public class VehicleModel
     {
         public long Id { get; set; }
-        [Required(ErrorMessage = "Favor informar a placa do veículo.")]
-        [StringLength(7, MinimumLength = 7, ErrorMessage = "A placa deve ter 7 caracteres.")]
         public string VehiclePlate { get; set; }
         [Required(ErrorMessage = "Favor informar o codinome do veículo.")]
         [StringLength(20, MinimumLength = 3, ErrorMessage = "O codinome deve ter no mínimo 3 e no máximo 20 caracteres.")]
