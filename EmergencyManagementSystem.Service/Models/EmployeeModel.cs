@@ -32,17 +32,30 @@ namespace EmergencyManagementSystem.Service.Models
         [Range(1, 2, ErrorMessage = "Favor informar a coorporação.")]
         public Company Company { get; set; }
         public string ProfessionalRegistration { get; set; }
-        public  AddressModel AddressModel { get; set; }
+        public AddressModel AddressModel { get; set; }
         public long AddressId { get; set; }
         [Range(1, 7, ErrorMessage = "Favor informar o cargo ocupacional.")]
         public Occupation Occupation { get; set; }
+        public Active Active { get; set; }
 
         public EmployeeModel()
         {
             AddressModel = new AddressModel();
         }
 
-      
+        public string GetEnumDescription(Enum value)
+        {
+            return Utils.GetEnumDescription(value);
+        }
+
+        public string GetActive()
+        {
+            if (Active == Active.Active)
+                return "Desativar";
+            else
+                return "Ativar";
+        }
+
     }
 
     public static class Utils

@@ -1,4 +1,5 @@
-﻿using EmergencyManagementSystem.Service.Filters;
+﻿using EmergencyManagementSystem.Service.Enums;
+using EmergencyManagementSystem.Service.Filters;
 using EmergencyManagementSystem.Service.Interfaces;
 using EmergencyManagementSystem.Service.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -99,10 +100,22 @@ namespace EmergencyManagementSystem.Web.Controllers
 
         public IActionResult Delete(int id)
         {
-            var result = _employeeRest.Delete(new EmployeeModel { Id = id });
+            var result = _employeeRest.Find(new EmployeeFilter { Id = id });
             if (!result.Success)
-                ModelState.AddModelError("Id", "Erro ao remover funcionário");
+            {
+                ViewBag.Error = result.Messages;
+                var employees = _employeeRest.FindPaginated(new EmployeeFilter());
+                return View("Index", employees);
+            }
 
+            result.Model.Active = (result.Model.Active == Active.Active) ? Active.Disabled : Active.Active;
+            var resultDisable = _employeeRest.Update(result.Model);
+            if (!resultDisable.Success)
+            {
+                ViewBag.Error = new List<string> { "Erro ao remover o funcionário." };
+                var employees = _employeeRest.FindPaginated(new EmployeeFilter());
+                return View("Index", employees);
+            }
             return RedirectToAction(nameof(Index));
         }
     }

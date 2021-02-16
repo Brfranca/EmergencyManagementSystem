@@ -1,4 +1,5 @@
 ﻿@model EmergencyManagementSystem.Service.Models.EmployeeModel
+@using EmergencyManagementSystem.Service.Enums;
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -27,27 +28,23 @@
                                 <div class="col-sm-4 invoice-col">
                                     <address>
                                         <strong>@Model.Name</strong><br>
-                                        Cpf: @Model.CPF<br>
+                                        CPF: @Model.CPF<br>
                                         Nasc: @Model.BirthDate.Date<br>
-                                        @Model.Company<br>
-                                        @Html.DisplayFor(model => model.Occupation)
-
+                                        @Model.GetEnumDescription(Model.Company)<br>
+                                        @Model.GetEnumDescription(Model.Occupation)
                                     </address>
                                 </div>
                                 <!-- /.col -->
                                 <div class="col-sm-4 invoice-col">
                                     <address>
-                                        <strong>@Model.AddressModel.City</strong><br>
-                                        @Model.AddressModel.CEP - @Model.AddressModel.Street @Model.AddressModel.Number<br>
+                                        <strong>Endereço/ Contatos</strong><br>
+                                        @Model.AddressModel.CEP - @Model.AddressModel.City, @Model.AddressModel.Street @Model.AddressModel.Number<br>
                                         @Model.Email<br>
                                         @Model.Telephone
                                     </address>
                                 </div>
                             </div>
-
-                        </div>
-                        <div class="col-md-3">
-                            <a href="@Url.Action("Index","Employee")">Back to List</a>
+                                <a href="@Url.Action("Index","Employee")">Voltar</a>
                         </div>
                     </div>
                 </div>
