@@ -18,37 +18,24 @@
                         <div class="card-body">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             <div class="row">
-                                <div class="col-md-4 col-xs-12">
-                                    <h4 class="card-title">Dados do Veículo</h4>
-                                    <div id="treeview1" class=""></div>
+                                <div class="col-lg-12 m-b-3">
+                                    <h3 class="text-white">Dados do Veículo <span class="pull-right">Id: @Model.Id</span> </h3>
                                 </div>
+                                <!-- /.col -->
                             </div>
-                            <input type="hidden" asp-for="Vehicle.Id" />
-                            <div class="form-group">
-                                <label asp-for="VehicleName">Nome/Modelo: </label>
-                                @Html.DisplayFor(model => model.VehicleName)
+                            <div class="row invoice-info m-b-3">
+                                <div class="col-sm-4 invoice-col">
+                                    <address>
+                                        <strong>@Model.Codename</strong><br>
+                                        Cidade: @Model.OperationCity <br>
+                                        Tipo: @Model.GetEnumDescription(Model.VehicleType)<br>
+                                        Modelo: @Model.VehicleName @Model.Year<br>
+                                        Placa: @Model.VehiclePlate<br>
+                                    </address>
+                                </div>
+                                <!-- /.col -->
                             </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Placa: </label>
-                                @Html.DisplayFor(model => model.VehiclePlate)
-
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Ano: </label>
-                                @Html.DisplayFor(model => model.Year)
-                            </div>
-                            <div class="form-group">
-                                <label for="location1">Tipo do Veículo: </label>
-                                @Html.DisplayFor(model => model.VehicleType)
-                            </div>
-                            <div class="form-group">
-                                <label for="location1">Situação do veículo: </label>
-                                @Html.DisplayFor(model => model.VehicleStatus)
-                            </div>
-                            <div class="col-md-3">
-                                <a href="@Url.Action("Update", "Vehicle", new { id = Model.Id })" class="btn btn-default">Alterar</a>
-                                <a href="@Url.Action("Index","Vehicle")">Back to List</a>
-                            </div>
+                            <a href="@Url.Action("Index","Vehicle")">Voltar</a>
                         </div>
                     </div>
                 </div>

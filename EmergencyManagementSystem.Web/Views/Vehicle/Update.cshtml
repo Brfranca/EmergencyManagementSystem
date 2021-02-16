@@ -44,7 +44,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
                                         <label for="exampleInputEmail1">Nome/Modelo</label>
-                                        @Html.EditorFor(model => model.VehicleName, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.EditorFor(model => model.VehicleName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                                         @Html.ValidationMessageFor(d => d.VehicleName, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group has-feedback">
                                         <label for="exampleInputEmail1">Ano</label>
-                                        @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                                         @Html.ValidationMessageFor(d => d.Year, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -99,6 +99,7 @@
                     </div>
                     <div class="card-body">
                         <button type="submit" class="btn btn-lg bg-purpleTest">Salvar alterações</button>
+                        <a class="col-md-2" href="@Url.Action("Index","Vehicle")">   Voltar</a>
                     </div>
                 </div>
             </div>

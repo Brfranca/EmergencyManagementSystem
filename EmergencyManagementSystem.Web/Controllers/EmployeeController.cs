@@ -90,15 +90,17 @@ namespace EmergencyManagementSystem.Web.Controllers
         {
             var result = _employeeRest.Find(new EmployeeFilter { Id = id });
 
-            if (!ModelState.IsValid)
-                return RedirectToAction(nameof(Index));
-
             if (!result.Success)
-                return RedirectToAction(nameof(Index));
+            {
+                ViewBag.Error = new List<string> { "Erro ao mostrar os detalhes do funcionário." };
+                var employees = _employeeRest.FindPaginated(new EmployeeFilter());
+                return View("Index", employees);
+            }
             return View(result.Model);
         }
 
-        public IActionResult Delete(int id)
+        //testar msgm de erro
+        public IActionResult Disable(int id)
         {
             var result = _employeeRest.Find(new EmployeeFilter { Id = id });
             if (!result.Success)
@@ -112,7 +114,7 @@ namespace EmergencyManagementSystem.Web.Controllers
             var resultDisable = _employeeRest.Update(result.Model);
             if (!resultDisable.Success)
             {
-                ViewBag.Error = new List<string> { "Erro ao remover o funcionário." };
+                ViewBag.Error = new List<string> { $"Erro ao alterar o status do funcionário." };
                 var employees = _employeeRest.FindPaginated(new EmployeeFilter());
                 return View("Index", employees);
             }

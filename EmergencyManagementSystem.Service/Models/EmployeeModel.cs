@@ -55,7 +55,6 @@ namespace EmergencyManagementSystem.Service.Models
             else
                 return "Ativar";
         }
-
     }
 
     public static class Utils

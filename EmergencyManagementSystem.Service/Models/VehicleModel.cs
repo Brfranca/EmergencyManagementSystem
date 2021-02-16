@@ -7,8 +7,6 @@ namespace EmergencyManagementSystem.Service.Models
     public class VehicleModel
     {
         public long Id { get; set; }
-        [Required(ErrorMessage = "Favor informar a placa do veículo.")]
-        [StringLength(7, MinimumLength = 7, ErrorMessage = "A placa deve ter 7 caracteres.")]
         public string VehiclePlate { get; set; }
         [Required(ErrorMessage = "Favor informar o codinome do veículo.")]
         [StringLength(20, MinimumLength = 3, ErrorMessage = "O codinome deve ter no mínimo 3 e no máximo 20 caracteres.")]
@@ -25,7 +23,19 @@ namespace EmergencyManagementSystem.Service.Models
         [Range(1, 4, ErrorMessage = "Favor informar o tipo do veículo.")]
         public VehicleType VehicleType { get; set; }
         public VehicleStatus VehicleStatus { get; set; }
+        public Active Active { get; set; }
 
-        
+        public string GetEnumDescription(Enum value)
+        {
+            return Utils.GetEnumDescription(value);
+        }
+
+        public string GetActive()
+        {
+            if (Active == Active.Active)
+                return "Desativar";
+            else
+                return "Ativar";
+        }
     }
 }
