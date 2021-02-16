@@ -4,6 +4,8 @@
 @model X.PagedList.IPagedList<EmployeeModel>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    List<string> Messages = ViewBag?.Error;
+
 }
 
 
@@ -13,6 +15,18 @@
 <form>
 
     <div class="content">
+        @if (Messages != null)
+        {
+            <div class="m-b-3" id="error-notification">
+                <div class="callout callout-info" style="margin-bottom: 0!important;">
+                    <h4><i class="fa fa-warning"></i> Nota:</h4>
+                    @foreach (string error in Messages)
+                    {
+                        @error<br />
+                    }
+                </div>
+            </div>
+        }
         <div class="row">
             <div class="col-lg-12">
                 <div class="info-box">
@@ -53,6 +67,7 @@
                                         <th>Telefone</th>
                                         <th>Email</th>
                                         <th>Coorporação</th>
+                                        <th>Adicionar Usuário</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -65,6 +80,13 @@
                                             <td>@item.Telephone</td>
                                             <td>@item.Email</td>
                                             <td>@item.Company.GetEnumDescription()</td>
+                                            <td>
+                                                <center>
+                                                    <div class="col-md-3">
+                                                        <a class="btn btn-outline-success btn-sm" title="Add usuário" href="@Url.Action("AddUser", "Employee", new { id = item.Id })"><i class="fa fa-user-md"></i></a>
+                                                    </div>
+                                                </center>
+                                            </td>
                                             <td class="jsgrid-cell jsgrid-control-field jsgrid-align-center" style="width: 50px;">
                                                 <span class="pull-right">
                                                     <div class="row">
@@ -93,7 +115,7 @@
                                 LinkToNextPageFormat = "Próximo",
                             })
                         </div>
-                        <a type="button" class="btn btn-nor bg-purpleTest"  href="@Url.Action("Register","Employee")">
+                        <a type="button" class="btn btn-nor bg-purpleTest" href="@Url.Action("Register","Employee")">
                             Novo Funcionário
                             <i class="ti-pencil-alt" aria-hidden="true"></i>
                         </a>

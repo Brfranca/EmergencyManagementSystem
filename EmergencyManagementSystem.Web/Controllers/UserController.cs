@@ -1,10 +1,6 @@
 ﻿using EmergencyManagementSystem.Service.Interfaces;
 using EmergencyManagementSystem.Service.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace EmergencyManagementSystem.Web.Controllers
 {
@@ -16,18 +12,23 @@ namespace EmergencyManagementSystem.Web.Controllers
             _userRest = userRest;
         }
 
-        public IActionResult Register()
+        public IActionResult Register(long employeeId)
         {
-            return View(new UserModel());
+            return View(new UserModel() {EmployeeId = employeeId });
         }
 
         [HttpPost]
         public IActionResult Register(UserModel userModel)
         {
-            var result = _userRest.Register(userModel);
-            if (!result.Success)
+            if (!ModelState.IsValid)
                 return View(userModel);
 
+            var result = _userRest.Register(userModel);
+            if (!result.Success)
+            {
+                ViewBag.Error = result.Messages;
+                return View(userModel);
+            }
             return RedirectToAction("Index", "Employee");
         }
     }
