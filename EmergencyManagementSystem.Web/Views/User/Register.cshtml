@@ -3,40 +3,64 @@
 @{
     ViewData["Title"] = "Register";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    List<string> Messages = ViewBag?.Error;
+
 }
+
+@Html.AntiForgeryToken()
 
 <div class="content-header sty-one">
     <h1 class="text-white">Cadastro de Usuário</h1>
 </div>
 
-<div class="content">
-    <div class="info-box">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <form>
+@using (Html.BeginForm())
+{
+
+    <div class="content">
+        @if (Messages != null)
+        {
+            <div class="m-b-3" id="error-notification">
+                <div class="callout callout-info" style="margin-bottom: 0!important;">
+                    <h4><i class="fa fa-warning"></i> Nota:</h4>
+                    @foreach (string error in Messages)
+                    {
+                        @error<br />
+                    }
+                </div>
+            </div>
+        }
+        <div class="info-box">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
                         <div class="card-body">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             <div class="row">
                                 <div class="col-md-4 col-xs-12">
                                     <h4 class="card-title">Dados do Login</h4>
                                     <div id="treeview1" class=""></div>
                                 </div>
                             </div>
+                            <input type="hidden" asp-for="EmployeeId" name="EmployeeId" value="@Model.EmployeeId" />
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Usuário</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Usuário" value="@Model.Login" name="Login">
+                                @*<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Usuário" value="@Model.Login" name="Login">*@
+                                @Html.EditorFor(model => model.Login, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(d => d.Login, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Senha</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha" value="@Model.Password" name="Password">
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(d => d.Password, "", new { @class = "text-danger" })
+                                @*<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha" value="@Model.Password" name="Password">*@
                             </div>
                         </div>
                         <div class="card-body">
                             <button type="submit" class="btn btn-lg bg-purpleTest">Cadastrar</button>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+}

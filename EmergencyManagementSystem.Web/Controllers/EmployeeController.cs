@@ -1,14 +1,9 @@
 ﻿using EmergencyManagementSystem.Service.Filters;
 using EmergencyManagementSystem.Service.Interfaces;
 using EmergencyManagementSystem.Service.Models;
-using EmergencyManagementSystem.Service.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using X.PagedList;
 
 namespace EmergencyManagementSystem.Web.Controllers
 {
@@ -17,10 +12,13 @@ namespace EmergencyManagementSystem.Web.Controllers
     {
         private readonly IEmployeeRest _employeeRest;
         private readonly IAddressRest _addressRest;
-        public EmployeeController(IEmployeeRest employeeRest, IAddressRest addressRest)
+        private readonly IUserRest _userRest;
+
+        public EmployeeController(IEmployeeRest employeeRest, IAddressRest addressRest, IUserRest userRest)
         {
             _employeeRest = employeeRest;
             _addressRest = addressRest;
+            _userRest = userRest;
         }
 
         public IActionResult Index(EmployeeFilter employeeFilter)
@@ -29,6 +27,18 @@ namespace EmergencyManagementSystem.Web.Controllers
             ViewBag.CPF = employeeFilter.CPF;
             var employees = _employeeRest.FindPaginated(employeeFilter);
             return View(employees);
+        }
+
+        public IActionResult AddUser(long id)
+        {
+            var result = _userRest.Find(new UserFilter { EmployeeId = id });
+            if (result.Model != null)
+            {
+                ViewBag.Error = new List<string> { "Esse funcionário já tem um usuário e senha cadastrado." };
+                var employees = _employeeRest.FindPaginated(new EmployeeFilter());
+                return View("Index", employees);
+            }
+            return RedirectToAction("Register", "User",new { employeeId = id});
         }
 
         public IActionResult Register()
