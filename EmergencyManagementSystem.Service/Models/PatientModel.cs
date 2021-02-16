@@ -13,7 +13,13 @@ namespace EmergencyManagementSystem.Service.Models
         public string Name { get; set; }
         public int Age { get; set; }
         public Gender Gender { get; set; }
-        public virtual EmergencyModel EmergencyModel { get; set; }
         public long EmergencyId { get; set; }
+
+        public string GetGenderSelected(short gender)
+        {
+            if (Gender == (Gender)gender)
+                return "Selected";
+            return "";
+        }
     }
 }

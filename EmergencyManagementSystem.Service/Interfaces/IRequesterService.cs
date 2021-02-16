@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace EmergencyManagementSystem.Service.Interfaces
 {
-    public interface IEmergencyRest : IRestBase<EmergencyModel>
+    public interface IRequesterService : IRestBase<RequesterModel>
     {
-        Result SimpleRegister(EmergencyModel model);
     }
 }

@@ -55,6 +55,7 @@ namespace EmergencyManagementSystem.Service.Models
     {
         public bool Success { get; set; }
         public List<string> Messages { get; set; }
+        public long Id { get; set; }
 
         public static Result BuildError(string message)
             => new Result
