@@ -1,4 +1,6 @@
 ﻿
+using EmergencyManagementSystem.Service.Enums;
+
 namespace EmergencyManagementSystem.Service.Filters
 {
     public class EmployeeFilter : FilterBase
@@ -6,5 +8,6 @@ namespace EmergencyManagementSystem.Service.Filters
         public long Id { get; set; }
         public string Name { get; set; }
         public string CPF { get; set; }
+        public Occupation Occupation { get; set; }
     }
 }

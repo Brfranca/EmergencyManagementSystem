@@ -63,10 +63,6 @@
                     type: "number",
                     width: 70
                 }, {
-                    name: "Address",
-                    type: "text",
-                    width: 200
-                }, {
                     name: "Country",
                     type: "select",
                     items: db.countries,

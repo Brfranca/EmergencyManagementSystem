@@ -1,4 +1,5 @@
-(function() {
+
+(function () {
 
     var db = {
 
