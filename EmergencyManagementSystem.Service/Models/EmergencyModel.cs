@@ -15,7 +15,7 @@ namespace EmergencyManagementSystem.Service.Models
         public long AddressId { get; set; }
         public EmergencyStatus EmergencyStatus { get; set; }
         public ICollection<EmergencyRequiredVehicleModel> EmergencyRequiredVehicles { get; set; }
-        public ICollection<PatientModel> Patients { get; set; }
+        public List<PatientModel> Patients { get; set; }
         public ICollection<MedicalEvaluationModel> MedicalEvaluations { get; set; }
 
 

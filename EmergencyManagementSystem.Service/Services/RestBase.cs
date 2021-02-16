@@ -13,7 +13,7 @@ namespace EmergencyManagementSystem.Service.Services
     {
         private readonly IConfiguration _configuration;
         private readonly RestClient _restClient;
-        private readonly string _controller;
+        protected readonly string _controller;
         public RestBase(IConfiguration configuration, string key, string controller)
         {
             _configuration = configuration;
