@@ -9,7 +9,7 @@ namespace EmergencyManagementSystem.Service.Enums
 {
     public enum CodeColor : short
     {
-        [Description("Selecionar")]
+        [Description("Selecione")]
         Invalido,
         [Description("Vermelho")]
         Red,

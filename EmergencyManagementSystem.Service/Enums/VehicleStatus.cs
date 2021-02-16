@@ -4,7 +4,7 @@ namespace EmergencyManagementSystem.Service.Enums
 {
     public enum VehicleStatus : short
     {
-        [Description("Selecionar")]
+        [Description("Selecione")]
         Invalid,
         [Description("Quebrado")]
         Broken,

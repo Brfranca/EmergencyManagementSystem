@@ -9,7 +9,7 @@ namespace EmergencyManagementSystem.Service.Enums
 {
     public enum Occupation : short
     {
-        [Description("Selecionar")]
+        [Description("Selecione")]
         Invalid,
         [Description("Técnico/a Auxiliar de Regulação Médica")]
         TARM,

@@ -5,7 +5,7 @@ namespace EmergencyManagementSystem.Service.Enums
 {
     public enum VehicleType : short
     {
-        [Description("Selecionar")]
+        [Description("Selecione")]
         Invalido,
         [Description("Suporte básico de vida terrestre (USB)")]
         USB,

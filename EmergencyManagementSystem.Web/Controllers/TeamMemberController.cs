@@ -1,4 +1,5 @@
-﻿using EmergencyManagementSystem.Service.Filters;
+﻿using EmergencyManagementSystem.Service.Enums;
+using EmergencyManagementSystem.Service.Filters;
 using EmergencyManagementSystem.Service.Interfaces;
 using EmergencyManagementSystem.Service.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -15,12 +16,13 @@ namespace EmergencyManagementSystem.Web.Controllers
         private readonly ITeamMemberRest _teamMemberRest;
         private readonly IEmployeeRest _employeeRest;
         private readonly IAddressRest _addressRest;
-
-        public TeamMemberController(ITeamMemberRest teamMemberRest, IEmployeeRest employeeRest, IAddressRest addressRest)
+        private readonly IVehicleRest _vehicleRest;
+        public TeamMemberController(ITeamMemberRest teamMemberRest, IEmployeeRest employeeRest, IAddressRest addressRest, IVehicleRest vehicleRest)
         {
             _teamMemberRest = teamMemberRest;
             _employeeRest = employeeRest;
             _addressRest = addressRest;
+            _vehicleRest = vehicleRest;
         }
 
         public IActionResult Index()
@@ -28,13 +30,19 @@ namespace EmergencyManagementSystem.Web.Controllers
             return View();
         }
 
-        public IActionResult Register(EmployeeFilter employeeFilter)
+        public IActionResult Register(EmployeeFilter employeeFilter, VehicleFilter vehicleFilter)
         {
+             
             ViewBag.Name = employeeFilter.Name;
             ViewBag.Id = employeeFilter.Id;
             ViewBag.Occupation = employeeFilter.Occupation;
-            var employees = _employeeRest.FindPaginated(employeeFilter);
-            return View(new TeamMemberRegisterViewModel { employeeModels = employees });
+            var employees = (PagedList<EmployeeModel>)_employeeRest.FindPaginated(employeeFilter).Where(d => d.Occupation != Occupation.RO & d.Occupation != Occupation.TARM).ToPagedList<EmployeeModel>();
+
+            ViewBag.VehicleName = vehicleFilter.VehicleName;
+            ViewBag.Plate = vehicleFilter.VehiclePlate;
+            var vehicles = _vehicleRest.FindPaginated(vehicleFilter);
+
+            return View(new TeamMemberRegisterViewModel { EmployeeModels = employees, VehicleModels = vehicles});
         }
     }
 }

@@ -9,7 +9,7 @@ namespace EmergencyManagementSystem.Service.Enums
 {
     public enum  EmergencyStatus : short
     {
-        [Description("Inválido")]
+        [Description("Selecione")]
         Invalid,
         [Description("Cancelada")]
         Canceled,

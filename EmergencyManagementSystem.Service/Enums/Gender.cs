@@ -9,7 +9,7 @@ namespace EmergencyManagementSystem.Service.Enums
 {
     public enum  Gender : short
     {
-        [Description("Selecionar")]
+        [Description("Selecione")]
         Invalid,
         [Description("Feminino")]
         Female,

@@ -10,6 +10,7 @@ namespace EmergencyManagementSystem.Service.Models
     public class TeamMemberRegisterViewModel
     {
         public TeamMemberModel TeamMemberModel { get; set; }
-        public PagedList<EmployeeModel> employeeModels { get; set; }
+        public PagedList<EmployeeModel> EmployeeModels { get; set; }
+        public PagedList<VehicleModel> VehicleModels { get; set; }
     }
 }
