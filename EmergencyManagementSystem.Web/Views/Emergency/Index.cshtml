@@ -22,10 +22,6 @@
                     <ul class="nav nav-tabs profile-tab" role="tablist">
                         <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab" aria-expanded="true">Ocorrência</a> </li>
                         <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab" aria-expanded="false">Avaliação</a> </li>
-                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#settings" role="tab">Atendimento</a> </li>
-
-                        @*<li class="nav-item"><span class="pull-right">Data Hora</span> </li>*@
-                        @*<label class="pull-right">Nº Ocorrência</label>*@
 
                     </ul>
 
@@ -47,8 +43,6 @@
                                                             <input class="form-control" placeholder="Telefone" id="telefone" readonly type="text" name="RequesterPhone" value="@Model.RequesterPhone">
                                                         </div>
                                                     </div>
-
-
                                                     <div class="col-md-6">
                                                         <div class="form-group has-feedback">
                                                             <label class="control-label">Solicitante</label>
@@ -62,13 +56,9 @@
                                                 </div>
 
                                                 <div id="patientNewList">
-
-
-
                                                     @{int current = 0;}
                                                     @foreach (var patient in Model.Patients)
                                                     {
-
                                                         <hr />
 
                                                         <div class="form-group">
@@ -96,9 +86,7 @@
                                                         </div>
                                                         current++;
                                                     }
-
                                                 </div>
-
                                                 <div class="row">
                                                     <div class="col-md-5">
                                                         <button type="button" class="btn btn-sm bg-purpleTest" onclick="AddPatients('patientNew', 'patientNewList')"><i class="fa fa-plus-circle"></i> Paciente</button>
@@ -148,15 +136,12 @@
                                                     <label for="exampleinputemail1">Ponto de Referência</label>
                                                     <input type="text" class="form-control" id="exampleinputemail1" placeholder="Próximo..." value="@(Model?.AddressModel?.Reference)" name="AddressModel.Reference">
                                                 </div>
-
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <button type="submit" id="btnRegister" class="btn btn-lg bg-purpleTest">Registrar</button>
                                                         <button type="button" id="btnCancel" onclick="appendCancel()" class="btn btn-lg bg-light">Cancelar</button>
-
                                                     </div>
                                                 </div>
-
 
                                                 <div id="cancel" class="hide">
                                                     <hr />
@@ -171,13 +156,11 @@
                                                         <div class="col-md-12">
                                                             <button type="submit" class="btn btn-sm bg-purpleTest">Registrar Cancelamento</button>
                                                         </div>
-
                                                     </div>
                                                 </div>
                                             }
                                             else
                                             {
-
                                                 <div class="row">
                                                     <div class="col-md-4">
                                                         <div class="form-group has-feedback">
@@ -185,7 +168,7 @@
                                                             <input class="form-control" placeholder="Telefone" id="telefone" type="text" name="RequesterPhone">
                                                         </div>
                                                     </div>
-                                                    <button type="submit" class="btn btn-lg bg-purpleTest" style="">Iniciar</button>
+                                                    <button type="submit" class="btn btn-nor bg-purpleTest" style="">Iniciar</button>
                                                 </div>
                                             }
                                         </form>
@@ -212,18 +195,13 @@
                                                 <div class="treeview-menu">
 
                                                     <label>Blumenau/Fortaleza Alta - Rua Monte Meru, 353</label>
-
-
                                                     <input id="pac-input"
                                                            class="controls"
                                                            type="text"
                                                            placeholder="Procurar" value="Rua Gustav Tribess - Tribess, Blumenau - SC, Brasil" />
 
                                                     <div id="map">
-
                                                     </div>
-
-
                                                 </div>
                                             </div>
                                         </div>
@@ -707,62 +685,6 @@
                                     </div><!--ACaba card body da pagina-->
 
                                 </div>
-                            </div>
-                        </div>
-
-
-                        <!--third tab-->
-                        <div class="tab-pane" id="settings" role="tabpanel">
-                            <div class="card-body">
-                                <form>
-                                    <div class="form-group">
-                                        <label class="col-lg-12">Full Name</label>
-                                        <div class="col-lg-12">
-                                            <input placeholder="Florence Douglas" class="form-control form-control-line" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="example-email" class="col-md-12">Email</label>
-                                        <div class="col-lg-12">
-                                            <input placeholder="florencedouglas@admin.com" class="form-control form-control-line" name="example-email" id="example-email" type="email">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-12">Password</label>
-                                        <div class="col-md-12">
-                                            <input value="password" class="form-control form-control-line" type="password">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-12">Phone No</label>
-                                        <div class="col-md-12">
-                                            <input placeholder="123 456 7890" class="form-control form-control-line" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-12">Message</label>
-                                        <div class="col-md-12">
-                                            <textarea rows="5" class="form-control form-control-line"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-12">Select Country</label>
-                                        <div class="col-sm-12">
-                                            <select class="form-control form-control-line">
-                                                <option>London</option>
-                                                <option>India</option>
-                                                <option>Usa</option>
-                                                <option>Canada</option>
-                                                <option>Thailand</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-12">
-                                            <button class="btn btn-success">Update Profile</button>
-                                        </div>
-                                    </div>
-                                </form>
                             </div>
                         </div>
                     </div> @*Final TabContent*@
