@@ -11,19 +11,20 @@
 
 @Html.AntiForgeryToken()
 <div class="content-header sty-one">
-    <h1 class="text-white">Equipes</h1>
+    <h1 class="text-white">Seleção de quipes</h1>
 </div>
 @using (Html.BeginForm())
 {
-    <body class="hold-transition skin-blue sidebar-mini">
-        <!-- Main content -->
-        <div class="content">
-            <div class="info-box">
+
+    <!-- Main content -->
+    <div class="content">
+        <div class="info-box">
+            <div class="box-body">
                 <div class="col-md-6">
-                    <div class="jsgrid">
+                    <div class="jsgrid-row">
                         <h4 class="text-white">Veículo</h4>
-                        <table class="jsgrid-table table table-striped table-hover">
-                            <tr style="width: auto">
+                        <table class="jsgrid-table">
+                            <tr>
                                 <th>
                                     <select class="form-control input-sm">
                                         @foreach (var suit in Model.VehicleModels)
@@ -32,144 +33,197 @@
                                         }
                                     </select>
                                 </th>
+                                <th>
+                                    <div class="col-sm-2">
+                                        <div class="form-group-sm">
+                                            <input type="submit" class="btn btn-secondary btn-nor" value="Adicionar veículo" />
+                                        </div>
+                                    </div>
+                                </th>
                             </tr>
                         </table> @*fim da primeira tabela - mostra veiculos*@
 
                     </div>
-                    </div>
-                    <div class="info-box">
-                        <div id="basicscenario" class="jsgrid">
-                            <div class="jsgrid-grid-header jsgrid-header-scrollbar">
-                                <table class="jsgrid-table table table-striped table-hover">
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="info-box">
+                            <div id="basicscenario" class="jsgrid form-control">
+                                <div class="jsgrid-grid-header jsgrid-header-scrollbar form-control">
+                                    <table class="jsgrid-table table table-striped table-hover">
+                                        <tr class="jsgrid-header-row text-black">
+                                            <th class=" jsgrid-header-cell jsgrid-align-center">Nome</th>
+                                            <th class=" jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable">ID</th>
+                                            <th class=" jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable">Ocupação</th>
+                                            <th class=" jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable"></th>
+                                        </tr>
+                                        <tr class="jsgrid-filter-row">
+                                            <td class="jsgrid-cell">
+                                                <input type="text" name="employeeFilter.Name" class="form-control input-sm" value="@ViewBag.Name">
+                                            </td>
+                                            <td class="jsgrid-cell jsgrid-align-right">
+                                                <input type="number" name="employeeFilter.Id" class="form-control input-sm" value="@ViewBag.Id">
+                                            </td>
 
-                                    <tr class="jsgrid-header-row">
-                                        <th class=" jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable">Nome</th>
-                                        <th class=" jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable">ID</th>
-                                        <th class=" jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable">Ocupação</th>
-                                    </tr>
-                                    <tr class="jsgrid-filter-row">
-                                        <td class="jsgrid-cell">
-                                            <input type="text" class="form-control input-sm">
-                                        </td>
-                                        <td class="jsgrid-cell jsgrid-align-right">
-                                            <input type="number" class="form-control input-sm">
-                                        </td>
-
-                                        <td class="jsgrid-cell jsgrid-align-center">
-                                            <select class="form-control input-sm">
-                                                @foreach (EmergencyManagementSystem.Service.Enums.Occupation suit in (EmergencyManagementSystem.Service.Enums.Occupation[])Enum.GetValues(typeof(EmergencyManagementSystem.Service.Enums.Occupation)))
-                                                {
-                                                    <option value="@suit" @*@(suit == (Model?.MemberModel. ?? 0) ? "Selected" : "")*@>@suit.GetEnumDescription()</option>
-                                                }
-                                            </select>
-                                        </td>
-                                        <td class="jsgrid-cell jsgrid-control-field jsgrid-align-center">
-                                            <button class="jsgrid-button jsgrid-search-button" type="button" title="Pesquisar">
-                                            </button>
-                                            <button class="jsgrid-button jsgrid-clear-filter-button" type="button" title="Limpar filtro">
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr class="jsgrid-insert-row" style="display: none;">
-                                        <td class="jsgrid-cell"><input type="text" class="form-control input-sm"></td>
-                                        <td class="jsgrid-cell jsgrid-align-right">
-                                            <input type="number" class="form-control input-sm">
-                                        </td>
-                                        <td class="jsgrid-cell jsgrid-align-center">
-                                            <select class="form-control input-sm">
-                                                @foreach (EmergencyManagementSystem.Service.Enums.Occupation suit in (EmergencyManagementSystem.Service.Enums.Occupation[])Enum.GetValues(typeof(EmergencyManagementSystem.Service.Enums.Occupation)))
-                                                {
-                                                    if (suit != 0)
+                                            <td class="jsgrid-cell jsgrid-align-center">
+                                                <select name="employeeFilter.Occupation" class="form-control input-sm" value="@ViewBag.Occupation">
+                                                    @foreach (EmergencyManagementSystem.Service.Enums.Occupation suit in (EmergencyManagementSystem.Service.Enums.Occupation[])Enum.GetValues(typeof(EmergencyManagementSystem.Service.Enums.Occupation)))
                                                     {
-                                                        suit.GetEnumDescription();
                                                         <option value="@suit" @*@(suit == (Model?.MemberModel. ?? 0) ? "Selected" : "")*@>@suit.GetEnumDescription()</option>
                                                     }
+                                                </select>
+                                            </td>
+                                            <td class="jsgrid-cell jsgrid-control-field jsgrid-align-center">
+                                                <button class="jsgrid-button jsgrid-search-button" type="submit" title="Pesquisar" value="Pesquisar">
+                                                </button>
+                                                <button class="jsgrid-button jsgrid-clear-filter-button" type="button" title="Limpar filtro">
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr class="jsgrid-insert-row" style="display: none;">
+                                            <td class="jsgrid-cell">
+                                                <input type="text" class="form-control input-sm">
+                                            </td>
+                                            <td class="jsgrid-cell jsgrid-align-right">
+                                                <input type="number" class="form-control input-sm">
+                                            </td>
+                                            <td class="jsgrid-cell jsgrid-align-center">
+                                                <select class="form-control input-sm">
+                                                    @foreach (EmergencyManagementSystem.Service.Enums.Occupation suit in (EmergencyManagementSystem.Service.Enums.Occupation[])Enum.GetValues(typeof(EmergencyManagementSystem.Service.Enums.Occupation)))
+                                                    {
+                                                        if (suit != 0)
+                                                        {
+                                                            suit.GetEnumDescription();
+                                                            <option value="@suit" @*@(suit == (Model?.MemberModel. ?? 0) ? "Selected" : "")*@>@suit.GetEnumDescription()</option>
+                                                        }
 
-                                                }
-                                            </select>
-                                        </td>
-                                        <td class="jsgrid-cell jsgrid-control-field jsgrid-align-center">
-                                            <button class="jsgrid-button jsgrid-insert-button" type="button" title="Insert">
-                                            </button>
-                                        </td>
+                                                    }
+                                                </select>
+                                            </td>
+                                            <td class="jsgrid-cell jsgrid-control-field jsgrid-align-center">
+                                                <button class="jsgrid-button jsgrid-insert-button" type="button" title="Insert">
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="jsgrid-grid-body text-gray-dark form-control">
+                                    <table class="jsgrid-table">
+                                        <tbody>
+                                            @foreach (var item in Model.EmployeeModels)
+                                            {
+                                                <tr class="jsgrid-row">
+                                                    <td class="jsgrid-cell jsgrid-align-center">@item.Name</td>
+                                                    <td class="jsgrid-cell jsgrid-align-center">@item.Id</td>
+                                                    <td class="jsgrid-cell jsgrid-align-center">@item.Occupation.GetEnumDescription()</td>
+                                                    <td class="jsgrid-cell jsgrid-control-field jsgrid-align-center">
+                                                        <button class="jsgrid-button jsgrid-insert-button" type="button" title="Adicionar"></button>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+
+
+
+
+                            </div>
+                            @Html.PagedListPager(Model.EmployeeModels, page =>
+                   Url.Action("Register", new { CurrentPage = page, Name = ViewBag.Name, Id = ViewBag.Id, Occupation = ViewBag.Occupation }),
+                   new PagedListRenderOptionsBase
+                   {
+                       ContainerDivClasses = new[] { "jsgrid-pager-page-container" },
+                       ActiveLiElementClass = "jsgrid-pager-nav-button",
+                       PageClasses = new[] { "jsgrid-pager-page" },
+                       UlElementClasses = new[] { "pagination" },
+                       LinkToPreviousPageFormat = "Voltar",
+                       LinkToNextPageFormat = "Próximo",
+                   })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="jsgrid-row">
+                        <h4 class="text-white">Equipe</h4>
+                        <div id="basicscenario" class="jsgrid form-control">
+                            <div class="jsgrid-grid-header jsgrid-header-scrollbar form-control">
+                                <table class="jsgrid-table table table-striped table-hover">
+
+                                    <tr class="jsgrid-header-row text-black">
+                                        <th class=" jsgrid-header-cell jsgrid-align-center">Funcionário</th>
+                                        <th class=" jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable">Veículo</th>
+                                        <th class=" jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable"></th>
                                     </tr>
                                 </table>
                             </div>
-                            <div class="jsgrid-grid-body">
-                                <table class="jsgrid-table table table-striped table-hover">
+                            <div class="jsgrid-grid-body text-gray-dark form-control">
+                                <table class="jsgrid-table">
                                     <tbody>
                                         @foreach (var item in Model.EmployeeModels)
                                         {
                                             <tr class="jsgrid-row">
                                                 <td class="jsgrid-cell jsgrid-align-center">@item.Name</td>
-                                                <td class="jsgrid-cell jsgrid-align-center">@item.Id</td>
                                                 <td class="jsgrid-cell jsgrid-align-center">@item.Occupation.GetEnumDescription()</td>
                                                 <td class="jsgrid-cell jsgrid-control-field jsgrid-align-center">
-                                                    <button class="jsgrid-button jsgrid-edit-button" type="button" title="Edit">
-                                                    </button><button class="jsgrid-button jsgrid-delete-button" type="button" title="Delete"></button>
+                                                    <button class="jsgrid-button jsgrid-delete-button" type="button" title="Delete"></button>
                                                 </td>
                                             </tr>
                                         }
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="jsgrid-pager-container">
-                                <div class="jsgrid-pager">
-                                    <span class="jsgrid-pager-page">
-
-                                        @Html.PagedListPager(Model.EmployeeModels, page =>
-                                                Url.Action("Register", new { CurrentPage = page, Name = ViewBag.EmployeeName, Id = ViewBag.Id, Occupation = ViewBag.Occupation }),
-                                                new PagedListRenderOptionsBase
-                                                {
-                                                    LiElementClasses = new string[] { "page-item" },
-                                                    PageClasses = new string[] { "page-link" }
-                                                })
-                                    </span>
-
-                                </div>
-                            </div>
 
                         </div>
+
                     </div>
+                    <div class="col-sm-2">
+                        <div class="form-group-sm">
+                            <input type="submit" class="btn btn-secondary" value="Confirmar equipe" />
+                        </div>
+                    </div>
+
                 </div>
+                
 
-                <!-- v4.0.0-alpha.6 -->
-                <link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css">
-
-                <!-- Theme style -->
-                @*<link rel="stylesheet" href="~/css/style.css">*@    @*deixa a escrita na tabela na cor branca *@
-                <link rel="stylesheet" href="~/css/font-awesome/css/font-awesome.min.css">
-                <link rel="stylesheet" href="~/css/et-line-font/et-line-font.css">
-                <link rel="stylesheet" href="~/css/themify-icons/themify-icons.css">
-
-                <!-- jsgrid Tables -->
-                <link type="text/css" rel="stylesheet" href="~/plugins/jsgrid/jsgrid.css" />
-                <link type="text/css" rel="stylesheet" href="~/plugins/jsgrid/theme.css" />
-
-                <!-- jsgrid Tables -->
-                @*<script src="~/plugins/jsgrid/db.js"></script>*@ @*aonde tem os filtros para a tabela*@
-                <script src="~/plugins/jsgrid/jsgrid.css"></script>
-
-                <script src="~/plugins/jsgrid/jsgrid.min.js"></script>
-                @*<script src="~/plugins/jsgrid/jsgrid.int.js"></script>*@
-                @*<script src="~/plugins/jsgrid/theme.css"></script>*@
-                <script src="~/lib/bootstrap/dist/css/bootstrap.min.css"></script>
-                <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-                <script src="~/js/jquery.min.js"></script>
             </div>
-    </body>
+
+        </div>
+    @*finalização das duas primeiras tabelas, onde selecionamos o veiculo e o funcionário*@
+
+    @*
+
+        <!-- v4.0.0-alpha.6 -->
+        @*<link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css">*@
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/css/style.css">
+    @*deixa a escrita na tabela na cor branca *@
+    <link rel="stylesheet" href="~/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/et-line-font/et-line-font.css">
+    <link rel="stylesheet" href="~/css/themify-icons/themify-icons.css">
+
+    <!-- jsgrid Tables -->
+    <link type="text/css" rel="stylesheet" href="~/plugins/jsgrid/jsgrid.css" />
+    <link type="text/css" rel="stylesheet" href="~/plugins/jsgrid/theme.css" />
+
+    <!-- jsgrid Tables -->
+    @*<script src="~/plugins/jsgrid/db.js"></script>*@ @*aonde tem os filtros para a tabela*@
+    <script src="~/plugins/jsgrid/jsgrid.css"></script>
+
+    <script src="~/plugins/jsgrid/jsgrid.min.js"></script>
+    @*<script src="~/plugins/jsgrid/jsgrid.int.js"></script>*@
+    <script src="~/plugins/jsgrid/theme.css"></script>
+    @*<script src="~/lib/bootstrap/dist/css/bootstrap.min.css"></script>*@
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/js/jquery.min.js"></script>
+    </div>
+
 }
 
-<script>
-    function() {
-        $("#basicscenario").jsGrid({
-            filtering: false,
-            editing: false,
-            sorting: false,
-            paging: false,
-            pageButtonCount: 5,
-        })
-</script>
+
 
 
 
