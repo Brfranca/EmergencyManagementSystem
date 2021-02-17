@@ -44,5 +44,10 @@ namespace EmergencyManagementSystem.Web.Controllers
 
             return View(new TeamMemberRegisterViewModel { EmployeeModels = employees, VehicleModels = vehicles});
         }
+
+        public IActionResult Teste()
+        {
+            return View();
+        }
     }
 }

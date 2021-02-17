@@ -31,5 +31,10 @@ namespace EmergencyManagementSystem.Web.Controllers
             }
             return RedirectToAction("Index", "Employee");
         }
+
+        public IActionResult Update(long employeeId)
+        {
+            return View(new UserModel() { EmployeeId = employeeId });
+        }
     }
 }
