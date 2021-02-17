@@ -1,0 +1,150 @@
+﻿@using EmergencyManagementSystem.Service.Models
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+@model EmergencyManagementSystem.Service.Models.MemberRegisterViewModel
+
+
+@{
+    ViewData["Title"] = "Teste";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+@Html.AntiForgeryToken()
+<div class="content-header sty-one">
+    <h1 class="text-white">Composição de Equipe </h1>
+</div>
+
+<div class="content">
+    <div class="info-box">
+        <div class="row">
+            <div class="col-lg-6 m-b-3">
+                <h4 class="text-white">Profissionais</h4>
+                <div class="col-lg-12 form-group-sm row ">
+                    <select name="employeeFilter.Occupation" class="form-control input-sm" value="@ViewBag.Occupation">
+                        @foreach (EmergencyManagementSystem.Service.Enums.Occupation suit in (EmergencyManagementSystem.Service.Enums.Occupation[])Enum.GetValues(typeof(EmergencyManagementSystem.Service.Enums.Occupation)))
+                        {
+                            <option value="@suit" @*@(suit == (Model?.MemberModel. ?? 0) ? "Selected" : "")*@>@suit.GetEnumDescription()</option>
+                        }
+                    </select>
+                    <input type="submit" class="btn btn-secondary btn-nor" value="Pesquisar" />
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="bg-primary text-white">
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Ocupação</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.EmployeeModels)
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>@item.Name</td>
+                                    <td>@item.Occupation.GetEnumDescription()</td>
+                                    <td>
+                                        <div class="jsgrid">
+                                            <button class="jsgrid-button jsgrid-insert-button" type="button" title="Adicionar"></button>
+                                        </div>
+                                        
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                    @Html.PagedListPager(Model.EmployeeModels, page =>
+                   Url.Action("Index", new { CurrentPage = page, Name = ViewBag.Name, Id = ViewBag.Id, Occupation = ViewBag.Occupation }),
+                   new PagedListRenderOptionsBase
+                   {
+                       ContainerDivClasses = new[] { "jsgrid-pager-page-container" },
+                       ActiveLiElementClass = "jsgrid-pager-nav-button",
+                       PageClasses = new[] { "jsgrid-pager-page" },
+                       UlElementClasses = new[] { "pagination" },
+                       LinkToPreviousPageFormat = "Voltar",
+                       LinkToNextPageFormat = "Próximo",
+                   })
+                </div>
+            </div>
+
+            <div class="col-lg-6 m-b-3">
+                <h4 class="text-white">Veículo</h4>
+                <div class="form-group has-feedback">
+                    <select class="form-control input-sm" value="@ViewBag.VehicleId">
+                        @foreach (var suit in Model.VehicleModels)
+                        {
+                            <option value="@suit">@suit.Codename</option>
+                        }
+                    </select>
+                    <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
+                </div>
+                <h4 class="text-white">Equipe atual</h4>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="bg-primary text-white">
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Funcionário</th>
+                                <th scope="col">Ocupação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model.MemberModels)
+                            {
+                                <tr>
+                                    <td>@item.EmployeeGuid</td>
+                                    <td>como add o nome/</td>
+                                    <td>como add a ocupação?</td>
+                                    <td>
+                                        <button class="fa-remove" type="button" title="Remover"></button>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                    @Html.PagedListPager(Model.MemberModels, page =>
+                   Url.Action("Register", new { CurrentPage = page, VehicleId = ViewBag.VehicleId, Id = ViewBag.Id, Occupation = ViewBag.Occupation }),
+                   new PagedListRenderOptionsBase
+                   {
+                       ContainerDivClasses = new[] { "jsgrid-pager-page-container" },
+                       ActiveLiElementClass = "jsgrid-pager-nav-button",
+                       PageClasses = new[] { "jsgrid-pager-page" },
+                       UlElementClasses = new[] { "pagination" },
+                       LinkToPreviousPageFormat = "Voltar",
+                       LinkToNextPageFormat = "Próximo",
+                   })
+                </div>
+            </div>
+
+            <script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
+            <script src="~/plugins/datatables/dataTables.bootstrap.min.js"></script>
+            <script src="~/plugins/jsgrid/jsgrid.css"></script>
+            <script src="~/plugins/jsgrid/jsgrid.min.js"></script>
+            <link rel="stylesheet" href="~/css/themify-icons/themify-icons.css">
+
+            <link rel="stylesheet" href="~/css/et-line-font/et-line-font.css">
+
+            <!-- jsgrid Tables -->
+            <link type="text/css" rel="stylesheet" href="~/plugins/jsgrid/jsgrid.css" />
+            <link type="text/css" rel="stylesheet" href="~/plugins/jsgrid/theme.css" />
+
+            <!-- jsgrid Tables -->
+            @*<script src="~/plugins/jsgrid/db.js"></script>*@ @*aonde tem os filtros para a tabela*@
+            <script src="~/plugins/jsgrid/jsgrid.css"></script>
+
+            <script src="~/plugins/jsgrid/jsgrid.min.js"></script>
+            @*<script src="~/plugins/jsgrid/jsgrid.int.js"></script>*@
+            <script src="~/plugins/jsgrid/theme.css"></script>
+            @*<script src="~/lib/bootstrap/dist/css/bootstrap.min.css"></script>*@
+            <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+            <script src="~/js/jquery.min.js"></script>
+        </div>
+    </div>
+</div>
