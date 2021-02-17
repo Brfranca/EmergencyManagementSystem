@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-md-6">
                         <div class="info-box">
                             <div id="basicscenario" class="jsgrid form-control">
                                 <div class="jsgrid-grid-header jsgrid-header-scrollbar form-control">
@@ -89,15 +89,17 @@
                                             </td>
                                             <td class="jsgrid-cell jsgrid-align-center">
                                                 <select class="form-control input-sm">
-                                                    @foreach (EmergencyManagementSystem.Service.Enums.Occupation suit in (EmergencyManagementSystem.Service.Enums.Occupation[])Enum.GetValues(typeof(EmergencyManagementSystem.Service.Enums.Occupation)))
-                                                    {
-                                                        if (suit != 0)
-                                                        {
-                                                            suit.GetEnumDescription();
-                                                            <option value="@suit" @*@(suit == (Model?.MemberModel. ?? 0) ? "Selected" : "")*@>@suit.GetEnumDescription()</option>
-                                                        }
 
+
+                                                    @foreach (EmergencyManagementSystem.Service.Enums.Occupation suit in
+                                                    (EmergencyManagementSystem.Service.Enums.Occupation[])Enum.GetValues(typeof(EmergencyManagementSystem.Service.Enums.Occupation)))
+                                                    {
+
+                                                        suit.GetEnumDescription();
+                                                        <option value="@suit" @*@(suit == (Model?.MemberModel. ?? 0) ? "Selected" : "")*@>@suit.GetEnumDescription()</option>
                                                     }
+
+
                                                 </select>
                                             </td>
                                             <td class="jsgrid-cell jsgrid-control-field jsgrid-align-center">
@@ -186,39 +188,39 @@
                     </div>
 
                 </div>
-                
+
 
             </div>
 
         </div>
-    @*finalização das duas primeiras tabelas, onde selecionamos o veiculo e o funcionário*@
+        @*finalização das duas primeiras tabelas, onde selecionamos o veiculo e o funcionário*@
 
-    @*
+        @*
 
-        <!-- v4.0.0-alpha.6 -->
-        @*<link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css">*@
+            <!-- v4.0.0-alpha.6 -->
+            @*<link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css">*@
 
-    <!-- Theme style -->
-    <link rel="stylesheet" href="~/css/style.css">
-    @*deixa a escrita na tabela na cor branca *@
-    <link rel="stylesheet" href="~/css/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="~/css/et-line-font/et-line-font.css">
-    <link rel="stylesheet" href="~/css/themify-icons/themify-icons.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="~/css/style.css">
+        @*deixa a escrita na tabela na cor branca *@
+        <link rel="stylesheet" href="~/css/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="~/css/et-line-font/et-line-font.css">
+        <link rel="stylesheet" href="~/css/themify-icons/themify-icons.css">
 
-    <!-- jsgrid Tables -->
-    <link type="text/css" rel="stylesheet" href="~/plugins/jsgrid/jsgrid.css" />
-    <link type="text/css" rel="stylesheet" href="~/plugins/jsgrid/theme.css" />
+        <!-- jsgrid Tables -->
+        <link type="text/css" rel="stylesheet" href="~/plugins/jsgrid/jsgrid.css" />
+        <link type="text/css" rel="stylesheet" href="~/plugins/jsgrid/theme.css" />
 
-    <!-- jsgrid Tables -->
-    @*<script src="~/plugins/jsgrid/db.js"></script>*@ @*aonde tem os filtros para a tabela*@
-    <script src="~/plugins/jsgrid/jsgrid.css"></script>
+        <!-- jsgrid Tables -->
+        @*<script src="~/plugins/jsgrid/db.js"></script>*@ @*aonde tem os filtros para a tabela*@
+        <script src="~/plugins/jsgrid/jsgrid.css"></script>
 
-    <script src="~/plugins/jsgrid/jsgrid.min.js"></script>
-    @*<script src="~/plugins/jsgrid/jsgrid.int.js"></script>*@
-    <script src="~/plugins/jsgrid/theme.css"></script>
-    @*<script src="~/lib/bootstrap/dist/css/bootstrap.min.css"></script>*@
-    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="~/js/jquery.min.js"></script>
+        <script src="~/plugins/jsgrid/jsgrid.min.js"></script>
+        @*<script src="~/plugins/jsgrid/jsgrid.int.js"></script>*@
+        <script src="~/plugins/jsgrid/theme.css"></script>
+        @*<script src="~/lib/bootstrap/dist/css/bootstrap.min.css"></script>*@
+        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="~/js/jquery.min.js"></script>
     </div>
 
 }
