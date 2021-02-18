@@ -33,8 +33,10 @@ namespace EmergencyManagementSystem.Web
             services.AddScoped<IVehicleRest, VehicleRest>();
             services.AddScoped<IAddressRest, AddressRest>();
             services.AddScoped<IMemberRest, MemberRest>();
-            services.AddScoped<IRequesterService, RequesterService>();
+            services.AddScoped<IRequesterService, RequesterRest>();
             services.AddScoped<IEmergencyRest, EmergencyRest>();
+            services.AddScoped<UserService>();
+            services.AddHttpContextAccessor();
 
 
 

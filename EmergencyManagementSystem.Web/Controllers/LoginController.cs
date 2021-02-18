@@ -17,9 +17,14 @@ namespace EmergencyManagementSystem.Web.Controllers
     public class LoginController : Controller
     {
         private readonly IUserRest _userRest;
-        public LoginController(IUserRest userRest)
+        private readonly UserService _userService;
+        private readonly IEmployeeRest _employeeRest;
+        public LoginController(IUserRest userRest, IEmployeeRest employeeRest,
+            UserService userService)
         {
             _userRest = userRest;
+            _userService = userService;
+            _employeeRest = employeeRest;
         }
 
         public IActionResult Index()
@@ -42,7 +47,13 @@ namespace EmergencyManagementSystem.Web.Controllers
                     return View("Index", userLogin);
                 }
 
-                SingIn(user.Model);
+                var employee = _employeeRest.Find(new EmployeeFilter { Id = user.Model.EmployeeId });
+                if (!employee.Success)
+                {
+                    ModelState.AddModelError("Login", "Funcionário não encontrado");
+                    return View("Index", userLogin);
+                }
+                SingIn(user.Model, employee.Model);
 
                 return RedirectToAction("Index");
             }
@@ -61,15 +72,16 @@ namespace EmergencyManagementSystem.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        private async void SingIn(UserModel usuario)
+        private async void SingIn(UserModel usuario, EmployeeModel employee)
         {
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, usuario.Login),
-                new Claim(ClaimTypes.Role, "Usuario_Comum")
+                new Claim(ClaimTypes.Role, employee.Name),
             };
 
             var identidadeDeUsuario = new ClaimsIdentity(claims, "Login");
+
             ClaimsPrincipal claimPrincipal = new ClaimsPrincipal(identidadeDeUsuario);
 
             var propriedadesDeAutenticacao = new AuthenticationProperties

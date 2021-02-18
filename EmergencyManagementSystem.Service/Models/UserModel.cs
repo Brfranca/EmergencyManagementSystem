@@ -14,5 +14,6 @@ namespace EmergencyManagementSystem.Service.Models
         public string Password { get; set; }
         [Required(ErrorMessage = "Favor informar o Id do funcionário.")]
         public long EmployeeId { get; set; }
+        public string EmployeeName { get; set; }
     }
 }

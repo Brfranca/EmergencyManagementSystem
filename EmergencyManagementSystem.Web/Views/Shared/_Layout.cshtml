@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using EmergencyManagementSystem.Web
+@inject UserService _userService
+@{
+    var currentUser = @_userService.GetCurrentUser();
+}
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="utf-8">
@@ -159,7 +164,7 @@
                         </li>
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu p-ph-res">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> @*<img src="~/img/img1.jpg" class="user-image" alt="User Image">*@ <span class="hidden-xs">Alexander Pierce</span> </a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> @*<img src="~/img/img1.jpg" class="user-image" alt="User Image">*@ <span class="hidden-xs">@currentUser.EmployeeName</span> </a>
                             <ul class="dropdown-menu">
                                 <li class="user-header">
                                     <div class="pull-left user-img"><img src="~/img/img1.jpg" class="img-responsive" alt="User"></div>

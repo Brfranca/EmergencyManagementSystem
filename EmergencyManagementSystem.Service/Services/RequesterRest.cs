@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace EmergencyManagementSystem.Service.Services
 {
-    public class RequesterService : RestBase<RequesterModel>, IRequesterService
+    public class RequesterRest : RestBase<RequesterModel>, IRequesterService
     {
-        public RequesterService(IConfiguration configuration)
+        public RequesterRest(IConfiguration configuration)
             : base(configuration, "CommonApi", "Requester")
         {
         }
