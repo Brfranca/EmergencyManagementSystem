@@ -14,24 +14,35 @@
 <div class="content-header sty-one">
     <h1 class="text-white">Composição de Equipe </h1>
 </div>
+<form>
+    <div class="content">
+        <div class="info-box">
+            <div class="row">
+                <div class="col-lg-6 m-b-3">
+                    <h4 class="text-white">Ocupação</h4>
+                    <div class="form-group has-feedback ">
+                        <select name="employeeFilter.Occupation" class="form-control input-sm" value="@ViewBag.Occupation" id="employeeFilter">
+                            @foreach (EmergencyManagementSystem.Service.Enums.Occupation suit in (EmergencyManagementSystem.Service.Enums.Occupation[])Enum.GetValues(typeof(EmergencyManagementSystem.Service.Enums.Occupation)))
+                            {
+
+                                <option value="@suit">@suit.GetEnumDescription()</option>
+
+                            }
+                        </select>
+                        <input type="submit" class="btn btn-secondary btn-nor" value="Pesquisar" id="employeeFilter" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+</form>
 <form method="post" action="@Url.Action("Register","Member")" id="formMember">
     <div class="content">
         <div class="info-box">
             <div class="row">
                 <div class="col-lg-6 m-b-3">
-                    <h4 class="text-white">Profissionais</h4>
-                    <div class="form-group has-feedback ">
-                        <select name="employeeFilter.Occupation" class="form-control input-sm" value="@ViewBag.Occupation">
-                            @foreach (EmergencyManagementSystem.Service.Enums.Occupation suit in (EmergencyManagementSystem.Service.Enums.Occupation[])Enum.GetValues(typeof(EmergencyManagementSystem.Service.Enums.Occupation)))
-                            {
-                                <option value="@suit" @*@(suit == (Model?.MemberModel. ?? 0) ? "Selected" : "")*@>@suit.GetEnumDescription()</option>
-                            }
-                        </select>
-                        <input type="submit" class="btn btn-secondary btn-nor" value="Pesquisar" />
-                    </div>
-
-
                     <div class="table-responsive">
+                        <h4 class="text-white">Profissionais</h4>
                         <table class="table">
                             <thead class="bg-primary text-white">
                                 <tr>
@@ -85,6 +96,7 @@
                         <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                     </div>
 
+                    @*fazer outro form a partir daqui*@
 
                     <h4 class="text-white">Equipe atual</h4>
                     <div class="table-responsive">
@@ -125,7 +137,7 @@
                        })
                     </div>
                 </div>
-            </div>
+            </div> @*fazer mais um form e colocar os dois primeiros dentro de uma div para ficar um do lado do outro?*@
         </div>
     </div>
     <input type="submit" hidden id="addMember" />
@@ -140,6 +152,8 @@
         $('#addMember').click();
 
     }
+
+
 </script>
 
 <script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
