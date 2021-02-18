@@ -47,13 +47,13 @@ namespace EmergencyManagementSystem.Web.Controllers
                 var requesterResult = _requesterService.Find(new RequesterFilter { Telephone = emergencyModel.RequesterPhone });
                 if (!requesterResult.Success)
                 {
-                    //adicionar mensagem de erro
-                    return View(emergencyModel); //colocar um new e n retornar os dados
+                    ViewBag.Error = new List<string>() { requesterResult?.Messages?.FirstOrDefault() ?? "Ocorreu um erro, favor tente novamente." };
+                    return View("Index", new EmergencyModel()); 
                 }
 
                 emergencyModel.AddressId = requesterResult?.Model?.AddressId ?? 0;
                 emergencyModel.AddressModel = requesterResult?.Model?.AddressModel;
-                emergencyModel.EmergencyStatus = Service.Enums.EmergencyStatus.Opened;
+                emergencyModel.EmergencyStatus = EmergencyStatus.Opened;
                 emergencyModel.RequesterName = requesterResult?.Model?.Name ?? "";
                 emergencyModel.Name = "";
                 emergencyModel.Date = DateTime.Now;
@@ -61,7 +61,7 @@ namespace EmergencyManagementSystem.Web.Controllers
                 var emergencyResult = _emergencyRest.SimpleRegister(emergencyModel);
                 if (!emergencyResult.Success)
                 {
-                    //Adicionar mensagem de erro
+                    ViewBag.Error = new List<string> { emergencyResult?.Messages?.FirstOrDefault() ?? "Ocorreu um erro, favor tente novamente." };
                     return View(emergencyModel);
                 }
                 emergencyModel.Id = emergencyResult.Id;
@@ -73,8 +73,8 @@ namespace EmergencyManagementSystem.Web.Controllers
                 var requesterResultFind = _requesterService.Find(new RequesterFilter { Telephone = emergencyModel.RequesterPhone });
                 if (!requesterResultFind.Success)
                 {
-                    //adicionar mensagem de erro.
-                    return View(emergencyModel);
+                    ViewBag.Error = new List<string> { requesterResultFind?.Messages?.FirstOrDefault() ?? "Ocorreu um erro, favor tente novamente." };
+                    return View("Index", emergencyModel);
                 }
                 if ((requesterResultFind?.Model?.Id ?? 0) == 0)
                 {
@@ -86,8 +86,8 @@ namespace EmergencyManagementSystem.Web.Controllers
                     });
                     if (!requesterResult.Success)
                     {
-                        //adicionar mensagem de erro.
-                        return View(emergencyModel);
+                        ViewBag.Error = requesterResult.Messages;
+                        return View("Index", emergencyModel);
                     }
                 }
                 else
@@ -98,18 +98,18 @@ namespace EmergencyManagementSystem.Web.Controllers
                     var requesterResult = _requesterService.Update(requesterResultFind.Model);
                     if (!requesterResult.Success)
                     {
-                        //adicionar mensagem de erro.
-                        return View(emergencyModel);
+                        ViewBag.Error = requesterResult.Messages;
+                        return View("Index", emergencyModel);
                     }
                 }
-                if (emergencyModel.EmergencyStatus == Service.Enums.EmergencyStatus.Opened)
-                    emergencyModel.EmergencyStatus = Service.Enums.EmergencyStatus.InEvaluation;
+                if (emergencyModel.EmergencyStatus == EmergencyStatus.Opened)
+                    emergencyModel.EmergencyStatus = EmergencyStatus.InEvaluation;
 
                 var emergencyResult = _emergencyRest.Update(emergencyModel);
                 if (!emergencyResult.Success)
                 {
-                    //adicionar mensagem de erro.
-                    return View(emergencyModel);
+                    ViewBag.Error = emergencyResult.Messages;
+                    return View("Index", emergencyModel);
                 }
                 //retornar todas as ocorrênciar em aberto
                 return View("Index", new EmergencyModel());
