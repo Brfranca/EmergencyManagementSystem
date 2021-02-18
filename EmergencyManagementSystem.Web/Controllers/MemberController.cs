@@ -44,7 +44,7 @@ namespace EmergencyManagementSystem.Web.Controllers
             //ViewBag.Guid = memberFilter.EmployeeGuid;
             //var employeeMembers = _employeeRest.FindPaginated(memberFilter);
 
-            return View(new MemberRegisterViewModel { EmployeeModels = employees, VehicleModels = vehicles, MemberModels = members/*, EmployeeMembers = employeeMembers*/ });
+            return View(new MemberRegisterModel { EmployeeModels = employees, VehicleModels = vehicles, MemberModels = members/*, EmployeeMembers = employeeMembers*/ });
         }
 
         [HttpPost]

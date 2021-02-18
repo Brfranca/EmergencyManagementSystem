@@ -115,69 +115,15 @@
                                 <li class="footer"><a href="#">View All Messages</a></li>
                             </ul>
                         </li>
-                        <!-- Notifications: style can be found in dropdown.less -->
-                        <li class="dropdown messages-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-bell-o"></i>
-                                <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">Notifications</li>
-                                <li>
-                                    <ul class="menu">
-                                        <li>
-                                            <a href="#">
-                                                <div class="pull-left icon-circle red"><i class="icon-lightbulb"></i></div>
-                                                <h4>Alex C. Patton</h4>
-                                                <p>I've finished it! See you so...</p>
-                                                <p><span class="time">9:30 AM</span></p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <div class="pull-left icon-circle blue"><i class="fa fa-coffee"></i></div>
-                                                <h4>Nikolaj S. Henriksen</h4>
-                                                <p>I've finished it! See you so...</p>
-                                                <p><span class="time">1:30 AM</span></p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <div class="pull-left icon-circle green"><i class="fa fa-paperclip"></i></div>
-                                                <h4>Kasper S. Jessen</h4>
-                                                <p>I've finished it! See you so...</p>
-                                                <p><span class="time">9:30 AM</span></p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <div class="pull-left icon-circle yellow"><i class="fa  fa-plane"></i></div>
-                                                <h4>Florence S. Kasper</h4>
-                                                <p>I've finished it! See you so...</p>
-                                                <p><span class="time">11:10 AM</span></p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="footer"><a href="#">Check all Notifications</a></li>
-                            </ul>
-                        </li>
+
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu p-ph-res">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"> @*<img src="~/img/img1.jpg" class="user-image" alt="User Image">*@ <span class="hidden-xs">@currentUser.EmployeeName</span> </a>
                             <ul class="dropdown-menu">
-                                <li class="user-header">
-                                    <div class="pull-left user-img"><img src="~/img/img1.jpg" class="img-responsive" alt="User"></div>
-                                    <p class="text-left">Florence Douglas <small>florence@gmail.com</small> </p>
-                                    <div class="view-link text-left"><a href="#">View Profile</a> </div>
-                                </li>
-                                <li><a href="#"><i class="icon-profile-male"></i> My Profile</a></li>
-                                <li><a href="#"><i class="icon-wallet"></i> My Balance</a></li>
-                                <li><a href="#"><i class="icon-envelope"></i> Inbox</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#"><i class="icon-gears"></i> Account Setting</a></li>
+                                <li><a href="#"><i class="icon-gears"></i> Alterar Senha</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="@Url.Action("Logout", "Login")"><i class="fa fa-power-off"></i> Logout</a></li>
+                                <li><a href="@Url.Action("Logout", "Login")"><i class="fa fa-power-off"></i> Sair</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -192,7 +138,7 @@
                 <div class="user-panel">
                     <div class="image text-center"><img src="~/img/img1.jpg" class="img-circle" alt="User Image"> </div>
                     <div class="info">
-                        <p>Alexander Pierce</p>
+                        <p>@currentUser.Login</p>
                         @*  <a href="#"><i class="fa fa-cog"></i></a> <a href="#"><i class="fa fa-envelope-o"></i></a> <a href="#"><i class="fa fa-power-off"></i></a>*@
                     </div>
                 </div>
@@ -205,8 +151,6 @@
                         <ul class="treeview-menu">
                             <li><a href="@Url.Action("","Employee")">Funcionário</a></li>
                             <li><a href="@Url.Action("","Vehicle")">Veículos</a></li>
-                            <li><a href="index3.html">Dashboard 3</a></li>
-                            <li><a href="index4.html">Dashboard 4</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
@@ -220,14 +164,6 @@
                         </ul>
                     </li>
                     <li class="treeview">
-                        <a href="#"> <i class="fa fa-envelope-o "></i> <span>Inbox</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
-                        <ul class="treeview-menu">
-                            <li><a href="apps-mailbox.html">Mailbox</a></li>
-                            <li><a href="apps-mailbox-detail.html">Mailbox Detail</a></li>
-                            <li><a href="apps-compose-mail.html">Compose Mail</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
                         <a href="#"> <i class="fa fa-briefcase"></i> <span>Cadastros</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
                         <ul class="treeview-menu">
                             <li><a href="ui-cards.html" class="active">Funcionários</a></li>
@@ -235,24 +171,6 @@
                             <li><a href="ui-user-card.html">Carros</a></li>
                             <li><a href="ui-grid.html">Grid</a></li>
                             <li><a href="ui-buttons.html">Buttons</a></li>
-                            <li><a href="ui-notification.html">Notification</a></li>
-                            <li><a href="ui-progressbar.html">Progressbar</a></li>
-                            <li><a href="ui-range-slider.html">Range slider</a></li>
-                            <li><a href="ui-timeline.html">Timeline</a></li>
-                            <li><a href="ui-horizontal-timeline.html">Horizontal Timeline</a></li>
-                            <li><a href="ui-breadcrumb.html">Breadcrumb</a></li>
-                            <li><a href="ui-typography.html">Typography</a></li>
-                            <li><a href="ui-bootstrap-switch.html">Bootstrap Switch</a></li>
-                            <li><a href="ui-tooltip-popover.html">Tooltip &amp; Popover</a></li>
-                            <li><a href="ui-list-media.html">List Media</a></li>
-                            <li><a href="ui-carousel.html">Carousel</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#"> <i class="fa fa-map-marker"></i> <span>Maps</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
-                        <ul class="treeview-menu">
-                            <li><a href="map-google.html">Google Maps</a></li>
-                            <li><a href="map-vector.html" class="active">Vector Maps</a></li>
                         </ul>
                     </li>
                 </ul>

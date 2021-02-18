@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using X.PagedList;
+﻿using X.PagedList;
 
 namespace EmergencyManagementSystem.Service.Models
 {
-    public class MemberRegisterViewModel
+    public class MemberRegisterModel
     {
         public PagedList<MemberModel> MemberModels { get; set; }
         public MemberModel MemberModel { get; set; }
