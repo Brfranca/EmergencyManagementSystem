@@ -1,5 +1,6 @@
 ﻿
 using EmergencyManagementSystem.Service.Enums;
+using System;
 
 namespace EmergencyManagementSystem.Service.Filters
 {
@@ -9,5 +10,7 @@ namespace EmergencyManagementSystem.Service.Filters
         public string Name { get; set; }
         public string CPF { get; set; }
         public Occupation Occupation { get; set; }
+        public Guid Guid { get; set; }
+
     }
 }

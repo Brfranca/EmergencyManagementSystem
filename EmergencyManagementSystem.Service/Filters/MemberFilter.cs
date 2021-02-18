@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EmergencyManagementSystem.Service.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +12,7 @@ namespace EmergencyManagementSystem.Service.Filters
         public long Id { get; set; }
         public Guid EmployeeGuid { get; set; }
         public long VehicleId { get; set; }
+        public VehicleModel VehicleModel { get; set; }
+
     }
 }

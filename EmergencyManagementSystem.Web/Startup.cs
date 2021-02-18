@@ -32,7 +32,7 @@ namespace EmergencyManagementSystem.Web
             services.AddScoped<IEmployeeRest, EmployeeRest>();
             services.AddScoped<IVehicleRest, VehicleRest>();
             services.AddScoped<IAddressRest, AddressRest>();
-            services.AddScoped<ITeamMemberRest, TeamMemberRest>();
+            services.AddScoped<IMemberRest, MemberRest>();
             services.AddScoped<IRequesterService, RequesterService>();
             services.AddScoped<IEmergencyRest, EmergencyRest>();
 
