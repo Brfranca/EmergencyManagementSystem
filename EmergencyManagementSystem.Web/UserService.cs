@@ -1,11 +1,6 @@
-﻿using EmergencyManagementSystem.Service.Filters;
-using EmergencyManagementSystem.Service.Interfaces;
-using EmergencyManagementSystem.Service.Models;
+﻿using EmergencyManagementSystem.Service.Models;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace EmergencyManagementSystem.Web
 {

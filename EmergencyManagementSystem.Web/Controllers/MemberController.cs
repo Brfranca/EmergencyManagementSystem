@@ -50,7 +50,8 @@ namespace EmergencyManagementSystem.Web.Controllers
         [HttpPost]
         public IActionResult Register(MemberModel memberModel)
         {
-
+            //está recebendo o EmployeeGuid e o VehicleId
+            
             return View();
         }
 

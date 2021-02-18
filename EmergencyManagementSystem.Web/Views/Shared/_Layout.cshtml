@@ -45,9 +45,9 @@
             <!-- Logo -->
             <a href="index.html" class="logo blue-bg">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><img src="~/img/logo-n.png" alt=""></span>
+                <span class="logo-mini"><img src="~/img/Caduceus.png" alt=""></span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><img src="~/img/logo.png" alt=""></span>
+                <span class="logo-lg"><img src="~/img/EMS_United_Salvation.png" alt=""></span>
             </a>
             <!-- Header Navbar: style can be found in header.less --> @*TESTE COR*@
             <nav class="navbar blue-bg navbar-static-top">
@@ -55,16 +55,6 @@
                 <ul class="nav navbar-nav pull-left">
                     <li><a class="sidebar-toggle" data-toggle="push-menu" href=""></a> </li>
                 </ul>
-                <!--<div class="pull-left search-box">
-                    <form action="#" method="get" class="search-form">
-                        <div class="input-group">
-                            <input name="search" class="form-control" placeholder="Search..." type="text">
-                            <span class="input-group-btn">
-                                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i> </button>
-                            </span>
-                        </div>
-                    </form>-->
-                <!-- search form -->
                 <!--</div>-->
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
@@ -121,7 +111,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"> @*<img src="~/img/img1.jpg" class="user-image" alt="User Image">*@ <span class="hidden-xs">@currentUser.EmployeeName</span> </a>
                             <ul class="dropdown-menu">
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#"><i class="icon-gears"></i> Alterar Senha</a></li>
+                                <li><a href="@Url.Action("Update", "User")"><i class="icon-gears"></i> Alterar Senha</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="@Url.Action("Logout", "Login")"><i class="fa fa-power-off"></i> Sair</a></li>
                             </ul>
@@ -150,7 +140,7 @@
                         <a href="#"> <i class="fa fa-dashboard"></i> <span>Cadastros</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
                         <ul class="treeview-menu">
                             <li><a href="@Url.Action("","Employee")">Funcionário</a></li>
-                            <li><a href="@Url.Action("","Vehicle")">Veículos</a></li>
+                            <li><a href="@Url.Action("","Vehicle")">Veículo</a></li>
                         </ul>
                     </li>
                     <li class="treeview">

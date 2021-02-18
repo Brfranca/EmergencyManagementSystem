@@ -1,4 +1,4 @@
-﻿model EmergencyManagementSystem.Service.Models.UserModel
+﻿@model EmergencyManagementSystem.Service.Models.UserModel
 
 @{
     ViewData["Title"] = "Update";
@@ -10,7 +10,7 @@
 @Html.AntiForgeryToken()
 
 <div class="content-header sty-one">
-    <h1 class="text-white">Cadastro de Usuário</h1>
+    <h1 class="text-white">Atualização de Usuário</h1>
 </div>
 
 @using (Html.BeginForm())
@@ -37,25 +37,29 @@
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             <div class="row">
                                 <div class="col-md-4 col-xs-12">
-                                    <h4 class="card-title">Dados do Login</h4>
+                                    <h4 class="card-title">Alterar Senha</h4>
                                     <div id="treeview1" class=""></div>
                                 </div>
                             </div>
-                            <input type="hidden" asp-for="EmployeeId" name="EmployeeId" value="@Model.EmployeeId" />
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Usuário</label>
-                                @*@Html.EditorFor(model => model.Login, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(d => d.Login, "", new { @class = "text-danger" })*@
+                                <label for="exampleInputEmail1">Senha Atual</label>
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @type = "password" } })
+                                @Html.ValidationMessageFor(d => d.Password, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Senha</label>
-                                @*@Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(d => d.Password, "", new { @class = "text-danger" })*@
+                                <label for="exampleInputPassword1">Nova Senha</label>
+                                @Html.EditorFor(model => model.NewPassword, new { htmlAttributes = new { @class = "form-control", @type = "password" } })
+                                @Html.ValidationMessageFor(d => d.NewPassword, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Confirmação da Nova Senha</label>
+                                @Html.EditorFor(model => model.NewPasswordConfirmation, new { htmlAttributes = new { @class = "form-control", @type = "password" } })
+                                @Html.ValidationMessageFor(d => d.NewPasswordConfirmation, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="card-body">
                             <button type="submit" class="btn btn-lg bg-purpleTest">Cadastrar</button>
-                            <a class="col-md-2" href="@Url.Action("Index","Employee")">   Voltar</a>
+                            <a class="col-md-2" href="@Url.Action("Index","Emergency")">   Voltar</a>
                         </div>
                     </div>
                 </div>
