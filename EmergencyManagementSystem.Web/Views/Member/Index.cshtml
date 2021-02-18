@@ -20,7 +20,7 @@
         <div class="row">
             <div class="col-lg-6 m-b-3">
                 <h4 class="text-white">Profissionais</h4>
-                <div class="col-lg-12 form-group-sm row ">
+                <div class="form-group has-feedback ">
                     <select name="employeeFilter.Occupation" class="form-control input-sm" value="@ViewBag.Occupation">
                         @foreach (EmergencyManagementSystem.Service.Enums.Occupation suit in (EmergencyManagementSystem.Service.Enums.Occupation[])Enum.GetValues(typeof(EmergencyManagementSystem.Service.Enums.Occupation)))
                         {
@@ -49,7 +49,7 @@
                                     <td>@item.Occupation.GetEnumDescription()</td>
                                     <td>
                                         <div class="jsgrid">
-                                            <button class="jsgrid-button jsgrid-insert-button" type="button" title="Adicionar"></button>
+                                            <button class="jsgrid-button jsgrid-insert-button" type="button" title="Adicionar" href="@Url.Action("Register", "Member", new { guidEmployee = item.Guid })"></button>
                                         </div>
                                         
                                     </td>
