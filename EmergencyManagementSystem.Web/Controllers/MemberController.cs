@@ -28,7 +28,7 @@ namespace EmergencyManagementSystem.Web.Controllers
 
         public IActionResult Index(EmployeeFilter employeeFilter, VehicleFilter vehicleFilter, MemberFilter memberFilter)
         {
-             
+
             ViewBag.Name = employeeFilter.Name;
             ViewBag.Id = employeeFilter.Id;
             ViewBag.Occupation = employeeFilter.Occupation;
@@ -47,7 +47,8 @@ namespace EmergencyManagementSystem.Web.Controllers
             return View(new MemberRegisterViewModel { EmployeeModels = employees, VehicleModels = vehicles, MemberModels = members/*, EmployeeMembers = employeeMembers*/ });
         }
 
-        public IActionResult Register(Guid guidEmployee, long idVehicle)
+        [HttpPost]
+        public IActionResult Register(MemberModel memberModel)
         {
 
             return View();
