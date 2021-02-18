@@ -62,7 +62,7 @@ namespace EmergencyManagementSystem.Web.Controllers
                 if (!emergencyResult.Success)
                 {
                     ViewBag.Error = new List<string> { emergencyResult?.Messages?.FirstOrDefault() ?? "Ocorreu um erro, favor tente novamente." };
-                    return View(emergencyModel);
+                    return View("Index", emergencyModel);
                 }
                 emergencyModel.Id = emergencyResult.Id;
 
