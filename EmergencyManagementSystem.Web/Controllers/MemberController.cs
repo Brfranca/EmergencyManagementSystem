@@ -25,10 +25,6 @@ namespace EmergencyManagementSystem.Web.Controllers
             _vehicleRest = vehicleRest;
         }
 
-        public IActionResult Register()
-        {
-            return View();
-        }
 
         public IActionResult Index(EmployeeFilter employeeFilter, VehicleFilter vehicleFilter, MemberFilter memberFilter)
         {
@@ -51,9 +47,12 @@ namespace EmergencyManagementSystem.Web.Controllers
             return View(new MemberRegisterViewModel { EmployeeModels = employees, VehicleModels = vehicles, MemberModels = members/*, EmployeeMembers = employeeMembers*/ });
         }
 
-        public IActionResult Teste()
+        public IActionResult Register(Guid guidEmployee, long idVehicle)
         {
+
             return View();
         }
+
+
     }
 }
