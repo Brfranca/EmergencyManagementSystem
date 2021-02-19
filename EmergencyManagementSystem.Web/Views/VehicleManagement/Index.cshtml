@@ -1,0 +1,678 @@
+﻿@using EmergencyManagementSystem.Service.Models
+@model EmergencyModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<string> Messages = ViewBag?.Error;
+    List<EmergencyModel> emergencies = ViewBag.Emergencies;
+}
+
+
+<div class="content">
+    @if (Messages != null)
+    {
+        <div class="m-b-3" id="error-notification">
+            <div class="callout callout-info" style="margin-bottom: 0!important;">
+                <h4><i class="fa fa-warning"></i> Nota:</h4>
+                @foreach (string error in Messages)
+                {
+                    @error<br />
+                }
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="info-box">
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value="">
+                                    Ocorrências abertas
+                                </label>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value="">
+                                    ocorrências em avaliação
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Modelo ocorrência aberta ou em avaliação que não tenha passado pelo médico-->
+            @*@foreach (var emergency in emergencies)
+                {
+                    <div class="info-box @emergency.GetClassByStatus()">
+                        <a href="#">
+                            <div class="box-body">
+                                <h5><b>Oc: </b>@emergency.Id<span class="pull-right"><b>@emergency.Date.ToShortDateString() @emergency.Date.ToShortTimeString()</b></span></h5>
+                                <h4>@emergency.Name</h4>
+                            </div>
+                        </a>
+                    </div>
+                }*@
+
+            <!--Modelo ocorrência Avaliada pelo médico e classificada: AZUL-->
+            @*<div class="info-box bg-blue">
+                    <a href="#">
+                        <div class="box-body">
+                            <h5><b>Oc: </b> 3255454<span class="pull-right"><b>18/06 18:35</b></span></h5>
+                            <h4>Acidente de Carro</h4>
+                        </div>
+                    </a>
+                </div>*@
+
+            <!--Modelo ocorrência Avaliada pelo médico e classificada: AMARELO-->
+            @*<div class="info-box bg-yellow">
+                    <a href="#">
+                        <div class="box-body">
+                            <h5><b>Oc: </b> 3255454<span class="pull-right"><b>18/06 18:35</b></span></h5>
+                            <h4>Acidente de Carro</h4>
+                        </div>
+                    </a>
+                </div>*@
+
+            <!--Modelo ocorrência Avaliada pelo médico e classificada: VERDE-->
+            @*<div class="info-box bg-green">
+                    <a href="#">
+                        <div class="box-body">
+                            <h5><b>Oc: </b> 3255454<span class="pull-right"><b>18/06 18:35</b></span></h5>
+                            <h4>Acidente de Carro</h4>
+                        </div>
+                    </a>
+                </div>*@
+
+            <!--Modelo ocorrência Avaliada pelo médico e classificada: VERMELHO-->
+            @*<div class="info-box bg-red">
+                    <a href="#">
+                        <div class="box-body">
+                            <h5><b>Oc: </b> 3255454<span class="pull-right"><b>18/06 18:35</b></span></h5>
+                            <h4>Acidente de Carro</h4>
+                        </div>
+                    </a>
+                </div>*@
+
+        </div>
+
+        <!-- exemplo ocorrência em espera -->
+        @*<div class="col-lg-4">
+                <div class="info-box">
+                    <div class="box-body">
+                        <div class="row">
+                            <h4 class="text-white">OC: 532154@(Model?.Id) - Acidente de Carro<span class="pull-right"><b>10/02/2021  15:12</b></span> </h4>
+                            <h5 class="text-white"><b>Solicitante:</b> Tiago<span class="pull-right"><b>Funcionário:</b> Marilei</span> </h5>
+                            <h5 class="text-white"><b>Telefone:</b> 47 99968-34567<span class="pull-right"></span> </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+
+
+
+        <div class="col-lg-8">
+            <div class="info-box">
+                <div class="card tab-style1">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs profile-tab" role="tablist">
+                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab" aria-expanded="true">Veículos Empenhados</a> </li>
+                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab" aria-expanded="false">Avaliação</a> </li>
+
+                    </ul>
+
+                    <!-- First tab -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="home" role="tabpanel" aria-expanded="true">
+                            <div class="row m-t-3-1">
+                                <div class="col-lg-12">
+                                    <div class="card-body">
+                                        <form method="post" action="@Url.Action("Register", "Emergency")">
+                                            <h4 class="text-white">OC: @(Model?.Id ?? 0)<span class="pull-right"><b>@Model.Date</b></span> </h4>
+                                            <input hidden name="Id" value="@Model.Id" />
+                                            <input hidden name="Date" value="@Model.Date" />
+                                            <input hidden name="EmergencyStatus" value="@Model.EmergencyStatus" />
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="control-label">Telefone</label>
+                                                        <input class="form-control" placeholder="Telefone" id="telefone" readonly type="text" name="RequesterPhone" value="@Model.RequesterPhone">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="control-label">Solicitante</label>
+                                                        <input class="form-control" placeholder="Nome" type="text" name="RequesterName" value="@Model.RequesterName">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleinputemail1">Nome da Ocorrência</label>
+                                                <input type="text" class="form-control" id="exampleinputemail1" placeholder="Motivo / Queixa" name="Name" value="@Model.Name">
+                                            </div>
+
+                                            <div id="patientNewList">
+                                                @{int current = 0;}
+                                                @foreach (var patient in Model.Patients)
+                                                {
+                                                    <hr />
+
+                                                    <div class="form-group">
+                                                        <label for="exampleinputemail1">Paciente</label>
+                                                        <input type="text" class="form-control" id="exampleinputemail1" placeholder="Nome" name="Patients[@current].Name" value="@patient.Name">
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="location1">Sexo</label>
+                                                                <select class="custom-select form-control" id="location1" name="Patients[@current].Gender">
+                                                                    <option value="0" @patient.GetGenderSelected(0)>Selecione</option>
+                                                                    <option value="1" @patient.GetGenderSelected(1)>Feminino</option>
+                                                                    <option value="2" @patient.GetGenderSelected(2)>Masculino</option>
+                                                                    <option value="3" @patient.GetGenderSelected(3)>Indeterminado</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group has-feedback">
+                                                                <label class="control-label">Idade</label>
+                                                                <input class="form-control" placeholder="00" type="number" value="@patient?.Age" name="Patients[@current].Age">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    current++;
+                                                }
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <button type="button" class="btn btn-sm bg-purpleTest" onclick="AddPatients('patientNew', 'patientNewList')"><i class="fa fa-plus-circle"></i> Paciente</button>
+                                                </div>
+                                            </div>
+
+                                            <hr />
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="control-label">CEP</label>
+                                                        <input class="form-control" placeholder="00.000-000" type="text" value="@(Model?.AddressModel?.CEP)" name="AddressModel.CEP">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="control-label">Cidade</label>
+                                                        <input class="form-control" placeholder="Cidade" type="text" value="@(Model?.AddressModel?.City)" name="AddressModel.City">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="control-label">Bairro</label>
+                                                        <input class="form-control" placeholder="Bairro" type="text" value="@(Model?.AddressModel?.District)" name="AddressModel.District">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="control-label">Rua</label>
+                                                        <input class="form-control" placeholder="Rua" type="text" value="@(Model?.AddressModel?.Street)" name="AddressModel.Street">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="control-label">Número</label>
+                                                        <input class="form-control" placeholder="Número" type="text" value="@(Model?.AddressModel?.Number)" name="AddressModel.Number">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="control-label">Complemento</label>
+                                                        <input class="form-control" placeholder="Complemento" type="text" value="@(Model?.AddressModel?.Complement)" name="AddressModel.Complement">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleinputemail1">Ponto de Referência</label>
+                                                <input type="text" class="form-control" id="exampleinputemail1" placeholder="Próximo..." value="@(Model?.AddressModel?.Reference)" name="AddressModel.Reference">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <button type="submit" id="btnRegister" class="btn btn-lg bg-purpleTest">Registrar</button>
+                                                    <button type="button" id="btnCancel" onclick="appendCancel()" class="btn btn-lg bg-light">Cancelar</button>
+                                                </div>
+                                            </div>
+
+                                            <div id="cancel" class="hide">
+                                                <hr />
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group has-feedback">
+                                                            <label class="control-label">Comentário</label>
+                                                            <textarea class="form-control" id="placeTextarea" rows="1" placeholder="Observação"></textarea>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12">
+                                                        <button type="submit" class="btn btn-sm bg-purpleTest">Registrar Cancelamento</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!--second tab-->
+                        <div class="tab-pane" id="profile" role="tabpanel" aria-expanded="false">
+
+                            <div class="row m-t-3-1">
+                                <div class="col-lg-12">
+                                    <div class="card-body">
+                                        <h4 class="text-white">OC: 532154@(Model?.Id) - Acidente de Carro<span class="pull-right"><b>10/02/2021  15:12</b></span> </h4>
+                                        <h5 class="text-white"><b>Solicitante:</b> Tiago<span class="pull-right"><b>Funcionário:</b> Marilei</span> </h5>
+                                        <h5 class="text-white"><b>Telefone:</b> 47 99968-34567<span class="pull-right"></span> </h5>
+                                        <hr />
+
+                                        <div class="sidebar-menu" data-widget="tree">
+                                            <div class="treeview">
+                                                <a href="#" onclick="Pesquisar()"> <i class="fa fa-map-marker"></i> <span>Localização</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+                                                <div class="treeview-menu">
+
+                                                    <label>Blumenau/Fortaleza Alta - Rua Monte Meru, 353</label>
+                                                    <input id="pac-input"
+                                                           class="controls"
+                                                           type="text"
+                                                           placeholder="Procurar" value="Rua Gustav Tribess - Tribess, Blumenau - SC, Brasil" />
+
+                                                    <div id="map">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+
+
+                                        <div class="box-header with-border">
+                                            <h5 class="box-title text-white">
+                                                Histórico de Avaliação Médica
+                                            </h5>
+                                        </div>
+                                        <div class="direct-chat-messages">
+                                            <table id="" class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="wt20">Data</th>
+                                                        <th class="wt15">Profissional</th>
+                                                        <th class="wt15">Paciente</th>
+                                                        <th class="wt50">Avaliação</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="">
+                                                    <tr>
+                                                        <td class="wt20">Hora</td>
+                                                        <td class="wt15">Profissional</td>
+                                                        <td class="wt15">Paciente</td>
+                                                        <td class="wt50">Avaliação</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="wt20">Hora</td>
+                                                        <td class="wt15">Profissional</td>
+                                                        <td class="wt15">Paciente</td>
+                                                        <td class="wt50">Avaliação</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="wt20">Hora</td>
+                                                        <td class="wt15">Profissional</td>
+                                                        <td class="wt15">Paciente</td>
+                                                        <td class="wt50">Avaliação</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="wt20">Hora</td>
+                                                        <td class="wt15">Profissional</td>
+                                                        <td class="wt15">Paciente</td>
+                                                        <td class="wt50">Avaliação</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="wt20">Hora</td>
+                                                        <td class="wt15">Profissional</td>
+                                                        <td class="wt15">Paciente</td>
+                                                        <td class="wt50">Avaliação</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="wt20">Hora</td>
+                                                        <td class="wt15">Profissional</td>
+                                                        <td class="wt15">Paciente</td>
+                                                        <td class="wt50">Avaliação</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <hr />
+                                        <!--Implementar os J's aqui-->
+                                            <h5 class="box-title text-white">
+                                                Posição da viatura
+                                            </h5>
+                                        <div class="card-group align-items-center">
+                                            <div class="col-2">
+                                                <div class="form-group has-feedback">
+                                                    <a href="#"><label class="control-label"> + J9 </label></a>
+                                                    <input class="form-control" type="text" id="PA-">
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+
+                                                <div class="form-group has-feedback">
+                                                    <a href="#"><label class="control-label"> + J10 </label></a>
+                                                    <input class="form-control" type="text" id="FC-">
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+
+                                                <div class="form-group has-feedback">
+                                                    <a href="#"><label class="control-label"> + J9 </label></a>
+                                                    <input class="form-control" type="text" id="FR-">
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="form-group has-feedback">
+                                                    <a href="#"><label class="control-label"> + J10 </label></a>
+                                                    <input class="form-control" type="text" id="Temp-">
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="form-group has-feedback">
+                                                    <a href="#"><label class="control-label"> + J11 </label></a>
+                                                    <input class="form-control" type="text" id="Sat02-">
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="form-group has-feedback">
+                                                    <a href="#"><label class="control-label"> + J12 </label></a>
+                                                    <input class="form-control" type="text" id="HGT-">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="card-group align-items-center">
+                                            <div class="col-2">
+                                                <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
+                                            </div>
+                                            <div class="col-2">
+                                                <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
+                                            </div>
+                                            <div class="col-2">
+                                                <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
+                                            </div>
+                                            <div class="col-2">
+                                                <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
+                                            </div>
+                                            <div class="col-2">
+                                                <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
+                                            </div>
+                                            <div class="col-2">
+                                                <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
+                                            </div>
+
+                                        </div>
+
+                                        <hr />
+
+
+                                        <div class="sidebar-menu" data-widget="tree">
+                                            <div class="treeview">
+                                                <a href="#"> <i class="fa fa-ambulance"></i> <span>Envio de Veículos</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+                                                <div class="treeview-menu">
+                                                    <!-- Veículos  -->
+                                                    <div class="">
+                                                        <div class="row">
+
+                                                            <div class="col-md-3">
+
+                                                                <div class="info-box">
+                                                                    <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
+                                                                    <span class=""> <span class="info-box-number">USB</span> <span class="info-box-text"></span> </span>
+                                                                </div>
+
+                                                                <ul class="fc-color-picker" id="color-chooser">
+                                                                    <li><span class="text-light-blue" href="#"><i class="fa fa-square"></i></span></li>
+                                                                    <li><span class="text-yellow" href="#"><i class="fa fa-square"></i></span></li>
+                                                                    <li><span class="text-green" href="#"><i class="fa fa-square"></i></span></li>
+                                                                    <li><span class="text-red" href="#"><i class="fa fa-square"></i></span></li>
+                                                                </ul>
+                                                            </div>
+
+                                                            <div class="col-md-3">
+
+                                                                <div class="info-box">
+                                                                    <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
+                                                                    <span class=""> <span class="info-box-number">USA</span> <span class="info-box-text"></span> </span>
+                                                                </div>
+
+                                                                <ul class="fc-color-picker" id="color-chooser">
+                                                                    <li><span class="text-light-blue" href="#"><i class="fa fa-square"></i></span></li>
+                                                                    <li><span class="text-yellow" href="#"><i class="fa fa-square"></i></span></li>
+                                                                    <li><span class="text-green" href="#"><i class="fa fa-square"></i></span></li>
+                                                                    <li><span class="text-red" href="#"><i class="fa fa-square"></i></span></li>
+                                                                </ul>
+                                                            </div>
+
+                                                            <div class="col-md-3">
+
+                                                                <div class="info-box">
+                                                                    <span class="info-box-icon bg-red"><i class="fas fa-helicopter"></i></span>
+                                                                    <span class=""> <span class="info-box-number">HEL</span> <span class="info-box-text"></span> </span>
+                                                                </div>
+
+                                                                <ul class="fc-color-picker" id="color-chooser">
+                                                                    <li><span class="text-light-blue" href="#"><i class="fa fa-square"></i></span></li>
+                                                                    <li><span class="text-yellow" href="#"><i class="fa fa-square"></i></span></li>
+                                                                    <li><span class="text-green" href="#"><i class="fa fa-square"></i></span></li>
+                                                                    <li><span class="text-red" href="#"><i class="fa fa-square"></i></span></li>
+                                                                </ul>
+                                                            </div>
+
+                                                            <div class="col-md-3">
+
+                                                                <div class="info-box">
+                                                                    <span class="info-box-icon bg-red"><i class="fa fa-plane"></i></span>
+                                                                    <span class=""> <span class="info-box-number">AVI</span> <span class="info-box-text"></span> </span>
+                                                                </div>
+
+                                                                <ul class="fc-color-picker" id="color-chooser">
+                                                                    <li><span class="text-light-blue" href="#"><i class="fa fa-square"></i></span></li>
+                                                                    <li><span class="text-yellow" href="#"><i class="fa fa-square"></i></span></li>
+                                                                    <li><span class="text-green" href="#"><i class="fa fa-square"></i></span></li>
+                                                                    <li><span class="text-red" href="#"><i class="fa fa-square"></i></span></li>
+                                                                </ul>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+
+                                        <hr />
+
+                                        <div class="">
+                                            <a id="btnRegister" class="btn btn-block bg-purpleTest">Finalizar Ocorrência</a>
+                                        </div>
+
+                                        <hr />
+                                    </div><!--ACaba card body da pagina-->
+
+                                    </div>
+                            </div>
+                        </div>
+                    </div> @*Final TabContent*@
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Main row -->
+</div>
+
+
+<style>
+</style>
+
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClYGY0602EMNEOdHTFm0UWoisuKoF73u4&region=BR&language=pt&callback=initAutocomplete&libraries=places&v=weekly"></script>
+<link href="~/css/maps.css" rel="stylesheet" />
+<script src="~/js/maps.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+<script>
+    //Cuidado ao mexer
+
+    $(function () {
+        $('#example1').DataTable()
+        $('#example2').DataTable({
+            'paging': false,
+            'lengthChange': false,
+            'searching': false,
+            'ordering': false,
+            'info': false,
+            'autoWidth': false,
+            'scrollY': "200px",
+            'scrollCollapse': true,
+            'responsive': true
+        })
+    })
+
+    function ConcatFields(idPatient) {
+
+        var pa = $('#PA-' + idPatient);
+        var fc = $('#FC-' + idPatient);
+        var fr = $('#FR-' + idPatient);
+        var temp = $('#Temp-' + idPatient);
+        var sat02 = $('#Sat02-' + idPatient);
+        var hgt = $('#HGT-' + idPatient);
+        var glas = $('#Glasgow-' + idPatient);
+
+        var evalution = $('#Evaluation-' + idPatient).val();
+
+        var result = '';
+        if (pa.val().trim() != '')
+            result += 'PA: ' + pa.val() + ' - ';
+        if (fc.val().trim() != '')
+            result += 'FC ' + fc.val() + ' - ';
+        if (fr.val().trim() != '')
+            result += 'FR ' + fr.val() + ' - ';
+        if (temp.val().trim() != '')
+            result += 'Temp ' + temp.val() + ' - ';
+        if (sat02.val().trim() != '')
+            result += 'Sat02 ' + sat02.val() + ' - ';
+        if (hgt.val().trim() != '')
+            result += 'HGT ' + hgt.val() + ' - ';
+        if (glas.val().trim() != '')
+            result += 'Glasgow ' + glas.val() + ' ';
+
+        if (evalution.trim() != '') {
+            $('#Evaluation-' + idPatient).val(evalution + ' ' + result);
+        } else {
+            $('#Evaluation-' + idPatient).val(result);
+        }
+
+        pa.val('');
+        fc.val('');
+        fr.val('');
+        temp.val('');
+        sat02.val('');
+        hgt.val('');
+        glas.val('');
+
+    }
+    var qtdPatient = 0;
+
+    RefreshQtdPatient();
+
+    function RefreshQtdPatient() {
+        if (@Model.Patients.Count() > 0) {
+            qtdPatient = @Model.Patients.Count();
+        }
+    }
+
+    function AddPatients(patientNew, patientNewList) {
+        debugger;
+        var patient = $('#' + patientNew).html();
+        patient = patient.replace("Patients[0]", "Patients[" + qtdPatient + "]")
+        patient = patient.replace("Patients[0]", "Patients[" + qtdPatient + "]")
+        patient = patient.replace("Patients[0]", "Patients[" + qtdPatient + "]")
+
+        $('#' + patientNewList).append(patient);
+
+        qtdPatient++;
+    }
+
+    var numberPacient = 1; //Variável deve receber a quantidade de paciente do back-end
+
+    function AddPatientsTab() {
+
+
+        numberPacient += 1;
+
+        var navAddPatients = '<li class="nav-item" id="navAddPatients"><a onclick="AddPatientsTab()" class="nav-link" data-toggle="tab" role="tab" aria-expanded="true" href="#patient-1"><i class="fa fa-plus-circle"></i></a></li>';
+
+        var navPatient = '<li class="nav-item"> <a id="navPatient" class="nav-link" data-toggle="tab" href="#patient" role="tab" aria-expanded="false">Paciente</a> </li>';
+
+        navPatient = navPatient.replace('#patient', '#patient-' + numberPacient)
+            .replace('navPatient', 'navPatient-' + numberPacient);
+
+        $('#navAddPatients').remove();
+        $('#navsPatient').append(navPatient);
+        $('#navsPatient').append(navAddPatients);
+
+        var tab = $('#tabExample').html();
+
+        tab = '<div class="tab-pane" id="patient-2" role="tabpanel" aria-expanded="false">' + tab + '</div>';
+        tab = tab.replace('patient-2', 'patient-' + numberPacient)
+            .replace('PA-', 'PA-' + numberPacient)
+            .replace('FC-', 'FC-' + numberPacient)
+            .replace('FR-', 'FR-' + numberPacient)
+            .replace('Temp-', 'Temp-' + numberPacient)
+            .replace('Sat02-', 'Sat02-' + numberPacient)
+            .replace('HGT-', 'HGT-' + numberPacient)
+            .replace('Glasgow-', 'Glasgow-' + numberPacient)
+            .replace('ConcatFields()', 'ConcatFields(' + numberPacient + ')')
+            .replace('Evaluation-', 'Evaluation-' + numberPacient);
+
+
+        $('#tabsPatient').append(tab);
+        window.setTimeout(SelectTab, 100);
+    }
+
+    function SelectTab() {
+        $('#navPatient-' + numberPacient).click();
+
+    }
+
+    function appendCancel() {
+        $('#btnCancel').attr('disabled', true);
+        $('#btnRegister').attr('disabled', true);
+        $("#cancel").removeClass();
+    }
+
+    function Pesquisar() {
+        window.setTimeout(PesquisarTeste, 1000);
+    }
+
+    function PesquisarTeste() {
+        var input = document.getElementById('pac-input');
+
+        google.maps.event.trigger(input, 'focus', {});
+        google.maps.event.trigger(input, 'keydown', { keyCode: 13 });
+        google.maps.event.trigger(this, 'focus', {});
+    }
+</script>
+
+
