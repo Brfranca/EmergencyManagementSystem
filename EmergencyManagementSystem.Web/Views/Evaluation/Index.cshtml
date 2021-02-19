@@ -1,4 +1,5 @@
 ﻿@using EmergencyManagementSystem.Service.Models
+@using System.Linq
 @model EmergencyModel
 
 @{
@@ -98,19 +99,25 @@
                                             <!-- Nav tabs -->
                                             <ul class="nav nav-tabs profile-tab" role="tablist" id="navsPatient">
 
-                                                <li class="nav-item" id="navPatient-1"> <a class="nav-link active" data-toggle="tab" href="#patient-1" role="tab" aria-expanded="true">Paciente</a> </li>
-
-                                                @*<li class="nav-item" id="navPatient"> <a class="nav-link" data-toggle="tab" href="#patient-2" role="tab" aria-expanded="false">Paciente</a> </li>*@
-                                                @*<li class="nav-item" id="navPatient"><a class="nav-link" data-toggle="tab" href="#patient-2" role="tab" aria-expanded="false"></a></li>*@
-
-                                                <li class="nav-item" id="navAddPatients"><a onclick="AddPatientsTab()" class="nav-link" data-toggle="tab" role="tab" aria-expanded="true" href="#patient-1"><i class="fa fa-plus-circle"></i></a></li>
+                                                @foreach ((var patient, int i) in Model.Patients.Select((value, i) => (value, i)))
+                                                {
+                                                    var index = i + 1;
+                                                    var active = index == 1 ? "active" : "";
+                                                    var ariaExpanded = index == 1 ? "true" : "false";
+                                                    <li class="nav-item" id="navPatient-@index"> <a class="nav-link @active" data-toggle="tab" href="#patient-@index" role="tab" aria-expanded="@ariaExpanded">Paciente</a> </li>
+                                                }
+                                                <li class="nav-item" id="navAddPatients"><a onclick="AddPatientsTab()" class="nav-link" data-toggle="tab" role="tab" aria-expanded="false" href="#"><i class="fa fa-plus-circle"></i></a></li>
 
                                             </ul>
 
                                             <div class="tab-content" id="tabsPatient">
+                                                @foreach ((var patient, int i) in Model.Patients.Select((value, i) => (value, i)))
+                                                {
+                                                    var index = i + 1;
+                                                    var active = index == 1 ? "active" : "";
+                                                    var ariaExpanded = index == 1 ? "true" : "false";
 
-                                               <div id="patient">
-                                                    <div class="tab-pane active" role="tabpanel" aria-expanded="true" id="patient-1">
+                                                    <div class="tab-pane @active" role="tabpanel" aria-expanded="@ariaExpanded" id="patient-@index">
                                                         <div class="row m-t-3-1">
                                                             <div class="col-lg-12">
                                                                 <div class="card-body">
@@ -118,17 +125,17 @@
 
                                                                         <div class="form-group">
                                                                             <label for="exampleinputemail1">Paciente</label>
-                                                                            <input type="text" class="form-control" id="exampleinputemail1" placeholder="Nome">
+                                                                            <input type="text" class="form-control" id="exampleinputemail1" placeholder="Nome" value="@patient.Name" name="Patients[@index].Name">
                                                                         </div>
                                                                         <div class="row">
                                                                             <div class="col-md-6">
                                                                                 <div class="form-group">
                                                                                     <label for="location1">Sexo</label>
-                                                                                    <select class="custom-select form-control" id="location1" name="location">
-                                                                                        <option value="">Selecione</option>
-                                                                                        <option value="">Indeterminado</option>
-                                                                                        <option value="">Feminino</option>
-                                                                                        <option value="">Masculino</option>
+                                                                                    <select class="custom-select form-control" id="location1" name="Patients[@index].Gender">
+                                                                                        <option value="0" @patient.GetGenderSelected(0)>Selecione</option>
+                                                                                        <option value="1" @patient.GetGenderSelected(0)>Feminino</option>
+                                                                                        <option value="2" @patient.GetGenderSelected(0)>Masculino</option>
+                                                                                        <option value="3" @patient.GetGenderSelected(0)>Indeterminado</option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
@@ -212,12 +219,8 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    @*</div>*@
-                                                </div>
-                                                @* tab limpa para replicar*@
-                                                
+                                                }
                                             </div>
-
                                         </div>
 
 
@@ -687,14 +690,14 @@
         qtdPatient++;
     }
 
-    var numberPacient = 1; //Variável deve receber a quantidade de paciente do back-end
+    var numberPacient = @Model.Patients.Count(); //Variável deve receber a quantidade de paciente do back-end
 
     function AddPatientsTab() {
 
 
         numberPacient += 1;
 
-        var navAddPatients = '<li class="nav-item" id="navAddPatients"><a onclick="AddPatientsTab()" class="nav-link" data-toggle="tab" role="tab" aria-expanded="true" href="#patient-1"><i class="fa fa-plus-circle"></i></a></li>';
+        var navAddPatients = '<li class="nav-item" id="navAddPatients"><a onclick="AddPatientsTab()" class="nav-link" data-toggle="tab" role="tab" aria-expanded="false" href="#"><i class="fa fa-plus-circle"></i></a></li>';
 
         var navPatient = '<li class="nav-item"> <a id="navPatient" class="nav-link" data-toggle="tab" href="#patient" role="tab" aria-expanded="false">Paciente</a> </li>';
 
@@ -721,7 +724,7 @@
 
 
         $('#tabsPatient').append(tab);
-        window.setTimeout(SelectTab, 100);
+        window.setTimeout(SelectTab, 300);
     }
 
     function SelectTab() {
