@@ -27,22 +27,31 @@ namespace EmergencyManagementSystem.Web.Controllers
         public IActionResult Index()
         {
             LoadBag();
-
-            //ViewBag.Name = emergencyFilter.Id;
-            //ViewBag.CPF = emergencyFilter.Date;
-            //var emergencies = _emergencyRest.FindPaginated(emergencyFilter);
             return View(new EmergencyModel());
+        }
+
+        public ActionResult Update(long id)
+        {
+            var result = _emergencyRest.Find(new EmergencyFilter { Id = id });
+            if (!result.Success)
+            {
+                LoadBag();
+                ViewBag.Error = new List<string> { result?.Messages?.FirstOrDefault() ?? "Ocorreu um erro, favor tente novamente." };
+                return View("index", new EmergencyModel());
+            }
+            LoadBag();
+            return View("index", result.Model);
         }
 
         [HttpPost]
         public IActionResult Register(EmergencyModel emergencyModel)
         {
-            LoadBag();
             emergencyModel.EmployeeGuid = _userService.GetCurrentUser().EmployeeGuid;
 
             if (string.IsNullOrWhiteSpace(emergencyModel.RequesterPhone))
             {
                 ModelState.AddModelError("RequesterPhone", "Favor preencher telefone");
+                LoadBag();
                 return View("index", new EmergencyModel());
             }
             if ((emergencyModel?.Id ?? 0) == 0)
@@ -51,6 +60,7 @@ namespace EmergencyManagementSystem.Web.Controllers
                 if (!requesterResult.Success)
                 {
                     ViewBag.Error = new List<string>() { requesterResult?.Messages?.FirstOrDefault() ?? "Ocorreu um erro, favor tente novamente." };
+                    LoadBag();
                     return View("Index", new EmergencyModel());
                 }
 
@@ -67,10 +77,12 @@ namespace EmergencyManagementSystem.Web.Controllers
                 if (!emergencyResult.Success)
                 {
                     ViewBag.Error = new List<string> { emergencyResult?.Messages?.FirstOrDefault() ?? "Ocorreu um erro, favor tente novamente." };
+                    LoadBag();
                     return View("Index", emergencyModel);
                 }
                 emergencyModel.Id = emergencyResult.Id;
 
+                LoadBag();
                 return View("Index", emergencyModel);
             }
             else
@@ -79,6 +91,7 @@ namespace EmergencyManagementSystem.Web.Controllers
                 if (!requesterResultFind.Success)
                 {
                     ViewBag.Error = new List<string> { requesterResultFind?.Messages?.FirstOrDefault() ?? "Ocorreu um erro, favor tente novamente." };
+                    LoadBag();
                     return View("Index", emergencyModel);
                 }
                 if ((requesterResultFind?.Model?.Id ?? 0) == 0)
@@ -92,6 +105,7 @@ namespace EmergencyManagementSystem.Web.Controllers
                     if (!requesterResult.Success)
                     {
                         ViewBag.Error = requesterResult.Messages;
+                        LoadBag();
                         return View("Index", emergencyModel);
                     }
                 }
@@ -104,6 +118,7 @@ namespace EmergencyManagementSystem.Web.Controllers
                     if (!requesterResult.Success)
                     {
                         ViewBag.Error = requesterResult.Messages;
+                        LoadBag();
                         return View("Index", emergencyModel);
                     }
                 }
@@ -114,9 +129,11 @@ namespace EmergencyManagementSystem.Web.Controllers
                 if (!emergencyResult.Success)
                 {
                     ViewBag.Error = emergencyResult.Messages;
+                    LoadBag();
                     return View("Index", emergencyModel);
                 }
-                //retornar todas as ocorrênciar em aberto
+
+                LoadBag();
                 return View("Index", new EmergencyModel());
             }
         }
