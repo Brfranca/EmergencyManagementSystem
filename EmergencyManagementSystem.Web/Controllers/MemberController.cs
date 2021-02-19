@@ -51,8 +51,20 @@ namespace EmergencyManagementSystem.Web.Controllers
         public IActionResult Register(MemberModel memberModel)
         {
             //está recebendo o EmployeeGuid e o VehicleId
-            
-            return View();
+
+            if (!ModelState.IsValid)
+                return View(memberModel);
+
+            memberModel.EmployeeStatus = EmployeeStatus.Working;
+            memberModel.StartedWork = DateTime.Now;
+            var result = _memberRest.Register(memberModel);
+            if (!result.Success)
+            {
+                ViewBag.Error = result.Messages;
+                return View(memberModel);
+            }
+
+            return RedirectToAction(nameof(Index));
         }
 
 
