@@ -240,42 +240,15 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody class="">
-                                                    <tr>
-                                                        <td class="wt20">Hora</td>
-                                                        <td class="wt15">Profissional</td>
-                                                        <td class="wt15">Paciente</td>
-                                                        <td class="wt50">Avaliação</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="wt20">Hora</td>
-                                                        <td class="wt15">Profissional</td>
-                                                        <td class="wt15">Paciente</td>
-                                                        <td class="wt50">Avaliação</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="wt20">Hora</td>
-                                                        <td class="wt15">Profissional</td>
-                                                        <td class="wt15">Paciente</td>
-                                                        <td class="wt50">Avaliação</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="wt20">Hora</td>
-                                                        <td class="wt15">Profissional</td>
-                                                        <td class="wt15">Paciente</td>
-                                                        <td class="wt50">Avaliação</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="wt20">Hora</td>
-                                                        <td class="wt15">Profissional</td>
-                                                        <td class="wt15">Paciente</td>
-                                                        <td class="wt50">Avaliação</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="wt20">Hora</td>
-                                                        <td class="wt15">Profissional</td>
-                                                        <td class="wt15">Paciente</td>
-                                                        <td class="wt50">Avaliação</td>
-                                                    </tr>
+                                                    @foreach (var item in Model.MedicalEvaluations)
+                                                    {
+                                                        <tr>
+                                                            <td>@item.Date</td>
+                                                            <td>@item.EmployeeGuid</td>
+                                                            <td>@item.PatientModel.Name</td>
+                                                            <td>@item.Evaluation</td>
+                                                        </tr>
+                                                    }
                                                 </tbody>
                                             </table>
                                         </div>
