@@ -26,7 +26,7 @@ namespace EmergencyManagementSystem.Web.Controllers
         }
 
 
-        public IActionResult Index(EmployeeFilter employeeFilter, VehicleFilter vehicleFilter, MemberFilter memberFilter)
+        public IActionResult Index(EmployeeFilter employeeFilter, VehicleFilter vehicleFilter)
         {
 
             ViewBag.Name = employeeFilter.Name;
@@ -36,16 +36,40 @@ namespace EmergencyManagementSystem.Web.Controllers
 
             ViewBag.VehicleName = vehicleFilter.VehicleName;
             ViewBag.Plate = vehicleFilter.VehiclePlate;
+            ViewBag.Id = vehicleFilter.Id;
             var vehicles = _vehicleRest.FindPaginated(vehicleFilter);
 
-            ViewBag.VehicleId = memberFilter.VehicleId;
-            var members = (PagedList<MemberModel>)_memberRest.FindPaginated(memberFilter).Where(d => d.EmployeeStatus == EmployeeStatus.Working).ToPagedList();
 
-            //ViewBag.Guid = memberFilter.EmployeeGuid;
-            //var employeeMembers = _employeeRest.FindPaginated(memberFilter);
+            var members = _memberRest.FindPaginated(new MemberFilter { VehicleId = vehicleFilter.Id }).Where(d => d.EmployeeStatus == EmployeeStatus.Working).ToList();
 
-            return View(new MemberRegisterModel { EmployeeModels = employees, VehicleModels = vehicles, MemberModels = members/*, EmployeeMembers = employeeMembers*/ });
+
+            List<EmployeeVehicleModel> employeeVehicles = new List<EmployeeVehicleModel>();
+
+            if (members != null)
+            {
+                foreach (var item in members)
+                {
+                    var employee = _employeeRest.Find(new EmployeeFilter { Guid = item.EmployeeGuid }).Model;
+                    var vehicle = _vehicleRest.Find(new VehicleFilter { Id = item.VehicleId }).Model;
+                    if (employee != null && vehicle != null)
+                    {
+                        EmployeeVehicleModel employeeVehicleModel = new EmployeeVehicleModel
+                        {
+                            EmployeeModel = employee,
+                            VehicleModel = vehicle,
+                            MemberId = item.Id
+                        };
+
+                        employeeVehicles.Add(employeeVehicleModel);
+                    }
+                }
+            }
+
+            return View(new MemberRegisterModel { EmployeeModels = employees, VehicleModels = vehicles, EmployeeVehicleModels = employeeVehicles});
         }
+
+
+
 
         [HttpPost]
         public IActionResult Register(MemberModel memberModel)
@@ -67,6 +91,22 @@ namespace EmergencyManagementSystem.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpPost]
+        public IActionResult Update(MemberModel memberModel)
+        {
+            if (!ModelState.IsValid)
+                return View(nameof(Index));
 
+            memberModel.EmployeeStatus = EmployeeStatus.Finished;
+            memberModel.FinishedWork = DateTime.Now;
+            var result = _memberRest.Update(memberModel);
+            if (!result.Success)
+            {
+                ViewBag.Error = result.Messages;
+                return View(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

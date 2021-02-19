@@ -5,10 +5,13 @@
 
 
 @{
-    ViewData["Title"] = "Teste";
+    ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
+
+
+
 
 @Html.AntiForgeryToken()
 <div class="content-header sty-one">
@@ -95,54 +98,54 @@
                         </select>
                         <span class="fa fa-user form-control-feedback" aria-hidden="true"></span>
                     </div>
-
-                    @*fazer outro form a partir daqui*@
-
-                    <h4 class="text-white">Equipe atual</h4>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead class="bg-primary text-white">
-                                <tr>
-                                    <th scope="col">Id</th>
-                                    <th scope="col">Funcionário</th>
-                                    <th scope="col">Ocupação</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                @foreach (var item in Model.MemberModels)
-                                {
-                                    <tr>
-                                        <td>@item.EmployeeGuid</td>
-                                        <td>como add o nome/</td>
-                                        <td>como add a ocupação?</td>
-                                        <td>
-                                            <button class="fa-remove" type="button" title="Remover"></button>
-                                        </td>
-                                    </tr>
-                                }
-
-                            </tbody>
-                        </table>
-                        @Html.PagedListPager(Model.MemberModels, page =>
-                       Url.Action("Register", new { CurrentPage = page, VehicleId = ViewBag.VehicleId, Id = ViewBag.Id, Occupation = ViewBag.Occupation }),
-                       new PagedListRenderOptionsBase
-                       {
-                           ContainerDivClasses = new[] { "jsgrid-pager-page-container" },
-                           ActiveLiElementClass = "jsgrid-pager-nav-button",
-                           PageClasses = new[] { "jsgrid-pager-page" },
-                           UlElementClasses = new[] { "pagination" },
-                           LinkToPreviousPageFormat = "Voltar",
-                           LinkToNextPageFormat = "Próximo",
-                       })
-                    </div>
                 </div>
-            </div> @*fazer mais um form e colocar os dois primeiros dentro de uma div para ficar um do lado do outro?*@
+            </div>
         </div>
     </div>
     <input type="submit" hidden id="addMember" />
+</form>
+@*fazer outro form a partir daqui*@
 
+<form>
+    <div class="content">
+        <div class="info-box">
+            <div class="row">
+                <h4 class="text-white">Equipe atual</h4>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="bg-primary text-white">
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Funcionário</th>
+                                <th scope="col">Ocupação</th>
+                                <th scope="col">Veículo</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model.EmployeeVehicleModels)
+                            {
+                                <tr>
+                                    <td>@item.MemberId</td>
+                                    <td>@item.EmployeeModel.Name</td>
+                                    <td>@item.EmployeeModel.Occupation.GetEnumDescription()</td>
+                                    <td>@item.VehicleModel.Codename</td>
+
+                                    <td>
+                                        <div class="jsgrid">
+                                            <a class="jsgrid-button jsgrid-delete-button" @*type="button" title="Remover" href="@Url.Action("Update", "Member", new { id = item.MemberId })"*@></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    
+                </div>
+            </div>
+        </div> @*fazer mais um form e colocar os dois primeiros dentro de uma div para ficar um do lado do outro?*@
+    </div>
 </form>
 
 
@@ -154,8 +157,19 @@
 
     }
 
+    function DeleteMember(idMember) {
+        debugger;
+        $('#formMemberRemove').append('<input name="MemberId" hidden id="removeMember" value="' + idMember + '"/>');
+        $('#removeMember').click();
+
+    }
+
 
 </script>
+
+
+
+
 
 <script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="~/plugins/datatables/dataTables.bootstrap.min.js"></script>
@@ -179,3 +193,14 @@
 @*<script src="~/lib/bootstrap/dist/css/bootstrap.min.css"></script>*@
 <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="~/js/jquery.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
