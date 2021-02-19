@@ -80,8 +80,10 @@
                                                 <a href="#" onclick="Pesquisar()"> <i class="fa fa-map-marker"></i> <span>Localização</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
                                                 <div class="treeview-menu">
 
-                                                    <label>@Model.AddressModel.City/@Model.AddressModel.District - @Model.AddressModel.Street, @Model.AddressModel.Number 
-                                                    @Model.AddressModel.Complement. Prox: @Model.AddressModel.Reference</label>
+                                                    <label>
+                                                        @Model.AddressModel.City/@Model.AddressModel.District - @Model.AddressModel.Street, @Model.AddressModel.Number
+                                                        @Model.AddressModel.Complement. Prox: @Model.AddressModel.Reference
+                                                    </label>
                                                     <input id="pac-input"
                                                            class="controls"
                                                            type="text"
@@ -245,7 +247,7 @@
                                                         <tr>
                                                             <td>@item.Date</td>
                                                             <td>@item.EmployeeGuid</td>
-                                                            <td>@item.PatientModel.Name</td>
+                                                            <td>@(item?.PatientModel?.Name ?? "")</td>
                                                             <td>@item.Evaluation</td>
                                                         </tr>
                                                     }
