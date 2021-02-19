@@ -91,15 +91,25 @@ namespace EmergencyManagementSystem.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpPost]
-        public IActionResult Update(MemberModel memberModel)
+        
+        public IActionResult Update(long id)
         {
             if (!ModelState.IsValid)
                 return View(nameof(Index));
 
-            memberModel.EmployeeStatus = EmployeeStatus.Finished;
-            memberModel.FinishedWork = DateTime.Now;
-            var result = _memberRest.Update(memberModel);
+
+            var result = _memberRest.Find(new MemberFilter { Id = id });
+            if (!result.Success)
+            {
+                ViewBag.Error = result.Messages;
+                var members = _employeeRest.FindPaginated(new MemberFilter());
+                return View("Index", members);
+            }
+
+
+            result.Model.EmployeeStatus = EmployeeStatus.Finished;
+            result.Model.FinishedWork = DateTime.Now;
+            var resultUpdate = _memberRest.Update(result.Model);
             if (!result.Success)
             {
                 ViewBag.Error = result.Messages;
