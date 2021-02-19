@@ -4,6 +4,7 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     List<string> Messages = ViewBag?.Error;
+    List<EmergencyModel> emergencies = ViewBag.Emergencies;
 }
 
 
@@ -47,54 +48,57 @@
             </div>
 
             <!--Modelo ocorrência aberta ou em avaliação que não tenha passado pelo médico-->
-            <div class="info-box">
-                <a href="#">
-                    <div class="box-body">
-                        <h5><b>Oc: </b> 3255454<span class="pull-right"><b>18/06 18:35</b></span></h5>
-                        <h4>Acidente de Carro</h4>
-                    </div>
-                </a>
-            </div>
+            @foreach (var emergency in emergencies)
+            {
+                <div class="info-box @emergency.GetClassByStatus()">
+                    <a href="#">
+                        <div class="box-body">
+                            <h5><b>Oc: </b>@emergency.Id<span class="pull-right"><b>@emergency.Date.ToShortDateString() @emergency.Date.ToShortTimeString()</b></span></h5>
+                            <h4>@emergency.Name</h4>
+                        </div>
+                    </a>
+                </div>
+            }
 
             <!--Modelo ocorrência Avaliada pelo médico e classificada: AZUL-->
-            <div class="info-box bg-blue">
-                <a href="#">
-                    <div class="box-body">
-                        <h5><b>Oc: </b> 3255454<span class="pull-right"><b>18/06 18:35</b></span></h5>
-                        <h4>Acidente de Carro</h4>
-                    </div>
-                </a>
-            </div>
+            @*<div class="info-box bg-blue">
+                    <a href="#">
+                        <div class="box-body">
+                            <h5><b>Oc: </b> 3255454<span class="pull-right"><b>18/06 18:35</b></span></h5>
+                            <h4>Acidente de Carro</h4>
+                        </div>
+                    </a>
+                </div>*@
 
             <!--Modelo ocorrência Avaliada pelo médico e classificada: AMARELO-->
-            <div class="info-box bg-yellow">
-                <a href="#">
-                    <div class="box-body">
-                        <h5><b>Oc: </b> 3255454<span class="pull-right"><b>18/06 18:35</b></span></h5>
-                        <h4>Acidente de Carro</h4>
-                    </div>
-                </a>
-            </div>
+            @*<div class="info-box bg-yellow">
+                    <a href="#">
+                        <div class="box-body">
+                            <h5><b>Oc: </b> 3255454<span class="pull-right"><b>18/06 18:35</b></span></h5>
+                            <h4>Acidente de Carro</h4>
+                        </div>
+                    </a>
+                </div>*@
 
             <!--Modelo ocorrência Avaliada pelo médico e classificada: VERDE-->
-            <div class="info-box bg-green">
-                <a href="#">
-                    <div class="box-body">
-                        <h5><b>Oc: </b> 3255454<span class="pull-right"><b>18/06 18:35</b></span></h5>
-                        <h4>Acidente de Carro</h4>
-                    </div>
-                </a>
-            </div>
+            @*<div class="info-box bg-green">
+                    <a href="#">
+                        <div class="box-body">
+                            <h5><b>Oc: </b> 3255454<span class="pull-right"><b>18/06 18:35</b></span></h5>
+                            <h4>Acidente de Carro</h4>
+                        </div>
+                    </a>
+                </div>*@
 
             <!--Modelo ocorrência Avaliada pelo médico e classificada: VERMELHO-->
-            <div class="info-box bg-red">
-                <a href="#">
-                    <div class="box-body">
-                        <h5><b>Oc: </b> 3255454<span class="pull-right"><b>18/06 18:35</b></span></h5>
-                        <h4>Acidente de Carro</h4>
-                    </div>
-                </a>
-            </div>
+            @*<div class="info-box bg-red">
+                    <a href="#">
+                        <div class="box-body">
+                            <h5><b>Oc: </b> 3255454<span class="pull-right"><b>18/06 18:35</b></span></h5>
+                            <h4>Acidente de Carro</h4>
+                        </div>
+                    </a>
+                </div>*@
 
         </div>
 
@@ -270,7 +274,9 @@
                                                         </div>
                                                     </div>
                                                     <!--<div class="jsgrid">
-                                                        <button class="jsgrid-button jsgrid-insert-button" type="button" title="Adicionar"--> @*onclick="SubmitMember('@item.Guid')*@<!--"></button>
+                                                        <button class="jsgrid-button jsgrid-insert-button" type="button" title="Adicionar"-->
+                                                    @*onclick="SubmitMember('@item.Guid')*@
+                                                    <!--"></button>
                                                     </div>-->
                                                     <button type="submit" class="btn btn-nor bg-purpleTest" style="">Iniciar</button>
                                                 </div>

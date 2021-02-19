@@ -1,4 +1,5 @@
 ﻿using EmergencyManagementSystem.Service.Models;
+using System.Collections.Generic;
 using X.PagedList;
 
 namespace EmergencyManagementSystem.Service.Interfaces
@@ -10,5 +11,6 @@ namespace EmergencyManagementSystem.Service.Interfaces
         Result<TModel> Find(IFilter model);
         Result Update(TModel model);
         PagedList<TModel> FindPaginated(IFilter filter);
+        Result<List<TModel>> FindAll(IFilter emergencyFilter);
     }
 }

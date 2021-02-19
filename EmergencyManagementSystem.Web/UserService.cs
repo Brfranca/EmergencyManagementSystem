@@ -1,5 +1,6 @@
 ﻿using EmergencyManagementSystem.Service.Models;
 using Microsoft.AspNetCore.Http;
+using System;
 using System.Linq;
 
 namespace EmergencyManagementSystem.Web
@@ -18,9 +19,26 @@ namespace EmergencyManagementSystem.Web
             if (identity?.IsAuthenticated ?? false)
             {
                 var name = identity.Claims.LastOrDefault().Value;
-                return new UserModel { EmployeeName = name, Login = identity.Name };
+                return new UserModel { EmployeeName = name, EmployeeGuid = GetGuidCookie(identity.Name) };
             }
             return new UserModel();
+        }
+
+        private Guid GetGuidCookie(string cookie)
+        {
+            if (cookie.IsGuid())
+                return new Guid(cookie);
+
+            return Guid.NewGuid();
+        }
+    }
+
+    public static class GuidValidation
+    {
+        public static bool IsGuid(this string value)
+        {
+            Guid x;
+            return Guid.TryParse(value, out x);
         }
     }
 }

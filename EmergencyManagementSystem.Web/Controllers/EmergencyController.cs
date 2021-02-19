@@ -16,8 +16,10 @@ namespace EmergencyManagementSystem.Web.Controllers
     {
         private readonly IRequesterService _requesterService;
         private readonly IEmergencyRest _emergencyRest;
-        public EmergencyController(IRequesterService requesterService, IEmergencyRest emergencyRest)
+        private readonly UserService _userService;
+        public EmergencyController(IRequesterService requesterService, IEmergencyRest emergencyRest, UserService userService)
         {
+            _userService = userService;
             _requesterService = requesterService;
             _emergencyRest = emergencyRest;
         }
@@ -36,6 +38,7 @@ namespace EmergencyManagementSystem.Web.Controllers
         public IActionResult Register(EmergencyModel emergencyModel)
         {
             LoadBag();
+            emergencyModel.EmployeeGuid = _userService.GetCurrentUser().EmployeeGuid;
 
             if (string.IsNullOrWhiteSpace(emergencyModel.RequesterPhone))
             {
@@ -48,11 +51,13 @@ namespace EmergencyManagementSystem.Web.Controllers
                 if (!requesterResult.Success)
                 {
                     ViewBag.Error = new List<string>() { requesterResult?.Messages?.FirstOrDefault() ?? "Ocorreu um erro, favor tente novamente." };
-                    return View("Index", new EmergencyModel()); 
+                    return View("Index", new EmergencyModel());
                 }
 
-                emergencyModel.AddressId = requesterResult?.Model?.AddressId ?? 0;
                 emergencyModel.AddressModel = requesterResult?.Model?.AddressModel;
+                if (emergencyModel.AddressModel != null)
+                    emergencyModel.AddressModel.Id = 0;
+
                 emergencyModel.EmergencyStatus = EmergencyStatus.Opened;
                 emergencyModel.RequesterName = requesterResult?.Model?.Name ?? "";
                 emergencyModel.Name = "";
@@ -121,7 +126,10 @@ namespace EmergencyManagementSystem.Web.Controllers
             //chamar o o método LoadBag em todos os retornos para a tela de index.
             //Até o momento ja está
 
-            var filter = new[] { EmergencyStatus.InEvaluation, EmergencyStatus.InService };
+            var emergenciesStatus = new[] { EmergencyStatus.InEvaluation, EmergencyStatus.InService };
+            var emergencies = _emergencyRest.FindAll(new EmergencyFilter { EmergenciesStatus = emergenciesStatus });
+            if (emergencies.Success)
+                ViewBag.Emergencies = emergencies.Model;
             //Filtar todas as ocorrências com os status acima
             //ViewBag.Emergencies = _emergencyRest.GetEmergencies();
             //Criar foreach na view e preencher com as emergencias da viewBag

@@ -53,7 +53,7 @@ namespace EmergencyManagementSystem.Web.Controllers
                     ModelState.AddModelError("Login", "Funcionário não encontrado");
                     return View("Index", userLogin);
                 }
-                SingIn(user.Model, employee.Model);
+                SingIn(employee.Model);
 
                 return RedirectToAction("Index");
             }
@@ -72,11 +72,11 @@ namespace EmergencyManagementSystem.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        private async void SingIn(UserModel usuario, EmployeeModel employee)
+        private async void SingIn(EmployeeModel employee)
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, usuario.Login),
+                new Claim(ClaimTypes.Name, employee.Guid.ToString()),
                 new Claim(ClaimTypes.Role, employee.Name),
             };
 

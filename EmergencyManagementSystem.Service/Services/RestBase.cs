@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using X.PagedList;
 
@@ -64,6 +65,11 @@ namespace EmergencyManagementSystem.Service.Services
         {
             var result = Post<PaginationModel<TModel>, IFilter>(filter, $"{_controller}/FindPaginated");
             return new PagedList<TModel>(result.DataPagination, result.Models);
+        }
+
+        public Result<List<TModel>> FindAll(IFilter filter)
+        {
+            return Post<Result<List<TModel>>, IFilter>(filter, $"{_controller}/FindAll");
         }
     }
 }
