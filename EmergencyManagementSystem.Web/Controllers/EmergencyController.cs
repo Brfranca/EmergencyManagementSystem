@@ -138,6 +138,25 @@ namespace EmergencyManagementSystem.Web.Controllers
             }
         }
 
+        public ActionResult Emergencies()
+        {
+            var emergenciesStatus = new[] { EmergencyStatus.InEvaluation, EmergencyStatus.InService };
+            var emergencies = _emergencyRest.FindAll(new EmergencyFilter { EmergenciesStatus = emergenciesStatus });
+
+            string HtmlTeste = "";
+            foreach (var item in emergencies.Model)
+            {
+                string html =
+                    $"<div class=\"info-box {item.GetClassByStatus()}\"><a href=\"{Url.Action("Update", "Evaluation", new { id = item.Id })}\"><div class=\"box-body\">" +
+                    $"<h5><b>Oc: </b>{item.Id} <span class=\"pull-right\"><b>{item.Date.ToShortDateString()} {item.Date.ToShortTimeString()}</b></span></h5>" +
+                    $"<h4>{item.Name}</h4></div></a></div>";
+                HtmlTeste += html;
+            }
+
+            var teste = Json(HtmlTeste);
+            return teste;
+        }
+
         public void LoadBag()
         {
             //chamar o o método LoadBag em todos os retornos para a tela de index.
