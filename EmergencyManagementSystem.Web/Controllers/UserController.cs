@@ -28,9 +28,6 @@ namespace EmergencyManagementSystem.Web.Controllers
         [HttpPost]
         public IActionResult Register(UserModel userModel)
         {
-            if (!ModelState.IsValid)
-                return View(userModel);
-
             var result = _userRest.Register(userModel);
             if (!result.Success)
             {
