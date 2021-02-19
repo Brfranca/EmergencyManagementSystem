@@ -1,10 +1,4 @@
-﻿using EmergencyManagementSystem.Service.Filters;
-using EmergencyManagementSystem.Service.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EmergencyManagementSystem.Service.Models;
 
 namespace EmergencyManagementSystem.Service.Interfaces
 {

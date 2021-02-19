@@ -80,7 +80,8 @@
                                                 <a href="#" onclick="Pesquisar()"> <i class="fa fa-map-marker"></i> <span>Localização</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
                                                 <div class="treeview-menu">
 
-                                                    <label>Blumenau/Fortaleza Alta - Rua Monte Meru, 353</label>
+                                                    <label>@Model.AddressModel.City/@Model.AddressModel.District - @Model.AddressModel.Street, @Model.AddressModel.Number 
+                                                    @Model.AddressModel.Complement. Prox: @Model.AddressModel.Reference</label>
                                                     <input id="pac-input"
                                                            class="controls"
                                                            type="text"
@@ -121,7 +122,7 @@
                                                         <div class="row m-t-3-1">
                                                             <div class="col-lg-12">
                                                                 <div class="card-body">
-                                                                    <form>
+                                                                    <form method="post" action="@Url.Action("RegisterMedicalEvaluation", "Evaluation")">
 
                                                                         <div class="form-group">
                                                                             <label for="exampleinputemail1">Paciente</label>
@@ -199,20 +200,19 @@
 
                                                                                 <div class="form-group has-feedback">
                                                                                     <label class="control-label">Avaliação Médica</label>
-                                                                                    <textarea class="form-control" id="Evaluation-1" rows="3"></textarea>
+                                                                                    <textarea class="form-control" name="Description" id="Evaluation-1" rows="3"></textarea>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
+                                                                        <input hidden name="Id" value="@Model.Id" />
+                                                                        <input hidden name="patientId" value="@patient.Id" />
+
                                                                         <div class="row">
 
-                                                                            <!-- arrumar -->
                                                                             <div class="col-md-5">
-                                                                                <button type="button" class="btn btn-sm bg-purpleTest" onclick=""><i class="fa fa-save"></i> Gravar</button>
+                                                                                <button type="submit" class="btn btn-sm bg-purpleTest"><i class="fa fa-save"></i> Gravar</button>
                                                                             </div>
                                                                         </div>
-
-
-
                                                                     </form>
                                                                 </div>
 

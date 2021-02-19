@@ -16,12 +16,14 @@ namespace EmergencyManagementSystem.Web.Controllers
     {
         private readonly IRequesterService _requesterService;
         private readonly IEmergencyRest _emergencyRest;
+        private readonly IEmergencyHistoryRest _emergencyHistoryRest;
         private readonly UserService _userService;
-        public EmergencyController(IRequesterService requesterService, IEmergencyRest emergencyRest, UserService userService)
+        public EmergencyController(IRequesterService requesterService, IEmergencyRest emergencyRest, UserService userService, IEmergencyHistoryRest emergencyHistoryRest)
         {
             _userService = userService;
             _requesterService = requesterService;
             _emergencyRest = emergencyRest;
+            _emergencyHistoryRest = emergencyHistoryRest;
         }
 
         public IActionResult Index()
@@ -47,6 +49,10 @@ namespace EmergencyManagementSystem.Web.Controllers
         public IActionResult Register(EmergencyModel emergencyModel)
         {
             emergencyModel.EmployeeGuid = _userService.GetCurrentUser().EmployeeGuid;
+            if (!string.IsNullOrWhiteSpace(emergencyModel.Description))
+            {
+                return RedirectToAction("Cancel", emergencyModel);
+            }
 
             if (string.IsNullOrWhiteSpace(emergencyModel.RequesterPhone))
             {
@@ -136,6 +142,37 @@ namespace EmergencyManagementSystem.Web.Controllers
                 LoadBag();
                 return View("Index", new EmergencyModel());
             }
+        }
+
+        public ActionResult Cancel(EmergencyModel emergencyModel)
+        {
+            EmergencyHistoryModel emergencyHistoryModel = new EmergencyHistoryModel()
+            {
+                Date = DateTime.Now,
+                EmergencyId = emergencyModel.Id,
+                EmployeeGuid = emergencyModel.EmployeeGuid,
+                EmergencyStatus = EmergencyStatus.Canceled,
+                Description = emergencyModel.Description
+            };
+            var resultEmergency = _emergencyRest.Find(new EmergencyFilter { Id = emergencyModel.Id });
+            if (!resultEmergency.Success)
+            {
+                ViewBag.Error = resultEmergency.Messages;
+                LoadBag();
+                return View("Index", emergencyModel);
+            }
+            resultEmergency.Model.EmergencyStatus = EmergencyStatus.Canceled;
+            emergencyHistoryModel.EmergencyModel = resultEmergency.Model;
+            var result = _emergencyHistoryRest.Register(emergencyHistoryModel);
+            if (!result.Success)
+            {
+                ViewBag.Error = result.Messages;
+                LoadBag();
+                return View("Index", emergencyModel);
+            }
+
+            LoadBag();
+            return View("Index", new EmergencyModel());
         }
 
         public ActionResult Emergencies()

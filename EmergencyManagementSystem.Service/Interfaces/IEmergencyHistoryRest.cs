@@ -2,7 +2,7 @@
 
 namespace EmergencyManagementSystem.Service.Interfaces
 {
-    public interface IEmployeeRest : IRestBase<EmployeeModel>
+    public interface IEmergencyHistoryRest : IRestBase<EmergencyHistoryModel>
     {
     }
 }

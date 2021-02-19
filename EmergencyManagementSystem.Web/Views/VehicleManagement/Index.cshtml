@@ -79,11 +79,14 @@
                                                 <a href="#" onclick="Pesquisar()"> <i class="fa fa-map-marker"></i> <span>Localização</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
                                                 <div class="treeview-menu">
 
-                                                    <label>Blumenau/Fortaleza Alta - Rua Monte Meru, 353</label>
+                                                    <label>
+                                                        @Model.AddressModel.City/@Model.AddressModel.District - @Model.AddressModel.Street, @Model.AddressModel.Number
+                                                        @Model.AddressModel.Complement. Prox: @Model.AddressModel.Reference
+                                                    </label>
                                                     <input id="pac-input"
                                                            class="controls"
                                                            type="text"
-                                                           placeholder="Procurar" value="Rua Gustav Tribess - Tribess, Blumenau - SC, Brasil" />
+                                                           placeholder="Procurar" value="@Model.AddressModel.Street - @Model.AddressModel.District, @Model.AddressModel.City" />
 
                                                     <div id="map">
                                                     </div>

@@ -23,43 +23,6 @@
     }
     <div class="row">
         <div class="col-lg-4">
-            <div class="info-box">
-                <div class="box-body">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value="">
-                                    Ocorrências abertas
-                                </label>
-                            </div>
-
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value="">
-                                    ocorrências em avaliação
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!--Modelo ocorrência aberta ou em avaliação que não tenha passado pelo médico-->
-            @*@foreach (var emergency in emergencies)
-            {
-                <div class="info-box @emergency.GetClassByStatus()">
-                    <a href="@Url.Action("Update","Emergency", new { id = emergency.Id })">
-                        <div class="box-body">
-                            <h5><b>Oc: </b>@emergency.Id<span class="pull-right"><b>@emergency.Date.ToShortDateString() @emergency.Date.ToShortTimeString()</b></span></h5>
-                            <h4>@emergency.Name</h4>
-                        </div>
-                    </a>
-                </div>
-            }*@
-
             <div id="refTable">
                 @Html.Partial("Emergencies", emergencies)
             </div>
@@ -86,6 +49,7 @@
                                                 <input hidden name="Date" value="@Model.Date" />
                                                 <input hidden name="EmergencyStatus" value="@Model.EmergencyStatus" />
                                                 <input hidden name="AddressId" value="@Model?.AddressId" />
+
 
                                                 <div class="row">
                                                     <div class="col-md-6">
@@ -195,14 +159,13 @@
                                                         <button type="button" id="btnCancel" onclick="appendCancel()" class="btn btn-lg bg-light">Cancelar</button>
                                                     </div>
                                                 </div>
-
                                                 <div id="cancel" class="hide">
                                                     <hr />
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="form-group has-feedback">
                                                                 <label class="control-label">Comentário</label>
-                                                                <textarea class="form-control" id="placeTextarea" rows="1" placeholder="Observação"></textarea>
+                                                                <textarea class="form-control" name="Description" id="placeTextarea" rows="1" placeholder="Observação"></textarea>
                                                             </div>
                                                         </div>
 
@@ -214,14 +177,16 @@
                                             }
                                             else
                                             {
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <div class="form-group has-feedback">
-                                                            <label class="control-label">Telefone</label>
-                                                            <input class="form-control" placeholder="Telefone" id="telefone" type="text" name="RequesterPhone">
+                                                <div class="card-group align-items-center">
+
+                                                        <div class="col-md-4">
+                                                            <div class="form-group has-feedback">
+                                                                <label class="control-label">Telefone</label>
+                                                                <input class="form-control" placeholder="Telefone" id="telefone" type="text" name="RequesterPhone">
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <button type="submit" class="btn btn-nor bg-purpleTest" style="">Iniciar</button>
+
+                                                        <button type="submit" class="btn btn-nor bg-purpleTest align-self-center" style="">Iniciar</button>
                                                 </div>
                                             }
                                         </form>
@@ -269,6 +234,8 @@
 
 </div>
 
+
+
 <script>
 
     function RefreshEmergencies() {
@@ -287,6 +254,12 @@
 </script>
 
 <script>
+    function appendCancel() {
+        $('#btnCancel').attr('disabled', true);
+        $('#btnRegister').attr('disabled', true);
+        $("#cancel").removeClass();
+    }
+
     var qtdPatient = 0;
 
     RefreshQtdPatient();

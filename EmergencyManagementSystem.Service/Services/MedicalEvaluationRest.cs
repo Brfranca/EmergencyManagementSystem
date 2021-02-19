@@ -4,10 +4,9 @@ using Microsoft.Extensions.Configuration;
 
 namespace EmergencyManagementSystem.Service.Services
 {
-    public class AddressRest : RestBase<AddressModel>, IAddressRest
+    public class MedicalEvaluationRest : RestBase<MedicalEvaluationModel>, IMedicalEvaluationRest
     {
-        public AddressRest(IConfiguration configuration)
-            : base(configuration, "CommonApi", "Address")
+        public MedicalEvaluationRest(IConfiguration configuration) : base(configuration, "SAMUApi", "MedicalEvaluation")
         {
         }
     }

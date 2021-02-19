@@ -2,6 +2,7 @@
 using EmergencyManagementSystem.Service.Filters;
 using EmergencyManagementSystem.Service.Interfaces;
 using EmergencyManagementSystem.Service.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,23 +11,60 @@ using System.Threading.Tasks;
 
 namespace EmergencyManagementSystem.Web.Controllers
 {
+    [Authorize]
     public class EvaluationController : Controller
     {
 
         private readonly IRequesterService _requesterService;
         private readonly IEmergencyRest _emergencyRest;
+        private readonly IMedicalEvaluationRest _medicalEvaluationRest;
         private readonly UserService _userService;
-        public EvaluationController(IRequesterService requesterService, IEmergencyRest emergencyRest, UserService userService)
+        public EvaluationController(IRequesterService requesterService, IEmergencyRest emergencyRest, UserService userService, IMedicalEvaluationRest medicalEvaluationRest)
         {
             _userService = userService;
             _requesterService = requesterService;
             _emergencyRest = emergencyRest;
+            _medicalEvaluationRest = medicalEvaluationRest;
         }
 
         public IActionResult Index()
         {
             LoadBag();
             return View(new EmergencyModel());
+        }
+
+        [HttpPost]
+        public ActionResult RegisterMedicalEvaluation(EmergencyModel emergencyModel, long patientId)
+        {
+            //como trazer os dados do paciente caso seja alterado na tela de avaliação?
+            emergencyModel.EmployeeGuid = _userService.GetCurrentUser().EmployeeGuid;
+            MedicalEvaluationModel medicalEvaluationModel = new MedicalEvaluationModel
+            {
+                EmergencyId = emergencyModel.Id,
+                EmployeeGuid = emergencyModel.EmployeeGuid,
+                Evaluation = emergencyModel.Description,
+                Date = DateTime.Now,
+                PatientId = patientId
+            };
+
+            var resultEmergency = _emergencyRest.Find(new EmergencyFilter { Id = emergencyModel.Id });
+            if (!resultEmergency.Success)
+            {
+                ViewBag.Error = resultEmergency.Messages;
+                LoadBag();
+                return View("Index", emergencyModel);
+            }
+
+            var result = _medicalEvaluationRest.Register(medicalEvaluationModel);
+            if (!result.Success)
+            {
+                ViewBag.Error = result.Messages;
+                LoadBag();
+                return View("Index", resultEmergency.Model);
+            }
+
+            LoadBag();
+            return View("Index", resultEmergency.Model);
         }
 
         public ActionResult Update(long id)
@@ -38,9 +76,8 @@ namespace EmergencyManagementSystem.Web.Controllers
                 ViewBag.Error = new List<string> { result?.Messages?.FirstOrDefault() ?? "Ocorreu um erro, favor tente novamente." };
                 return View("index", new EmergencyModel());
             }
-            var currentUser = _userService.GetCurrentUser();
-            result.Model.EmployeeName = currentUser.EmployeeName;
-            result.Model.EmployeeGuid = currentUser.EmployeeGuid;
+            result.Model.EmployeeName = _userService.GetCurrentUser().EmployeeName;
+            result.Model.EmployeeGuid = _userService.GetCurrentUser().EmployeeGuid;
             LoadBag();
             return View("index", result.Model);
         }
