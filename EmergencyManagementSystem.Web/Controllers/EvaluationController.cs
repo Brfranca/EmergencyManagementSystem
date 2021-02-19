@@ -76,8 +76,17 @@ namespace EmergencyManagementSystem.Web.Controllers
                 ViewBag.Error = new List<string> { result?.Messages?.FirstOrDefault() ?? "Ocorreu um erro, favor tente novamente." };
                 return View("index", new EmergencyModel());
             }
+            //Não está trazendo o PatientModel para pegar o nome do paciente
+            var resultEvaluation = _medicalEvaluationRest.FindAll(new MedicalEvaluationFilter { EmergencyId = id });
+            if (!resultEvaluation.Success)
+            {
+                LoadBag();
+                ViewBag.Error = new List<string> { result?.Messages?.FirstOrDefault() ?? "Ocorreu um erro, favor tente novamente." };
+                return View("index", new EmergencyModel());
+            }
             result.Model.EmployeeName = _userService.GetCurrentUser().EmployeeName;
             result.Model.EmployeeGuid = _userService.GetCurrentUser().EmployeeGuid;
+            result.Model.MedicalEvaluations = resultEvaluation.Model;
             LoadBag();
             return View("index", result.Model);
         }
