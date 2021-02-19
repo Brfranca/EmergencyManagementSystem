@@ -19,7 +19,7 @@ namespace EmergencyManagementSystem.Service.Models
         public List<PatientModel> Patients { get; set; }
         public List<MedicalEvaluationModel> MedicalEvaluations { get; set; }
         public Guid EmployeeGuid { get; set; }
-
+        public string EmployeeName { get; set; }
         public EmergencyModel()
         {
             AddressModel = new AddressModel();
