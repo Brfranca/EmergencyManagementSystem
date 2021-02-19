@@ -122,154 +122,118 @@
                 <div class="card tab-style1">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs profile-tab" role="tablist">
-                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab" aria-expanded="true">Veículos Empenhados</a> </li>
-                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab" aria-expanded="false">Avaliação</a> </li>
-
+                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab" aria-expanded="true">Enviar Veículo</a> </li>
+                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab" aria-expanded="false">Dados da Ocorrência</a> </li>
+                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#main" role="tab" aria-expanded="false">Controle de Veículos</a> </li>
                     </ul>
 
-                    <!-- First tab -->
+                    <!-- TAB DE ESCOLHA DE VEÍCULO PARA EMPENHAR NA VTR -->
                     <div class="tab-content">
                         <div class="tab-pane active" id="home" role="tabpanel" aria-expanded="true">
                             <div class="row m-t-3-1">
                                 <div class="col-lg-12">
                                     <div class="card-body">
-                                        <form method="post" action="@Url.Action("Register", "Emergency")">
-                                            <h4 class="text-white">OC: @(Model?.Id ?? 0)<span class="pull-right"><b>@Model.Date</b></span> </h4>
-                                            <input hidden name="Id" value="@Model.Id" />
-                                            <input hidden name="Date" value="@Model.Date" />
-                                            <input hidden name="EmergencyStatus" value="@Model.EmergencyStatus" />
+                                        <h4 class="text-white">OC: 532154@(Model?.Id) - Acidente de Carro<span class="pull-right"><b>10/02/2021  15:12</b></span> </h4>
+                                        <h5 class="text-white"><b>Solicitante:</b> Tiago<span class="pull-right"><b>Funcionário:</b> Marilei</span> </h5>
+                                        <h5 class="text-white"><b>Telefone:</b> 47 99968-34567<span class="pull-right"></span> </h5>
+                                        <hr />
 
+                                        <div class="sidebar-menu" data-widget="tree">
+                                            <div class="treeview">
+                                                <a href="#" onclick="Pesquisar()"> <i class="fa fa-map-marker"></i> <span>Localização</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+                                                <div class="treeview-menu">
+
+                                                    <label>Blumenau/Fortaleza Alta - Rua Monte Meru, 353</label>
+                                                    <input id="pac-input"
+                                                           class="controls"
+                                                           type="text"
+                                                           placeholder="Procurar" value="Rua Gustav Tribess - Tribess, Blumenau - SC, Brasil" />
+
+                                                    <div id="map">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <h5 class="box-title text-white">
+                                            Veículo: USB - Código: Vermelho
+                                        </h5>
+                                        <!--Listar Veículos disponíveis-->
+                                        <div class="">
                                             <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group has-feedback">
-                                                        <label class="control-label">Telefone</label>
-                                                        <input class="form-control" placeholder="Telefone" id="telefone" readonly type="text" name="RequesterPhone" value="@Model.RequesterPhone">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group has-feedback">
-                                                        <label class="control-label">Solicitante</label>
-                                                        <input class="form-control" placeholder="Nome" type="text" name="RequesterName" value="@Model.RequesterName">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="exampleinputemail1">Nome da Ocorrência</label>
-                                                <input type="text" class="form-control" id="exampleinputemail1" placeholder="Motivo / Queixa" name="Name" value="@Model.Name">
-                                            </div>
 
-                                            <div id="patientNewList">
-                                                @{int current = 0;}
-                                                @foreach (var patient in Model.Patients)
-                                                {
-                                                    <hr />
-
-                                                    <div class="form-group">
-                                                        <label for="exampleinputemail1">Paciente</label>
-                                                        <input type="text" class="form-control" id="exampleinputemail1" placeholder="Nome" name="Patients[@current].Name" value="@patient.Name">
+                                                <div class="col-md-3">
+                                                    <div class="info-box">
+                                                        <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
+                                                        <span class=""> <span class="info-box-number">USB</span> <span class="info-box-text"></span> </span>
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label for="location1">Sexo</label>
-                                                                <select class="custom-select form-control" id="location1" name="Patients[@current].Gender">
-                                                                    <option value="0" @patient.GetGenderSelected(0)>Selecione</option>
-                                                                    <option value="1" @patient.GetGenderSelected(1)>Feminino</option>
-                                                                    <option value="2" @patient.GetGenderSelected(2)>Masculino</option>
-                                                                    <option value="3" @patient.GetGenderSelected(3)>Indeterminado</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group has-feedback">
-                                                                <label class="control-label">Idade</label>
-                                                                <input class="form-control" placeholder="00" type="number" value="@patient?.Age" name="Patients[@current].Age">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    current++;
-                                                }
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-5">
-                                                    <button type="button" class="btn btn-sm bg-purpleTest" onclick="AddPatients('patientNew', 'patientNewList')"><i class="fa fa-plus-circle"></i> Paciente</button>
+                                                    <center>
+                                                        <h5><a href="#">Blumenau <i class="fa fa-mail-forward"></i></a></h5>
+                                                    </center>
                                                 </div>
-                                            </div>
 
+                                                <div class="col-md-3">
+                                                    <div class="info-box">
+                                                        <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
+                                                        <span class=""> <span class="info-box-number">USA</span> <span class="info-box-text"></span> </span>
+                                                    </div>
+                                                    <center>
+                                                        <h5><a href="#">Rio do Sul <i class="fa fa-mail-forward"></i></a></h5>
+                                                    </center>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <div class="info-box">
+                                                        <span class="info-box-icon bg-red"><i class="fas fa-helicopter"></i></span>
+                                                        <span class=""> <span class="info-box-number">HEL</span> <span class="info-box-text"></span> </span>
+                                                    </div>
+                                                    <center>
+                                                        <h5><a href="#">Indaial <i class="fa fa-mail-forward"></i></a></h5>
+                                                    </center>
+                                                </div>
+
+                                                <div class="col-md-3">
+
+                                                    <div class="info-box">
+                                                        <span class="info-box-icon bg-red"><i class="fa fa-plane"></i></span>
+                                                        <span class=""> <span class="info-box-number">AVI</span> <span class="info-box-text"></span> </span>
+                                                    </div>
+                                                    <center>
+                                                        <h5><a href="#">Blumenau <i class="fa fa-mail-forward"></i></a></h5>
+                                                    </center>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <hr />
+
+                                        <div class="">
+                                            <button id="btnCancel" onclick="appendCancel()" class="btn btn-block bg-light">Cancelar Ocorrência</button>
+                                        </div>
+
+                                        <div id="cancel" class="hide">
                                             <hr />
                                             <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group has-feedback">
-                                                        <label class="control-label">CEP</label>
-                                                        <input class="form-control" placeholder="00.000-000" type="text" value="@(Model?.AddressModel?.CEP)" name="AddressModel.CEP">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group has-feedback">
-                                                        <label class="control-label">Cidade</label>
-                                                        <input class="form-control" placeholder="Cidade" type="text" value="@(Model?.AddressModel?.City)" name="AddressModel.City">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group has-feedback">
-                                                        <label class="control-label">Bairro</label>
-                                                        <input class="form-control" placeholder="Bairro" type="text" value="@(Model?.AddressModel?.District)" name="AddressModel.District">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group has-feedback">
-                                                        <label class="control-label">Rua</label>
-                                                        <input class="form-control" placeholder="Rua" type="text" value="@(Model?.AddressModel?.Street)" name="AddressModel.Street">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group has-feedback">
-                                                        <label class="control-label">Número</label>
-                                                        <input class="form-control" placeholder="Número" type="text" value="@(Model?.AddressModel?.Number)" name="AddressModel.Number">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group has-feedback">
-                                                        <label class="control-label">Complemento</label>
-                                                        <input class="form-control" placeholder="Complemento" type="text" value="@(Model?.AddressModel?.Complement)" name="AddressModel.Complement">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="exampleinputemail1">Ponto de Referência</label>
-                                                <input type="text" class="form-control" id="exampleinputemail1" placeholder="Próximo..." value="@(Model?.AddressModel?.Reference)" name="AddressModel.Reference">
-                                            </div>
-                                            <div class="row">
                                                 <div class="col-md-12">
-                                                    <button type="submit" id="btnRegister" class="btn btn-lg bg-purpleTest">Registrar</button>
-                                                    <button type="button" id="btnCancel" onclick="appendCancel()" class="btn btn-lg bg-light">Cancelar</button>
-                                                </div>
-                                            </div>
-
-                                            <div id="cancel" class="hide">
-                                                <hr />
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="form-group has-feedback">
-                                                            <label class="control-label">Comentário</label>
-                                                            <textarea class="form-control" id="placeTextarea" rows="1" placeholder="Observação"></textarea>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-12">
-                                                        <button type="submit" class="btn btn-sm bg-purpleTest">Registrar Cancelamento</button>
+                                                    <div class="form-group has-feedback">
+                                                        <label class="control-label">Comentário</label>
+                                                        <textarea class="form-control" id="placeTextarea" rows="1" placeholder="Observação"></textarea>
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                        </form>
+                                                <div class="col-md-12">
+                                                    <button type="submit" class="btn btn-sm bg-purpleTest">Registrar Cancelamento</button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
 
-                        <!--second tab-->
+                        <!--TAB DADOS DA OCORRENCIA-->
                         <div class="tab-pane" id="profile" role="tabpanel" aria-expanded="false">
 
                             <div class="row m-t-3-1">
@@ -297,7 +261,6 @@
                                             </div>
                                         </div>
                                         <hr />
-
 
                                         <div class="box-header with-border">
                                             <h5 class="box-title text-white">
@@ -354,12 +317,12 @@
                                                 </tbody>
                                             </table>
                                         </div>
-
+                                        <br />
                                         <hr />
                                         <!--Implementar os J's aqui-->
-                                            <h5 class="box-title text-white">
-                                                Posição da viatura
-                                            </h5>
+                                        <h5 class="box-title text-white">
+                                            Posição da viatura - USB01
+                                        </h5>
                                         <div class="card-group align-items-center">
                                             <div class="col-2">
                                                 <div class="form-group has-feedback">
@@ -422,97 +385,177 @@
                                             </div>
 
                                         </div>
-
                                         <hr />
 
-
-                                        <div class="sidebar-menu" data-widget="tree">
-                                            <div class="treeview">
-                                                <a href="#"> <i class="fa fa-ambulance"></i> <span>Envio de Veículos</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
-                                                <div class="treeview-menu">
-                                                    <!-- Veículos  -->
-                                                    <div class="">
-                                                        <div class="row">
-
-                                                            <div class="col-md-3">
-
-                                                                <div class="info-box">
-                                                                    <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
-                                                                    <span class=""> <span class="info-box-number">USB</span> <span class="info-box-text"></span> </span>
-                                                                </div>
-
-                                                                <ul class="fc-color-picker" id="color-chooser">
-                                                                    <li><span class="text-light-blue" href="#"><i class="fa fa-square"></i></span></li>
-                                                                    <li><span class="text-yellow" href="#"><i class="fa fa-square"></i></span></li>
-                                                                    <li><span class="text-green" href="#"><i class="fa fa-square"></i></span></li>
-                                                                    <li><span class="text-red" href="#"><i class="fa fa-square"></i></span></li>
-                                                                </ul>
-                                                            </div>
-
-                                                            <div class="col-md-3">
-
-                                                                <div class="info-box">
-                                                                    <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
-                                                                    <span class=""> <span class="info-box-number">USA</span> <span class="info-box-text"></span> </span>
-                                                                </div>
-
-                                                                <ul class="fc-color-picker" id="color-chooser">
-                                                                    <li><span class="text-light-blue" href="#"><i class="fa fa-square"></i></span></li>
-                                                                    <li><span class="text-yellow" href="#"><i class="fa fa-square"></i></span></li>
-                                                                    <li><span class="text-green" href="#"><i class="fa fa-square"></i></span></li>
-                                                                    <li><span class="text-red" href="#"><i class="fa fa-square"></i></span></li>
-                                                                </ul>
-                                                            </div>
-
-                                                            <div class="col-md-3">
-
-                                                                <div class="info-box">
-                                                                    <span class="info-box-icon bg-red"><i class="fas fa-helicopter"></i></span>
-                                                                    <span class=""> <span class="info-box-number">HEL</span> <span class="info-box-text"></span> </span>
-                                                                </div>
-
-                                                                <ul class="fc-color-picker" id="color-chooser">
-                                                                    <li><span class="text-light-blue" href="#"><i class="fa fa-square"></i></span></li>
-                                                                    <li><span class="text-yellow" href="#"><i class="fa fa-square"></i></span></li>
-                                                                    <li><span class="text-green" href="#"><i class="fa fa-square"></i></span></li>
-                                                                    <li><span class="text-red" href="#"><i class="fa fa-square"></i></span></li>
-                                                                </ul>
-                                                            </div>
-
-                                                            <div class="col-md-3">
-
-                                                                <div class="info-box">
-                                                                    <span class="info-box-icon bg-red"><i class="fa fa-plane"></i></span>
-                                                                    <span class=""> <span class="info-box-number">AVI</span> <span class="info-box-text"></span> </span>
-                                                                </div>
-
-                                                                <ul class="fc-color-picker" id="color-chooser">
-                                                                    <li><span class="text-light-blue" href="#"><i class="fa fa-square"></i></span></li>
-                                                                    <li><span class="text-yellow" href="#"><i class="fa fa-square"></i></span></li>
-                                                                    <li><span class="text-green" href="#"><i class="fa fa-square"></i></span></li>
-                                                                    <li><span class="text-red" href="#"><i class="fa fa-square"></i></span></li>
-                                                                </ul>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group has-feedback">
+                                                    <label class="control-label">Intercorrências</label>
+                                                    <textarea class="form-control" id="Evaluation-1" rows="2"></textarea>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <button type="submit" class="btn btn-sm bg-purpleTest"><i class="fa fa-save"></i> Gravar</button>
                                             </div>
                                         </div>
                                         <hr />
 
-                                        <hr />
-
                                         <div class="">
-                                            <a id="btnRegister" class="btn btn-block bg-purpleTest">Finalizar Ocorrência</a>
+                                            <a id="btnRegister" class="btn btn-block bg-purpleTest">Concluído</a>
                                         </div>
 
                                         <hr />
+                                        <span class="pull-right">
+                                            <button id="btnCancelar1" class="btn btn-nor bg-light">Cancelar Viatura</button>
+                                        </span>
+                                        <br />
                                     </div><!--ACaba card body da pagina-->
 
-                                    </div>
+                                </div>
                             </div>
                         </div>
+
+
+                        <!--TAB CONTROLE DE VEICULOS-->
+                        <div class="tab-pane" id="main" role="tabpanel" aria-expanded="false">
+
+                            <div class="row m-t-3-1">
+                                <div class="col-lg-12">
+                                    <div class="card-body">
+
+
+                                        <!--MODELO OCORRENCIA EM ANDAMENTO-->
+                                        <div class="col-lg-12">
+                                            <div class="small-box bg-red">
+                                                <div class="inner">
+                                                    <div class="text-left">
+                                                        <h5>OC: 14456874  -  USB01</h5>
+                                                        <h6>Dor no peito e dispneia</h6>
+                                                    </div>
+
+
+                                                    <!-- TALVEZ SERIA LEGAL MUDAR A COR DO IMPUT ONDE O VEICULO ESTÁ-->
+                                                    <div class="card-group align-items-center">
+                                                        <div class="col-2">
+                                                            <div class="form-group has-feedback">
+                                                                <a href="#"><label class="control-label"> + J9 </label></a>
+                                                                <input class="form-control" type="text" id="PA-">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-2">
+
+                                                            <div class="form-group has-feedback">
+                                                                <a href="#"><label class="control-label"> + J10 </label></a>
+                                                                <input class="form-control" type="text" id="FC-">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-2">
+
+                                                            <div class="form-group has-feedback">
+                                                                <a href="#"><label class="control-label"> + J9 </label></a>
+                                                                <input class="form-control" type="text" id="FR-">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-2">
+                                                            <div class="form-group has-feedback">
+                                                                <a href="#"><label class="control-label"> + J10 </label></a>
+                                                                <input class="form-control" type="text" id="Temp-">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-2">
+                                                            <div class="form-group has-feedback">
+                                                                <a href="#"><label class="control-label"> + J11 </label></a>
+                                                                <input class="form-control" type="text" id="Sat02-">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-2">
+                                                            <div class="form-group has-feedback">
+                                                                <a href="#"><label class="control-label"> + J12 </label></a>
+                                                                <input class="form-control" type="text" id="HGT-">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--MODELO OCORRENCIA EM ANDAMENTO-->
+                                        <div class="col-lg-12">
+                                            <div class="small-box bg-yellow">
+                                                <div class="inner">
+                                                    <div class="text-left">
+                                                        <h5>OC: 14456874  -  USB01</h5>
+                                                        <h6>Dor no peito e dispneia</h6>
+                                                    </div>
+
+
+                                                    <!-- TALVEZ SERIA LEGAL MUDAR A COR DO IMPUT ONDE O VEICULO ESTÁ-->
+                                                    <div class="card-group align-items-center">
+                                                        <div class="col-2">
+                                                            <div class="form-group has-feedback">
+                                                                <a href="#"><label class="control-label"> + J9 </label></a>
+                                                                <input class="form-control" type="text" id="PA-">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-2">
+
+                                                            <div class="form-group has-feedback">
+                                                                <a href="#"><label class="control-label"> + J10 </label></a>
+                                                                <input class="form-control" type="text" id="FC-">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-2">
+
+                                                            <div class="form-group has-feedback">
+                                                                <a href="#"><label class="control-label"> + J9 </label></a>
+                                                                <input class="form-control" type="text" id="FR-">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-2">
+                                                            <div class="form-group has-feedback">
+                                                                <a href="#"><label class="control-label"> + J10 </label></a>
+                                                                <input class="form-control" type="text" id="Temp-">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-2">
+                                                            <div class="form-group has-feedback">
+                                                                <a href="#"><label class="control-label"> + J11 </label></a>
+                                                                <input class="form-control" type="text" id="Sat02-">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-2">
+                                                            <div class="form-group has-feedback">
+                                                                <a href="#"><label class="control-label"> + J12 </label></a>
+                                                                <input class="form-control" type="text" id="HGT-">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+                                    </div><!--ACaba card body da pagina-->
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
                     </div> @*Final TabContent*@
                 </div>
             </div>
