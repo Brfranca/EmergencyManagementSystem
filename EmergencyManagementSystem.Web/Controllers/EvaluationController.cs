@@ -36,8 +36,15 @@ namespace EmergencyManagementSystem.Web.Controllers
             return View(new EmergencyModel());
         }
 
+        public IActionResult MedicalOrientation(long emergencyId, string orientation)
+        {
+            //em desenvolvimento
+            return View();
+        }
+
+
         [HttpPost]
-        public ActionResult RegisterMedicalEvaluation(EmergencyModel emergencyModel)
+        public IActionResult RegisterMedicalEvaluation(EmergencyModel emergencyModel)
         {
             var resultEmergency = GetEmergencyModel(emergencyModel.Id);
             if (!resultEmergency.Success)
@@ -75,29 +82,20 @@ namespace EmergencyManagementSystem.Web.Controllers
             return View("Index", resultEmergency.Model);
         }
 
-        public ActionResult Update(long id)
+        public IActionResult Update(long id)
         {
-            var result = _emergencyRest.Find(new EmergencyFilter { Id = id });
+            var result = GetEmergencyModel(id);
             if (!result.Success)
             {
                 LoadBag();
                 ViewBag.Error = new List<string> { result?.Messages?.FirstOrDefault() ?? "Ocorreu um erro, favor tente novamente." };
                 return View("index", new EmergencyModel());
             }
-
-            var resultEvaluation = _medicalEvaluationRest.FindAll(new MedicalEvaluationFilter { EmergencyId = id });
-            if (!resultEvaluation.Success)
-            {
-                LoadBag();
-                ViewBag.Error = new List<string> { result?.Messages?.FirstOrDefault() ?? "Ocorreu um erro, favor tente novamente." };
-                return View("index", new EmergencyModel());
-            }
-            result.Model.MedicalEvaluationModels = resultEvaluation.Model;
             LoadBag();
             return View("index", result.Model);
         }
 
-        public ActionResult Emergencies()
+        public IActionResult Emergencies()
         {
             var emergenciesStatus = new[] { EmergencyStatus.InEvaluation, EmergencyStatus.InService };
             var emergencies = _emergencyRest.FindAll(new EmergencyFilter { EmergenciesStatus = emergenciesStatus });

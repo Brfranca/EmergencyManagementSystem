@@ -259,11 +259,11 @@
 
 
                                         <div class="">
-                                            <a id="btnRegister" class="btn btn-block btn-default">Orientação Médica Sem Envio de Veículo</a>
-                                            <a id="btnCancel" class="btn btn-block btn-default">Solicitar Apoio Bombeiro</a>
-                                            <a id="btnRegister" class="btn btn-block btn-default">Solicitar Apoio SAMU</a>
-                                            <a id="btnCancel" class="btn btn-block btn-default">Repasse Bombeiro</a>
-                                            <a id="btnCancel" class="btn btn-block btn-default">Repasse SAMU</a>
+                                            <a id="btnRegister" href="@Url.Action("MedicalOrientation", "Evalution", new { emergencyId = Model.Id, orientation = "Orientação Médica Sem Envio de Veículo" })" class="btn btn-block btn-default">Orientação Médica Sem Envio de Veículo</a>
+                                            <a id="btnCancel" href="@Url.Action("MedicalOrientation", "Evalution", new { emergencyId = Model.Id, orientation = "Solicitar Apoio Bombeiro" })" class="btn btn-block btn-default">Solicitar Apoio Bombeiro</a>
+                                            <a id="btnRegister" href="@Url.Action("MedicalOrientation", "Evalution", new { emergencyId = Model.Id, orientation = "Solicitar Apoio PM" })" class="btn btn-block btn-default">Solicitar Apoio PM</a>
+                                            @*<a id="btnCancel" class="btn btn-block btn-default">Repasse Bombeiro</a>*@
+                                            @*<a id="btnCancel" class="btn btn-block btn-default">Repasse SAMU</a>*@
                                         </div>
 
                                         <hr />
