@@ -56,7 +56,7 @@
 
                                             <div class="sidebar-menu" data-widget="tree">
                                                 <div class="treeview">
-                                                    <a href="#" onclick="Pesquisar()"> <i class="fa fa-map-marker"></i> <span>Localização</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+                                                    <a href="#" onclick="search()"> <i class="fa fa-map-marker"></i> <span>Localização</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
                                                     <div class="treeview-menu">
 
                                                         <label>
@@ -166,7 +166,7 @@
 
                                         <div class="sidebar-menu" data-widget="tree">
                                             <div class="treeview">
-                                                <a href="#" onclick="Search()"> <i class="fa fa-map-marker"></i> <span>Localização</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+                                                <a href="#" onclick="search()"> <i class="fa fa-map-marker"></i> <span>Localização</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
                                                 <div class="treeview-menu">
 
                                                     <label>
@@ -513,11 +513,11 @@
         $("#cancel").removeClass();
     }
 
-    function Search() {
-        window.setTimeout(SearchTimer, 1000);
+    function search() {
+        window.setTimeout(searchTimer, 1000);
     }
 
-    function SearchTimer() {
+    function searchTimer() {
         var input = document.getElementById('pac-input');
 
         google.maps.event.trigger(input, 'focus', {});

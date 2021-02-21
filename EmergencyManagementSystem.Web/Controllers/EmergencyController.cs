@@ -177,7 +177,7 @@ namespace EmergencyManagementSystem.Web.Controllers
 
         public ActionResult Emergencies()
         {
-            var emergenciesStatus = new[] { EmergencyStatus.InEvaluation, EmergencyStatus.InService };
+            var emergenciesStatus = new[] { EmergencyStatus.InEvaluation, EmergencyStatus.Opened };
             var emergencies = _emergencyRest.FindAll(new EmergencyFilter { EmergenciesStatus = emergenciesStatus });
 
             string HtmlTeste = "";
@@ -199,7 +199,7 @@ namespace EmergencyManagementSystem.Web.Controllers
             //chamar o o método LoadBag em todos os retornos para a tela de index.
             //Até o momento ja está
 
-            var emergenciesStatus = new[] { EmergencyStatus.InEvaluation, EmergencyStatus.InService };
+            var emergenciesStatus = new[] { EmergencyStatus.InEvaluation, EmergencyStatus.Opened };
             var emergencies = _emergencyRest.FindAll(new EmergencyFilter { EmergenciesStatus = emergenciesStatus });
             if (emergencies.Success)
                 ViewBag.Emergencies = emergencies.Model;

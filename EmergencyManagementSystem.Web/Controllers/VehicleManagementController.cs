@@ -2,6 +2,7 @@
 using EmergencyManagementSystem.Service.Filters;
 using EmergencyManagementSystem.Service.Interfaces;
 using EmergencyManagementSystem.Service.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace EmergencyManagementSystem.Web.Controllers
 {
+    [Authorize]
     public class VehicleManagementController : Controller
     {
         private readonly IEmergencyRest _emergencyRest;
@@ -49,28 +51,19 @@ namespace EmergencyManagementSystem.Web.Controllers
             return View("Index", new EmergencyModel());
         }
 
-        //public IActionResult Update(long id)
-        //{
-        //    var result = _emergencyRest.Find(new EmergencyFilter { Id = id });
-        //    if (!result.Success)
-        //    {
-        //        LoadBag();
-        //        ViewBag.Error = new List<string> { result?.Messages?.FirstOrDefault() ?? "Ocorreu um erro, favor tente novamente." };
-        //        return View("index", new EmergencyModel());
-        //    }
+        public IActionResult Update(long id)
+        {
+            var result = GetEmergencyModel(id);
+            if (!result.Success)
+            {
+                LoadBag();
+                ViewBag.Error = new List<string> { result?.Messages?.FirstOrDefault() ?? "Ocorreu um erro, favor tente novamente." };
+                return View("index", new EmergencyModel());
+            }
+            LoadBag();
+            return View("index", result.Model);
 
-        //    var resultEvaluation = _medicalEvaluationRest.FindAll(new MedicalEvaluationFilter { EmergencyId = id });
-        //    if (!resultEvaluation.Success)
-        //    {
-        //        LoadBag();
-        //        ViewBag.Error = new List<string> { result?.Messages?.FirstOrDefault() ?? "Ocorreu um erro, favor tente novamente." };
-        //        return View("index", new EmergencyModel());
-        //    }
-        //    result.Model.MedicalEvaluationModels = resultEvaluation.Model;
-        //    LoadBag();
-        //    return View("index", result.Model);
-
-        //}
+        }
 
         public ActionResult Cancel(EmergencyModel emergencyModel)
         {
