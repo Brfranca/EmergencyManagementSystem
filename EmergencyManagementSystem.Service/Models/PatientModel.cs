@@ -14,7 +14,7 @@ namespace EmergencyManagementSystem.Service.Models
         public int Age { get; set; }
         public Gender Gender { get; set; }
         public long EmergencyId { get; set; }
-
+        public string Description { get; set; }
         public string GetGenderSelected(short gender)
         {
             if (Gender == (Gender)gender)

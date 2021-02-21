@@ -12,6 +12,7 @@ namespace EmergencyManagementSystem.Service.Models
         public string Evaluation { get; set; }
         public PatientModel PatientModel { get; set; }
         public long PatientId { get; set; }
+        public string EmployeeName { get; set; }
 
         public MedicalEvaluationModel()
         {

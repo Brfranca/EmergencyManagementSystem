@@ -96,35 +96,33 @@
                                         </div>
                                         <hr />
 
+                                        <form method="post" action="@Url.Action("RegisterMedicalEvaluation", "Evaluation")">
+                                            <input hidden name="Id" value="@Model.Id" />
 
-                                        @*TESTE*@
-                                        <div class="card tab-style1">
-                                            <!-- Nav tabs -->
-                                            <ul class="nav nav-tabs profile-tab" role="tablist" id="navsPatient">
+                                            <div class="card tab-style1">
 
-                                                @foreach ((var patient, int i) in Model.Patients.Select((value, i) => (value, i)))
-                                                {
-                                                    var index = i + 1;
-                                                    var active = index == 1 ? "active" : "";
-                                                    var ariaExpanded = index == 1 ? "true" : "false";
-                                                    <li class="nav-item" id="navPatient-@index"> <a class="nav-link @active" data-toggle="tab" href="#patient-@index" role="tab" aria-expanded="@ariaExpanded">Paciente</a> </li>
-                                                }
-                                                <li class="nav-item" id="navAddPatients"><a onclick="AddPatientsTab()" class="nav-link" data-toggle="tab" role="tab" aria-expanded="false" href="#"><i class="fa fa-plus-circle"></i></a></li>
+                                                <ul class="nav nav-tabs profile-tab" role="tablist" id="navsPatient">
 
-                                            </ul>
+                                                    @foreach ((var patient, int index) in Model.Patients.Select((value, i) => (value, i)))
+                                                    {
+                                                        var active = index == 0 ? "active" : "";
+                                                        var ariaExpanded = index == 0 ? "true" : "false";
+                                                        <li class="nav-item" id="navPatient-@index"> <a class="nav-link @active" data-toggle="tab" href="#patient-@index" role="tab" aria-expanded="@ariaExpanded">Paciente</a> </li>
+                                                    }
+                                                    <li class="nav-item" id="navAddPatients"><a onclick="AddPatientsTab()" class="nav-link" data-toggle="tab" role="tab" aria-expanded="false" href="#"><i class="fa fa-plus-circle"></i></a></li>
 
-                                            <div class="tab-content" id="tabsPatient">
-                                                @foreach ((var patient, int i) in Model.Patients.Select((value, i) => (value, i)))
-                                                {
-                                                    var index = i + 1;
-                                                    var active = index == 1 ? "active" : "";
-                                                    var ariaExpanded = index == 1 ? "true" : "false";
+                                                </ul>
+                                                <div class="tab-content" id="tabsPatient">
 
-                                                    <div class="tab-pane @active" role="tabpanel" aria-expanded="@ariaExpanded" id="patient-@index">
-                                                        <div class="row m-t-3-1">
-                                                            <div class="col-lg-12">
-                                                                <div class="card-body">
-                                                                    <form method="post" action="@Url.Action("RegisterMedicalEvaluation", "Evaluation")">
+                                                    @foreach ((var patient, int index) in Model.Patients.Select((value, i) => (value, i)))
+                                                    {
+                                                        var active = index == 0 ? "active" : "";
+                                                        var ariaExpanded = index == 0 ? "true" : "false";
+
+                                                        <div class="tab-pane @active" role="tabpanel" aria-expanded="@ariaExpanded" id="patient-@index">
+                                                            <div class="row m-t-3-1">
+                                                                <div class="col-lg-12">
+                                                                    <div class="card-body">
 
                                                                         <div class="form-group">
                                                                             <label for="exampleinputemail1">Paciente</label>
@@ -136,16 +134,16 @@
                                                                                     <label for="location1">Sexo</label>
                                                                                     <select class="custom-select form-control" id="location1" name="Patients[@index].Gender">
                                                                                         <option value="0" @patient.GetGenderSelected(0)>Selecione</option>
-                                                                                        <option value="1" @patient.GetGenderSelected(0)>Feminino</option>
-                                                                                        <option value="2" @patient.GetGenderSelected(0)>Masculino</option>
-                                                                                        <option value="3" @patient.GetGenderSelected(0)>Indeterminado</option>
+                                                                                        <option value="1" @patient.GetGenderSelected(1)>Feminino</option>
+                                                                                        <option value="2" @patient.GetGenderSelected(2)>Masculino</option>
+                                                                                        <option value="3" @patient.GetGenderSelected(3)>Indeterminado</option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6">
                                                                                 <div class="form-group has-feedback">
                                                                                     <label class="control-label">Idade</label>
-                                                                                    <input class="form-control" placeholder="00" type="number">
+                                                                                    <input class="form-control" placeholder="" type="number" value="@patient.Age" name="Patients[@index].Age">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -154,47 +152,47 @@
                                                                             <div class="col-1-5">
                                                                                 <div class="form-group has-feedback">
                                                                                     <label class="control-label">PA</label>
-                                                                                    <input class="form-control" type="text" id="PA-1">
+                                                                                    <input class="form-control" type="text" id="PA-@index">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-1-5">
                                                                                 <div class="form-group has-feedback">
                                                                                     <label class="control-label">FC</label>
-                                                                                    <input class="form-control" type="text" id="FC-1">
+                                                                                    <input class="form-control" type="text" id="FC-@index">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-1-5">
                                                                                 <div class="form-group has-feedback">
                                                                                     <label class="control-label">FR</label>
-                                                                                    <input class="form-control" type="text" id="FR-1">
+                                                                                    <input class="form-control" type="text" id="FR-@index">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-1-5">
                                                                                 <div class="form-group has-feedback">
                                                                                     <label class="control-label">Temp</label>
-                                                                                    <input class="form-control" type="text" id="Temp-1">
+                                                                                    <input class="form-control" type="text" id="Temp-@index">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-1-5">
                                                                                 <div class="form-group has-feedback">
                                                                                     <label class="control-label">SatO2</label>
-                                                                                    <input class="form-control" type="text" id="Sat02-1">
+                                                                                    <input class="form-control" type="text" id="Sat02-@index">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-1-5">
                                                                                 <div class="form-group has-feedback">
                                                                                     <label class="control-label">HGT</label>
-                                                                                    <input class="form-control" type="text" id="HGT-1">
+                                                                                    <input class="form-control" type="text" id="HGT-@index">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-1-5">
                                                                                 <div class="form-group">
                                                                                     <label class="control-label">Glasgow</label>
-                                                                                    <input class="form-control" type="text" id="Glasgow-1">
+                                                                                    <input class="form-control" type="text" id="Glasgow-@index">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-1-5">
-                                                                                <a class="btn btn-nor bg-purpleTest" onclick="ConcatFields(1)"><i class="fa fa-plus-circle"></i></a>
+                                                                                <a class="btn btn-nor bg-purpleTest" onclick="ConcatFields(@index)"><i class="fa fa-plus-circle"></i></a>
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
@@ -202,29 +200,29 @@
 
                                                                                 <div class="form-group has-feedback">
                                                                                     <label class="control-label">Avaliação Médica</label>
-                                                                                    <textarea class="form-control" name="Description" id="Evaluation-1" rows="3"></textarea>
+                                                                                    <textarea class="form-control" name="Patients[@index].Description" id="Evaluation-@index" rows="3">@patient.Description</textarea>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        <input hidden name="Id" value="@Model.Id" />
-                                                                        <input hidden name="patientId" value="@patient.Id" />
+                                                                        <input hidden name="Patients[@index].Id" value="@patient.Id" />
 
                                                                         <div class="row">
-
                                                                             <div class="col-md-5">
                                                                                 <button type="submit" class="btn btn-sm bg-purpleTest"><i class="fa fa-save"></i> Gravar</button>
                                                                             </div>
                                                                         </div>
-                                                                    </form>
-                                                                </div>
 
+                                                                    </div>
+
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                }
-                                            </div>
-                                        </div>
+                                                    }
 
+                                                </div>
+                                            </div>
+
+                                        </form>
 
                                         <div class="box-header with-border">
                                             <h5 class="box-title text-white">
@@ -246,7 +244,7 @@
                                                     {
                                                         <tr>
                                                             <td>@item.Date</td>
-                                                            <td>@item.EmployeeGuid</td>
+                                                            <td>@item.EmployeeName</td>
                                                             <td>@(item?.PatientModel?.Name ?? "")</td>
                                                             <td>@item.Evaluation</td>
                                                         </tr>
@@ -463,96 +461,93 @@
     <div class="row m-t-3-1">
         <div class="col-lg-12">
             <div class="card-body">
-                <form>
+                <div class="form-group">
+                    <label for="exampleinputemail1">Paciente</label>
+                    <input type="text" class="form-control" id="exampleinputemail1" placeholder="Nome" name="Patients[0].Name">
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="location1">Sexo</label>
+                            <select class="custom-select form-control" id="location1" name="Patients[0].Gender">
+                                <option value="0">Selecione</option>
+                                <option value="1">Feminino</option>
+                                <option value="2">Masculino</option>
+                                <option value="3">Indeterminado</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group has-feedback">
+                            <label class="control-label">Idade</label>
+                            <input class="form-control" placeholder="" type="number" name="Patients[0].Age">
+                        </div>
+                    </div>
+                </div>
 
-                    <div class="form-group">
-                        <label for="exampleinputemail1">Paciente</label>
-                        <input type="text" class="form-control" id="exampleinputemail1" placeholder="Nome">
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="location1">Sexo</label>
-                                <select class="custom-select form-control" id="location1" name="location">
-                                    <option value="">Selecione</option>
-                                    <option value="">Indeterminado</option>
-                                    <option value="">Feminino</option>
-                                    <option value="">Masculino</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group has-feedback">
-                                <label class="control-label">Idade</label>
-                                <input class="form-control" placeholder="00" type="number">
-                            </div>
+                <div class="card-group align-items-center">
+                    <div class="col-1-5">
+                        <div class="form-group has-feedback">
+                            <label class="control-label">PA</label>
+                            <input class="form-control" type="text" id="PA-">
                         </div>
                     </div>
+                    <div class="col-1-5">
+                        <div class="form-group has-feedback">
+                            <label class="control-label">FC</label>
+                            <input class="form-control" type="text" id="FC-">
+                        </div>
+                    </div>
+                    <div class="col-1-5">
+                        <div class="form-group has-feedback">
+                            <label class="control-label">FR</label>
+                            <input class="form-control" type="text" id="FR-">
+                        </div>
+                    </div>
+                    <div class="col-1-5">
+                        <div class="form-group has-feedback">
+                            <label class="control-label">Temp</label>
+                            <input class="form-control" type="text" id="Temp-">
+                        </div>
+                    </div>
+                    <div class="col-1-5">
+                        <div class="form-group has-feedback">
+                            <label class="control-label">SatO2</label>
+                            <input class="form-control" type="text" id="Sat02-">
+                        </div>
+                    </div>
+                    <div class="col-1-5">
+                        <div class="form-group has-feedback">
+                            <label class="control-label">HGT</label>
+                            <input class="form-control" type="text" id="HGT-">
+                        </div>
+                    </div>
+                    <div class="col-1-5">
+                        <div class="form-group">
+                            <label class="control-label">Glasgow</label>
+                            <input class="form-control" type="text" id="Glasgow-">
+                        </div>
+                    </div>
+                    <div class="col-1-5">
+                        <a class="btn btn-nor bg-purpleTest" onclick="ConcatFields()"><i class="fa fa-plus-circle"></i></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
 
-                    <div class="card-group align-items-center">
-                        <div class="col-1-5">
-                            <div class="form-group has-feedback">
-                                <label class="control-label">PA</label>
-                                <input class="form-control" type="text" id="PA-">
-                            </div>
-                        </div>
-                        <div class="col-1-5">
-                            <div class="form-group has-feedback">
-                                <label class="control-label">FC</label>
-                                <input class="form-control" type="text" id="FC-">
-                            </div>
-                        </div>
-                        <div class="col-1-5">
-                            <div class="form-group has-feedback">
-                                <label class="control-label">FR</label>
-                                <input class="form-control" type="text" id="FR-">
-                            </div>
-                        </div>
-                        <div class="col-1-5">
-                            <div class="form-group has-feedback">
-                                <label class="control-label">Temp</label>
-                                <input class="form-control" type="text" id="Temp-">
-                            </div>
-                        </div>
-                        <div class="col-1-5">
-                            <div class="form-group has-feedback">
-                                <label class="control-label">SatO2</label>
-                                <input class="form-control" type="text" id="Sat02-">
-                            </div>
-                        </div>
-                        <div class="col-1-5">
-                            <div class="form-group has-feedback">
-                                <label class="control-label">HGT</label>
-                                <input class="form-control" type="text" id="HGT-">
-                            </div>
-                        </div>
-                        <div class="col-1-5">
-                            <div class="form-group">
-                                <label class="control-label">Glasgow</label>
-                                <input class="form-control" type="text" id="Glasgow-">
-                            </div>
-                        </div>
-                        <div class="col-1-5">
-                            <a class="btn btn-nor bg-purpleTest" onclick="ConcatFields()"><i class="fa fa-plus-circle"></i></a>
+                        <div class="form-group has-feedback">
+                            <label class="control-label">Avaliação Médica</label>
+                            <textarea class="form-control" id="Evaluation-" rows="3" name="Patients[0].Description"></textarea>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
+                </div>
+                <div class="row">
 
-                            <div class="form-group has-feedback">
-                                <label class="control-label">Avaliação Médica</label>
-                                <textarea class="form-control" id="Evaluation-" rows="3"></textarea>
-                            </div>
-                        </div>
+                    @*arrumar*@
+                    <div class="col-md-5">
+                        <button type="submit" class="btn btn-sm bg-purpleTest"><i class="fa fa-save"></i> Gravar</button>
                     </div>
-                    <div class="row">
-
-                        <!-- arrumar -->
-                        <div class="col-md-5">
-                            <button type="submit" class="btn btn-sm bg-purpleTest"><i class="fa fa-save"></i> Gravar</button>
-                        </div>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
@@ -578,7 +573,7 @@
                 $("#refTable").empty();
                 $("#refTable").append(partialViewResult);
             }
-        })
+        });
     }
 
     window.setInterval(RefreshEmergencies, 5000);
@@ -600,7 +595,7 @@
             'scrollCollapse': true,
             'responsive': true
         })
-    })
+    });
 
     function ConcatFields(idPatient) {
 
@@ -646,30 +641,8 @@
 
     }
 
-    function RefreshQtdPatient() {
-        if (@Model.Patients.Count() > 0) {
-            qtdPatient = @Model.Patients.Count();
-        }
-    }
-
-    function AddPatients(patientNew, patientNewList) {
-        debugger;
-        var patient = $('#' + patientNew).html();
-        patient = patient.replace("Patients[0]", "Patients[" + qtdPatient + "]")
-        patient = patient.replace("Patients[0]", "Patients[" + qtdPatient + "]")
-        patient = patient.replace("Patients[0]", "Patients[" + qtdPatient + "]")
-
-        $('#' + patientNewList).append(patient);
-
-        qtdPatient++;
-    }
-
     var numberPacient = @Model.Patients.Count(); //Variável deve receber a quantidade de paciente do back-end
-
     function AddPatientsTab() {
-
-
-        numberPacient += 1;
 
         var navAddPatients = '<li class="nav-item" id="navAddPatients"><a onclick="AddPatientsTab()" class="nav-link" data-toggle="tab" role="tab" aria-expanded="false" href="#"><i class="fa fa-plus-circle"></i></a></li>';
 
@@ -696,6 +669,10 @@
             .replace('ConcatFields()', 'ConcatFields(' + numberPacient + ')')
             .replace('Evaluation-', 'Evaluation-' + numberPacient);
 
+        tab = tab.replace("Patients[0]", "Patients[" + numberPacient + "]")
+        tab = tab.replace("Patients[0]", "Patients[" + numberPacient + "]")
+        tab = tab.replace("Patients[0]", "Patients[" + numberPacient + "]")
+        tab = tab.replace("Patients[0]", "Patients[" + numberPacient + "]")
 
         $('#tabsPatient').append(tab);
         window.setTimeout(SelectTab, 300);
@@ -703,6 +680,8 @@
 
     function SelectTab() {
         $('#navPatient-' + numberPacient).click();
+
+        numberPacient += 1;
     }
 
     function appendCancel() {

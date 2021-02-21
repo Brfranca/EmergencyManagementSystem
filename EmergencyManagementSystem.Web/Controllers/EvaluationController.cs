@@ -19,8 +19,11 @@ namespace EmergencyManagementSystem.Web.Controllers
         private readonly IEmergencyRest _emergencyRest;
         private readonly IMedicalEvaluationRest _medicalEvaluationRest;
         private readonly UserService _userService;
-        public EvaluationController(IRequesterService requesterService, IEmergencyRest emergencyRest, UserService userService, IMedicalEvaluationRest medicalEvaluationRest)
+        private readonly IEmployeeRest _employeeRest;
+        public EvaluationController(IRequesterService requesterService, IEmergencyRest emergencyRest, UserService userService,
+            IMedicalEvaluationRest medicalEvaluationRest, IEmployeeRest employeeRest)
         {
+            _employeeRest = employeeRest;
             _userService = userService;
             _requesterService = requesterService;
             _emergencyRest = emergencyRest;
@@ -34,35 +37,40 @@ namespace EmergencyManagementSystem.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult RegisterMedicalEvaluation(EmergencyModel emergencyModel, long patientId)
+        public ActionResult RegisterMedicalEvaluation(EmergencyModel emergencyModel)
         {
-            //como trazer os dados do paciente caso seja alterado na tela de avaliação?
-            emergencyModel.EmployeeGuid = _userService.GetCurrentUser().EmployeeGuid;
-            MedicalEvaluationModel medicalEvaluationModel = new MedicalEvaluationModel
-            {
-                EmergencyId = emergencyModel.Id,
-                EmployeeGuid = emergencyModel.EmployeeGuid,
-                Evaluation = emergencyModel.Description,
-                Date = DateTime.Now,
-                PatientId = patientId
-            };
-
-            var resultEmergency = _emergencyRest.Find(new EmergencyFilter { Id = emergencyModel.Id });
+            var resultEmergency = GetEmergencyModel(emergencyModel.Id);
             if (!resultEmergency.Success)
             {
                 ViewBag.Error = resultEmergency.Messages;
                 LoadBag();
                 return View("Index", emergencyModel);
             }
+            //como trazer os dados do paciente caso seja alterado na tela de avaliação?
+            List<MedicalEvaluationModel> evaluations = new List<MedicalEvaluationModel>();
+            foreach (var patient in emergencyModel.Patients)
+            {
+                MedicalEvaluationModel medicalEvaluationModel = new MedicalEvaluationModel
+                {
+                    EmergencyId = emergencyModel.Id,
+                    EmployeeGuid = emergencyModel.EmployeeGuid,
+                    Evaluation = patient.Description,
+                    Date = DateTime.Now,
+                    PatientId = patient.Id,
+                    PatientModel = patient,
+                };
+                patient.EmergencyId = emergencyModel.Id;
+                evaluations.Add(medicalEvaluationModel);
+            }
 
-            var result = _medicalEvaluationRest.Register(medicalEvaluationModel);
+            var result = _medicalEvaluationRest.RegisterEvaluations(evaluations);
             if (!result.Success)
             {
                 ViewBag.Error = result.Messages;
                 LoadBag();
                 return View("Index", resultEmergency.Model);
             }
-
+            resultEmergency = GetEmergencyModel(emergencyModel.Id);
             LoadBag();
             return View("Index", resultEmergency.Model);
         }
@@ -84,8 +92,6 @@ namespace EmergencyManagementSystem.Web.Controllers
                 ViewBag.Error = new List<string> { result?.Messages?.FirstOrDefault() ?? "Ocorreu um erro, favor tente novamente." };
                 return View("index", new EmergencyModel());
             }
-            result.Model.EmployeeName = _userService.GetCurrentUser().EmployeeName;
-            result.Model.EmployeeGuid = _userService.GetCurrentUser().EmployeeGuid;
             result.Model.MedicalEvaluations = resultEvaluation.Model;
             LoadBag();
             return View("index", result.Model);
@@ -108,6 +114,20 @@ namespace EmergencyManagementSystem.Web.Controllers
 
             var teste = Json(HtmlTeste);
             return teste;
+        }
+
+        private Result<EmergencyModel> GetEmergencyModel(long id)
+        {
+            var resultEmergency = _emergencyRest.Find(new EmergencyFilter { Id = id });
+            if (!resultEmergency.Success)
+                return resultEmergency;
+
+            foreach (var medicalEvaluation in resultEmergency.Model.MedicalEvaluations)
+            {
+                var employee = _employeeRest.Find(new EmployeeFilter { Guid = medicalEvaluation.EmployeeGuid });
+                medicalEvaluation.EmployeeName = employee.Model.Name;
+            }
+            return resultEmergency;
         }
 
         public void LoadBag()
