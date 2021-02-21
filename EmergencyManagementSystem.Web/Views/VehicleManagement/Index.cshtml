@@ -574,17 +574,17 @@
     RefreshQtdPatient();
 
     function RefreshQtdPatient() {
-        if (@Model.Patients.Count() > 0) {
-            qtdPatient = @Model.Patients.Count();
+        if (@Model.PatientModels.Count() > 0) {
+            qtdPatient = @Model.PatientModels.Count();
         }
     }
 
     function AddPatients(patientNew, patientNewList) {
         debugger;
         var patient = $('#' + patientNew).html();
-        patient = patient.replace("Patients[0]", "Patients[" + qtdPatient + "]")
-        patient = patient.replace("Patients[0]", "Patients[" + qtdPatient + "]")
-        patient = patient.replace("Patients[0]", "Patients[" + qtdPatient + "]")
+        patient = patient.replace("PatientModels[0]", "PatientModels[" + qtdPatient + "]")
+        patient = patient.replace("PatientModels[0]", "PatientModels[" + qtdPatient + "]")
+        patient = patient.replace("PatientModels[0]", "PatientModels[" + qtdPatient + "]")
 
         $('#' + patientNewList).append(patient);
 
