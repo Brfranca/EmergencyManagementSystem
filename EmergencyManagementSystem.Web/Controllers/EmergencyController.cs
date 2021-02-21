@@ -41,6 +41,12 @@ namespace EmergencyManagementSystem.Web.Controllers
                 ViewBag.Error = new List<string> { result?.Messages?.FirstOrDefault() ?? "Ocorreu um erro, favor tente novamente." };
                 return View("index", new EmergencyModel());
             }
+            var requesterResult = _requesterService.Find(new RequesterFilter { Telephone = result.Model.RequesterPhone });
+            if (requesterResult.Success)
+            {
+                result.Model.AddressModel = requesterResult.Model.AddressModel;
+                result.Model.AddressModel.Id = 0;
+            }
             LoadBag();
             return View("index", result.Model);
         }

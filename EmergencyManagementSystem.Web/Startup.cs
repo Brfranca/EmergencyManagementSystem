@@ -35,7 +35,6 @@ namespace EmergencyManagementSystem.Web
             services.AddScoped<IEmergencyRequiredVehicleRest, EmergencyRequiredVehicleRest>();
             services.AddScoped<IMedicalDecisionHistoryRest, MedicalDecisionHistoryRest>();
 
-
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => true;
@@ -59,6 +58,7 @@ namespace EmergencyManagementSystem.Web
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+
             app.UseAuthentication();
 
             app.UseHttpsRedirection();
