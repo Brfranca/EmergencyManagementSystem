@@ -51,9 +51,11 @@ namespace EmergencyManagementSystem.Web.Controllers
             return View("Index", new EmergencyModel());
         }
 
-        public IActionResult Update(long id)
+        public IActionResult Update(long emergencyId, long idEmergencyRequiredVehicle)
         {
-            var result = GetEmergencyModel(id);
+
+            //tratar a nivel de veículo
+            var result = GetEmergencyModel(emergencyId);
             if (!result.Success)
             {
                 LoadBag();

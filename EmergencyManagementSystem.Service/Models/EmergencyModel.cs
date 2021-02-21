@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace EmergencyManagementSystem.Service.Models
 {
-    public class EmergencyModel
+    public class EmergencyModel : ICloneable
     {
         public long Id { get; set; }
         public string Name { get; set; }
@@ -57,6 +57,11 @@ namespace EmergencyManagementSystem.Service.Models
                 default:
                     return "";
             }
+        }
+
+        public object Clone()
+        {
+           return this.Clone();
         }
     }
 }

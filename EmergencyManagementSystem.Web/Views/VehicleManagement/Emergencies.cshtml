@@ -3,12 +3,15 @@
 
 @foreach (var emergency in Model)
 {
-    <div class="info-box @emergency.GetClassByStatus()">
-        <a href="@Url.Action("Update", "vehicleManagement", new { id = emergency.Id})">
+    foreach (var vehicleModel in emergency.EmergencyRequiredVehicleModels)
+    {
+    <div class="info-box @vehicleModel.GetClassByColor()">
+        <a href="@Url.Action("Update", "vehicleManagement", new { emergencyId = emergency.Id, idEmergencyRequiredVehicle = vehicleModel.Id })">
             <div class="box-body">
                 <h5><b>Oc: </b>@emergency.Id<span class="pull-right"><b>@emergency.Date.ToShortDateString() @emergency.Date.ToShortTimeString()</b></span></h5>
                 <h4>@emergency.Name</h4>
             </div>
         </a>
     </div>
+    }
 }
