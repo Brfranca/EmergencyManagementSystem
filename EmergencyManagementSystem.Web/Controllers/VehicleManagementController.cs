@@ -14,20 +14,72 @@ namespace EmergencyManagementSystem.Web.Controllers
     {
         private readonly IEmergencyRest _emergencyRest;
         private readonly UserService _userService;
-        public VehicleManagementController(IEmergencyRest emergencyRest, UserService userService)
+        private readonly IEmergencyHistoryRest _emergencyHistoryRest;
+        private readonly IEmergencyRequiredVehicleRest _requiredVehicleRest;
+
+        public VehicleManagementController(IEmergencyRest emergencyRest, UserService userService, IEmergencyHistoryRest emergencyHistoryRest, IEmergencyRequiredVehicleRest emergencyRequiredVehicleRest)
         {
             _userService = userService;
             _emergencyRest = emergencyRest;
+            _emergencyHistoryRest = emergencyHistoryRest;
+            _requiredVehicleRest = emergencyRequiredVehicleRest;
         }
 
         public IActionResult Index()
         {
+            LoadBag();
             return View(new EmergencyModel());
+        }
+
+        [HttpPost]
+        public IActionResult Register(EmergencyModel emergencyModel)
+        {
+            emergencyModel.EmployeeGuid = _userService.GetCurrentUser().EmployeeGuid;
+            if (!string.IsNullOrWhiteSpace(emergencyModel.Description))
+            {
+                return RedirectToAction("Cancel", emergencyModel);
+            }
+
+            LoadBag();
+            return View("Index", new EmergencyModel());
+        }
+
+        public ActionResult Cancel(EmergencyModel emergencyModel)
+        {
+            var resultFind = _requiredVehicleRest.Find(new RequiredVehicleFilter { Id = emergencyModel.EmergencyRequiredVehicleModels.FirstOrDefault().Id });
+            if (!resultFind.Success)
+            {
+                ViewBag.Error = resultFind.Messages;
+                LoadBag();
+                return View("Index", emergencyModel);
+            }
+
+            EmergencyHistoryModel emergencyHistoryModel = new EmergencyHistoryModel()
+            {
+                Date = DateTime.Now,
+                EmergencyId = emergencyModel.Id,
+                EmployeeGuid = emergencyModel.EmployeeGuid,
+                EmergencyStatus = emergencyModel.EmergencyStatus,
+                Description = emergencyModel.Description + " - Cancelamento de veículo " + resultFind.Model.VehicleType.GetEnumDescription()
+            };
+
+            resultFind.Model.emergencyHistoryModel = emergencyHistoryModel;
+            resultFind.Model.Status = VehicleRequiredStatus.Canceled;
+            var result = _requiredVehicleRest.Update(resultFind.Model);
+            if (!result.Success)
+            {
+                ViewBag.Error = result.Messages;
+                LoadBag();
+                return View("Index", emergencyModel);
+            }
+
+            LoadBag();
+            return View("Index", new EmergencyModel());
         }
 
         public ActionResult Emergencies()
         {
-            var emergenciesStatus = new[] { EmergencyStatus.InEvaluation, EmergencyStatus.InService };
+            var emergenciesStatus = new[] { EmergencyStatus.Committed, EmergencyStatus.InService };
             var emergencies = _emergencyRest.FindAll(new EmergencyFilter { EmergenciesStatus = emergenciesStatus });
 
             string HtmlTeste = "";
@@ -46,7 +98,7 @@ namespace EmergencyManagementSystem.Web.Controllers
 
         public void LoadBag()
         {
-            var emergenciesStatus = new[] { EmergencyStatus.InEvaluation, EmergencyStatus.InService };
+            var emergenciesStatus = new[] { EmergencyStatus.Committed, EmergencyStatus.InService };
             var emergencies = _emergencyRest.FindAll(new EmergencyFilter { EmergenciesStatus = emergenciesStatus });
             if (emergencies.Success)
                 ViewBag.Emergencies = emergencies.Model;

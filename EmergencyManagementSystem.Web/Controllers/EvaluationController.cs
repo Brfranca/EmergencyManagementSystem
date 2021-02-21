@@ -86,7 +86,7 @@ namespace EmergencyManagementSystem.Web.Controllers
             }
             result.Model.EmployeeName = _userService.GetCurrentUser().EmployeeName;
             result.Model.EmployeeGuid = _userService.GetCurrentUser().EmployeeGuid;
-            result.Model.MedicalEvaluations = resultEvaluation.Model;
+            result.Model.MedicalEvaluationModels = resultEvaluation.Model;
             LoadBag();
             return View("index", result.Model);
         }

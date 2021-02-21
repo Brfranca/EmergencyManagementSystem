@@ -15,23 +15,25 @@ namespace EmergencyManagementSystem.Service.Models
         public virtual AddressModel AddressModel { get; set; }
         public long AddressId { get; set; }
         public EmergencyStatus EmergencyStatus { get; set; }
-        public List<EmergencyRequiredVehicleModel> EmergencyRequiredVehicles { get; set; }
+        public List<EmergencyRequiredVehicleModel> EmergencyRequiredVehicleModels { get; set; }
         public List<PatientModel> Patients { get; set; }
-        public List<MedicalEvaluationModel> MedicalEvaluations { get; set; }
+        public List<MedicalEvaluationModel> MedicalEvaluationModels { get; set; }
+        public List<ServiceHistoryModel> ServiceHistoryModels { get; set; }
         public Guid EmployeeGuid { get; set; }
         public string EmployeeName { get; set; }
         public string Description { get; set; }
         public EmergencyModel()
         {
             AddressModel = new AddressModel();
-            EmergencyRequiredVehicles = new List<EmergencyRequiredVehicleModel>();
+            EmergencyRequiredVehicleModels = new List<EmergencyRequiredVehicleModel>();
             Patients = new List<PatientModel>();
-            MedicalEvaluations = new List<MedicalEvaluationModel>();
+            MedicalEvaluationModels = new List<MedicalEvaluationModel>();
+            ServiceHistoryModels = new List<ServiceHistoryModel>();
         }
 
         public string GetClassByStatus()
         {
-            var code = EmergencyRequiredVehicles
+            var code = EmergencyRequiredVehicleModels
                 .OrderBy(d => d.CodeColor)
                 .FirstOrDefault()?.CodeColor ?? CodeColor.Yellow;
 

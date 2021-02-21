@@ -11,5 +11,7 @@ namespace EmergencyManagementSystem.Service.Models
         public virtual EmergencyModel EmergencyModel { get; set; }
         public long EmergencyId { get; set; }
         public CodeColor CodeColor { get; set; }
+        public VehicleRequiredStatus Status { get; set; }
+        public EmergencyHistoryModel emergencyHistoryModel { get; set; }
     }
 }

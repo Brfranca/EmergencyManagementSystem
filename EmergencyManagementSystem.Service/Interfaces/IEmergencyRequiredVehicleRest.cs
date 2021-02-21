@@ -2,7 +2,7 @@
 
 namespace EmergencyManagementSystem.Service.Interfaces
 {
-    public interface IAddressRest : IRestBase<AddressModel>
+    public interface IEmergencyRequiredVehicleRest : IRestBase<EmergencyRequiredVehicleModel>
     {
     }
 }
