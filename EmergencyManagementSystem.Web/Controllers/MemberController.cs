@@ -69,6 +69,10 @@ namespace EmergencyManagementSystem.Web.Controllers
         }
 
 
+        public IActionResult Teste(MemberModel memberModel)
+        {
+            return View(new MemberModel());
+        }
 
 
         [HttpPost]
