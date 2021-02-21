@@ -8,7 +8,7 @@ namespace EmergencyManagementSystem.Service.Models
         public long Id { get; set; }
         public DateTime Date { get; set; }
         public VehicleType VehicleType { get; set; }
-        public virtual EmergencyModel EmergencyModel { get; set; }
+        public EmergencyModel EmergencyModel { get; set; }
         public long EmergencyId { get; set; }
         public CodeColor CodeColor { get; set; }
         public VehicleRequiredStatus Status { get; set; }

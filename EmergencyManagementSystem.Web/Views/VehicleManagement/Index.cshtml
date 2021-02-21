@@ -37,7 +37,7 @@
                 <div class="card tab-style1">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs profile-tab" role="tablist">
-                        <li class="nav-item" hidden> <a class="nav-link" data-toggle="tab" href="#home" role="tab" aria-expanded="false">Enviar Veículo</a> </li>
+                        <li class="nav-item" > <a class="nav-link" data-toggle="tab" href="#home" role="tab" aria-expanded="false">Enviar Veículo</a> </li>
                         <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab" aria-expanded="false">Dados da Ocorrência</a> </li>
                         <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#main" role="tab" aria-expanded="true">Controle de Veículos</a> </li>
                     </ul>
@@ -166,7 +166,7 @@
 
                                         <div class="sidebar-menu" data-widget="tree">
                                             <div class="treeview">
-                                                <a href="#" onclick="Pesquisar()"> <i class="fa fa-map-marker"></i> <span>Localização</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+                                                <a href="#" onclick="Search()"> <i class="fa fa-map-marker"></i> <span>Localização</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
                                                 <div class="treeview-menu">
 
                                                     <label>
@@ -200,42 +200,15 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody class="">
-                                                    <tr>
-                                                        <td class="wt20">Hora</td>
-                                                        <td class="wt15">Profissional</td>
-                                                        <td class="wt15">Paciente</td>
-                                                        <td class="wt50">Avaliação</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="wt20">Hora</td>
-                                                        <td class="wt15">Profissional</td>
-                                                        <td class="wt15">Paciente</td>
-                                                        <td class="wt50">Avaliação</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="wt20">Hora</td>
-                                                        <td class="wt15">Profissional</td>
-                                                        <td class="wt15">Paciente</td>
-                                                        <td class="wt50">Avaliação</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="wt20">Hora</td>
-                                                        <td class="wt15">Profissional</td>
-                                                        <td class="wt15">Paciente</td>
-                                                        <td class="wt50">Avaliação</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="wt20">Hora</td>
-                                                        <td class="wt15">Profissional</td>
-                                                        <td class="wt15">Paciente</td>
-                                                        <td class="wt50">Avaliação</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="wt20">Hora</td>
-                                                        <td class="wt15">Profissional</td>
-                                                        <td class="wt15">Paciente</td>
-                                                        <td class="wt50">Avaliação</td>
-                                                    </tr>
+                                                    @foreach (var item in Model.MedicalEvaluationModels)
+                                                    {
+                                                        <tr>
+                                                            <td>@item.Date</td>
+                                                            <td>@item.EmployeeName</td>
+                                                            <td>@(item?.PatientModel?.Name ?? "")</td>
+                                                            <td>@item.Evaluation</td>
+                                                        </tr>
+                                                    }
                                                 </tbody>
                                             </table>
                                         </div>
@@ -353,8 +326,7 @@
                                             <div class="small-box bg-red">
                                                 <div class="inner">
                                                     <div class="text-left">
-                                                        <h5>OC: 14456874  -  USB01</h5>
-                                                        <h6>Dor no peito e dispneia</h6>
+                                                        <h5>OC: 14456874 - Dor no peito e dispneia  -  (USB01)</h5>
                                                     </div>
 
 
@@ -409,8 +381,7 @@
                                             <div class="small-box bg-yellow">
                                                 <div class="inner">
                                                     <div class="text-left">
-                                                        <h5>OC: 14456874  -  USB01</h5>
-                                                        <h6>Dor no peito e dispneia</h6>
+                                                        <h5>OC: 14456874 - Dor no peito e dispneia  -  (USB01)</h5>
                                                     </div>
 
 
@@ -509,6 +480,14 @@
 </script>
 
 <script>
+    function now() {
+        var now = Date.now();
+        now.format("dd/MM hh:mm");
+        return now;
+    }
+</script>
+
+<script>
     //Cuidado ao mexer
 
     $(function () {
@@ -526,112 +505,7 @@
         })
     })
 
-    function ConcatFields(idPatient) {
 
-        var pa = $('#PA-' + idPatient);
-        var fc = $('#FC-' + idPatient);
-        var fr = $('#FR-' + idPatient);
-        var temp = $('#Temp-' + idPatient);
-        var sat02 = $('#Sat02-' + idPatient);
-        var hgt = $('#HGT-' + idPatient);
-        var glas = $('#Glasgow-' + idPatient);
-
-        var evalution = $('#Evaluation-' + idPatient).val();
-
-        var result = '';
-        if (pa.val().trim() != '')
-            result += 'PA: ' + pa.val() + ' - ';
-        if (fc.val().trim() != '')
-            result += 'FC ' + fc.val() + ' - ';
-        if (fr.val().trim() != '')
-            result += 'FR ' + fr.val() + ' - ';
-        if (temp.val().trim() != '')
-            result += 'Temp ' + temp.val() + ' - ';
-        if (sat02.val().trim() != '')
-            result += 'Sat02 ' + sat02.val() + ' - ';
-        if (hgt.val().trim() != '')
-            result += 'HGT ' + hgt.val() + ' - ';
-        if (glas.val().trim() != '')
-            result += 'Glasgow ' + glas.val() + ' ';
-
-        if (evalution.trim() != '') {
-            $('#Evaluation-' + idPatient).val(evalution + ' ' + result);
-        } else {
-            $('#Evaluation-' + idPatient).val(result);
-        }
-
-        pa.val('');
-        fc.val('');
-        fr.val('');
-        temp.val('');
-        sat02.val('');
-        hgt.val('');
-        glas.val('');
-
-    }
-    var qtdPatient = 0;
-
-    RefreshQtdPatient();
-
-    function RefreshQtdPatient() {
-        if (@Model.PatientModels.Count() > 0) {
-            qtdPatient = @Model.PatientModels.Count();
-        }
-    }
-
-    function AddPatients(patientNew, patientNewList) {
-        debugger;
-        var patient = $('#' + patientNew).html();
-        patient = patient.replace("PatientModels[0]", "PatientModels[" + qtdPatient + "]")
-        patient = patient.replace("PatientModels[0]", "PatientModels[" + qtdPatient + "]")
-        patient = patient.replace("PatientModels[0]", "PatientModels[" + qtdPatient + "]")
-
-        $('#' + patientNewList).append(patient);
-
-        qtdPatient++;
-    }
-
-    var numberPacient = 1; //Variável deve receber a quantidade de paciente do back-end
-
-    function AddPatientsTab() {
-
-
-        numberPacient += 1;
-
-        var navAddPatients = '<li class="nav-item" id="navAddPatients"><a onclick="AddPatientsTab()" class="nav-link" data-toggle="tab" role="tab" aria-expanded="true" href="#patient-1"><i class="fa fa-plus-circle"></i></a></li>';
-
-        var navPatient = '<li class="nav-item"> <a id="navPatient" class="nav-link" data-toggle="tab" href="#patient" role="tab" aria-expanded="false">Paciente</a> </li>';
-
-        navPatient = navPatient.replace('#patient', '#patient-' + numberPacient)
-            .replace('navPatient', 'navPatient-' + numberPacient);
-
-        $('#navAddPatients').remove();
-        $('#navsPatient').append(navPatient);
-        $('#navsPatient').append(navAddPatients);
-
-        var tab = $('#tabExample').html();
-
-        tab = '<div class="tab-pane" id="patient-2" role="tabpanel" aria-expanded="false">' + tab + '</div>';
-        tab = tab.replace('patient-2', 'patient-' + numberPacient)
-            .replace('PA-', 'PA-' + numberPacient)
-            .replace('FC-', 'FC-' + numberPacient)
-            .replace('FR-', 'FR-' + numberPacient)
-            .replace('Temp-', 'Temp-' + numberPacient)
-            .replace('Sat02-', 'Sat02-' + numberPacient)
-            .replace('HGT-', 'HGT-' + numberPacient)
-            .replace('Glasgow-', 'Glasgow-' + numberPacient)
-            .replace('ConcatFields()', 'ConcatFields(' + numberPacient + ')')
-            .replace('Evaluation-', 'Evaluation-' + numberPacient);
-
-
-        $('#tabsPatient').append(tab);
-        window.setTimeout(SelectTab, 100);
-    }
-
-    function SelectTab() {
-        $('#navPatient-' + numberPacient).click();
-
-    }
 
     function appendCancel() {
         $('#btnCancel').attr('disabled', true);
@@ -639,11 +513,11 @@
         $("#cancel").removeClass();
     }
 
-    function Pesquisar() {
-        window.setTimeout(PesquisarTeste, 1000);
+    function Search() {
+        window.setTimeout(SearchTimer, 1000);
     }
 
-    function PesquisarTeste() {
+    function SearchTimer() {
         var input = document.getElementById('pac-input');
 
         google.maps.event.trigger(input, 'focus', {});
