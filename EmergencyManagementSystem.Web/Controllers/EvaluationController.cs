@@ -85,7 +85,7 @@ namespace EmergencyManagementSystem.Web.Controllers
             return View("index", resultEmergency.Model);
         }
 
-        public IActionResult MedicalOrientation(long emergencyId, string orientation)
+        public IActionResult MedicalDecision(long emergencyId, string orientation, CodeColor codeColor = CodeColor.NoColor)
         {
             var user = _userService.GetCurrentUser();
             var result = _medicalDecisionHistoryRest.Register(new MedicalDecisionHistoryModel
