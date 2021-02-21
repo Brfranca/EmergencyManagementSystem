@@ -20,9 +20,11 @@ namespace EmergencyManagementSystem.Web.Controllers
         private readonly IMedicalEvaluationRest _medicalEvaluationRest;
         private readonly UserService _userService;
         private readonly IEmployeeRest _employeeRest;
+        private readonly IMedicalDecisionHistoryRest _medicalDecisionHistoryRest;
         public EvaluationController(IRequesterService requesterService, IEmergencyRest emergencyRest, UserService userService,
-            IMedicalEvaluationRest medicalEvaluationRest, IEmployeeRest employeeRest)
+            IMedicalEvaluationRest medicalEvaluationRest, IEmployeeRest employeeRest, IMedicalDecisionHistoryRest medicalDecisionHistoryRest)
         {
+            _medicalDecisionHistoryRest = medicalDecisionHistoryRest;
             _employeeRest = employeeRest;
             _userService = userService;
             _requesterService = requesterService;
@@ -38,7 +40,18 @@ namespace EmergencyManagementSystem.Web.Controllers
 
         public IActionResult MedicalOrientation(long emergencyId, string orientation)
         {
-            //em desenvolvimento
+            var user = _userService.GetCurrentUser();
+            var result = _medicalDecisionHistoryRest.Register(new MedicalDecisionHistoryModel
+            {
+                Description = orientation,
+                Date = DateTime.Now,
+                EmergencyId = emergencyId,
+                EmployeeGuid = user.EmployeeGuid,
+                CodeColor = CodeColor.Blue
+            });
+            if (!result.Success)
+                ModelState.AddModelError("Orientation", string.Join(" ", result?.Messages ?? new List<string> { "Ocorreu uma erro tente novamente." }));
+
             return View();
         }
 

@@ -37,14 +37,14 @@
                 <div class="card tab-style1">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs profile-tab" role="tablist">
-                        <li class="nav-item" > <a class="nav-link" data-toggle="tab" href="#home" role="tab" aria-expanded="false">Enviar Veículo</a> </li>
+                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#home" role="tab" aria-expanded="false">Enviar Veículo</a> </li>
                         <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab" aria-expanded="false">Dados da Ocorrência</a> </li>
                         <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#main" role="tab" aria-expanded="true">Controle de Veículos</a> </li>
                     </ul>
 
                     <!-- TAB DE ESCOLHA DE VEÍCULO PARA EMPENHAR NA VTR -->
                     <div class="tab-content">
-                        <div class="tab-pane" id="home" role="tabpanel" aria-expanded="false" >
+                        <div class="tab-pane" id="home" role="tabpanel" aria-expanded="false">
                             <div class="row m-t-3-1">
                                 <div class="col-lg-12">
                                     <div class="card-body">
@@ -56,8 +56,8 @@
 
                                             <div class="sidebar-menu" data-widget="tree">
                                                 <div class="treeview">
-                                                    <a href="#" onclick="search()"> <i class="fa fa-map-marker"></i> <span>Localização</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
-                                                    <div class="treeview-menu">
+                                                    <a href="#" onclick="searchMaps()"> <i class="fa fa-map-marker"></i> <span>Localização</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+                                                    <div class="treeview-menu" id="teste">
 
                                                         <label>
                                                             @Model.AddressModel.City/@Model.AddressModel.District - @Model.AddressModel.Street, @Model.AddressModel.Number
@@ -166,7 +166,7 @@
 
                                         <div class="sidebar-menu" data-widget="tree">
                                             <div class="treeview">
-                                                <a href="#" onclick="search()"> <i class="fa fa-map-marker"></i> <span>Localização</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+                                                <a href="#" onclick="searchMaps()"> <i class="fa fa-map-marker"></i> <span>Localização</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
                                                 <div class="treeview-menu">
 
                                                     <label>
@@ -503,9 +503,7 @@
             'scrollCollapse': true,
             'responsive': true
         })
-    })
-
-
+    });
 
     function appendCancel() {
         $('#btnCancel').attr('disabled', true);
@@ -513,17 +511,18 @@
         $("#cancel").removeClass();
     }
 
-    function search() {
-        window.setTimeout(searchTimer, 1000);
+    function searchMaps() {
+        window.setTimeout(searchMapsTimer, 1000);
     }
 
-    function searchTimer() {
+    function searchMapsTimer() {
         var input = document.getElementById('pac-input');
 
         google.maps.event.trigger(input, 'focus', {});
         google.maps.event.trigger(input, 'keydown', { keyCode: 13 });
         google.maps.event.trigger(this, 'focus', {});
     }
+
 </script>
 
 
