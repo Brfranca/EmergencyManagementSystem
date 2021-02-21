@@ -184,7 +184,7 @@ namespace EmergencyManagementSystem.Web.Controllers
             foreach (var item in emergencies.Model)
             {
                 string html =
-                    $"<div class=\"info-box {item.GetClassByStatus()}\"><a href=\"{Url.Action("Update", "Evaluation", new { id = item.Id })}\"><div class=\"box-body\">" +
+                    $"<div class=\"info-box {item.GetClassByStatus()}\"><a href=\"{Url.Action("Update", "Emergency", new { id = item.Id })}\"><div class=\"box-body\">" +
                     $"<h5><b>Oc: </b>{item.Id} <span class=\"pull-right\"><b>{item.Date.ToShortDateString()} {item.Date.ToShortTimeString()}</b></span></h5>" +
                     $"<h4>{item.Name}</h4></div></a></div>";
                 HtmlTeste += html;
