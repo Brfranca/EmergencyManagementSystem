@@ -84,7 +84,7 @@ namespace EmergencyManagementSystem.Web.Controllers
                 ViewBag.Error = new List<string> { result?.Messages?.FirstOrDefault() ?? "Ocorreu um erro, favor tente novamente." };
                 return View("index", new EmergencyModel());
             }
-            //Não está trazendo o PatientModel para pegar o nome do paciente
+
             var resultEvaluation = _medicalEvaluationRest.FindAll(new MedicalEvaluationFilter { EmergencyId = id });
             if (!resultEvaluation.Success)
             {
@@ -92,7 +92,7 @@ namespace EmergencyManagementSystem.Web.Controllers
                 ViewBag.Error = new List<string> { result?.Messages?.FirstOrDefault() ?? "Ocorreu um erro, favor tente novamente." };
                 return View("index", new EmergencyModel());
             }
-            result.Model.MedicalEvaluations = resultEvaluation.Model;
+            result.Model.MedicalEvaluationModels = resultEvaluation.Model;
             LoadBag();
             return View("index", result.Model);
         }
@@ -122,7 +122,7 @@ namespace EmergencyManagementSystem.Web.Controllers
             if (!resultEmergency.Success)
                 return resultEmergency;
 
-            foreach (var medicalEvaluation in resultEmergency.Model.MedicalEvaluations)
+            foreach (var medicalEvaluation in resultEmergency.Model.MedicalEvaluationModels)
             {
                 var employee = _employeeRest.Find(new EmployeeFilter { Guid = medicalEvaluation.EmployeeGuid });
                 medicalEvaluation.EmployeeName = employee.Model.Name;
