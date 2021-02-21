@@ -21,8 +21,10 @@ namespace EmergencyManagementSystem.Web.Controllers
         private readonly UserService _userService;
         private readonly IEmployeeRest _employeeRest;
         private readonly IMedicalDecisionHistoryRest _medicalDecisionHistoryRest;
+        private readonly IEmergencyRequiredVehicleRest _emergencyRequiredVehicleRest;
         public EvaluationController(IRequesterService requesterService, IEmergencyRest emergencyRest, UserService userService,
-            IMedicalEvaluationRest medicalEvaluationRest, IEmployeeRest employeeRest, IMedicalDecisionHistoryRest medicalDecisionHistoryRest)
+            IMedicalEvaluationRest medicalEvaluationRest, IEmployeeRest employeeRest, IMedicalDecisionHistoryRest medicalDecisionHistoryRest,
+            IEmergencyRequiredVehicleRest emergencyRequiredVehicleRest)
         {
             _medicalDecisionHistoryRest = medicalDecisionHistoryRest;
             _employeeRest = employeeRest;
@@ -30,6 +32,7 @@ namespace EmergencyManagementSystem.Web.Controllers
             _requesterService = requesterService;
             _emergencyRest = emergencyRest;
             _medicalEvaluationRest = medicalEvaluationRest;
+            _emergencyRequiredVehicleRest = emergencyRequiredVehicleRest;
         }
 
         public IActionResult Index()
@@ -38,7 +41,51 @@ namespace EmergencyManagementSystem.Web.Controllers
             return View(new EmergencyModel());
         }
 
-        public IActionResult MedicalDecision(long emergencyId, string orientation, CodeColor codeColor = CodeColor.NoColor)
+        public IActionResult Finish(long emergencyId)
+        {
+            var result = _emergencyRest.Finish(new EmergencyModel { Id = emergencyId });
+            if (!result.Success)
+            {
+                ViewBag.Error = result.Messages;
+                LoadBag();
+                var resultEmergency = GetEmergencyModel(emergencyId);
+                return View("Index", resultEmergency.Model);
+            }
+
+            return RedirectToAction("index");
+        }
+
+        public IActionResult SendVehicle(long emergencyId, VehicleType vehicleType, CodeColor codeColor)
+        {
+            var result = _emergencyRequiredVehicleRest.Register(new EmergencyRequiredVehicleModel
+            {
+                CodeColor = codeColor,
+                Date = DateTime.Now,
+                EmergencyId = emergencyId,
+                Status = VehicleRequiredStatus.Opened,
+                VehicleType = vehicleType,
+                EmergencyHistoryModel = new EmergencyHistoryModel
+                {
+                    Date = DateTime.Now,
+                    Description = "Solicitado veículo",
+                    EmergencyId = emergencyId,
+                    EmergencyStatus = EmergencyStatus.InEvaluation,
+                    EmployeeGuid = _userService.GetCurrentUser().EmployeeGuid
+                }
+            });
+
+            LoadBag();
+            var resultEmergency = GetEmergencyModel(emergencyId);
+            if (!result.Success)
+            {
+                ViewBag.Error = result.Messages;
+                LoadBag();
+                return View("Index", resultEmergency.Model);
+            }
+            return View("index", resultEmergency.Model);
+        }
+
+        public IActionResult MedicalOrientation(long emergencyId, string orientation)
         {
             var user = _userService.GetCurrentUser();
             var result = _medicalDecisionHistoryRest.Register(new MedicalDecisionHistoryModel

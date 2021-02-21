@@ -11,6 +11,11 @@ namespace EmergencyManagementSystem.Service.Services
         {
         }
 
+        public Result Finish(EmergencyModel model)
+        {
+            return Post<Result, EmergencyModel>(model, $"{_controller}/Finish");
+        }
+
         public Result SimpleRegister(EmergencyModel model)
         {
             return Post<Result, EmergencyModel>(model, $"{_controller}/SimpleRegister");
