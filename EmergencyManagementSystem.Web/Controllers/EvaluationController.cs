@@ -38,7 +38,7 @@ namespace EmergencyManagementSystem.Web.Controllers
             return View(new EmergencyModel());
         }
 
-        public IActionResult MedicalOrientation(long emergencyId, string orientation)
+        public IActionResult MedicalDecision(long emergencyId, string orientation, CodeColor codeColor = CodeColor.NoColor)
         {
             var user = _userService.GetCurrentUser();
             var result = _medicalDecisionHistoryRest.Register(new MedicalDecisionHistoryModel
@@ -47,12 +47,19 @@ namespace EmergencyManagementSystem.Web.Controllers
                 Date = DateTime.Now,
                 EmergencyId = emergencyId,
                 EmployeeGuid = user.EmployeeGuid,
-                CodeColor = CodeColor.Blue
+                CodeColor = codeColor
             });
             if (!result.Success)
-                ModelState.AddModelError("Orientation", string.Join(" ", result?.Messages ?? new List<string> { "Ocorreu uma erro tente novamente." }));
+            {
+                ViewBag.Error = result.Messages;
+                LoadBag();
+                var resultE = GetEmergencyModel(emergencyId);
+                return View("Index", resultE.Model);
+            }
 
-            return View();
+            var resultEmergency = GetEmergencyModel(emergencyId);
+            LoadBag();
+            return View("Index", resultEmergency.Model);
         }
 
 
@@ -66,14 +73,13 @@ namespace EmergencyManagementSystem.Web.Controllers
                 LoadBag();
                 return View("Index", emergencyModel);
             }
-            //como trazer os dados do paciente caso seja alterado na tela de avaliação?
             List<MedicalEvaluationModel> evaluations = new List<MedicalEvaluationModel>();
             foreach (var patient in emergencyModel.PatientModels)
             {
                 MedicalEvaluationModel medicalEvaluationModel = new MedicalEvaluationModel
                 {
                     EmergencyId = emergencyModel.Id,
-                    EmployeeGuid = emergencyModel.EmployeeGuid,
+                    EmployeeGuid = _userService.GetCurrentUser().EmployeeGuid,
                     Evaluation = patient.Description,
                     Date = DateTime.Now,
                     PatientId = patient.Id,
@@ -138,6 +144,13 @@ namespace EmergencyManagementSystem.Web.Controllers
                 var employee = _employeeRest.Find(new EmployeeFilter { Guid = medicalEvaluation.EmployeeGuid });
                 medicalEvaluation.EmployeeName = employee.Model.Name;
             }
+
+            foreach (var medicalDecisionHistory in resultEmergency.Model.MedicalDecisionHistoryModels)
+            {
+                var employee = _employeeRest.Find(new EmployeeFilter { Guid = medicalDecisionHistory.EmployeeGuid });
+                medicalDecisionHistory.EmployeeName = employee.Model.Name;
+            }
+
             return resultEmergency;
         }
 

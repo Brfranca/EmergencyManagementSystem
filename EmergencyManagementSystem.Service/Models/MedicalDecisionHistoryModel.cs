@@ -1,7 +1,6 @@
 ﻿using EmergencyManagementSystem.Service.Enums;
 using System;
 
-
 namespace EmergencyManagementSystem.Service.Models
 {
     public class MedicalDecisionHistoryModel
@@ -12,5 +11,6 @@ namespace EmergencyManagementSystem.Service.Models
         public Guid EmployeeGuid { get; set; }
         public string Description { get; set; }
         public CodeColor CodeColor { get; set; }
+        public string EmployeeName { get; set; }
     }
 }

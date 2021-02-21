@@ -235,9 +235,9 @@
 
 
                                         <div class="">
-                                            <a id="btnRegister" href="@Url.Action("MedicalDecision", "Evalution", new { emergencyId = Model.Id, orientation = "Orientação Médica Sem Envio de Veículo" })" class="btn btn-block btn-default">Orientação Médica Sem Envio de Veículo</a>
-                                            <a id="btnCancel" href="@Url.Action("MedicalDecision", "Evalution", new { emergencyId = Model.Id, orientation = "Solicitar Apoio Bombeiro" })" class="btn btn-block btn-default">Solicitar Apoio Bombeiro</a>
-                                            <a id="btnRegister" href="@Url.Action("MedicalDecision", "Evalution", new { emergencyId = Model.Id, orientation = "Solicitar Apoio PM" })" class="btn btn-block btn-default">Solicitar Apoio PM</a>
+                                            <a id="btnRegister" href="@Url.Action("MedicalDecision", "Evaluation", new { emergencyId = Model.Id, orientation = "Orientação Médica Sem Envio de Veículo" })" class="btn btn-block btn-default">Orientação Médica Sem Envio de Veículo</a>
+                                            <a id="btnCancel" href="@Url.Action("MedicalDecision", "Evaluation", new { emergencyId = Model.Id, orientation = "Solicitar Apoio Bombeiro" })" class="btn btn-block btn-default">Solicitar Apoio Bombeiro</a>
+                                            <a id="btnRegister" href="@Url.Action("MedicalDecision", "Evaluation", new { emergencyId = Model.Id, orientation = "Solicitar Apoio PM" })" class="btn btn-block btn-default">Solicitar Apoio PM</a>
                                             @*<a id="btnCancel" class="btn btn-block btn-default">Repasse Bombeiro</a>*@
                                             @*<a id="btnCancel" class="btn btn-block btn-default">Repasse SAMU</a>*@
                                         </div>
@@ -331,29 +331,20 @@
                                                     <tr>
                                                         <th class="wt20">Data/Hora</th>
                                                         <th class="wt15">Profissional</th>
-                                                        <th class="wt30">Decisão Técnica</th>
-                                                        <th class="wt35">Observação</th>
+                                                        <th class="wt45">Decisão Técnica</th>
+                                                        <th class="wt20">Observação</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="">
-                                                    <tr>
-                                                        <td class="wt20">Hora</td>
-                                                        <td class="wt15">Profissional</td>
-                                                        <td class="wt30">Envio de USB</td>
-                                                        <td class="wt35">USB 01 - Blumenau</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="wt20">Hora</td>
-                                                        <td class="wt15">Profissional</td>
-                                                        <td class="wt30">Orientação sem envio de veículo</td>
-                                                        <td class="wt35"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="wt20">Hora</td>
-                                                        <td class="wt15">Profissional</td>
-                                                        <td class="wt30">Envio de USB</td>
-                                                        <td class="wt35">USB 01 - Blumenau</td>
-                                                    </tr>
+                                                    @foreach (var item in Model.MedicalDecisionHistoryModels)
+                                                    {
+                                                        <tr>
+                                                            <td>@item.Date</td>
+                                                            <td>@item.EmployeeName</td>
+                                                            <td>@item.Description</td>
+                                                            <td>@item.CodeColor.GetEnumDescription()</td>
+                                                        </tr>
+                                                    }
                                                 </tbody>
                                             </table>
                                         </div>

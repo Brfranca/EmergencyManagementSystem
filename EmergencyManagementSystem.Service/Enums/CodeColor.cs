@@ -13,6 +13,8 @@ namespace EmergencyManagementSystem.Service.Enums
         [Description("Verde")]
         Green,
         [Description("Azul")]
-        Blue
+        Blue,
+        [Description("")]
+        NoColor
     }
 }

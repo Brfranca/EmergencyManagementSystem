@@ -18,6 +18,7 @@ namespace EmergencyManagementSystem.Service.Models
         public List<EmergencyRequiredVehicleModel> EmergencyRequiredVehicleModels { get; set; }
         public List<PatientModel> PatientModels { get; set; }
         public List<MedicalEvaluationModel> MedicalEvaluationModels { get; set; }
+        public List<MedicalDecisionHistoryModel> MedicalDecisionHistoryModels { get; set; }
         public List<ServiceHistoryModel> ServiceHistoryModels { get; set; }
         public Guid EmployeeGuid { get; set; }
         public string EmployeeName { get; set; }
@@ -29,6 +30,7 @@ namespace EmergencyManagementSystem.Service.Models
             PatientModels = new List<PatientModel>();
             MedicalEvaluationModels = new List<MedicalEvaluationModel>();
             ServiceHistoryModels = new List<ServiceHistoryModel>();
+            MedicalDecisionHistoryModels = new List<MedicalDecisionHistoryModel>();
         }
 
         public string GetClassByStatus()
