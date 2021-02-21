@@ -84,7 +84,7 @@ namespace EmergencyManagementSystem.Web.Controllers
                 Description = emergencyModel.Description + " - Cancelamento de veículo " + resultFind.Model.VehicleType.GetEnumDescription()
             };
 
-            resultFind.Model.emergencyHistoryModel = emergencyHistoryModel;
+            resultFind.Model.EmergencyHistoryModel = emergencyHistoryModel;
             resultFind.Model.Status = VehicleRequiredStatus.Canceled;
             var result = _requiredVehicleRest.Update(resultFind.Model);
             if (!result.Success)
@@ -120,11 +120,14 @@ namespace EmergencyManagementSystem.Web.Controllers
             string HtmlTeste = "";
             foreach (var item in emergencies.Model)
             {
-                string html =
-                    $"<div class=\"info-box {item.GetClassByStatus()}\"><a href=\"{Url.Action("Update", "VehicleManagement", new { id = item.Id })}\"><div class=\"box-body\">" +
+                foreach (var requiredVehicleModel in item.EmergencyRequiredVehicleModels)
+                {
+                    string html =
+                    $"<div class=\"info-box {requiredVehicleModel.GetClassByColor()}\"><a href=\"{Url.Action("Update", "VehicleManagement", new { emergencyId = item.Id, idEmergencyRequiredVehicle = requiredVehicleModel.Id })}\"><div class=\"box-body\">" +
                     $"<h5><b>Oc: </b>{item.Id} <span class=\"pull-right\"><b>{item.Date.ToShortDateString()} {item.Date.ToShortTimeString()}</b></span></h5>" +
                     $"<h4>{item.Name}</h4></div></a></div>";
-                HtmlTeste += html;
+                    HtmlTeste += html;
+                }
             }
 
             var teste = Json(HtmlTeste);

@@ -12,6 +12,23 @@ namespace EmergencyManagementSystem.Service.Models
         public long EmergencyId { get; set; }
         public CodeColor CodeColor { get; set; }
         public VehicleRequiredStatus Status { get; set; }
-        public EmergencyHistoryModel emergencyHistoryModel { get; set; }
+        public EmergencyHistoryModel EmergencyHistoryModel { get; set; }
+
+        public string GetClassByColor()
+        {
+            switch (CodeColor)
+            {
+                case CodeColor.Red:
+                    return "bg-red";
+                case CodeColor.Yellow:
+                    return "bg-yellow";
+                case CodeColor.Green:
+                    return "bg-green";
+                case CodeColor.Blue:
+                    return "bg-blue";
+                default:
+                    return "";
+            }
+        }
     }
 }

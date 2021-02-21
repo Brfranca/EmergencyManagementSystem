@@ -1,4 +1,5 @@
 ﻿@using EmergencyManagementSystem.Service.Models
+@using EmergencyManagementSystem.Service.Enums
 @using System.Linq
 @model EmergencyModel
 
@@ -284,10 +285,10 @@
                                                                 </div>
 
                                                                 <ul class="fc-color-picker" id="color-chooser">
-                                                                    <li><span class="text-light-blue" href="#"><i class="fa fa-square"></i></span></li>
-                                                                    <li><span class="text-yellow" href="#"><i class="fa fa-square"></i></span></li>
-                                                                    <li><span class="text-green" href="#"><i class="fa fa-square"></i></span></li>
-                                                                    <li><span class="text-red" href="#"><i class="fa fa-square"></i></span></li>
+                                                                    <li><a class="text-light-blue" href="@Url.Action("SendVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.USB, codeColor = CodeColor.Blue })"><i class="fa fa-square"></i></a></li>
+                                                                    <li><a class="text-yellow" href="@Url.Action("SendVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.USB, codeColor = CodeColor.Yellow})"><i class="fa fa-square"></i></a></li>
+                                                                    <li><a class="text-green" href="@Url.Action("SendVehicle", "Evaluation", new {emergencyId = Model.Id, vehicleType = VehicleType.USB, codeColor = CodeColor.Green })"><i class="fa fa-square"></i></a></li>
+                                                                    <li><a class="text-red" href="@Url.Action("SendVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.USB, codeColor = CodeColor.Red})"><i class="fa fa-square"></i></a></li>
                                                                 </ul>
                                                             </div>
 
@@ -299,10 +300,10 @@
                                                                 </div>
 
                                                                 <ul class="fc-color-picker" id="color-chooser">
-                                                                    <li><span class="text-light-blue" href="#"><i class="fa fa-square"></i></span></li>
-                                                                    <li><span class="text-yellow" href="#"><i class="fa fa-square"></i></span></li>
-                                                                    <li><span class="text-green" href="#"><i class="fa fa-square"></i></span></li>
-                                                                    <li><span class="text-red" href="#"><i class="fa fa-square"></i></span></li>
+                                                                    <li><a class="text-light-blue" href="@Url.Action("SendVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.USA, codeColor = CodeColor.Blue })"><i class="fa fa-square"></i></a></li>
+                                                                    <li><a class="text-yellow" href="@Url.Action("SendVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.USA, codeColor = CodeColor.Blue })"><i class="fa fa-square"></i></a></li>
+                                                                    <li><a class="text-green" href="@Url.Action("SendVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.USA, codeColor = CodeColor.Blue })"><i class="fa fa-square"></i></a></li>
+                                                                    <li><a class="text-red" href="@Url.Action("SendVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.USA, codeColor = CodeColor.Blue })"><i class="fa fa-square"></i></a></li>
                                                                 </ul>
                                                             </div>
 
@@ -314,10 +315,10 @@
                                                                 </div>
 
                                                                 <ul class="fc-color-picker" id="color-chooser">
-                                                                    <li><span class="text-light-blue" href="#"><i class="fa fa-square"></i></span></li>
-                                                                    <li><span class="text-yellow" href="#"><i class="fa fa-square"></i></span></li>
-                                                                    <li><span class="text-green" href="#"><i class="fa fa-square"></i></span></li>
-                                                                    <li><span class="text-red" href="#"><i class="fa fa-square"></i></span></li>
+                                                                    <li><a class="text-light-blue" href="@Url.Action("SendVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.HEL, codeColor = CodeColor.Blue })"><i class="fa fa-square"></i></a></li>
+                                                                    <li><a class="text-yellow" href="@Url.Action("SendVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.HEL, codeColor = CodeColor.Blue })"><i class="fa fa-square"></i></a></li>
+                                                                    <li><a class="text-green" href="@Url.Action("SendVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.HEL, codeColor = CodeColor.Blue })"><i class="fa fa-square"></i></a></li>
+                                                                    <li><a class="text-red" href="@Url.Action("SendVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.HEL, codeColor = CodeColor.Blue })"><i class="fa fa-square"></i></a></li>
                                                                 </ul>
                                                             </div>
 
@@ -329,10 +330,10 @@
                                                                 </div>
 
                                                                 <ul class="fc-color-picker" id="color-chooser">
-                                                                    <li><span class="text-light-blue" href="#"><i class="fa fa-square"></i></span></li>
-                                                                    <li><span class="text-yellow" href="#"><i class="fa fa-square"></i></span></li>
-                                                                    <li><span class="text-green" href="#"><i class="fa fa-square"></i></span></li>
-                                                                    <li><span class="text-red" href="#"><i class="fa fa-square"></i></span></li>
+                                                                    <li><a class="text-light-blue" href="@Url.Action("SendVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.AVI, codeColor = CodeColor.Blue })"><i class="fa fa-square"></i></a></li>
+                                                                    <li><a class="text-yellow" href="@Url.Action("SendVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.AVI, codeColor = CodeColor.Blue })"><i class="fa fa-square"></i></a></li>
+                                                                    <li><a class="text-green" href="@Url.Action("SendVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.AVI, codeColor = CodeColor.Blue })"><i class="fa fa-square"></i></a></li>
+                                                                    <li><a class="text-red" href="@Url.Action("SendVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.AVI, codeColor = CodeColor.Blue })"><i class="fa fa-square"></i></a></li>
                                                                 </ul>
                                                             </div>
 
@@ -438,7 +439,7 @@
                                         <hr />
 
                                         <div class="">
-                                            <a id="btnRegister" class="btn btn-block bg-purpleTest">Finalizar Ocorrência</a>
+                                            <a href="@Url.Action("Finish","Evaluation", new { emergencyId = Model.Id })" id="btnRegister" class="btn btn-block bg-purpleTest">Finalizar Ocorrência</a>
                                         </div>
 
                                         <hr />
@@ -545,7 +546,7 @@
 
                     @*arrumar*@
                     <div class="col-md-5">
-                        <button type="submit" class="btn btn-sm bg-purpleTest"><i class="fa fa-save"></i> Gravar</button>
+                        <a class="btn btn-sm bg-purpleTest"><i class="fa fa-save"></i> Gravar</a>
                     </div>
                 </div>
             </div>
