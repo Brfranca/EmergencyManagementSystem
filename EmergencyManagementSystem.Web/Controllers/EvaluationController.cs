@@ -48,7 +48,7 @@ namespace EmergencyManagementSystem.Web.Controllers
             }
             //como trazer os dados do paciente caso seja alterado na tela de avaliação?
             List<MedicalEvaluationModel> evaluations = new List<MedicalEvaluationModel>();
-            foreach (var patient in emergencyModel.Patients)
+            foreach (var patient in emergencyModel.PatientModels)
             {
                 MedicalEvaluationModel medicalEvaluationModel = new MedicalEvaluationModel
                 {

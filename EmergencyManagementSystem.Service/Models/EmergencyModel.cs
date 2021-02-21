@@ -16,7 +16,7 @@ namespace EmergencyManagementSystem.Service.Models
         public long AddressId { get; set; }
         public EmergencyStatus EmergencyStatus { get; set; }
         public List<EmergencyRequiredVehicleModel> EmergencyRequiredVehicleModels { get; set; }
-        public List<PatientModel> Patients { get; set; }
+        public List<PatientModel> PatientModels { get; set; }
         public List<MedicalEvaluationModel> MedicalEvaluationModels { get; set; }
         public List<ServiceHistoryModel> ServiceHistoryModels { get; set; }
         public Guid EmployeeGuid { get; set; }
@@ -26,7 +26,7 @@ namespace EmergencyManagementSystem.Service.Models
         {
             AddressModel = new AddressModel();
             EmergencyRequiredVehicleModels = new List<EmergencyRequiredVehicleModel>();
-            Patients = new List<PatientModel>();
+            PatientModels = new List<PatientModel>();
             MedicalEvaluationModels = new List<MedicalEvaluationModel>();
             ServiceHistoryModels = new List<ServiceHistoryModel>();
         }

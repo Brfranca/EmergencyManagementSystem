@@ -103,7 +103,7 @@
 
                                                 <ul class="nav nav-tabs profile-tab" role="tablist" id="navsPatient">
 
-                                                    @foreach ((var patient, int index) in Model.Patients.Select((value, i) => (value, i)))
+                                                    @foreach ((var patient, int index) in Model.PatientModels.Select((value, i) => (value, i)))
                                                     {
                                                         var active = index == 0 ? "active" : "";
                                                         var ariaExpanded = index == 0 ? "true" : "false";
@@ -114,7 +114,7 @@
                                                 </ul>
                                                 <div class="tab-content" id="tabsPatient">
 
-                                                    @foreach ((var patient, int index) in Model.Patients.Select((value, i) => (value, i)))
+                                                    @foreach ((var patient, int index) in Model.PatientModels.Select((value, i) => (value, i)))
                                                     {
                                                         var active = index == 0 ? "active" : "";
                                                         var ariaExpanded = index == 0 ? "true" : "false";
@@ -126,13 +126,13 @@
 
                                                                         <div class="form-group">
                                                                             <label for="exampleinputemail1">Paciente</label>
-                                                                            <input type="text" class="form-control" id="exampleinputemail1" placeholder="Nome" value="@patient.Name" name="Patients[@index].Name">
+                                                                            <input type="text" class="form-control" id="exampleinputemail1" placeholder="Nome" value="@patient.Name" name="PatientModels[@index].Name">
                                                                         </div>
                                                                         <div class="row">
                                                                             <div class="col-md-6">
                                                                                 <div class="form-group">
                                                                                     <label for="location1">Sexo</label>
-                                                                                    <select class="custom-select form-control" id="location1" name="Patients[@index].Gender">
+                                                                                    <select class="custom-select form-control" id="location1" name="PatientModels[@index].Gender">
                                                                                         <option value="0" @patient.GetGenderSelected(0)>Selecione</option>
                                                                                         <option value="1" @patient.GetGenderSelected(1)>Feminino</option>
                                                                                         <option value="2" @patient.GetGenderSelected(2)>Masculino</option>
@@ -143,7 +143,7 @@
                                                                             <div class="col-md-6">
                                                                                 <div class="form-group has-feedback">
                                                                                     <label class="control-label">Idade</label>
-                                                                                    <input class="form-control" placeholder="" type="number" value="@patient.Age" name="Patients[@index].Age">
+                                                                                    <input class="form-control" placeholder="" type="number" value="@patient.Age" name="PatientModels[@index].Age">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -200,11 +200,11 @@
 
                                                                                 <div class="form-group has-feedback">
                                                                                     <label class="control-label">Avaliação Médica</label>
-                                                                                    <textarea class="form-control" name="Patients[@index].Description" id="Evaluation-@index" rows="3">@patient.Description</textarea>
+                                                                                    <textarea class="form-control" name="PatientModels[@index].Description" id="Evaluation-@index" rows="3">@patient.Description</textarea>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        <input hidden name="Patients[@index].Id" value="@patient.Id" />
+                                                                        <input hidden name="PatientModels[@index].Id" value="@patient.Id" />
 
                                                                         <div class="row">
                                                                             <div class="col-md-5">
@@ -463,13 +463,13 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="exampleinputemail1">Paciente</label>
-                    <input type="text" class="form-control" id="exampleinputemail1" placeholder="Nome" name="Patients[0].Name">
+                    <input type="text" class="form-control" id="exampleinputemail1" placeholder="Nome" name="PatientModels[0].Name">
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="location1">Sexo</label>
-                            <select class="custom-select form-control" id="location1" name="Patients[0].Gender">
+                            <select class="custom-select form-control" id="location1" name="PatientModels[0].Gender">
                                 <option value="0">Selecione</option>
                                 <option value="1">Feminino</option>
                                 <option value="2">Masculino</option>
@@ -480,7 +480,7 @@
                     <div class="col-md-6">
                         <div class="form-group has-feedback">
                             <label class="control-label">Idade</label>
-                            <input class="form-control" placeholder="" type="number" name="Patients[0].Age">
+                            <input class="form-control" placeholder="" type="number" name="PatientModels[0].Age">
                         </div>
                     </div>
                 </div>
@@ -537,7 +537,7 @@
 
                         <div class="form-group has-feedback">
                             <label class="control-label">Avaliação Médica</label>
-                            <textarea class="form-control" id="Evaluation-" rows="3" name="Patients[0].Description"></textarea>
+                            <textarea class="form-control" id="Evaluation-" rows="3" name="PatientModels[0].Description"></textarea>
                         </div>
                     </div>
                 </div>
@@ -641,7 +641,7 @@
 
     }
 
-    var numberPacient = @Model.Patients.Count(); //Variável deve receber a quantidade de paciente do back-end
+    var numberPacient = @Model.PatientModels.Count(); //Variável deve receber a quantidade de paciente do back-end
     function AddPatientsTab() {
 
         var navAddPatients = '<li class="nav-item" id="navAddPatients"><a onclick="AddPatientsTab()" class="nav-link" data-toggle="tab" role="tab" aria-expanded="false" href="#"><i class="fa fa-plus-circle"></i></a></li>';
@@ -669,10 +669,10 @@
             .replace('ConcatFields()', 'ConcatFields(' + numberPacient + ')')
             .replace('Evaluation-', 'Evaluation-' + numberPacient);
 
-        tab = tab.replace("Patients[0]", "Patients[" + numberPacient + "]")
-        tab = tab.replace("Patients[0]", "Patients[" + numberPacient + "]")
-        tab = tab.replace("Patients[0]", "Patients[" + numberPacient + "]")
-        tab = tab.replace("Patients[0]", "Patients[" + numberPacient + "]")
+        tab = tab.replace("PatientModels[0]", "PatientModels[" + numberPacient + "]")
+        tab = tab.replace("PatientModels[0]", "PatientModels[" + numberPacient + "]")
+        tab = tab.replace("PatientModels[0]", "PatientModels[" + numberPacient + "]")
+        tab = tab.replace("PatientModels[0]", "PatientModels[" + numberPacient + "]")
 
         $('#tabsPatient').append(tab);
         window.setTimeout(SelectTab, 300);

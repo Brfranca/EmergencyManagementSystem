@@ -72,20 +72,20 @@
 
                                                 <div id="patientNewList">
                                                     @{int current = 0;}
-                                                    @foreach (var patient in Model.Patients)
+                                                    @foreach (var patient in Model.PatientModels)
                                                     {
                                                         <hr />
-                                                        <input hidden name="Patients[@current].Id" value="@patient.Id" />
+                                                        <input hidden name="PatientModels[@current].Id" value="@patient.Id" />
 
                                                         <div class="form-group">
                                                             <label for="exampleinputemail1">Paciente</label>
-                                                            <input type="text" class="form-control" id="exampleinputemail1" placeholder="Nome" name="Patients[@current].Name" value="@patient.Name">
+                                                            <input type="text" class="form-control" id="exampleinputemail1" placeholder="Nome" name="PatientModels[@current].Name" value="@patient.Name">
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="location1">Sexo</label>
-                                                                    <select class="custom-select form-control" id="location1" name="Patients[@current].Gender">
+                                                                    <select class="custom-select form-control" id="location1" name="PatientModels[@current].Gender">
                                                                         <option value="0" @patient.GetGenderSelected(0)>Selecione</option>
                                                                         <option value="1" @patient.GetGenderSelected(1)>Feminino</option>
                                                                         <option value="2" @patient.GetGenderSelected(2)>Masculino</option>
@@ -96,7 +96,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group has-feedback">
                                                                     <label class="control-label">Idade</label>
-                                                                    <input class="form-control" placeholder="00" type="number" value="@patient?.Age" name="Patients[@current].Age">
+                                                                    <input class="form-control" placeholder="00" type="number" value="@patient?.Age" name="PatientModels[@current].Age">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -210,13 +210,13 @@
 
     <div class="form-group">
         <label for="exampleinputemail1">Paciente</label>
-        <input type="text" class="form-control" id="exampleinputemail1" placeholder="Nome" value="" name="Patients[0].Name">
+        <input type="text" class="form-control" id="exampleinputemail1" placeholder="Nome" value="" name="PatientModels[0].Name">
     </div>
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
                 <label for="location1">Sexo</label>
-                <select class="custom-select form-control" id="location1" name="Patients[0].Gender">
+                <select class="custom-select form-control" id="location1" name="PatientModels[0].Gender">
                     <option value="0">Selecione</option>
                     <option value="1">Feminino</option>
                     <option value="2">Masculino</option>
@@ -227,7 +227,7 @@
         <div class="col-md-6">
             <div class="form-group has-feedback">
                 <label class="control-label">Idade</label>
-                <input class="form-control" placeholder="00" type="number" value="" name="Patients[0].Age">
+                <input class="form-control" placeholder="00" type="number" value="" name="PatientModels[0].Age">
             </div>
         </div>
     </div>
@@ -265,17 +265,17 @@
     RefreshQtdPatient();
 
     function RefreshQtdPatient() {
-        if (@Model.Patients.Count() > 0) {
-            qtdPatient = @Model.Patients.Count();
+        if (@Model.PatientModels.Count() > 0) {
+            qtdPatient = @Model.PatientModels.Count();
         }
     }
 
     function AddPatients(patientNew, patientNewList) {
         debugger;
         var patient = $('#' + patientNew).html();
-        patient = patient.replace("Patients[0]", "Patients[" + qtdPatient + "]")
-        patient = patient.replace("Patients[0]", "Patients[" + qtdPatient + "]")
-        patient = patient.replace("Patients[0]", "Patients[" + qtdPatient + "]")
+        patient = patient.replace("PatientModels[0]", "PatientModels[" + qtdPatient + "]")
+        patient = patient.replace("PatientModels[0]", "PatientModels[" + qtdPatient + "]")
+        patient = patient.replace("PatientModels[0]", "PatientModels[" + qtdPatient + "]")
 
         $('#' + patientNewList).append(patient);
 
