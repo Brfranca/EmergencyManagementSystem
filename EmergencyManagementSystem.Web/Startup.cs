@@ -34,6 +34,7 @@ namespace EmergencyManagementSystem.Web
             services.AddHttpContextAccessor();
             services.AddScoped<IEmergencyRequiredVehicleRest, EmergencyRequiredVehicleRest>();
             services.AddScoped<IMedicalDecisionHistoryRest, MedicalDecisionHistoryRest>();
+            services.AddScoped<IServiceHistoryRest, ServiceHistoryRest>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {

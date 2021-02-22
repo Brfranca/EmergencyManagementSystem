@@ -21,11 +21,12 @@ namespace EmergencyManagementSystem.Web.Controllers
         private readonly IEmployeeRest _employeeRest;
         private readonly IMedicalEvaluationRest _medicalEvaluationRest;
         private readonly IVehicleRest _vehicleRest;
-        private readonly IServiceHisotryRest serviceHisotryRest;
+        private readonly IServiceHistoryRest _serviceHisotryRest;
         public VehicleManagementController(IEmergencyRest emergencyRest, UserService userService, IEmergencyHistoryRest emergencyHistoryRest,
             IEmergencyRequiredVehicleRest requiredVehicleRest, IVehicleRest vehicleRest,
-            IEmployeeRest employeeRest, IMedicalEvaluationRest medicalEvaluationRest)
+            IEmployeeRest employeeRest, IMedicalEvaluationRest medicalEvaluationRest, IServiceHistoryRest serviceHisotryRest)
         {
+            _serviceHisotryRest = serviceHisotryRest;
             _vehicleRest = vehicleRest;
             _userService = userService;
             _emergencyRest = emergencyRest;
@@ -84,12 +85,12 @@ namespace EmergencyManagementSystem.Web.Controllers
 
         public IActionResult SendVehicle(long vehicleId, long emergencyRequiredVehicleId)
         {
-            //var result = _requiredVehicleRest.SendVehicle(new ServiceHistoryModel
-            //{
-            //    VehicleId = vehicleId,
-            //    Date = DateTime.Now,
-            //    EmergencyRequiredVehicleId = emergencyRequiredVehicleId,
-            //});
+            var result = _serviceHisotryRest.SendVehicle(new ServiceHistoryModel
+            {
+                VehicleId = vehicleId,
+                Date = DateTime.Now,
+                EmergencyRequiredVehicleId = emergencyRequiredVehicleId,
+            });
 
             return null;
         }

@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace EmergencyManagementSystem.Service.Interfaces
 {
-    public interface IServiceHisotryRest : IRestBase<ServiceHistoryModel>
+    public interface IServiceHistoryRest : IRestBase<ServiceHistoryModel>
     {
+        Result SendVehicle(ServiceHistoryModel serviceHistoryModel);
     }
 }
