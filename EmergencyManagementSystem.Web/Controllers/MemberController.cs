@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using X.PagedList;
 
 namespace EmergencyManagementSystem.Web.Controllers
@@ -82,7 +81,6 @@ namespace EmergencyManagementSystem.Web.Controllers
         [HttpPost]
         public IActionResult Register(MemberModel memberModel)
         {
-            //está recebendo o EmployeeGuid e o VehicleId
 
             if (!ModelState.IsValid)
                 return View(memberModel);

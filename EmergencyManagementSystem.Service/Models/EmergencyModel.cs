@@ -15,6 +15,7 @@ namespace EmergencyManagementSystem.Service.Models
         public virtual AddressModel AddressModel { get; set; }
         public long AddressId { get; set; }
         public EmergencyStatus EmergencyStatus { get; set; }
+        public long RequiredVehicleId { get; set; }
         public List<EmergencyRequiredVehicleModel> EmergencyRequiredVehicleModels { get; set; }
         public List<PatientModel> PatientModels { get; set; }
         public List<MedicalEvaluationModel> MedicalEvaluationModels { get; set; }

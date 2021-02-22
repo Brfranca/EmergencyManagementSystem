@@ -158,7 +158,7 @@ namespace EmergencyManagementSystem.Web.Controllers
                 EmergencyId = emergencyModel.Id,
                 EmployeeGuid = emergencyModel.EmployeeGuid,
                 EmergencyStatus = EmergencyStatus.Canceled,
-                Description = emergencyModel.Description
+                Description = emergencyModel.Description 
             };
             var resultEmergency = _emergencyRest.Find(new EmergencyFilter { Id = emergencyModel.Id });
             if (!resultEmergency.Success)

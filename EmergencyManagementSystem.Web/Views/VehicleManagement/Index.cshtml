@@ -100,49 +100,20 @@
                                                                     <span class=""> <span class="info-box-number">@vehicle.Codename</span> <span class="info-box-text"></span> </span>
                                                                 </div>
                                                                 <center>
-                                                                    <h5><a href="@Url.Action("SendVehicle", "VehicleManagement", new { vehicleId = vehicle.Id, emergencyRequiredVehicleId  })">@vehicle.OperationCity<i class="fa fa-mail-forward"></i></a></h5>
+                                                                    <h5><a href="@Url.Action("SendVehicle", "VehicleManagement", new { vehicleId = vehicle.Id, emergencyRequiredVehicleId })">@vehicle.OperationCity<i class="fa fa-mail-forward"></i></a></h5>
                                                                 </center>
                                                             </div>
 
                                                             <br />
                                                         }
 
-
-                                                        @*<div class="col-md-3">
-                                                                <div class="info-box">
-                                                                    <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
-                                                                    <span class=""> <span class="info-box-number">USA</span> <span class="info-box-text"></span> </span>
-                                                                </div>
-                                                                <center>
-                                                                    <h5><a href="#">Rio do Sul <i class="fa fa-mail-forward"></i></a></h5>
-                                                                </center>
-                                                            </div>*@
-
-                                                        @*<div class="col-md-3">
-                                                                <div class="info-box">
-                                                                    <span class="info-box-icon bg-red"><i class="fas fa-helicopter"></i></span>
-                                                                    <span class=""> <span class="info-box-number">HEL</span> <span class="info-box-text"></span> </span>
-                                                                </div>
-                                                                <center>
-                                                                    <h5><a href="#">Indaial <i class="fa fa-mail-forward"></i></a></h5>
-                                                                </center>
-                                                            </div>*@
-
-                                                        @*<div class="col-md-3">
-
-                                                                <div class="info-box">
-                                                                    <span class="info-box-icon bg-red"><i class="fa fa-plane"></i></span>
-                                                                    <span class=""> <span class="info-box-number">AVI</span> <span class="info-box-text"></span> </span>
-                                                                </div>
-                                                                <center>
-                                                                    <h5><a href="#">Blumenau <i class="fa fa-mail-forward"></i></a></h5>
-                                                                </center>
-                                                            </div>*@
-
                                                     </div>
                                                 </div>
 
                                                 <hr />
+                                                <input hidden name="Id" value="@Model.Id" />
+                                                <input hidden name="RequiredVehicleId" value="@emergencyRequiredVehicleId" />
+                                                <input hidden name="EmergencyStatus" value="@Model.EmergencyStatus" />
 
                                                 <div class="">
                                                     <button id="btnCancel" onclick="appendCancel()" class="btn btn-block bg-light">Cancelar Veículo</button>
@@ -154,7 +125,7 @@
                                                         <div class="col-md-12">
                                                             <div class="form-group has-feedback">
                                                                 <label class="control-label">Comentário</label>
-                                                                <textarea class="form-control" id="placeTextarea" rows="1" placeholder="Observação"></textarea>
+                                                                <textarea name="Description" class="form-control" id="placeTextarea" rows="1" placeholder="Observação"></textarea>
                                                             </div>
                                                         </div>
 
@@ -338,129 +309,86 @@
 
                             <div class="row m-t-3-1">
                                 <div class="col-lg-12">
-                                    <div class="card-body">
+                                    <a href="#">
+
+                                        <div class="card-body">
 
 
-                                        <!--MODELO OCORRENCIA EM ANDAMENTO-->
-                                        <div class="col-lg-12">
-                                            <div class="small-box bg-red">
-                                                <div class="inner">
-                                                    <div class="text-left">
-                                                        <h5>OC: 14456874 - Dor no peito e dispneia  -  (USB01)</h5>
-                                                    </div>
+                                            <!--MODELO OCORRENCIA EM ANDAMENTO-->
+                                            @foreach (var emergency in emergencies.Where(d => d.EmergencyStatus == EmergencyManagementSystem.Service.Enums.EmergencyStatus.Committed))
+                                            {
+                                                @foreach (var commited in emergency.ServiceHistoryModels.Where(d => d.ServiceHistoryStatus == EmergencyManagementSystem.Service.Enums.ServiceHistoryStatus.InProgress))
+                                                {
+                                                    var J9L = commited.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J9Local);
+                                                    var J10L = commited.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J10Local);
+                                                    var J9H = commited.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J9Hospital);
+                                                    var J10H = commited.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J10Hospital);
+                                                    var J11 = commited.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J11);
+                                                    var J12 = commited.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J12);
 
 
-                                                    <!-- TALVEZ SERIA LEGAL MUDAR A COR DO IMPUT ONDE O VEICULO ESTÁ-->
-                                                    <div class="card-group align-items-center">
-                                                        <div class="col-2">
-                                                            <div class="form-group has-feedback">
-                                                                <a href="#"><label class="control-label"> + J9 </label></a>
-                                                                <input class="form-control" type="text" id="PA-">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-2">
+                                                    <div class="col-lg-12">
+                                                        <div class="small-box @commited.GetClassByStatus()">
+                                                            <div class="inner">
+                                                                <!--COMO PERCORRER VEICULOS DIFERENTES PARA MESMA OCORRENCIA?-->
 
-                                                            <div class="form-group has-feedback">
-                                                                <a href="#"><label class="control-label"> + J10 </label></a>
-                                                                <input class="form-control" type="text" id="FC-">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-2">
+                                                                <div class="text-left">
+                                                                    <h5>OC: @emergency.Id - @emergency.Name -  (@commited.VehicleModel.Codename)</h5>
+                                                                </div>
 
-                                                            <div class="form-group has-feedback">
-                                                                <a href="#"><label class="control-label"> + J9 </label></a>
-                                                                <input class="form-control" type="text" id="FR-">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-2">
-                                                            <div class="form-group has-feedback">
-                                                                <a href="#"><label class="control-label"> + J10 </label></a>
-                                                                <input class="form-control" type="text" id="Temp-">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-2">
-                                                            <div class="form-group has-feedback">
-                                                                <a href="#"><label class="control-label"> + J11 </label></a>
-                                                                <input class="form-control" type="text" id="Sat02-">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-2">
-                                                            <div class="form-group has-feedback">
-                                                                <a href="#"><label class="control-label"> + J12 </label></a>
-                                                                <input class="form-control" type="text" id="HGT-">
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                                <div class="card-group align-items-center">
+                                                                    <div class="col-2">
+                                                                        <div class="form-group has-feedback">
+                                                                            <label class="control-label"> J9 </label>
+                                                                            <input class="form-control" type="text" id="J9L" value="@(J9L?.Date)">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-2">
 
-                                                </div>
-                                            </div>
-                                        </div>
+                                                                        <div class="form-group has-feedback">
+                                                                            <label class="control-label"> J10 </label>
+                                                                            <input class="form-control" type="text" id="J10L" value="@(J10L?.Date)">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-2">
 
-                                        <!--MODELO OCORRENCIA EM ANDAMENTO-->
-                                        <div class="col-lg-12">
-                                            <div class="small-box bg-yellow">
-                                                <div class="inner">
-                                                    <div class="text-left">
-                                                        <h5>OC: 14456874 - Dor no peito e dispneia  -  (USB01)</h5>
-                                                    </div>
-
-
-                                                    <!-- TALVEZ SERIA LEGAL MUDAR A COR DO IMPUT ONDE O VEICULO ESTÁ-->
-                                                    <div class="card-group align-items-center">
-                                                        <div class="col-2">
-                                                            <div class="form-group has-feedback">
-                                                                <a href="#"><label class="control-label"> + J9 </label></a>
-                                                                <input class="form-control" type="text" id="PA-">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-2">
-
-                                                            <div class="form-group has-feedback">
-                                                                <a href="#"><label class="control-label"> + J10 </label></a>
-                                                                <input class="form-control" type="text" id="FC-">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-2">
-
-                                                            <div class="form-group has-feedback">
-                                                                <a href="#"><label class="control-label"> + J9 </label></a>
-                                                                <input class="form-control" type="text" id="FR-">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-2">
-                                                            <div class="form-group has-feedback">
-                                                                <a href="#"><label class="control-label"> + J10 </label></a>
-                                                                <input class="form-control" type="text" id="Temp-">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-2">
-                                                            <div class="form-group has-feedback">
-                                                                <a href="#"><label class="control-label"> + J11 </label></a>
-                                                                <input class="form-control" type="text" id="Sat02-">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-2">
-                                                            <div class="form-group has-feedback">
-                                                                <a href="#"><label class="control-label"> + J12 </label></a>
-                                                                <input class="form-control" type="text" id="HGT-">
+                                                                        <div class="form-group has-feedback">
+                                                                            <label class="control-label"> J9 </label>
+                                                                            <input class="form-control" type="text" id="J9H" value="@(J9H?.Date)">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-2">
+                                                                        <div class="form-group has-feedback">
+                                                                            <label class="control-label"> J10 </label>
+                                                                            <input class="form-control" type="text" id="J10H" value="@(J10H?.Date)">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-2">
+                                                                        <div class="form-group has-feedback">
+                                                                            <label class="control-label"> J11 </label>
+                                                                            <input class="form-control" type="text" id="J11" value="@(J11?.Date)">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-2">
+                                                                        <div class="form-group has-feedback">
+                                                                            <label class="control-label"> J12 </label>
+                                                                            <input class="form-control" type="text" id="J12" value="@(J12?.Date)">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                }
+                                            }
 
-                                                </div>
-                                            </div>
-                                        </div>
+                                        </div><!--ACaba card body da pagina-->
+                                    </a>
 
-
-
-
-                                    </div><!--ACaba card body da pagina-->
 
                                 </div>
                             </div>
                         </div>
-
-
 
                     </div> @*Final TabContent*@
                 </div>
@@ -547,6 +475,7 @@
         $('#btnCancel').attr('disabled', true);
         $('#btnRegister').attr('disabled', true);
         $("#cancel").removeClass();
+        $("#cancel").append('<input hidden name="Cancel" value="true" />')
     }
 
     function searchMaps() {
