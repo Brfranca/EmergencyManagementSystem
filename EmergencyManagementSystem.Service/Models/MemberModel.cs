@@ -12,5 +12,6 @@ namespace EmergencyManagementSystem.Service.Models
         public EmployeeStatus EmployeeStatus { get; set; }
         public long VehicleId { get; set; }
         public VehicleModel VehicleModel { get; set; }
+        public Occupation occupation { get; set; }
     }
 }

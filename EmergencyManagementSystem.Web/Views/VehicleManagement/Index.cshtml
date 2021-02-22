@@ -5,8 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     List<string> Messages = ViewBag?.Error;
     List<EmergencyModel> emergencies = ViewBag.Emergencies;
-    EmergencyRequiredVehicleModel requiredVehicle = @Model?.EmergencyRequiredVehicleModels?.FirstOrDefault() ?? new EmergencyRequiredVehicleModel();
-    ServiceHistoryModel serviceHistoryModel = @Model?.ServiceHistoryModels?.FirstOrDefault() ?? new ServiceHistoryModel();
+    List<VehicleModel> vehiclesAvaiable = ViewBag.VehiclesAvaiable;
+    long emergencyRequiredVehicleId = ViewBag.EmergencyRequiredVehicleId;
+
+    EmergencyRequiredVehicleModel requiredVehicle = Model?.EmergencyRequiredVehicleModels?.FirstOrDefault() ?? new EmergencyRequiredVehicleModel();
+    ServiceHistoryModel serviceHistoryModel = Model?.ServiceHistoryModels?.FirstOrDefault() ?? null;
 }
 
 
@@ -37,18 +40,144 @@
                 <div class="card tab-style1">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs profile-tab" role="tablist">
-                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#home" role="tab" aria-expanded="false">Enviar Veículo</a> </li>
-                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab" aria-expanded="false">Dados da Ocorrência</a> </li>
+                        @if (vehiclesAvaiable != null)
+                        {
+                            <li class="nav-item"> <a id="tabVehicle" class="nav-link" data-toggle="tab" href="#home" role="tab" aria-expanded="false">Enviar Veículo</a> </li>
+                        }
+                        @if (serviceHistoryModel != null)
+                        {
+                            <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab" aria-expanded="false">Dados da Ocorrência</a> </li>
+                        }
                         <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#main" role="tab" aria-expanded="true">Controle de Veículos</a> </li>
                     </ul>
 
                     <!-- TAB DE ESCOLHA DE VEÍCULO PARA EMPENHAR NA VTR -->
                     <div class="tab-content">
-                        <div class="tab-pane" id="home" role="tabpanel" aria-expanded="false">
-                            <div class="row m-t-3-1">
-                                <div class="col-lg-12">
-                                    <div class="card-body">
-                                        <form method="post" action="@Url.Action("Register", "VehicleManagement")">
+                        @if (vehiclesAvaiable != null)
+                        {
+                            <div class="tab-pane" id="home" role="tabpanel" aria-expanded="false">
+                                <div class="row m-t-3-1">
+                                    <div class="col-lg-12">
+                                        <div class="card-body">
+                                            <form method="post" action="@Url.Action("Register", "VehicleManagement")">
+                                                <h4 class="text-white">OC: @(Model?.Id) - @Model.Name<span class="pull-right"><b>@Model.Date.ToShortDateString()  @Model.Date.ToShortTimeString()</b></span> </h4>
+                                                <h5 class="text-white"><b>Solicitante:</b> @Model.RequesterName<span class="pull-right"><b>Funcionário:</b> @Model.EmployeeName</span> </h5>
+                                                <h5 class="text-white"><b>Telefone:</b> @Model.RequesterPhone<span class="pull-right"></span> </h5>
+                                                <hr />
+
+                                                <div class="sidebar-menu" data-widget="tree">
+                                                    <div class="treeview">
+                                                        <a href="#" onclick="searchMaps()"> <i class="fa fa-map-marker"></i> <span>Localização</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
+                                                        <div class="treeview-menu" id="teste">
+
+                                                            <label>
+                                                                @Model.AddressModel.City/@Model.AddressModel.District - @Model.AddressModel.Street, @Model.AddressModel.Number
+                                                                @Model.AddressModel.Complement. Prox: @Model.AddressModel.Reference
+                                                            </label>
+                                                            <input id="pac-input"
+                                                                   class="controls"
+                                                                   type="text"
+                                                                   placeholder="Procurar" value="@Model.AddressModel.Street - @Model.AddressModel.District, @Model.AddressModel.City" />
+
+                                                            <div id="map">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr />
+                                                <h5 class="box-title text-white">
+                                                    Veículo: @requiredVehicle.VehicleType.GetEnumDescription() - Código: @requiredVehicle.CodeColor.GetEnumDescription()
+                                                </h5>
+                                                <!--Listar Veículos disponíveis-->
+                                                <div class="">
+                                                    <div class="row">
+
+                                                        @foreach (var vehicle in vehiclesAvaiable)
+                                                        {
+                                                            <div class="col-md-3">
+                                                                <div class="info-box">
+                                                                    <span class="info-box-icon bg-red"><i class="fa @vehicle.GetIconByType()"></i></span>
+                                                                    <span class=""> <span class="info-box-number">@vehicle.Codename</span> <span class="info-box-text"></span> </span>
+                                                                </div>
+                                                                <center>
+                                                                    <h5><a href="@Url.Action("SendVehicle", "VehicleManagement", new { vehicleId = vehicle.Id, emergencyRequiredVehicleId  })">@vehicle.OperationCity<i class="fa fa-mail-forward"></i></a></h5>
+                                                                </center>
+                                                            </div>
+
+                                                            <br />
+                                                        }
+
+
+                                                        @*<div class="col-md-3">
+                                                                <div class="info-box">
+                                                                    <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
+                                                                    <span class=""> <span class="info-box-number">USA</span> <span class="info-box-text"></span> </span>
+                                                                </div>
+                                                                <center>
+                                                                    <h5><a href="#">Rio do Sul <i class="fa fa-mail-forward"></i></a></h5>
+                                                                </center>
+                                                            </div>*@
+
+                                                        @*<div class="col-md-3">
+                                                                <div class="info-box">
+                                                                    <span class="info-box-icon bg-red"><i class="fas fa-helicopter"></i></span>
+                                                                    <span class=""> <span class="info-box-number">HEL</span> <span class="info-box-text"></span> </span>
+                                                                </div>
+                                                                <center>
+                                                                    <h5><a href="#">Indaial <i class="fa fa-mail-forward"></i></a></h5>
+                                                                </center>
+                                                            </div>*@
+
+                                                        @*<div class="col-md-3">
+
+                                                                <div class="info-box">
+                                                                    <span class="info-box-icon bg-red"><i class="fa fa-plane"></i></span>
+                                                                    <span class=""> <span class="info-box-number">AVI</span> <span class="info-box-text"></span> </span>
+                                                                </div>
+                                                                <center>
+                                                                    <h5><a href="#">Blumenau <i class="fa fa-mail-forward"></i></a></h5>
+                                                                </center>
+                                                            </div>*@
+
+                                                    </div>
+                                                </div>
+
+                                                <hr />
+
+                                                <div class="">
+                                                    <button id="btnCancel" onclick="appendCancel()" class="btn btn-block bg-light">Cancelar Veículo</button>
+                                                </div>
+                                                <input hidden name="Status" value="@requiredVehicle.Status" />
+                                                <div id="cancel" class="hide">
+                                                    <hr />
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group has-feedback">
+                                                                <label class="control-label">Comentário</label>
+                                                                <textarea class="form-control" id="placeTextarea" rows="1" placeholder="Observação"></textarea>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <button type="submit" class="btn btn-sm bg-purpleTest">Registrar Cancelamento</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        <!--TAB DADOS DA OCORRENCIA-->
+                        @if (serviceHistoryModel != null)
+                        {
+                            <div class="tab-pane" id="profile" role="tabpanel" aria-expanded="false">
+
+                                <div class="row m-t-3-1">
+                                    <div class="col-lg-12">
+                                        <div class="card-body">
                                             <h4 class="text-white">OC: @(Model?.Id) - @Model.Name<span class="pull-right"><b>@Model.Date.ToShortDateString()  @Model.Date.ToShortTimeString()</b></span> </h4>
                                             <h5 class="text-white"><b>Solicitante:</b> @Model.RequesterName<span class="pull-right"><b>Funcionário:</b> @Model.EmployeeName</span> </h5>
                                             <h5 class="text-white"><b>Telefone:</b> @Model.RequesterPhone<span class="pull-right"></span> </h5>
@@ -57,7 +186,7 @@
                                             <div class="sidebar-menu" data-widget="tree">
                                                 <div class="treeview">
                                                     <a href="#" onclick="searchMaps()"> <i class="fa fa-map-marker"></i> <span>Localização</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
-                                                    <div class="treeview-menu" id="teste">
+                                                    <div class="treeview-menu">
 
                                                         <label>
                                                             @Model.AddressModel.City/@Model.AddressModel.District - @Model.AddressModel.Street, @Model.AddressModel.Number
@@ -67,250 +196,141 @@
                                                                class="controls"
                                                                type="text"
                                                                placeholder="Procurar" value="@Model.AddressModel.Street - @Model.AddressModel.District, @Model.AddressModel.City" />
-
                                                         <div id="map">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <hr />
+
+                                            <div class="box-header with-border">
+                                                <h5 class="box-title text-white">
+                                                    Histórico de Avaliação Médica
+                                                </h5>
+                                            </div>
+                                            <div class="direct-chat-messages">
+                                                <table id="" class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="wt20">Data</th>
+                                                            <th class="wt15">Profissional</th>
+                                                            <th class="wt15">Paciente</th>
+                                                            <th class="wt50">Avaliação</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="">
+                                                        @foreach (var item in Model.MedicalEvaluationModels)
+                                                        {
+                                                            <tr>
+                                                                <td>@item.Date</td>
+                                                                <td>@item.EmployeeName</td>
+                                                                <td>@(item?.PatientModel?.Name ?? "")</td>
+                                                                <td>@item.Evaluation</td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <br />
+                                            <hr />
+                                            <!--Implementar os J's aqui-->
                                             <h5 class="box-title text-white">
-                                                Veículo: @requiredVehicle.VehicleType.GetEnumDescription() - Código: @requiredVehicle.CodeColor.GetEnumDescription()
+                                                Posição da viatura - @serviceHistoryModel.VehicleModel.Codename
                                             </h5>
-                                            <!--Listar Veículos disponíveis-->
-                                            <div class="">
-                                                <div class="row">
-
-                                                    <div class="col-md-3">
-                                                        <div class="info-box">
-                                                            <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
-                                                            <span class=""> <span class="info-box-number">USB</span> <span class="info-box-text"></span> </span>
-                                                        </div>
-                                                        <center>
-                                                            <h5><a href="#">Blumenau <i class="fa fa-mail-forward"></i></a></h5>
-                                                        </center>
+                                            <div class="card-group align-items-center">
+                                                <div class="col-2">
+                                                    <div class="form-group has-feedback">
+                                                        <a href="#"><label class="control-label"> + J9 </label></a>
+                                                        <input class="form-control" type="text" id="PA-">
                                                     </div>
+                                                </div>
+                                                <div class="col-2">
 
-                                                    <div class="col-md-3">
-                                                        <div class="info-box">
-                                                            <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
-                                                            <span class=""> <span class="info-box-number">USA</span> <span class="info-box-text"></span> </span>
-                                                        </div>
-                                                        <center>
-                                                            <h5><a href="#">Rio do Sul <i class="fa fa-mail-forward"></i></a></h5>
-                                                        </center>
+                                                    <div class="form-group has-feedback">
+                                                        <a href="#"><label class="control-label"> + J10 </label></a>
+                                                        <input class="form-control" type="text" id="FC-">
                                                     </div>
+                                                </div>
+                                                <div class="col-2">
 
-                                                    <div class="col-md-3">
-                                                        <div class="info-box">
-                                                            <span class="info-box-icon bg-red"><i class="fas fa-helicopter"></i></span>
-                                                            <span class=""> <span class="info-box-number">HEL</span> <span class="info-box-text"></span> </span>
-                                                        </div>
-                                                        <center>
-                                                            <h5><a href="#">Indaial <i class="fa fa-mail-forward"></i></a></h5>
-                                                        </center>
+                                                    <div class="form-group has-feedback">
+                                                        <a href="#"><label class="control-label"> + J9 </label></a>
+                                                        <input class="form-control" type="text" id="FR-">
                                                     </div>
-
-                                                    <div class="col-md-3">
-
-                                                        <div class="info-box">
-                                                            <span class="info-box-icon bg-red"><i class="fa fa-plane"></i></span>
-                                                            <span class=""> <span class="info-box-number">AVI</span> <span class="info-box-text"></span> </span>
-                                                        </div>
-                                                        <center>
-                                                            <h5><a href="#">Blumenau <i class="fa fa-mail-forward"></i></a></h5>
-                                                        </center>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="form-group has-feedback">
+                                                        <a href="#"><label class="control-label"> + J10 </label></a>
+                                                        <input class="form-control" type="text" id="Temp-">
                                                     </div>
-
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="form-group has-feedback">
+                                                        <a href="#"><label class="control-label"> + J11 </label></a>
+                                                        <input class="form-control" type="text" id="Sat02-">
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="form-group has-feedback">
+                                                        <a href="#"><label class="control-label"> + J12 </label></a>
+                                                        <input class="form-control" type="text" id="HGT-">
+                                                    </div>
                                                 </div>
                                             </div>
 
+                                            <div class="card-group align-items-center">
+                                                <div class="col-2">
+                                                    <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
+                                                </div>
+                                                <div class="col-2">
+                                                    <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
+                                                </div>
+                                                <div class="col-2">
+                                                    <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
+                                                </div>
+                                                <div class="col-2">
+                                                    <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
+                                                </div>
+                                                <div class="col-2">
+                                                    <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
+                                                </div>
+                                                <div class="col-2">
+                                                    <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
+                                                </div>
+
+                                            </div>
+                                            <hr />
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="control-label">Intercorrências</label>
+                                                        <textarea class="form-control" id="Evaluation-1" rows="2"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <button type="submit" class="btn btn-sm bg-purpleTest"><i class="fa fa-save"></i> Gravar</button>
+                                                </div>
+                                            </div>
                                             <hr />
 
                                             <div class="">
-                                                <button id="btnCancel" onclick="appendCancel()" class="btn btn-block bg-light">Cancelar Veículo</button>
+                                                <a id="btnRegister" class="btn btn-block bg-purpleTest">Concluído</a>
                                             </div>
-                                            <input hidden name="Status" value="@requiredVehicle.Status" />
-                                            <div id="cancel" class="hide">
-                                                <hr />
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="form-group has-feedback">
-                                                            <label class="control-label">Comentário</label>
-                                                            <textarea class="form-control" id="placeTextarea" rows="1" placeholder="Observação"></textarea>
-                                                        </div>
-                                                    </div>
 
-                                                    <div class="col-md-12">
-                                                        <button type="submit" class="btn btn-sm bg-purpleTest">Registrar Cancelamento</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
+                                            <hr />
+                                            <span class="pull-right">
+                                                <button id="btnCancelar1" class="btn btn-nor bg-light">Cancelar Viatura</button>
+                                            </span>
+                                            <br />
+                                        </div><!--ACaba card body da pagina-->
+
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-
-                        <!--TAB DADOS DA OCORRENCIA-->
-                        <div class="tab-pane" id="profile" role="tabpanel" aria-expanded="false">
-
-                            <div class="row m-t-3-1">
-                                <div class="col-lg-12">
-                                    <div class="card-body">
-                                        <h4 class="text-white">OC: @(Model?.Id) - @Model.Name<span class="pull-right"><b>@Model.Date.ToShortDateString()  @Model.Date.ToShortTimeString()</b></span> </h4>
-                                        <h5 class="text-white"><b>Solicitante:</b> @Model.RequesterName<span class="pull-right"><b>Funcionário:</b> @Model.EmployeeName</span> </h5>
-                                        <h5 class="text-white"><b>Telefone:</b> @Model.RequesterPhone<span class="pull-right"></span> </h5>
-                                        <hr />
-
-                                        <div class="sidebar-menu" data-widget="tree">
-                                            <div class="treeview">
-                                                <a href="#" onclick="searchMaps()"> <i class="fa fa-map-marker"></i> <span>Localização</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
-                                                <div class="treeview-menu">
-
-                                                    <label>
-                                                        @Model.AddressModel.City/@Model.AddressModel.District - @Model.AddressModel.Street, @Model.AddressModel.Number
-                                                        @Model.AddressModel.Complement. Prox: @Model.AddressModel.Reference
-                                                    </label>
-                                                    <input id="pac-input"
-                                                           class="controls"
-                                                           type="text"
-                                                           placeholder="Procurar" value="@Model.AddressModel.Street - @Model.AddressModel.District, @Model.AddressModel.City" />
-                                                    <div id="map">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr />
-
-                                        <div class="box-header with-border">
-                                            <h5 class="box-title text-white">
-                                                Histórico de Avaliação Médica
-                                            </h5>
-                                        </div>
-                                        <div class="direct-chat-messages">
-                                            <table id="" class="table table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="wt20">Data</th>
-                                                        <th class="wt15">Profissional</th>
-                                                        <th class="wt15">Paciente</th>
-                                                        <th class="wt50">Avaliação</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody class="">
-                                                    @foreach (var item in Model.MedicalEvaluationModels)
-                                                    {
-                                                        <tr>
-                                                            <td>@item.Date</td>
-                                                            <td>@item.EmployeeName</td>
-                                                            <td>@(item?.PatientModel?.Name ?? "")</td>
-                                                            <td>@item.Evaluation</td>
-                                                        </tr>
-                                                    }
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <br />
-                                        <hr />
-                                        <!--Implementar os J's aqui-->
-                                        <h5 class="box-title text-white">
-                                            Posição da viatura - @serviceHistoryModel.VehicleModel.Codename
-                                        </h5>
-                                        <div class="card-group align-items-center">
-                                            <div class="col-2">
-                                                <div class="form-group has-feedback">
-                                                    <a href="#"><label class="control-label"> + J9 </label></a>
-                                                    <input class="form-control" type="text" id="PA-">
-                                                </div>
-                                            </div>
-                                            <div class="col-2">
-
-                                                <div class="form-group has-feedback">
-                                                    <a href="#"><label class="control-label"> + J10 </label></a>
-                                                    <input class="form-control" type="text" id="FC-">
-                                                </div>
-                                            </div>
-                                            <div class="col-2">
-
-                                                <div class="form-group has-feedback">
-                                                    <a href="#"><label class="control-label"> + J9 </label></a>
-                                                    <input class="form-control" type="text" id="FR-">
-                                                </div>
-                                            </div>
-                                            <div class="col-2">
-                                                <div class="form-group has-feedback">
-                                                    <a href="#"><label class="control-label"> + J10 </label></a>
-                                                    <input class="form-control" type="text" id="Temp-">
-                                                </div>
-                                            </div>
-                                            <div class="col-2">
-                                                <div class="form-group has-feedback">
-                                                    <a href="#"><label class="control-label"> + J11 </label></a>
-                                                    <input class="form-control" type="text" id="Sat02-">
-                                                </div>
-                                            </div>
-                                            <div class="col-2">
-                                                <div class="form-group has-feedback">
-                                                    <a href="#"><label class="control-label"> + J12 </label></a>
-                                                    <input class="form-control" type="text" id="HGT-">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="card-group align-items-center">
-                                            <div class="col-2">
-                                                <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
-                                            </div>
-                                            <div class="col-2">
-                                                <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
-                                            </div>
-                                            <div class="col-2">
-                                                <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
-                                            </div>
-                                            <div class="col-2">
-                                                <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
-                                            </div>
-                                            <div class="col-2">
-                                                <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
-                                            </div>
-                                            <div class="col-2">
-                                                <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
-                                            </div>
-
-                                        </div>
-                                        <hr />
-
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group has-feedback">
-                                                    <label class="control-label">Intercorrências</label>
-                                                    <textarea class="form-control" id="Evaluation-1" rows="2"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <button type="submit" class="btn btn-sm bg-purpleTest"><i class="fa fa-save"></i> Gravar</button>
-                                            </div>
-                                        </div>
-                                        <hr />
-
-                                        <div class="">
-                                            <a id="btnRegister" class="btn btn-block bg-purpleTest">Concluído</a>
-                                        </div>
-
-                                        <hr />
-                                        <span class="pull-right">
-                                            <button id="btnCancelar1" class="btn btn-nor bg-light">Cancelar Viatura</button>
-                                        </span>
-                                        <br />
-                                    </div><!--ACaba card body da pagina-->
-
-                                </div>
-                            </div>
-                        </div>
+                        }
 
 
                         <!--TAB CONTROLE DE VEICULOS-->
@@ -489,6 +509,24 @@
 
 <script>
     //Cuidado ao mexer
+
+    @{
+        var shouldClick = @vehiclesAvaiable != null ? 1 : 0;
+    }
+
+    if (@shouldClick > 0) {
+        SelectTabTimer('tabVehicle');
+    }
+
+        function SelectTabTimer(id) {
+        window.setTimeout(SelectTab(id), 300);
+    }
+
+    function SelectTab(id) {
+        debugger;
+        $('#' + id).click();
+    }
+
 
     $(function () {
         $('#example1').DataTable()

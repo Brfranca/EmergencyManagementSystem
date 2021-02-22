@@ -16,6 +16,7 @@ namespace EmergencyManagementSystem.Service.Models
         public string Description { get; set; }
         public List<TeamMemberModel> TeamMemberModels { get; set; }
         public List<VehiclePositionHistoryModel> VehiclePositionHistoryModels { get; set; }
+        public long EmergencyRequiredVehicleId { get; set; }
 
         public ServiceHistoryModel()
         {

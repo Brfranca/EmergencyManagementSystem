@@ -26,11 +26,9 @@ namespace EmergencyManagementSystem.Web.Controllers
         }
 
 
-        public IActionResult Index(EmployeeFilter employeeFilter, VehicleFilter vehicleFilter)
+        public IActionResult Index(int currentPage, Occupation occupation, long vehicleId)
         {
-
-            ViewBag.Id = employeeFilter.Id;
-            ViewBag.Occupation = employeeFilter.Occupation;
+            ViewBag.OcccupationSelected = occupation;
 
             var membersWorking = _memberRest.FindAll(new MemberFilter { EmployeeStatus = EmployeeStatus.Working }).Model;
 
@@ -40,16 +38,19 @@ namespace EmergencyManagementSystem.Web.Controllers
 
             var employees = _employeeRest.FindPaginated(new EmployeeFilter
             {
-                Occupation = employeeFilter.Occupation,
+                Occupation = occupation,
                 EmployeeGuidWorking = membersGuidWorking,
-                IsMember = true
+                IsMember = true,
+                CurrentPage = currentPage == 0 ? 1 : currentPage
             });
-
-            ViewBag.Id = vehicleFilter.Id;
 
             var vehicles = _vehicleRest.FindAll(new VehicleFilter());
 
             var currentVehicle = vehicles.Model.FirstOrDefault();
+            if (vehicleId > 0)
+                currentVehicle = vehicles.Model.FirstOrDefault(d => d.Id == vehicleId);
+
+            ViewBag.VehicleId = currentVehicle.Id;
 
             List<EmployeeVehicleModel> employeeVehicles = new List<EmployeeVehicleModel>();
 
@@ -95,11 +96,11 @@ namespace EmergencyManagementSystem.Web.Controllers
                 return View(memberModel);
             }
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new { vehicleId = memberModel.VehicleId, occupation = memberModel.occupation });
         }
 
 
-        public IActionResult Update(long id)
+        public IActionResult Update(long id, Occupation occupation, long vehicleId)
         {
             if (!ModelState.IsValid)
                 return View(nameof(Index));
@@ -123,7 +124,7 @@ namespace EmergencyManagementSystem.Web.Controllers
                 return View(nameof(Index));
             }
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new { vehicleId, occupation });
         }
     }
 }

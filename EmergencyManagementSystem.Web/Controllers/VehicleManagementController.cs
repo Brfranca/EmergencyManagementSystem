@@ -20,14 +20,17 @@ namespace EmergencyManagementSystem.Web.Controllers
         private readonly IEmergencyRequiredVehicleRest _requiredVehicleRest;
         private readonly IEmployeeRest _employeeRest;
         private readonly IMedicalEvaluationRest _medicalEvaluationRest;
-
-        public VehicleManagementController(IEmergencyRest emergencyRest, UserService userService, IEmergencyHistoryRest emergencyHistoryRest, IEmergencyRequiredVehicleRest emergencyRequiredVehicleRest,
+        private readonly IVehicleRest _vehicleRest;
+        private readonly IServiceHisotryRest serviceHisotryRest;
+        public VehicleManagementController(IEmergencyRest emergencyRest, UserService userService, IEmergencyHistoryRest emergencyHistoryRest,
+            IEmergencyRequiredVehicleRest requiredVehicleRest, IVehicleRest vehicleRest,
             IEmployeeRest employeeRest, IMedicalEvaluationRest medicalEvaluationRest)
         {
+            _vehicleRest = vehicleRest;
             _userService = userService;
             _emergencyRest = emergencyRest;
             _emergencyHistoryRest = emergencyHistoryRest;
-            _requiredVehicleRest = emergencyRequiredVehicleRest;
+            _requiredVehicleRest = requiredVehicleRest;
             _employeeRest = employeeRest;
             _medicalEvaluationRest = medicalEvaluationRest;
         }
@@ -51,20 +54,44 @@ namespace EmergencyManagementSystem.Web.Controllers
             return View("Index", new EmergencyModel());
         }
 
-        public IActionResult Update(long emergencyId, long idEmergencyRequiredVehicle)
+        public IActionResult Update(long emergencyId, long emergencyRequiredVehicleId)
         {
 
             //tratar a nivel de veículo
-            var result = GetEmergencyModel(emergencyId);
+            //var result = GetEmergencyModel(emergencyId);
+            var result = _emergencyRest.Find(new EmergencyFilter { Id = emergencyId });
             if (!result.Success)
             {
                 LoadBag();
                 ViewBag.Error = new List<string> { result?.Messages?.FirstOrDefault() ?? "Ocorreu um erro, favor tente novamente." };
                 return View("index", new EmergencyModel());
             }
+
+            var requeridVehicle = result.Model.EmergencyRequiredVehicleModels.FirstOrDefault(d => d.Id == emergencyRequiredVehicleId);
+            ViewBag.VehiclesAvaiable = _vehicleRest.FindAll(new VehicleFilter
+            {
+                Active = Active.Active,
+                VehicleStatus = VehicleStatus.Cleared,
+                VehicleType = requeridVehicle.VehicleType
+            }).Model;
+
+            ViewBag.EmergencyRequiredVehicleId = emergencyRequiredVehicleId;
+
             LoadBag();
             return View("index", result.Model);
 
+        }
+
+        public IActionResult SendVehicle(long vehicleId, long emergencyRequiredVehicleId)
+        {
+            //var result = _requiredVehicleRest.SendVehicle(new ServiceHistoryModel
+            //{
+            //    VehicleId = vehicleId,
+            //    Date = DateTime.Now,
+            //    EmergencyRequiredVehicleId = emergencyRequiredVehicleId,
+            //});
+
+            return null;
         }
 
         public ActionResult Cancel(EmergencyModel emergencyModel)
@@ -125,7 +152,7 @@ namespace EmergencyManagementSystem.Web.Controllers
                 foreach (var requiredVehicleModel in item.EmergencyRequiredVehicleModels)
                 {
                     string html =
-                    $"<div class=\"info-box {requiredVehicleModel.GetClassByColor()}\"><a href=\"{Url.Action("Update", "VehicleManagement", new { emergencyId = item.Id, idEmergencyRequiredVehicle = requiredVehicleModel.Id })}\"><div class=\"box-body\">" +
+                    $"<div class=\"info-box {requiredVehicleModel.GetClassByColor()}\"><a href=\"{Url.Action("Update", "VehicleManagement", new { emergencyId = item.Id, emergencyRequiredVehicleId = requiredVehicleModel.Id })}\"><div class=\"box-body\">" +
                     $"<h5><b>Oc: </b>{item.Id} <span class=\"pull-right\"><b>{item.Date.ToShortDateString()} {item.Date.ToShortTimeString()}</b></span></h5>" +
                     $"<h4>{item.Name}</h4></div></a></div>";
                     HtmlTeste += html;

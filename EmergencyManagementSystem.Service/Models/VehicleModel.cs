@@ -30,12 +30,31 @@ namespace EmergencyManagementSystem.Service.Models
             return Utils.GetEnumDescription(value);
         }
 
+        public string GetSelected(long vehicleId)
+        {
+            if (Id == vehicleId)
+                return "Selected";
+            return "";
+        }
+
         public string GetActive()
         {
             if (Active == Active.Active)
                 return "Desativar";
             else
                 return "Ativar";
+        }
+
+        public string GetIconByType()
+        {
+            return VehicleType switch
+            {
+                VehicleType.USB => "fa-ambulance",
+                VehicleType.USA => "fa-ambulance",
+                VehicleType.HEL => "fa-helicopter",
+                VehicleType.AVI => "fa-plane",
+                _ => "",
+            };
         }
     }
 }

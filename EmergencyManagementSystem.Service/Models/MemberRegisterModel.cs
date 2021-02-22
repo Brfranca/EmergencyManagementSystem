@@ -26,5 +26,12 @@ namespace EmergencyManagementSystem.Service.Models
             ocupations = ocupations.ToListAsync().Result.Where(d => d != Occupation.RO && d != Occupation.TARM).ToArray();
             return ocupations;
         }
+
+        public string GetOcccupationSelected(Occupation currentOccupation, Occupation suit)
+        {
+            if (currentOccupation == suit)
+                return "Selected";
+            return "";
+        }
     }
 }

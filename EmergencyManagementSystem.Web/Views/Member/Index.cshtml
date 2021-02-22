@@ -2,12 +2,13 @@
 @using EmergencyManagementSystem.Service.Models
 @using X.PagedList.Mvc.Core
 @using X.PagedList.Web.Common
-@using System.Linq;
+@using EmergencyManagementSystem.Service.Enums;
 
 @{
     ViewData["Title"] = "Teste";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var currentVehicleId = Model.VehicleModels.FirstOrDefault().Id;
+    var currentVehicleId = ViewBag.VehicleId;
+    var occupationSelected = (Occupation)ViewBag.OcccupationSelected;
 }
 
 @Html.AntiForgeryToken()
@@ -20,21 +21,24 @@
 
         <div class="col-lg-6 m-b-3">
             <div class="info-box">
-                <h4 class="text-white">Profissionais Disponíveis</h4>
-                <div class="col-lg-12 form-group-sm row ">
-                    <select name="employeeFilter.Occupation" class="form-control input-sm col-md-9" value="@ViewBag.Occupation" id="employeeFilter">
-                        @{
+                <form action="@Url.Action("Index", "Member")">
+                    <h4 class="text-white">Profissionais Disponíveis</h4>
+                    <div class="col-lg-12 form-group-sm row ">
+                        <select name="occupation" class="form-control input-sm col-md-9" value="@ViewBag.Occupation" id="employeeFilter">
+                            @foreach (Occupation suit in Model.GetOccupations())
+                            {
+                                <option value="@suit" @Model.GetOcccupationSelected(occupationSelected, suit)>@suit.GetEnumDescription()</option>
+                            }
+                        </select>
+                        <input name="VehicleId" value="@currentVehicleId" hidden />
 
-                        }
-                        @foreach (EmergencyManagementSystem.Service.Enums.Occupation suit in Model.GetOccupations())
-                        {
-                            <option value="@suit">@suit.GetEnumDescription()</option>
-                        }
-                    </select>
-                    <input type="submit" class="btn btn-secondary btn-nor" value="Pesquisar" id="employeeFilter" />
-                </div>
+                        <input type="submit" class="btn btn-secondary btn-nor" value="Pesquisar" id="employeeFilter" />
+                    </div>
+                </form>
                 <form method="post" action="@Url.Action("Register","Member")" id="formMember">
 
+                    <input name="VehicleId" value="@currentVehicleId" hidden />
+                    <input name="occupation" value="@occupationSelected" hidden />
                     <div class="table-responsive">
                         <table class="table">
                             <thead class="bg-primary text-white">
@@ -62,15 +66,15 @@
                             </tbody>
                         </table>
                         @Html.PagedListPager(Model.EmployeeModels, page =>
-                        Url.Action("Index", new { CurrentPage = page, Name = ViewBag.Name, Id = ViewBag.Id, Occupation = ViewBag.Occupation }),
+                        Url.Action("Index", new { CurrentPage = page, Name = ViewBag.Name, Id = ViewBag.Id, Occupation = occupationSelected, vehicleId = currentVehicleId }),
                         new PagedListRenderOptionsBase
                         {
-                           ContainerDivClasses = new[] { "jsgrid-pager-page-container" },
-                           ActiveLiElementClass = "jsgrid-pager-nav-button",
-                           PageClasses = new[] { "jsgrid-pager-page" },
-                           UlElementClasses = new[] { "pagination" },
-                           LinkToPreviousPageFormat = "Voltar",
-                           LinkToNextPageFormat = "Próximo",
+                            ContainerDivClasses = new[] { "dataTables_paginate paging_simple_numbers" },
+                            ActiveLiElementClass = "paginate_button active",
+                            PageClasses = new[] { "page-link" },
+                            UlElementClasses = new[] { "pagination" },
+                            LinkToPreviousPageFormat = "Voltar",
+                            LinkToNextPageFormat = "Próximo"
                         })
                     </div>
                     <input type="submit" hidden id="addMember" />
@@ -87,15 +91,15 @@
                 <form action="@Url.Action("Index", "Member")">
 
                     <div class="col-lg-12 form-group-sm row ">
-                        <select class="form-control input-sm" name="VehicleId" id="VehicleId" onclick="GetVehicleSelected()">
+                        <select class="form-control input-sm" name="vehicleId" id="VehicleId" onclick="GetVehicleSelected()">
                             @foreach (var suit in Model.VehicleModels)
                             {
-                                <option value="@suit.Id">@suit.Codename</option>
+                                <option value="@suit.Id" @suit.GetSelected(currentVehicleId)>@suit.Codename</option>
                             }
                         </select>
                     </div>
                     <input id="submitVehicle" type="submit" hidden />
-
+                    <input name="MemberModel.Occupation" value="@occupationSelected" hidden />
                 </form>
                 <br />
                 <h4 class="text-white">Equipe Atual do Veículo</h4>
@@ -122,7 +126,7 @@
 
                                     <td>
                                         <div class="jsgrid">
-                                            <a class="jsgrid-button jsgrid-delete-button" type="button" title="Remover" href="@Url.Action("Update", "Member", new { id = item.MemberId })"></a>
+                                            <a class="jsgrid-button jsgrid-delete-button" type="button" title="Remover" href="@Url.Action("Update", "Member", new { id = item.MemberId, vehicleId = currentVehicleId, occupation = occupationSelected })"></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -137,17 +141,12 @@
 
 <script>
 
-    @*var currentVehicleId = @currentVehicleId;*@
-
-    var currentVehicleId = 1;
-
+    var currentVehicleId = @currentVehicleId;
 
     function GetVehicleSelected() {
-        debugger;
+        var value = $('#VehicleId').find(":selected").val();
 
-       var value  = $('#VehicleId').find(":selected").text();
-
-        if (value != currentVehicleId) {
+        if (currentVehicleId != value) {
             $('#submitVehicle').click();
         }
     }
