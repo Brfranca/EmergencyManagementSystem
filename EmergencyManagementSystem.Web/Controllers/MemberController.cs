@@ -29,49 +29,52 @@ namespace EmergencyManagementSystem.Web.Controllers
         public IActionResult Index(EmployeeFilter employeeFilter, VehicleFilter vehicleFilter)
         {
 
-            ViewBag.Name = employeeFilter.Name;
             ViewBag.Id = employeeFilter.Id;
             ViewBag.Occupation = employeeFilter.Occupation;
-            var employees = (PagedList<EmployeeModel>)_employeeRest.FindPaginated(employeeFilter).Where(d => d.Occupation != Occupation.RO & d.Occupation != Occupation.TARM).ToPagedList<EmployeeModel>();
 
-            ViewBag.VehicleName = vehicleFilter.VehicleName;
-            ViewBag.Plate = vehicleFilter.VehiclePlate;
+            var membersWorking = _memberRest.FindAll(new MemberFilter { EmployeeStatus = EmployeeStatus.Working }).Model;
+
+            var membersGuidWorking = membersWorking
+                .Select(d => d.EmployeeGuid).Distinct()
+                .ToList();
+
+            var employees = _employeeRest.FindPaginated(new EmployeeFilter
+            {
+                Occupation = employeeFilter.Occupation,
+                EmployeeGuidWorking = membersGuidWorking,
+                IsMember = true
+            });
+
             ViewBag.Id = vehicleFilter.Id;
-            var vehicles = _vehicleRest.FindPaginated(vehicleFilter);
 
+            var vehicles = _vehicleRest.FindAll(new VehicleFilter());
 
-            var members = _memberRest.FindPaginated(new MemberFilter { VehicleId = vehicleFilter.Id }).Where(d => d.EmployeeStatus == EmployeeStatus.Working).ToList();
-
+            var currentVehicle = vehicles.Model.FirstOrDefault();
 
             List<EmployeeVehicleModel> employeeVehicles = new List<EmployeeVehicleModel>();
 
-            if (members != null)
+            foreach (var memberWorking in membersWorking.Where(d => d.VehicleId == currentVehicle.Id))
             {
-                foreach (var item in members)
+                var employee = _employeeRest.Find(new EmployeeFilter { Guid = memberWorking.EmployeeGuid }).Model;
+                if (employee != null)
                 {
-                    var employee = _employeeRest.Find(new EmployeeFilter { Guid = item.EmployeeGuid }).Model;
-                    var vehicle = _vehicleRest.Find(new VehicleFilter { Id = item.VehicleId }).Model;
-                    if (employee != null && vehicle != null)
+                    EmployeeVehicleModel employeeVehicleModel = new EmployeeVehicleModel
                     {
-                        EmployeeVehicleModel employeeVehicleModel = new EmployeeVehicleModel
-                        {
-                            EmployeeModel = employee,
-                            VehicleModel = vehicle,
-                            MemberId = item.Id
-                        };
-
-                        employeeVehicles.Add(employeeVehicleModel);
-                    }
+                        EmployeeModel = employee,
+                        VehicleModel = currentVehicle,
+                        MemberId = memberWorking.Id
+                    };
+                    employeeVehicles.Add(employeeVehicleModel);
                 }
             }
 
-            return View(new MemberRegisterModel { EmployeeModels = employees, VehicleModels = vehicles, EmployeeVehicleModels = employeeVehicles});
+            return View(new MemberRegisterModel { EmployeeModels = employees, VehicleModels = vehicles.Model, EmployeeVehicleModels = employeeVehicles });
         }
 
 
-        public IActionResult Teste(MemberModel memberModel)
+        public IActionResult Index2(MemberModel memberModel)
         {
-            return View(new MemberModel());
+            return View(new MemberRegisterModel());
         }
 
 
@@ -95,7 +98,7 @@ namespace EmergencyManagementSystem.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        
+
         public IActionResult Update(long id)
         {
             if (!ModelState.IsValid)
