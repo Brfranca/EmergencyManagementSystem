@@ -202,16 +202,10 @@ namespace EmergencyManagementSystem.Web.Controllers
 
         public void LoadBag()
         {
-            //chamar o o método LoadBag em todos os retornos para a tela de index.
-            //Até o momento ja está
-
             var emergenciesStatus = new[] { EmergencyStatus.InEvaluation, EmergencyStatus.Opened };
             var emergencies = _emergencyRest.FindAll(new EmergencyFilter { EmergenciesStatus = emergenciesStatus });
             if (emergencies.Success)
                 ViewBag.Emergencies = emergencies.Model;
-            //Filtar todas as ocorrências com os status acima
-            //ViewBag.Emergencies = _emergencyRest.GetEmergencies();
-            //Criar foreach na view e preencher com as emergencias da viewBag
         }
     }
 }
