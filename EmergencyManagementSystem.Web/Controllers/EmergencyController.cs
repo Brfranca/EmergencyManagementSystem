@@ -42,9 +42,9 @@ namespace EmergencyManagementSystem.Web.Controllers
                 return View("index", new EmergencyModel());
             }
             var requesterResult = _requesterService.Find(new RequesterFilter { Telephone = result.Model.RequesterPhone });
-            if (requesterResult.Success)
+            if (requesterResult.Success && requesterResult?.Model?.AddressModel != null)
             {
-                result.Model.AddressModel = requesterResult.Model.AddressModel;
+                result.Model.AddressModel = requesterResult?.Model?.AddressModel;
                 result.Model.AddressModel.Id = 0;
             }
             LoadBag();
@@ -55,7 +55,7 @@ namespace EmergencyManagementSystem.Web.Controllers
         public IActionResult Register(EmergencyModel emergencyModel)
         {
             emergencyModel.EmployeeGuid = _userService.GetCurrentUser().EmployeeGuid;
-            if (!string.IsNullOrWhiteSpace(emergencyModel.Description))
+            if (emergencyModel.Cancel)
             {
                 return RedirectToAction("Cancel", emergencyModel);
             }

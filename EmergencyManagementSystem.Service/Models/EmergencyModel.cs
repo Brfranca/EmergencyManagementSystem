@@ -23,6 +23,7 @@ namespace EmergencyManagementSystem.Service.Models
         public Guid EmployeeGuid { get; set; }
         public string EmployeeName { get; set; }
         public string Description { get; set; }
+        public bool Cancel { get; set; }
         public EmergencyModel()
         {
             AddressModel = new AddressModel();
