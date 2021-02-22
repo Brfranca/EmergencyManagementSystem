@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace EmergencyManagementSystem.Service.Services
 {
-    public class ServiceHisotryRest : RestBase<ServiceHistoryModel>, IServiceHisotryRest
+    public class ServiceHistoryRest : RestBase<ServiceHistoryModel>, IServiceHistoryRest
     {
-        public ServiceHisotryRest(IConfiguration configuration) 
+        public ServiceHistoryRest(IConfiguration configuration) 
             : base(configuration, "SAMUApi", "ServiceHistory")
         {
         }

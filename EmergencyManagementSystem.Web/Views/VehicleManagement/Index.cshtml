@@ -6,7 +6,7 @@
     List<string> Messages = ViewBag?.Error;
     List<EmergencyModel> emergencies = ViewBag.Emergencies;
     List<VehicleModel> vehiclesAvaiable = ViewBag.VehiclesAvaiable;
-    long emergencyRequiredVehicleId = ViewBag.EmergencyRequiredVehicleId;
+    long? emergencyRequiredVehicleId = ViewBag?.EmergencyRequiredVehicleId;
 
     EmergencyRequiredVehicleModel requiredVehicle = Model?.EmergencyRequiredVehicleModels?.FirstOrDefault() ?? new EmergencyRequiredVehicleModel();
     ServiceHistoryModel serviceHistoryModel = Model?.ServiceHistoryModels?.FirstOrDefault() ?? null;
