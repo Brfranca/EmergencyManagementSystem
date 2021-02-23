@@ -41,5 +41,12 @@ namespace EmergencyManagementSystem.Service.Models
             };
         }
 
+        public string PositionSelect(VehiclePosition vehiclePosition)
+        {
+            var position = VehiclePositionHistoryModels.OrderByDescending(d => d.VehiclePosition).FirstOrDefault().VehiclePosition;
+            if (vehiclePosition != position)
+                return "hidden";
+            return "";
+        }
     }
 }

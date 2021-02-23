@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace EmergencyManagementSystem.Web.Controllers
 {
@@ -73,7 +72,7 @@ namespace EmergencyManagementSystem.Web.Controllers
                     EmployeeGuid =user.EmployeeGuid,
                     EmployeeName = user.EmployeeName,
                     CodeColor = codeColor,
-                    Description = "Solicitado veículo"
+                    Description = "Solicitado veículo - " + vehicleType
                 }
             });
 
@@ -170,7 +169,7 @@ namespace EmergencyManagementSystem.Web.Controllers
 
         public IActionResult Emergencies()
         {
-            var emergenciesStatus = new[] { EmergencyStatus.InEvaluation, EmergencyStatus.InService };
+            var emergenciesStatus = new[] { EmergencyStatus.InEvaluation, EmergencyStatus.InService, EmergencyStatus.Committed };
             var emergencies = _emergencyRest.FindAll(new EmergencyFilter { EmergenciesStatus = emergenciesStatus });
 
             string HtmlTeste = "";
@@ -189,7 +188,7 @@ namespace EmergencyManagementSystem.Web.Controllers
 
         public void LoadBag()
         {
-            var emergenciesStatus = new[] { EmergencyStatus.InEvaluation, EmergencyStatus.InService };
+            var emergenciesStatus = new[] { EmergencyStatus.InEvaluation, EmergencyStatus.InService, EmergencyStatus.Committed };
             var emergencies = _emergencyRest.FindAll(new EmergencyFilter { EmergenciesStatus = emergenciesStatus });
             if (emergencies.Success)
                 ViewBag.Emergencies = emergencies.Model;

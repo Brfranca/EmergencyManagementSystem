@@ -22,9 +22,11 @@ namespace EmergencyManagementSystem.Web.Controllers
         private readonly IMedicalEvaluationRest _medicalEvaluationRest;
         private readonly IVehicleRest _vehicleRest;
         private readonly IServiceHistoryRest _serviceHistoryRest;
+        private readonly IVehiclePositionHistoryRest _vehiclePositionHistoryRest;
+
         public VehicleManagementController(IEmergencyRest emergencyRest, UserService userService, IEmergencyHistoryRest emergencyHistoryRest,
-            IEmergencyRequiredVehicleRest requiredVehicleRest, IVehicleRest vehicleRest,
-            IEmployeeRest employeeRest, IMedicalEvaluationRest medicalEvaluationRest, IServiceHistoryRest serviceHistoryRest)
+            IEmergencyRequiredVehicleRest requiredVehicleRest, IVehicleRest vehicleRest, IEmployeeRest employeeRest, 
+            IMedicalEvaluationRest medicalEvaluationRest, IServiceHistoryRest serviceHistoryRest, IVehiclePositionHistoryRest vehiclePositionHistoryRest)
         {
             _serviceHistoryRest = serviceHistoryRest;
             _vehicleRest = vehicleRest;
@@ -34,6 +36,7 @@ namespace EmergencyManagementSystem.Web.Controllers
             _requiredVehicleRest = requiredVehicleRest;
             _employeeRest = employeeRest;
             _medicalEvaluationRest = medicalEvaluationRest;
+            _vehiclePositionHistoryRest = vehiclePositionHistoryRest;
         }
 
         public IActionResult Index()
@@ -64,7 +67,7 @@ namespace EmergencyManagementSystem.Web.Controllers
             {
                 LoadBag();
                 ViewBag.Error = new List<string> { result?.Messages?.FirstOrDefault() ?? "Ocorreu um erro, favor tente novamente." };
-                return View("index", new EmergencyModel());
+                return View("Index", new EmergencyModel());
             }
 
             var requeridVehicle = result.Model.EmergencyRequiredVehicleModels.FirstOrDefault(d => d.Id == emergencyRequiredVehicleId);
@@ -78,8 +81,52 @@ namespace EmergencyManagementSystem.Web.Controllers
             ViewBag.EmergencyRequiredVehicleId = emergencyRequiredVehicleId;
 
             LoadBag();
-            return View("index", result.Model);
+            return View("Index", result.Model);
 
+        }
+
+        public IActionResult EmergencyData(ServiceHistoryModel commited)
+        {
+            var result = _emergencyRest.Find(new EmergencyFilter { Id = commited.EmergencyId });
+            if (!result.Success)
+            {
+                LoadBag();
+                ViewBag.Error = new List<string> { result?.Messages?.FirstOrDefault() ?? "Ocorreu um erro, favor tente novamente." };
+                return View("Index", new EmergencyModel());
+            }
+
+            LoadBag();
+            return View("Index", result.Model);
+        }
+
+        public IActionResult RegisterPosition(long serviceHistoryId, VehiclePosition vehiclePosition, long emergencyId)
+        {
+            VehiclePositionHistoryModel vehiclePositionHistory = new VehiclePositionHistoryModel
+            {
+                Date = DateTime.Now,
+                EmergencyId = emergencyId,
+                ServiceHistoryId = serviceHistoryId,
+                VehiclePosition = vehiclePosition
+            };
+
+            var result = _vehiclePositionHistoryRest.Register(vehiclePositionHistory);
+            if (!result.Success)
+            {
+                LoadBag();
+                ViewBag.Error = new List<string> { result?.Messages?.FirstOrDefault() ?? "Ocorreu um erro, favor tente novamente." };
+                return View("Index", new EmergencyModel());
+            }
+
+            var resultEmergency = _emergencyRest.Find(new EmergencyFilter { Id = emergencyId });
+            if (!result.Success)
+            {
+                LoadBag();
+                ViewBag.Error = new List<string> { resultEmergency?.Messages?.FirstOrDefault() ?? "Ocorreu um erro, favor tente novamente." };
+                return View("Index", new EmergencyModel());
+            }
+
+            LoadBag();
+            return View("Index", resultEmergency.Model);
         }
 
         public IActionResult SendVehicle(long vehicleId, long emergencyRequiredVehicleId)

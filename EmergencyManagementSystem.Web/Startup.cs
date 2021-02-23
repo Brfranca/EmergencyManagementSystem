@@ -35,6 +35,8 @@ namespace EmergencyManagementSystem.Web
             services.AddScoped<IEmergencyRequiredVehicleRest, EmergencyRequiredVehicleRest>();
             services.AddScoped<IMedicalDecisionHistoryRest, MedicalDecisionHistoryRest>();
             services.AddScoped<IServiceHistoryRest, ServiceHistoryRest>();
+            services.AddScoped<IVehiclePositionHistoryRest, VehiclePositionHistoryRest>();
+
 
             services.Configure<CookiePolicyOptions>(options =>
             {

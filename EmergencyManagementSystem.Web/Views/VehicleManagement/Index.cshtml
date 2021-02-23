@@ -1,4 +1,6 @@
 ﻿@using EmergencyManagementSystem.Service.Models
+@using EmergencyManagementSystem.Service.Enums
+
 @model EmergencyModel
 
 @{
@@ -46,7 +48,7 @@
                         }
                         @if (serviceHistoryModel != null)
                         {
-                            <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab" aria-expanded="false">Dados da Ocorrência</a> </li>
+                            <li class="nav-item"> <a id="tabData" class="nav-link" data-toggle="tab" href="#profile" role="tab" aria-expanded="false">Dados da Ocorrência</a> </li>
                         }
                         <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#main" role="tab" aria-expanded="true">Controle de Veículos</a> </li>
                     </ul>
@@ -61,8 +63,8 @@
                                         <div class="card-body">
                                             <form method="post" action="@Url.Action("Register", "VehicleManagement")">
                                                 <h4 class="text-white">OC: @(Model?.Id) - @Model.Name<span class="pull-right"><b>@Model.Date.ToShortDateString()  @Model.Date.ToShortTimeString()</b></span> </h4>
-                                                <h5 class="text-white"><b>Solicitante:</b> @Model.RequesterName<span class="pull-right"><b>Funcionário:</b> @Model.EmployeeName</span> </h5>
-                                                <h5 class="text-white"><b>Telefone:</b> @Model.RequesterPhone<span class="pull-right"></span> </h5>
+                                                <h5 class="text-white"><b>Solicitante:</b> @Model.RequesterName</h5>
+                                                <h5 class="text-white"><b>Telefone:</b> @Model.RequesterPhone</h5>
                                                 <hr />
 
                                                 <div class="sidebar-menu" data-widget="tree">
@@ -150,14 +152,14 @@
                                     <div class="col-lg-12">
                                         <div class="card-body">
                                             <h4 class="text-white">OC: @(Model?.Id) - @Model.Name<span class="pull-right"><b>@Model.Date.ToShortDateString()  @Model.Date.ToShortTimeString()</b></span> </h4>
-                                            <h5 class="text-white"><b>Solicitante:</b> @Model.RequesterName<span class="pull-right"><b>Funcionário:</b> @Model.EmployeeName</span> </h5>
-                                            <h5 class="text-white"><b>Telefone:</b> @Model.RequesterPhone<span class="pull-right"></span> </h5>
+                                            <h5 class="text-white"><b>Solicitante:</b> @Model.RequesterName</h5>
+                                            <h5 class="text-white"><b>Telefone:</b> @Model.RequesterPhone</h5>
                                             <hr />
 
                                             <div class="sidebar-menu" data-widget="tree">
                                                 <div class="treeview">
                                                     <a href="#" onclick="searchMaps()"> <i class="fa fa-map-marker"></i> <span>Localização</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
-                                                    <div class="treeview-menu">
+                                                    <div class="treeview-menu" id="teste">
 
                                                         <label>
                                                             @Model.AddressModel.City/@Model.AddressModel.District - @Model.AddressModel.Street, @Model.AddressModel.Number
@@ -208,71 +210,80 @@
                                             <h5 class="box-title text-white">
                                                 Posição da viatura - @serviceHistoryModel.VehicleModel.Codename
                                             </h5>
+                                            @{
+                                                var j9Local = serviceHistoryModel.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J9Local);
+                                                var j10Local = serviceHistoryModel.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J10Local);
+                                                var j9Hospital = serviceHistoryModel.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J9Hospital);
+                                                var j10Hospital = serviceHistoryModel.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J10Hospital);
+                                                var j11 = serviceHistoryModel.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J11);
+                                                var j12 = serviceHistoryModel.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J12);
+                                            }
+
                                             <div class="card-group align-items-center">
                                                 <div class="col-2">
                                                     <div class="form-group has-feedback">
-                                                        <a href="#"><label class="control-label"> + J9 </label></a>
-                                                        <input class="form-control" type="text" id="PA-">
+                                                        <a href="@Url.Action("RegisterPosition","VehicleManagement", new {serviceHistoryId = serviceHistoryModel.Id, vehiclePosition = VehiclePosition.J9Local, emergencyId = serviceHistoryModel.EmergencyId })"><label class="control-label"> + J9 </label></a>
+                                                        <input class="form-control" type="text" id="J9Local" value="@(j9Local?.Date.ToString("dd/MM HH:ss"))">
                                                     </div>
                                                 </div>
                                                 <div class="col-2">
 
                                                     <div class="form-group has-feedback">
-                                                        <a href="#"><label class="control-label"> + J10 </label></a>
-                                                        <input class="form-control" type="text" id="FC-">
+                                                        <a href="@Url.Action("RegisterPosition","VehicleManagement", new {serviceHistoryId = serviceHistoryModel.Id, vehiclePosition = VehiclePosition.J10Local, emergencyId = serviceHistoryModel.EmergencyId })"><label class="control-label"> + J10 </label></a>
+                                                        <input class="form-control" type="text" id="J10Local" value="@(j10Local?.Date.ToString("dd/MM HH:ss"))">
                                                     </div>
                                                 </div>
                                                 <div class="col-2">
 
                                                     <div class="form-group has-feedback">
-                                                        <a href="#"><label class="control-label"> + J9 </label></a>
-                                                        <input class="form-control" type="text" id="FR-">
+                                                        <a href="@Url.Action("RegisterPosition","VehicleManagement", new {serviceHistoryId = serviceHistoryModel.Id, vehiclePosition = VehiclePosition.J9Hospital, emergencyId = serviceHistoryModel.EmergencyId })"><label class="control-label"> + J9 </label></a>
+                                                        <input class="form-control" type="text" id="J9Hospital" value="@(j9Hospital?.Date.ToString("dd/MM HH:ss"))">
                                                     </div>
                                                 </div>
                                                 <div class="col-2">
                                                     <div class="form-group has-feedback">
-                                                        <a href="#"><label class="control-label"> + J10 </label></a>
-                                                        <input class="form-control" type="text" id="Temp-">
+                                                        <a href="@Url.Action("RegisterPosition","VehicleManagement", new {serviceHistoryId = serviceHistoryModel.Id, vehiclePosition = VehiclePosition.J10Hospital, emergencyId = serviceHistoryModel.EmergencyId })"><label class="control-label"> + J10 </label></a>
+                                                        <input class="form-control" type="text" id="J10Hospital" value="@(j10Hospital?.Date.ToString("dd/MM HH:ss"))">
                                                     </div>
                                                 </div>
                                                 <div class="col-2">
                                                     <div class="form-group has-feedback">
-                                                        <a href="#"><label class="control-label"> + J11 </label></a>
-                                                        <input class="form-control" type="text" id="Sat02-">
+                                                        <a href="@Url.Action("RegisterPosition","VehicleManagement", new {serviceHistoryId = serviceHistoryModel.Id, vehiclePosition = VehiclePosition.J11, emergencyId = serviceHistoryModel.EmergencyId })"><label class="control-label"> + J11 </label></a>
+                                                        <input class="form-control" type="text" id="J11" value="@(j11?.Date.ToString("dd/MM HH:ss"))">
                                                     </div>
                                                 </div>
                                                 <div class="col-2">
                                                     <div class="form-group has-feedback">
-                                                        <a href="#"><label class="control-label"> + J12 </label></a>
-                                                        <input class="form-control" type="text" id="HGT-">
+                                                        <a href="@Url.Action("RegisterPosition","VehicleManagement", new {serviceHistoryId = serviceHistoryModel.Id, vehiclePosition = VehiclePosition.J12, emergencyId = serviceHistoryModel.EmergencyId })"><label class="control-label"> + J12 </label></a>
+                                                        <input class="form-control" type="text" id="J12" value="@(j12?.Date.ToString("dd/MM HH:ss"))">
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="card-group align-items-center">
                                                 <div class="col-2">
-                                                    <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
+                                                    <span class="info-box-icon bg-red" @serviceHistoryModel.PositionSelect(VehiclePosition.J9Local)><i class="fa fa-ambulance"></i></span>
                                                 </div>
                                                 <div class="col-2">
-                                                    <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
+                                                    <span class="info-box-icon bg-red" @serviceHistoryModel.PositionSelect(VehiclePosition.J10Local)><i class="fa fa-ambulance"></i></span>
                                                 </div>
                                                 <div class="col-2">
-                                                    <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
+                                                    <span class="info-box-icon bg-red" @serviceHistoryModel.PositionSelect(VehiclePosition.J9Hospital)><i class="fa fa-ambulance"></i></span>
                                                 </div>
                                                 <div class="col-2">
-                                                    <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
+                                                    <span class="info-box-icon bg-red" @serviceHistoryModel.PositionSelect(VehiclePosition.J10Hospital) ><i class="fa fa-ambulance"></i></span>
                                                 </div>
                                                 <div class="col-2">
-                                                    <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
+                                                    <span class="info-box-icon bg-red" @serviceHistoryModel.PositionSelect(VehiclePosition.J11)><i class="fa fa-ambulance"></i></span>
                                                 </div>
                                                 <div class="col-2">
-                                                    <span class="info-box-icon bg-red"><i class="fa fa-ambulance"></i></span>
+                                                    <span class="info-box-icon bg-red" @serviceHistoryModel.PositionSelect(VehiclePosition.J12)><i class="fa fa-ambulance"></i></span>
                                                 </div>
 
                                             </div>
                                             <hr />
 
-                                            <div class="row">
+                                            @*<div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group has-feedback">
                                                         <label class="control-label">Intercorrências</label>
@@ -285,10 +296,10 @@
                                                     <button type="submit" class="btn btn-sm bg-purpleTest"><i class="fa fa-save"></i> Gravar</button>
                                                 </div>
                                             </div>
-                                            <hr />
+                                            <hr />*@
 
                                             <div class="">
-                                                <a id="btnRegister" class="btn btn-block bg-purpleTest">Concluído</a>
+                                                <a id="btnRegister" href="@Url.Action("Index","VehicleManagement")" class="btn btn-block bg-purpleTest">Concluído</a>
                                             </div>
 
                                             <hr />
@@ -309,23 +320,23 @@
 
                             <div class="row m-t-3-1">
                                 <div class="col-lg-12">
-                                    <a href="#">
 
-                                        <div class="card-body">
+                                    <div class="card-body">
 
 
-                                            <!--MODELO OCORRENCIA EM ANDAMENTO-->
-                                            @foreach (var emergency in emergencies.Where(d => d.EmergencyStatus == EmergencyManagementSystem.Service.Enums.EmergencyStatus.Committed))
+                                        <!--MODELO OCORRENCIA EM ANDAMENTO-->
+                                        @foreach (var emergency in emergencies.Where(d => d.EmergencyStatus == EmergencyManagementSystem.Service.Enums.EmergencyStatus.Committed))
+                                        {
+                                            @foreach (var commited in emergency.ServiceHistoryModels.Where(d => d.ServiceHistoryStatus == EmergencyManagementSystem.Service.Enums.ServiceHistoryStatus.InProgress))
                                             {
-                                                @foreach (var commited in emergency.ServiceHistoryModels.Where(d => d.ServiceHistoryStatus == EmergencyManagementSystem.Service.Enums.ServiceHistoryStatus.InProgress))
-                                                {
-                                                    var J9L = commited.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J9Local);
-                                                    var J10L = commited.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J10Local);
-                                                    var J9H = commited.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J9Hospital);
-                                                    var J10H = commited.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J10Hospital);
-                                                    var J11 = commited.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J11);
-                                                    var J12 = commited.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J12);
+                                                var J9L = commited.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J9Local);
+                                                var J10L = commited.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J10Local);
+                                                var J9H = commited.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J9Hospital);
+                                                var J10H = commited.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J10Hospital);
+                                                var J11 = commited.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J11);
+                                                var J12 = commited.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J12);
 
+                                                <a href="@Url.Action("EmergencyData", "VehicleManagement", commited)">
 
                                                     <div class="col-lg-12">
                                                         <div class="small-box @commited.GetClassByStatus()">
@@ -340,52 +351,51 @@
                                                                     <div class="col-2">
                                                                         <div class="form-group has-feedback">
                                                                             <label class="control-label"> J9 </label>
-                                                                            <input class="form-control" type="text" id="J9L" value="@(J9L?.Date)">
+                                                                            <input class="form-control" type="text" id="J9L" value="@(J9L?.Date.ToString("dd/MM HH:ss"))">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-2">
 
                                                                         <div class="form-group has-feedback">
                                                                             <label class="control-label"> J10 </label>
-                                                                            <input class="form-control" type="text" id="J10L" value="@(J10L?.Date)">
+                                                                            <input class="form-control" type="text" id="J10L" value="@(J10L?.Date.ToString("dd/MM HH:ss"))">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-2">
 
                                                                         <div class="form-group has-feedback">
                                                                             <label class="control-label"> J9 </label>
-                                                                            <input class="form-control" type="text" id="J9H" value="@(J9H?.Date)">
+                                                                            <input class="form-control" type="text" id="J9H" value="@(J9H?.Date.ToString("dd/MM HH:ss"))">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-2">
                                                                         <div class="form-group has-feedback">
                                                                             <label class="control-label"> J10 </label>
-                                                                            <input class="form-control" type="text" id="J10H" value="@(J10H?.Date)">
+                                                                            <input class="form-control" type="text" id="J10H" value="@(J10H?.Date.ToString("dd/MM HH:ss"))">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-2">
                                                                         <div class="form-group has-feedback">
                                                                             <label class="control-label"> J11 </label>
-                                                                            <input class="form-control" type="text" id="J11" value="@(J11?.Date)">
+                                                                            <input class="form-control" type="text" id="J11F" value="@(J11?.Date.ToString("dd/MM HH:ss"))">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-2">
                                                                         <div class="form-group has-feedback">
                                                                             <label class="control-label"> J12 </label>
-                                                                            <input class="form-control" type="text" id="J12" value="@(J12?.Date)">
+                                                                            <input class="form-control" type="text" id="J12F" value="@(J12?.Date.ToString("dd/MM HH:ss"))">
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                }
+                                                </a>
+
                                             }
+                                        }
 
-                                        </div><!--ACaba card body da pagina-->
-                                    </a>
-
-
+                                    </div><!--ACaba card body da pagina-->
                                 </div>
                             </div>
                         </div>
@@ -433,6 +443,26 @@
         now.format("dd/MM hh:mm");
         return now;
     }
+</script>
+
+<script>
+     @{
+        var dataClick = serviceHistoryModel != null ? 2 : 0;
+    }
+
+    if (@dataClick > 0) {
+        SelectTabData('tabData');
+    }
+
+    function SelectTabData(id) {
+        window.setTimeout(SelectData(id), 300);
+    }
+
+    function SelectData(id) {
+        debugger;
+        $('#' + id).click();
+    }
+
 </script>
 
 <script>
