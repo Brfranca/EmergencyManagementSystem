@@ -10,6 +10,8 @@
     List<VehicleModel> vehiclesAvaiable = ViewBag.VehiclesAvaiable;
     long? emergencyRequiredVehicleId = ViewBag?.EmergencyRequiredVehicleId;
 
+
+    ServiceHistoryModel currentServiceHistory = ViewBag?.CurrentServiceHistory;
     EmergencyRequiredVehicleModel requiredVehicle = Model?.EmergencyRequiredVehicleModels?.FirstOrDefault() ?? new EmergencyRequiredVehicleModel();
     ServiceHistoryModel serviceHistoryModel = Model?.ServiceHistoryModels?.FirstOrDefault() ?? null;
 }
@@ -208,7 +210,7 @@
                                             <hr />
                                             <!--Implementar os J's aqui-->
                                             <h5 class="box-title text-white">
-                                                Posição da viatura - @serviceHistoryModel.VehicleModel.Codename
+                                                Posição da viatura - @currentServiceHistory.VehicleModel.Codename
                                             </h5>
                                             @{
                                                 var j9Local = serviceHistoryModel.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J9Local);
@@ -222,39 +224,39 @@
                                             <div class="card-group align-items-center">
                                                 <div class="col-2">
                                                     <div class="form-group has-feedback">
-                                                        <a href="@Url.Action("RegisterPosition","VehicleManagement", new {serviceHistoryId = serviceHistoryModel.Id, vehiclePosition = VehiclePosition.J9Local, emergencyId = serviceHistoryModel.EmergencyId })"><label class="control-label"> + J9 </label></a>
+                                                        <a href="@Url.Action("RegisterPosition","VehicleManagement", new {serviceHistoryId = currentServiceHistory.Id, vehiclePosition = VehiclePosition.J9Local, emergencyId = currentServiceHistory.EmergencyId })"><label class="control-label"> + J9 </label></a>
                                                         <input class="form-control" type="text" id="J9Local" value="@(j9Local?.Date.ToString("dd/MM HH:ss"))">
                                                     </div>
                                                 </div>
                                                 <div class="col-2">
 
                                                     <div class="form-group has-feedback">
-                                                        <a href="@Url.Action("RegisterPosition","VehicleManagement", new {serviceHistoryId = serviceHistoryModel.Id, vehiclePosition = VehiclePosition.J10Local, emergencyId = serviceHistoryModel.EmergencyId })"><label class="control-label"> + J10 </label></a>
+                                                        <a href="@Url.Action("RegisterPosition","VehicleManagement", new {serviceHistoryId = currentServiceHistory.Id, vehiclePosition = VehiclePosition.J10Local, emergencyId = currentServiceHistory.EmergencyId })"><label class="control-label"> + J10 </label></a>
                                                         <input class="form-control" type="text" id="J10Local" value="@(j10Local?.Date.ToString("dd/MM HH:ss"))">
                                                     </div>
                                                 </div>
                                                 <div class="col-2">
 
                                                     <div class="form-group has-feedback">
-                                                        <a href="@Url.Action("RegisterPosition","VehicleManagement", new {serviceHistoryId = serviceHistoryModel.Id, vehiclePosition = VehiclePosition.J9Hospital, emergencyId = serviceHistoryModel.EmergencyId })"><label class="control-label"> + J9 </label></a>
+                                                        <a href="@Url.Action("RegisterPosition","VehicleManagement", new {serviceHistoryId = currentServiceHistory.Id, vehiclePosition = VehiclePosition.J9Hospital, emergencyId = currentServiceHistory.EmergencyId })"><label class="control-label"> + J9 </label></a>
                                                         <input class="form-control" type="text" id="J9Hospital" value="@(j9Hospital?.Date.ToString("dd/MM HH:ss"))">
                                                     </div>
                                                 </div>
                                                 <div class="col-2">
                                                     <div class="form-group has-feedback">
-                                                        <a href="@Url.Action("RegisterPosition","VehicleManagement", new {serviceHistoryId = serviceHistoryModel.Id, vehiclePosition = VehiclePosition.J10Hospital, emergencyId = serviceHistoryModel.EmergencyId })"><label class="control-label"> + J10 </label></a>
+                                                        <a href="@Url.Action("RegisterPosition","VehicleManagement", new {serviceHistoryId = currentServiceHistory.Id, vehiclePosition = VehiclePosition.J10Hospital, emergencyId = currentServiceHistory.EmergencyId })"><label class="control-label"> + J10 </label></a>
                                                         <input class="form-control" type="text" id="J10Hospital" value="@(j10Hospital?.Date.ToString("dd/MM HH:ss"))">
                                                     </div>
                                                 </div>
                                                 <div class="col-2">
                                                     <div class="form-group has-feedback">
-                                                        <a href="@Url.Action("RegisterPosition","VehicleManagement", new {serviceHistoryId = serviceHistoryModel.Id, vehiclePosition = VehiclePosition.J11, emergencyId = serviceHistoryModel.EmergencyId })"><label class="control-label"> + J11 </label></a>
+                                                        <a href="@Url.Action("RegisterPosition","VehicleManagement", new {serviceHistoryId = currentServiceHistory.Id, vehiclePosition = VehiclePosition.J11, emergencyId = currentServiceHistory.EmergencyId })"><label class="control-label"> + J11 </label></a>
                                                         <input class="form-control" type="text" id="J11" value="@(j11?.Date.ToString("dd/MM HH:ss"))">
                                                     </div>
                                                 </div>
                                                 <div class="col-2">
                                                     <div class="form-group has-feedback">
-                                                        <a href="@Url.Action("RegisterPosition","VehicleManagement", new {serviceHistoryId = serviceHistoryModel.Id, vehiclePosition = VehiclePosition.J12, emergencyId = serviceHistoryModel.EmergencyId })"><label class="control-label"> + J12 </label></a>
+                                                        <a href="@Url.Action("RegisterPosition","VehicleManagement", new {serviceHistoryId = currentServiceHistory.Id, vehiclePosition = VehiclePosition.J12, emergencyId = currentServiceHistory.EmergencyId })"><label class="control-label"> + J12 </label></a>
                                                         <input class="form-control" type="text" id="J12" value="@(j12?.Date.ToString("dd/MM HH:ss"))">
                                                     </div>
                                                 </div>
@@ -303,8 +305,8 @@
                                             </div>
 
                                             <hr />
-                                            <span class="pull-right">
-                                                <button id="btnCancelar1" class="btn btn-nor bg-light">Cancelar Viatura</button>
+                                            <span class="">
+                                                <a id="btnCancelVehicle" href="@Url.Action("CancelService","VehicleManagement", currentServiceHistory)" class="btn btn-block btn-nor bg-light">Cancelar Viatura</a>
                                             </span>
                                             <br />
                                         </div><!--ACaba card body da pagina-->

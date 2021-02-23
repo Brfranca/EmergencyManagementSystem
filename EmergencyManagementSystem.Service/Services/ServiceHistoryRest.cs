@@ -15,5 +15,10 @@ namespace EmergencyManagementSystem.Service.Services
         {
             return Post<Result, ServiceHistoryModel>(serviceHistoryModel, $"{_controller}/SendVehicle");
         }
+
+        public Result CancelServiceHistory(ServiceCancellationHistoryModel serviceCancellation)
+        {
+            return Post<Result, ServiceCancellationHistoryModel>(serviceCancellation, $"{_controller}/CancelServiceHistory");
+        }
     }
 }

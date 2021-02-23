@@ -5,5 +5,6 @@ namespace EmergencyManagementSystem.Service.Interfaces
     public interface IServiceHistoryRest : IRestBase<ServiceHistoryModel>
     {
         Result SendVehicle(ServiceHistoryModel serviceHistoryModel);
+        Result CancelServiceHistory(ServiceCancellationHistoryModel serviceCancellation);
     }
 }

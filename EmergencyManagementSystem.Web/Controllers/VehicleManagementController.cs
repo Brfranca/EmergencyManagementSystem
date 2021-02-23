@@ -94,7 +94,7 @@ namespace EmergencyManagementSystem.Web.Controllers
                 ViewBag.Error = new List<string> { result?.Messages?.FirstOrDefault() ?? "Ocorreu um erro, favor tente novamente." };
                 return View("Index", new EmergencyModel());
             }
-            result.Model.ServiceHistoryModels = new List<ServiceHistoryModel>() { commited };
+            ViewBag.CurrentServiceHistory = commited;
             LoadBag();
             return View("Index", result.Model);
         }
@@ -112,21 +112,67 @@ namespace EmergencyManagementSystem.Web.Controllers
             var result = _vehiclePositionHistoryRest.Register(vehiclePositionHistory);
             if (!result.Success)
             {
+                var resultE = _emergencyRest.Find(new EmergencyFilter { Id = emergencyId });
+                if (!resultE.Success)
+                    resultE.Model = new EmergencyModel();
                 LoadBag();
+                ViewBag.CurrentServiceHistory = resultE.Model.ServiceHistoryModels.FirstOrDefault(d => d.Id == serviceHistoryId);
                 ViewBag.Error = new List<string> { result?.Messages?.FirstOrDefault() ?? "Ocorreu um erro, favor tente novamente." };
-                return View("Index", new EmergencyModel());
+                return View("Index", resultE.Model);
             }
 
             var resultEmergency = _emergencyRest.Find(new EmergencyFilter { Id = emergencyId });
-            if (!result.Success)
+            if (!resultEmergency.Success)
             {
                 LoadBag();
+                ViewBag.CurrentServiceHistory = resultEmergency.Model.ServiceHistoryModels.FirstOrDefault(d => d.Id == serviceHistoryId);
                 ViewBag.Error = new List<string> { resultEmergency?.Messages?.FirstOrDefault() ?? "Ocorreu um erro, favor tente novamente." };
+                return View("Index", resultEmergency.Model);
+            }
+
+            ViewBag.CurrentServiceHistory = resultEmergency.Model.ServiceHistoryModels.FirstOrDefault(d => d.Id == serviceHistoryId);
+            LoadBag();
+            return View("Index", resultEmergency.Model);
+        }
+
+        public IActionResult CancelService(ServiceHistoryModel currentServiceHistory)
+        {
+            currentServiceHistory.ServiceHistoryStatus = ServiceHistoryStatus.Canceled;
+
+            var user = _userService.GetCurrentUser();
+
+            EmergencyHistoryModel emergencyHistoryModel = new EmergencyHistoryModel()
+            {
+                Date = DateTime.Now,
+                EmergencyId = currentServiceHistory.EmergencyId,
+                EmployeeGuid = user.EmployeeGuid,
+            };
+
+            MedicalDecisionHistoryModel medicalDecision = new MedicalDecisionHistoryModel()
+            {
+                Date = DateTime.Now,
+                EmployeeGuid = user.EmployeeGuid,
+                EmployeeName = user.EmployeeName,
+                EmergencyId = currentServiceHistory.EmergencyId,
+            };
+
+            ServiceCancellationHistoryModel serviceCancellationHistory = new ServiceCancellationHistoryModel
+            {
+                EmergencyHistoryModel = emergencyHistoryModel,
+                MedicalDecisionHistoryModel = medicalDecision,
+                ServiceHistoryModel = currentServiceHistory
+            };
+
+            var result = _serviceHistoryRest.CancelServiceHistory(serviceCancellationHistory);
+            if (!result.Success)
+            {
+                ViewBag.Error = result.Messages;
+                LoadBag();
                 return View("Index", new EmergencyModel());
             }
 
             LoadBag();
-            return View("Index", resultEmergency.Model);
+            return View("Index", new EmergencyModel());
         }
 
         public IActionResult SendVehicle(long vehicleId, long emergencyRequiredVehicleId)

@@ -361,46 +361,37 @@
                                                     <thead>
                                                         <tr>
                                                             <th class="wt10">Cod.</th>
-                                                            <th class="wt15">Data/Hora</th>
-                                                            <th class="wt10">J9</th>
-                                                            <th class="wt10">J10</th>
-                                                            <th class="wt10">J9</th>
-                                                            <th class="wt10">J10</th>
-                                                            <th class="wt10">J11</th>
-                                                            <th class="wt25">Observação</th>
+                                                            <th class="wt15">J9</th>
+                                                            <th class="wt15">J10</th>
+                                                            <th class="wt15">J9</th>
+                                                            <th class="wt15">J10</th>
+                                                            <th class="wt15">J11</th>
+                                                            <th class="wt15">J12</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody class="">
+                                                        @foreach (var item in Model.ServiceHistoryModels)
+                                                        {
+                                                            var color = item.CodeColor.GetEnumDescription();
+                                                            var vehicle = item.VehicleModel.Codename;
+                                                            var J9L = item.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J9Local);
+                                                            var J10L = item.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J10Local);
+                                                            var J9H = item.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J9Hospital);
+                                                            var J10H = item.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J10Hospital);
+                                                            var J11 = item.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J11);
+                                                            var J12 = item.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J12);
+
                                                         <tr>
-                                                            <td class="wt10">Azul</td>
-                                                            <td class="wt15">Data/Hora</td>
-                                                            <td class="wt10">07:28</td>
-                                                            <td class="wt10">07:50</td>
-                                                            <td class="wt10">08:15</td>
-                                                            <td class="wt10">08:30</td>
-                                                            <td class="wt10">08:40</td>
-                                                            <td class="wt25">USB 01 - Ambulancia apresentou falha mecanica</td>
+
+                                                            <td class="wt10">@color - @vehicle</td>
+                                                            <td class="wt15">@(J9L?.Date.ToString("dd/MM HH:ss"))</td>
+                                                            <td class="wt15">@(J10L?.Date.ToString("dd/MM HH:ss"))</td>
+                                                            <td class="wt15">@(J9H?.Date.ToString("dd/MM HH:ss"))</td>
+                                                            <td class="wt15">@(J10H?.Date.ToString("dd/MM HH:ss"))</td>
+                                                            <td class="wt15">@(J11?.Date.ToString("dd/MM HH:ss"))</td>
+                                                            <td class="wt15">@(J12?.Date.ToString("dd/MM HH:ss"))</td>
                                                         </tr>
-                                                        <tr>
-                                                            <td class="wt10">Azul</td>
-                                                            <td class="wt15">Data/Hora</td>
-                                                            <td class="wt10">07:28</td>
-                                                            <td class="wt10">07:50</td>
-                                                            <td class="wt10">08:15</td>
-                                                            <td class="wt10">08:30</td>
-                                                            <td class="wt10">08:40</td>
-                                                            <td class="wt25">USB 01 - Ambulancia apresentou falha mecanica</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="wt10">Azul</td>
-                                                            <td class="wt15">Data/Hora</td>
-                                                            <td class="wt10">07:28</td>
-                                                            <td class="wt10">07:50</td>
-                                                            <td class="wt10">08:15</td>
-                                                            <td class="wt10">08:30</td>
-                                                            <td class="wt10">08:40</td>
-                                                            <td class="wt25">USB 01 - Ambulancia apresentou falha mecanica</td>
-                                                        </tr>
+                                                        }
                                                     </tbody>
                                                 </table>
                                             </div>
