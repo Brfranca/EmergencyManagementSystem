@@ -94,7 +94,7 @@ namespace EmergencyManagementSystem.Web.Controllers
                 ViewBag.Error = new List<string> { result?.Messages?.FirstOrDefault() ?? "Ocorreu um erro, favor tente novamente." };
                 return View("Index", new EmergencyModel());
             }
-
+            result.Model.ServiceHistoryModels = new List<ServiceHistoryModel>() { commited };
             LoadBag();
             return View("Index", result.Model);
         }
