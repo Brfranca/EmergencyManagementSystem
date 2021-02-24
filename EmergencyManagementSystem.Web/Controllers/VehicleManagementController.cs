@@ -25,7 +25,7 @@ namespace EmergencyManagementSystem.Web.Controllers
         private readonly IVehiclePositionHistoryRest _vehiclePositionHistoryRest;
 
         public VehicleManagementController(IEmergencyRest emergencyRest, UserService userService, IEmergencyHistoryRest emergencyHistoryRest,
-            IEmergencyRequiredVehicleRest requiredVehicleRest, IVehicleRest vehicleRest, IEmployeeRest employeeRest, 
+            IEmergencyRequiredVehicleRest requiredVehicleRest, IVehicleRest vehicleRest, IEmployeeRest employeeRest,
             IMedicalEvaluationRest medicalEvaluationRest, IServiceHistoryRest serviceHistoryRest, IVehiclePositionHistoryRest vehiclePositionHistoryRest)
         {
             _serviceHistoryRest = serviceHistoryRest;
@@ -79,6 +79,7 @@ namespace EmergencyManagementSystem.Web.Controllers
             }).Model;
 
             ViewBag.EmergencyRequiredVehicleId = emergencyRequiredVehicleId;
+            result.Model.ServiceHistoryModels = null;
 
             LoadBag();
             return View("Index", result.Model);
@@ -224,7 +225,7 @@ namespace EmergencyManagementSystem.Web.Controllers
                 EmergencyId = emergencyModel.Id,
                 Description = emergencyModel.Description + " - Cancelamento de veículo " + resultFind.Model.VehicleType
             };
-            
+
 
             resultFind.Model.EmergencyHistoryModel = emergencyHistoryModel;
             resultFind.Model.MedicalDecisionHistoryModel = medicalDecision;
