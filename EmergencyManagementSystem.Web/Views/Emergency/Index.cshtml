@@ -180,7 +180,7 @@
                                             {
                                                 <h5 class="text-white">Telefone</h5>
                                                 <div class="col-lg-12 form-group-sm row ">
-                                                    <input id="telefone"  placeholder="telefone" class="form-control col-md-3" type="text" name="RequesterPhone">
+                                                    <input id="telefone"  placeholder="XX XXXXX-XXXX " class="form-control col-md-3" type="text" name="RequesterPhone">
                                                     <input type="submit" class="btn btn-nor bg-purpleTest" value="Iniciar" />
                                                 </div>
                                             }
@@ -253,6 +253,7 @@
         $('#btnCancel').attr('disabled', true);
         $('#btnRegister').attr('disabled', true);
         $("#cancel").removeClass();
+        $("#cancel").append('<input hidden name="Cancel" value="true" />')
     }
 
     var qtdPatient = 0;

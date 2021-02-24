@@ -1,14 +1,10 @@
 ﻿using EmergencyManagementSystem.Service.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EmergencyManagementSystem.Service.Interfaces
 {
     public interface IServiceHistoryRest : IRestBase<ServiceHistoryModel>
     {
         Result SendVehicle(ServiceHistoryModel serviceHistoryModel);
+        Result CancelServiceHistory(ServiceCancellationHistoryModel serviceCancellation);
     }
 }

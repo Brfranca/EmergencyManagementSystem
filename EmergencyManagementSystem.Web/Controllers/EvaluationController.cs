@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace EmergencyManagementSystem.Web.Controllers
 {
@@ -48,15 +47,17 @@ namespace EmergencyManagementSystem.Web.Controllers
             {
                 ViewBag.Error = result.Messages;
                 LoadBag();
-                var resultEmergency = GetEmergencyModel(emergencyId);
+                var resultEmergency = _emergencyRest.Find(new EmergencyFilter { Id = emergencyId });
                 return View("Index", resultEmergency.Model);
             }
 
             return RedirectToAction("index");
         }
 
-        public IActionResult SendVehicle(long emergencyId, VehicleType vehicleType, CodeColor codeColor)
+        public IActionResult RequestVehicle(long emergencyId, VehicleType vehicleType, CodeColor codeColor)
         {
+            var user = _userService.GetCurrentUser();
+
             var result = _emergencyRequiredVehicleRest.Register(new EmergencyRequiredVehicleModel
             {
                 CodeColor = codeColor,
@@ -64,18 +65,19 @@ namespace EmergencyManagementSystem.Web.Controllers
                 EmergencyId = emergencyId,
                 Status = VehicleRequiredStatus.Opened,
                 VehicleType = vehicleType,
-                EmergencyHistoryModel = new EmergencyHistoryModel
+                MedicalDecisionHistoryModel = new MedicalDecisionHistoryModel
                 {
                     Date = DateTime.Now,
-                    Description = "Solicitado veículo",
                     EmergencyId = emergencyId,
-                    EmergencyStatus = EmergencyStatus.InEvaluation,
-                    EmployeeGuid = _userService.GetCurrentUser().EmployeeGuid
+                    EmployeeGuid =user.EmployeeGuid,
+                    EmployeeName = user.EmployeeName,
+                    CodeColor = codeColor,
+                    Description = "Solicitado veículo - " + vehicleType
                 }
             });
 
             LoadBag();
-            var resultEmergency = GetEmergencyModel(emergencyId);
+            var resultEmergency = _emergencyRest.Find(new EmergencyFilter { Id = emergencyId });
             if (!result.Success)
             {
                 ViewBag.Error = result.Messages;
@@ -94,17 +96,18 @@ namespace EmergencyManagementSystem.Web.Controllers
                 Date = DateTime.Now,
                 EmergencyId = emergencyId,
                 EmployeeGuid = user.EmployeeGuid,
+                EmployeeName = user.EmployeeName,
                 CodeColor = codeColor
             });
             if (!result.Success)
             {
                 ViewBag.Error = result.Messages;
                 LoadBag();
-                var resultE = GetEmergencyModel(emergencyId);
+                var resultE = _emergencyRest.Find(new EmergencyFilter { Id = emergencyId });
                 return View("Index", resultE.Model);
             }
 
-            var resultEmergency = GetEmergencyModel(emergencyId);
+            var resultEmergency = _emergencyRest.Find(new EmergencyFilter { Id = emergencyId });
             LoadBag();
             return View("Index", resultEmergency.Model);
         }
@@ -113,7 +116,7 @@ namespace EmergencyManagementSystem.Web.Controllers
         [HttpPost]
         public IActionResult RegisterMedicalEvaluation(EmergencyModel emergencyModel)
         {
-            var resultEmergency = GetEmergencyModel(emergencyModel.Id);
+            var resultEmergency = _emergencyRest.Find(new EmergencyFilter { Id = emergencyModel.Id });
             if (!resultEmergency.Success)
             {
                 ViewBag.Error = resultEmergency.Messages;
@@ -121,12 +124,15 @@ namespace EmergencyManagementSystem.Web.Controllers
                 return View("Index", emergencyModel);
             }
             List<MedicalEvaluationModel> evaluations = new List<MedicalEvaluationModel>();
+            var user = _userService.GetCurrentUser();
+
             foreach (var patient in emergencyModel.PatientModels)
             {
                 MedicalEvaluationModel medicalEvaluationModel = new MedicalEvaluationModel
                 {
                     EmergencyId = emergencyModel.Id,
-                    EmployeeGuid = _userService.GetCurrentUser().EmployeeGuid,
+                    EmployeeGuid = user.EmployeeGuid,
+                    EmployeeName = user.EmployeeName,
                     Evaluation = patient.Description,
                     Date = DateTime.Now,
                     PatientId = patient.Id,
@@ -143,14 +149,14 @@ namespace EmergencyManagementSystem.Web.Controllers
                 LoadBag();
                 return View("Index", resultEmergency.Model);
             }
-            resultEmergency = GetEmergencyModel(emergencyModel.Id);
+            resultEmergency = _emergencyRest.Find(new EmergencyFilter { Id = emergencyModel.Id });
             LoadBag();
             return View("Index", resultEmergency.Model);
         }
 
         public IActionResult Update(long id)
         {
-            var result = GetEmergencyModel(id);
+            var result = _emergencyRest.Find(new EmergencyFilter { Id = id });
             if (!result.Success)
             {
                 LoadBag();
@@ -163,7 +169,7 @@ namespace EmergencyManagementSystem.Web.Controllers
 
         public IActionResult Emergencies()
         {
-            var emergenciesStatus = new[] { EmergencyStatus.InEvaluation, EmergencyStatus.InService };
+            var emergenciesStatus = new[] { EmergencyStatus.InEvaluation, EmergencyStatus.InService, EmergencyStatus.Committed };
             var emergencies = _emergencyRest.FindAll(new EmergencyFilter { EmergenciesStatus = emergenciesStatus });
 
             string HtmlTeste = "";
@@ -180,30 +186,9 @@ namespace EmergencyManagementSystem.Web.Controllers
             return teste;
         }
 
-        private Result<EmergencyModel> GetEmergencyModel(long id)
-        {
-            var resultEmergency = _emergencyRest.Find(new EmergencyFilter { Id = id });
-            if (!resultEmergency.Success)
-                return resultEmergency;
-
-            foreach (var medicalEvaluation in resultEmergency.Model.MedicalEvaluationModels)
-            {
-                var employee = _employeeRest.Find(new EmployeeFilter { Guid = medicalEvaluation.EmployeeGuid });
-                medicalEvaluation.EmployeeName = employee.Model.Name;
-            }
-
-            foreach (var medicalDecisionHistory in resultEmergency.Model.MedicalDecisionHistoryModels)
-            {
-                var employee = _employeeRest.Find(new EmployeeFilter { Guid = medicalDecisionHistory.EmployeeGuid });
-                medicalDecisionHistory.EmployeeName = employee.Model.Name;
-            }
-
-            return resultEmergency;
-        }
-
         public void LoadBag()
         {
-            var emergenciesStatus = new[] { EmergencyStatus.InEvaluation, EmergencyStatus.InService };
+            var emergenciesStatus = new[] { EmergencyStatus.InEvaluation, EmergencyStatus.InService, EmergencyStatus.Committed };
             var emergencies = _emergencyRest.FindAll(new EmergencyFilter { EmergenciesStatus = emergenciesStatus });
             if (emergencies.Success)
                 ViewBag.Emergencies = emergencies.Model;

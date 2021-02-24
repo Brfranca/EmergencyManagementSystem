@@ -49,8 +49,8 @@
                                     <div class="col-lg-12">
                                         <div class="card-body">
                                             <h4 class="text-white">OC: @(Model?.Id) - @Model.Name<span class="pull-right"><b>@Model.Date.ToShortDateString()  @Model.Date.ToShortTimeString()</b></span> </h4>
-                                            <h5 class="text-white"><b>Solicitante:</b> @Model.RequesterName<span class="pull-right"><b>Funcionário:</b> @Model.EmployeeName</span> </h5>
-                                            <h5 class="text-white"><b>Telefone:</b> @Model.RequesterPhone<span class="pull-right"></span> </h5>
+                                            <h5 class="text-white"><b>Solicitante:</b> @Model.RequesterName</h5>
+                                            <h5 class="text-white"><b>Telefone:</b> @Model.RequesterPhone</h5>
                                             <hr />
 
                                             <div class="sidebar-menu" data-widget="tree">
@@ -261,12 +261,12 @@
                                                                         <span class=""> <span class="info-box-number">USB</span> <span class="info-box-text"></span> </span>
                                                                     </div>
 
-                                                                    <ul class="fc-color-picker" id="color-chooser">
-                                                                        <li><a class="text-light-blue" href="@Url.Action("SendVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.USB, codeColor = CodeColor.Blue })"><i class="fa fa-square"></i></a></li>
-                                                                        <li><a class="text-yellow" href="@Url.Action("SendVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.USB, codeColor = CodeColor.Yellow })"><i class="fa fa-square"></i></a></li>
-                                                                        <li><a class="text-green" href="@Url.Action("SendVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.USB, codeColor = CodeColor.Green })"><i class="fa fa-square"></i></a></li>
-                                                                        <li><a class="text-red" href="@Url.Action("SendVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.USB, codeColor = CodeColor.Red })"><i class="fa fa-square"></i></a></li>
-                                                                    </ul>
+                                                                    <div class="fc-color-picker" id="color-chooser">
+                                                                        <li><a class="text-light-blue" href="@Url.Action("RequestVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.USB, codeColor = CodeColor.Blue, })"><i class="fa fa-square"></i></a></li>
+                                                                        <li><a class="text-green" href="@Url.Action("RequestVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.USB, codeColor = CodeColor.Green, })"><i class="fa fa-square"></i></a></li>
+                                                                        <li><a class="text-yellow" href="@Url.Action("RequestVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.USB, codeColor = CodeColor.Yellow, })"><i class="fa fa-square"></i></a></li>
+                                                                        <li><a class="text-red" href="@Url.Action("RequestVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.USB, codeColor = CodeColor.Red })"><i class="fa fa-square"></i></a></li>
+                                                                    </div>
                                                                 </div>
 
                                                                 <div class="col-md-3">
@@ -276,12 +276,12 @@
                                                                         <span class=""> <span class="info-box-number">USA</span> <span class="info-box-text"></span> </span>
                                                                     </div>
 
-                                                                    <ul class="fc-color-picker" id="color-chooser">
-                                                                        <li><a class="text-light-blue" href="@Url.Action("SendVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.USA, codeColor = CodeColor.Blue })"><i class="fa fa-square"></i></a></li>
-                                                                        <li><a class="text-yellow" href="@Url.Action("SendVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.USA, codeColor = CodeColor.Blue })"><i class="fa fa-square"></i></a></li>
-                                                                        <li><a class="text-green" href="@Url.Action("SendVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.USA, codeColor = CodeColor.Blue })"><i class="fa fa-square"></i></a></li>
-                                                                        <li><a class="text-red" href="@Url.Action("SendVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.USA, codeColor = CodeColor.Blue })"><i class="fa fa-square"></i></a></li>
-                                                                    </ul>
+                                                                    <div class="fc-color-picker" id="color-chooser">
+                                                                        <li><a class="text-light-blue" href="@Url.Action("RequestVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.USA, codeColor = CodeColor.Blue })"><i class="fa fa-square"></i></a></li>
+                                                                        <li><a class="text-green" href="@Url.Action("RequestVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.USA, codeColor = CodeColor.Green })"><i class="fa fa-square"></i></a></li>
+                                                                        <li><a class="text-yellow" href="@Url.Action("RequestVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.USA, codeColor = CodeColor.Yellow })"><i class="fa fa-square"></i></a></li>
+                                                                        <li><a class="text-red" href="@Url.Action("RequestVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.USA, codeColor = CodeColor.Red })"><i class="fa fa-square"></i></a></li>
+                                                                    </div>
                                                                 </div>
 
                                                                 <div class="col-md-3">
@@ -291,12 +291,12 @@
                                                                         <span class=""> <span class="info-box-number">HEL</span> <span class="info-box-text"></span> </span>
                                                                     </div>
 
-                                                                    <ul class="fc-color-picker" id="color-chooser">
-                                                                        <li><a class="text-light-blue" href="@Url.Action("SendVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.HEL, codeColor = CodeColor.Blue })"><i class="fa fa-square"></i></a></li>
-                                                                        <li><a class="text-yellow" href="@Url.Action("SendVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.HEL, codeColor = CodeColor.Blue })"><i class="fa fa-square"></i></a></li>
-                                                                        <li><a class="text-green" href="@Url.Action("SendVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.HEL, codeColor = CodeColor.Blue })"><i class="fa fa-square"></i></a></li>
-                                                                        <li><a class="text-red" href="@Url.Action("SendVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.HEL, codeColor = CodeColor.Blue })"><i class="fa fa-square"></i></a></li>
-                                                                    </ul>
+                                                                    <div class="fc-color-picker" id="color-chooser">
+                                                                        <li><a class="text-light-blue" href="@Url.Action("RequestVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.HEL, codeColor = CodeColor.Blue })"><i class="fa fa-square"></i></a></li>
+                                                                        <li><a class="text-green" href="@Url.Action("RequestVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.HEL, codeColor = CodeColor.Green })"><i class="fa fa-square"></i></a></li>
+                                                                        <li><a class="text-yellow" href="@Url.Action("RequestVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.HEL, codeColor = CodeColor.Yellow })"><i class="fa fa-square"></i></a></li>
+                                                                        <li><a class="text-red" href="@Url.Action("RequestVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.HEL, codeColor = CodeColor.Red })"><i class="fa fa-square"></i></a></li>
+                                                                    </div>
                                                                 </div>
 
                                                                 <div class="col-md-3">
@@ -306,12 +306,12 @@
                                                                         <span class=""> <span class="info-box-number">AVI</span> <span class="info-box-text"></span> </span>
                                                                     </div>
 
-                                                                    <ul class="fc-color-picker" id="color-chooser">
-                                                                        <li><a class="text-light-blue" href="@Url.Action("SendVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.AVI, codeColor = CodeColor.Blue })"><i class="fa fa-square"></i></a></li>
-                                                                        <li><a class="text-yellow" href="@Url.Action("SendVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.AVI, codeColor = CodeColor.Blue })"><i class="fa fa-square"></i></a></li>
-                                                                        <li><a class="text-green" href="@Url.Action("SendVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.AVI, codeColor = CodeColor.Blue })"><i class="fa fa-square"></i></a></li>
-                                                                        <li><a class="text-red" href="@Url.Action("SendVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.AVI, codeColor = CodeColor.Blue })"><i class="fa fa-square"></i></a></li>
-                                                                    </ul>
+                                                                    <div class="fc-color-picker" id="color-chooser">
+                                                                        <li><a class="text-light-blue" href="@Url.Action("RequestVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.AVI, codeColor = CodeColor.Blue })"><i class="fa fa-square"></i></a></li>
+                                                                        <li><a class="text-green" href="@Url.Action("RequestVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.AVI, codeColor = CodeColor.Green })"><i class="fa fa-square"></i></a></li>
+                                                                        <li><a class="text-yellow" href="@Url.Action("RequestVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.AVI, codeColor = CodeColor.Yellow })"><i class="fa fa-square"></i></a></li>
+                                                                        <li><a class="text-red" href="@Url.Action("RequestVehicle", "Evaluation", new { emergencyId = Model.Id, vehicleType = VehicleType.AVI, codeColor = CodeColor.Red })"><i class="fa fa-square"></i></a></li>
+                                                                    </div>
                                                                 </div>
 
                                                             </div>
@@ -361,46 +361,37 @@
                                                     <thead>
                                                         <tr>
                                                             <th class="wt10">Cod.</th>
-                                                            <th class="wt15">Data/Hora</th>
-                                                            <th class="wt10">J9</th>
-                                                            <th class="wt10">J10</th>
-                                                            <th class="wt10">J9</th>
-                                                            <th class="wt10">J10</th>
-                                                            <th class="wt10">J11</th>
-                                                            <th class="wt25">Observação</th>
+                                                            <th class="wt15">J9</th>
+                                                            <th class="wt15">J10</th>
+                                                            <th class="wt15">J9</th>
+                                                            <th class="wt15">J10</th>
+                                                            <th class="wt15">J11</th>
+                                                            <th class="wt15">J12</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody class="">
-                                                        <tr>
-                                                            <td class="wt10">Azul</td>
-                                                            <td class="wt15">Data/Hora</td>
-                                                            <td class="wt10">07:28</td>
-                                                            <td class="wt10">07:50</td>
-                                                            <td class="wt10">08:15</td>
-                                                            <td class="wt10">08:30</td>
-                                                            <td class="wt10">08:40</td>
-                                                            <td class="wt25">USB 01 - Ambulancia apresentou falha mecanica</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="wt10">Azul</td>
-                                                            <td class="wt15">Data/Hora</td>
-                                                            <td class="wt10">07:28</td>
-                                                            <td class="wt10">07:50</td>
-                                                            <td class="wt10">08:15</td>
-                                                            <td class="wt10">08:30</td>
-                                                            <td class="wt10">08:40</td>
-                                                            <td class="wt25">USB 01 - Ambulancia apresentou falha mecanica</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="wt10">Azul</td>
-                                                            <td class="wt15">Data/Hora</td>
-                                                            <td class="wt10">07:28</td>
-                                                            <td class="wt10">07:50</td>
-                                                            <td class="wt10">08:15</td>
-                                                            <td class="wt10">08:30</td>
-                                                            <td class="wt10">08:40</td>
-                                                            <td class="wt25">USB 01 - Ambulancia apresentou falha mecanica</td>
-                                                        </tr>
+                                                        @foreach (var item in Model.ServiceHistoryModels)
+                                                        {
+                                                            var color = item.CodeColor.GetEnumDescription();
+                                                            var vehicle = item.VehicleModel.Codename;
+                                                            var J9L = item.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J9Local);
+                                                            var J10L = item.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J10Local);
+                                                            var J9H = item.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J9Hospital);
+                                                            var J10H = item.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J10Hospital);
+                                                            var J11 = item.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J11);
+                                                            var J12 = item.VehiclePositionHistoryModels.FirstOrDefault(d => d.VehiclePosition == EmergencyManagementSystem.Service.Enums.VehiclePosition.J12);
+
+                                                            <tr>
+
+                                                                <td class="wt10">@color - @vehicle</td>
+                                                                <td class="wt15">@(J9L?.Date.ToString("dd/MM HH:ss"))</td>
+                                                                <td class="wt15">@(J10L?.Date.ToString("dd/MM HH:ss"))</td>
+                                                                <td class="wt15">@(J9H?.Date.ToString("dd/MM HH:ss"))</td>
+                                                                <td class="wt15">@(J10H?.Date.ToString("dd/MM HH:ss"))</td>
+                                                                <td class="wt15">@(J11?.Date.ToString("dd/MM HH:ss"))</td>
+                                                                <td class="wt15">@(J12?.Date.ToString("dd/MM HH:ss"))</td>
+                                                            </tr>
+                                                        }
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -553,6 +544,10 @@
 
 <script>
     //Cuidado ao mexer
+
+    function SimulationClick(id) {
+        $('#' + id).click();
+    }
 
     $(function () {
         $('#example1').DataTable()

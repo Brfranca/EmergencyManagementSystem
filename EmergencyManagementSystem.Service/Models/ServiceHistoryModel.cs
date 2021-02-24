@@ -1,6 +1,7 @@
 ﻿using EmergencyManagementSystem.Service.Enums;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace EmergencyManagementSystem.Service.Models
 {
@@ -17,6 +18,8 @@ namespace EmergencyManagementSystem.Service.Models
         public List<TeamMemberModel> TeamMemberModels { get; set; }
         public List<VehiclePositionHistoryModel> VehiclePositionHistoryModels { get; set; }
         public long EmergencyRequiredVehicleId { get; set; }
+        public CodeColor CodeColor { get; set; }
+
 
         public ServiceHistoryModel()
         {
@@ -26,5 +29,24 @@ namespace EmergencyManagementSystem.Service.Models
             EmergencyModel = new EmergencyModel();
         }
 
+        public string GetClassByStatus()
+        {
+            return CodeColor switch
+            {
+                CodeColor.Red => "bg-red",
+                CodeColor.Yellow => "bg-yellow",
+                CodeColor.Green => "bg-green",
+                CodeColor.Blue => "bg-blue",
+                _ => "",
+            };
+        }
+
+        public string PositionSelect(VehiclePosition vehiclePosition)
+        {
+            var position = VehiclePositionHistoryModels?.OrderByDescending(d => d.VehiclePosition)?.FirstOrDefault()?.VehiclePosition;
+            if (vehiclePosition != position)
+                return "hidden";
+            return "";
+        }
     }
 }

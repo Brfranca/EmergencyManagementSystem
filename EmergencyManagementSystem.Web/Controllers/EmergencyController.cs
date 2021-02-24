@@ -42,9 +42,9 @@ namespace EmergencyManagementSystem.Web.Controllers
                 return View("index", new EmergencyModel());
             }
             var requesterResult = _requesterService.Find(new RequesterFilter { Telephone = result.Model.RequesterPhone });
-            if (requesterResult.Success)
+            if (requesterResult.Success && requesterResult?.Model?.AddressModel != null)
             {
-                result.Model.AddressModel = requesterResult.Model.AddressModel;
+                result.Model.AddressModel = requesterResult?.Model?.AddressModel;
                 result.Model.AddressModel.Id = 0;
             }
             LoadBag();
@@ -55,7 +55,7 @@ namespace EmergencyManagementSystem.Web.Controllers
         public IActionResult Register(EmergencyModel emergencyModel)
         {
             emergencyModel.EmployeeGuid = _userService.GetCurrentUser().EmployeeGuid;
-            if (!string.IsNullOrWhiteSpace(emergencyModel.Description))
+            if (emergencyModel.Cancel)
             {
                 return RedirectToAction("Cancel", emergencyModel);
             }
@@ -158,7 +158,7 @@ namespace EmergencyManagementSystem.Web.Controllers
                 EmergencyId = emergencyModel.Id,
                 EmployeeGuid = emergencyModel.EmployeeGuid,
                 EmergencyStatus = EmergencyStatus.Canceled,
-                Description = emergencyModel.Description
+                Description = emergencyModel.Description 
             };
             var resultEmergency = _emergencyRest.Find(new EmergencyFilter { Id = emergencyModel.Id });
             if (!resultEmergency.Success)
@@ -202,16 +202,10 @@ namespace EmergencyManagementSystem.Web.Controllers
 
         public void LoadBag()
         {
-            //chamar o o método LoadBag em todos os retornos para a tela de index.
-            //Até o momento ja está
-
             var emergenciesStatus = new[] { EmergencyStatus.InEvaluation, EmergencyStatus.Opened };
             var emergencies = _emergencyRest.FindAll(new EmergencyFilter { EmergenciesStatus = emergenciesStatus });
             if (emergencies.Success)
                 ViewBag.Emergencies = emergencies.Model;
-            //Filtar todas as ocorrências com os status acima
-            //ViewBag.Emergencies = _emergencyRest.GetEmergencies();
-            //Criar foreach na view e preencher com as emergencias da viewBag
         }
     }
 }

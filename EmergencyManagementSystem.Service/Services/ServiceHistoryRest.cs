@@ -1,11 +1,6 @@
 ﻿using EmergencyManagementSystem.Service.Interfaces;
 using EmergencyManagementSystem.Service.Models;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EmergencyManagementSystem.Service.Services
 {
@@ -19,6 +14,11 @@ namespace EmergencyManagementSystem.Service.Services
         public Result SendVehicle(ServiceHistoryModel serviceHistoryModel)
         {
             return Post<Result, ServiceHistoryModel>(serviceHistoryModel, $"{_controller}/SendVehicle");
+        }
+
+        public Result CancelServiceHistory(ServiceCancellationHistoryModel serviceCancellation)
+        {
+            return Post<Result, ServiceCancellationHistoryModel>(serviceCancellation, $"{_controller}/CancelServiceHistory");
         }
     }
 }
