@@ -57,8 +57,9 @@ namespace EmergencyManagementSystem.Web.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception error)
             {
+                ModelState.AddModelError("Login", error.GetBaseException().Message);
                 return RedirectToAction("Index");
             }
         }
